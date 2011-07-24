@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="Personal web site of Nick Knowlson: projects, blog,
+        contact information">
+
+        <title>Command line file transfer Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/inuit.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="favicon.ico" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+        
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logo3.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="" href="/projects/">Projects</a></li>
+                <li><a class="selected" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <a href="/blog/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Command line file transfer</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">05 Feb 2009</div>
+<div id="post" style="margin-bottom:20px">
+<p>(<strong>**Old post alert**</strong> This is an old post I dug up from sometime around college)</p>
+
+<p>I&#8217;ve gotten really used to using bash now, so it&#8217;s always a drag when I want to upload a file using sftp and lose my aliases, tab completion and everything else from my .bashrc. It&#8217;s also more of a pain to copy directories.</p>
+
+<p>I know there are a couple of replacements for the default sftp client, and up until now, I had only tried lftp briefly. It was better,but not quite what I was looking for, and I found a bit awkward to use. Although that part could just be my own inexperience with it.</p>
+
+<p>Anyway, I just stumbled upon a solution to my problem that is dead simple and ALSO lets me get all the power and ease of use my personalized bash environment. Double win! It&#8217;s called <a href='http://fuse.sourceforge.net/sshfs.html'>sshfs</a> (SSH FileSystem), it&#8217;s in the Debian and Ubuntu package repos already, and I doubtless should have found it a long time ago. It lets you mount a directory on your remote machine using ssh. Magical!</p>
+
+<p>In case you need it, here&#8217;s a quick runthrough of what you need to get this working:</p>
+<div class='highlight'><pre><code class='bash'>sudo aptitude install sshfs
+sshfs user@host: localmountpoint
+</code></pre>
+</div>
+<p>It defaults to your home directory as the point to mount, but if you want to you can specify a location after &#8216;host:&#8217; like so:</p>
+<div class='highlight'><pre><code class='bash'>sshfs user@host:/home/user/data/ localmountpoint
+</code></pre>
+</div>
+<p>When you&#8217;re done, you can unmount it with this command:</p>
+<div class='highlight'><pre><code class='bash'>fusermount -u localmountpoint
+</code></pre>
+</div>
+<p>If it a location that you use frequently like me, you could put an alias in your .bash_aliases file so mounting is a single &#8216;mount_server&#8217; command, and unmounting is &#8216;unmount_server&#8217;. Now when I want to upload something it&#8217;s as painless as using cp or mv!</p>
+</div>
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>23 Jul 2011</span> &raquo; <a href="/blog/2011/07/23/hello-world">Hello World!</a></li>
+    
+      <li><span>14 Jan 2009</span> &raquo; <a href="/blog/2009/01/14/haskell-for-great-good">Haskell for great good</a></li>
+    
+      <li><span>16 Dec 2008</span> &raquo; <a href="/blog/2008/12/16/vim-as-an-ide">Vim as an IDE</a></li>
+    
+  </ul>
+</div>
+
+            </div>
+        </div>
+    </body>
+</html>

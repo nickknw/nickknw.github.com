@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="Personal web site of Nick Knowlson: projects, blog,
+        contact information">
+
+        <title>Vim as an IDE Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/inuit.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="favicon.ico" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+        
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logo3.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="" href="/projects/">Projects</a></li>
+                <li><a class="selected" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <a href="/blog/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Vim as an IDE</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">16 Dec 2008</div>
+<div id="post" style="margin-bottom:20px">
+<p>(<strong>**Old post alert**</strong> This is an old post I dug up from sometime around college)</p>
+
+<p><a href='http://i.imgur.com/8Yopn.png'>Two</a> <a href='http://i.imgur.com/pZtNP.png'>screenshots</a>.</p>
+
+<p>In my linux class last year, I was introduced to vim, and I&#8217;ve been fairly impressed with its powerful text-editing capabilities. What I didn&#8217;t know is that it really can just about replace an IDE.</p>
+
+<p>What features does an IDE have that make it more useful than most text editors?</p>
+
+<p>Group 1</p>
+
+<ul>
+<li>Being able to jump to the definition of a variable, function, class etc.</li>
+
+<li>Autocompletion of variables, functions, classes etc.</li>
+
+<li>Outline of a class, with variables and functions</li>
+
+<li>Project explorer</li>
+
+<li>Syntax highlighting</li>
+</ul>
+
+<p>Group 2</p>
+
+<ul>
+<li>Compile-time error checking</li>
+
+<li>Step by step debugger</li>
+</ul>
+
+<p>Group 3</p>
+
+<ul>
+<li>Refactoring across projects</li>
+
+<li>Automatic insertion of language specific code (ex: imports needed in Eclipse, generate getters and setters in java, files that Visual Studio makes when you use the visual editor, templates in Dreamweaver)</li>
+</ul>
+
+<p>Okay, that&#8217;s quite a bit. Vim can do the first group perfectly, can sort of do the second group ( depending on language), and can&#8217;t do the last one. At least as far as I know, anyway.</p>
+
+<p>Just recently I&#8217;ve been interested in editing php with vim, so here&#8217;s a few things I found out:</p>
+
+<p><a href='http://weierophinney.net/matthew/archives/164-Vim-Productivity-Tips-for-PHP-Developers.html'>PHP parser check and running current file with the CLI</a></p>
+
+<p>Add the following to your .vimrc:</p>
+
+<pre><code>&quot; run file with PHP CLI (F5)
+autocmd FileType php noremap &lt;F5&gt; :w!&lt;CR&gt; :!$HOME/bin/php %&lt;CR&gt;
+
+&quot; PHP parser check (F4)
+autocmd FileType php noremap &lt;F4&gt; :!usr/bin/php -l &lt;CR&gt;</code></pre>
+
+<p>I changed the mappings to the function keys because &#60;c-m&#62; corresponds to &#60;return&#62; as well, which I find annoying because I like to use CTRL+ movement keys for changing windows.</p>
+
+<p><a href='http://www.vim.org/scripts/script.php?script_id=69'>Project</a></p>
+
+<p>Just like what it sounds like, it opens a side window that keeps track of all your folders and files in the project that you specify. Has lots of neat features, including a project-wide search and replace, which can be useful. I suggest adding this to your .vimrc to have a &#8216;Project toggle&#8217; rather than typing :Project each time:</p>
+
+<pre><code>nmap &lt;silent&gt; &lt;F10&gt; &lt;plug&gt;ToggleProject</code></pre>
+
+<p>Also, since by default folds have a hideous color scheme in my theme, I added this to my .vimrc to change that a bit.</p>
+
+<pre><code>hi Folded ctermbg=0 ctermfg=3
+hi FoldColumn ctermbg=0 ctermfg=3</code></pre>
+
+<p>Once you&#8217;ve got the Project plugin installed, \C while in the Project window is the command that you&#8217;ll probably want to use to help set up your first project (this took me a while). Also, make sure to use the help file that comes with the script (:help project).</p>
+
+<p><a href='http://www.vim.org/scripts/script.php?script_id=273'>Taglist</a></p>
+
+<p>This opens up a side window that shows a list of classes, variables and functions in all files that you have open at the time. I set a a taglist toggle in my .vimrc file with this line: nmap &#60;silent&#62; &#60;f12&#62; :TlistToggle&#60;cr&#62;</p>
+
+<p>In taglist.vim I changed a couple of the values so that it would look a bit better:</p>
+
+<pre><code>let Tlist_Use_Right_Window = 1 &quot;so that it doesn&#39;t conflict with the project plugin
+let Tlist_WinWidth = 25 &quot;make it a bit slimmer
+let Tlist_Enable_Fold_Column = 0 &quot;Disable the fold column (it&#39;s thick and not too useful for me)
+let Tlist_Inc_Winwidth = 0 &quot;Don&#39;t attempt to resize my terminal - this may vary depending on how you are running vim</code></pre>
+
+<p><a href='http://weierophinney.net/matthew/archives/134-exuberant-ctags-with-PHP-in-Vim.html'>Using ctags well</a></p>
+
+<p>This lets you jump around to the definition of functions, classes etc. Just follow his instructions.</p>
+
+<p><strong>Autocompletion</strong></p>
+
+<p>&#60;c-x&#62; + &#60;c-?&#62; when in insert mode. You get a list of letters that can be used in place of ? when you press . Some notable ones are:</p>
+
+<ul>
+<li><code>&lt;c-f&gt;</code> File - Autocompletes file names</li>
+
+<li><code>&lt;c-n&gt;</code>, <code>&lt;c-p&gt;</code> Forward, Back respectively</li>
+
+<li><code>&lt;c-i&gt;</code> Path - keywords in the current and included files</li>
+
+<li><code>&lt;c-o&gt;</code> Omni - Omni complete.</li>
+</ul>
+
+<p>Many thanks and full credit to Matthew Weier O&#8217;Phinney, whose <a href='http://weierophinney.net/matthew/archives/164-Vim-Productivity-Tips-for-PHP-Developers.html'>blog post</a> started me on all of this and indeed is the source of many of these tips.</p>
+
+<p>I didn&#8217;t cover debugging, I&#8217;ll save it for a later post maybe. If you&#8217;re interested, go ahead and <a href='http://www.vim.org/scripts/script_search_results.php?keywords=debug&amp;amp;script_type=&amp;amp;order_by=downloads&amp;amp;direction=descending&amp;amp;search=search'>search the scripts</a> for yourself.</p>
+
+<p>Also, here&#8217;s some <a href='http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks'>vim tips and tricks</a>!</p>
+</div>
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>23 Jul 2011</span> &raquo; <a href="/blog/2011/07/23/hello-world">Hello World!</a></li>
+    
+      <li><span>05 Feb 2009</span> &raquo; <a href="/blog/2009/02/05/command-line-file-transfer">Command line file transfer</a></li>
+    
+      <li><span>14 Jan 2009</span> &raquo; <a href="/blog/2009/01/14/haskell-for-great-good">Haskell for great good</a></li>
+    
+  </ul>
+</div>
+
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="Personal web site of Nick Knowlson: projects, blog,
+        contact information">
+
+        <title>Craigslist Highlighter Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/inuit.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="favicon.ico" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+        
+        <link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" />
+        <script src="/js/jquery.lightbox-0.5.pack.js"></script>
+   	<style type="text/css">
+	/* jQuery lightBox plugin - Gallery style */
+	#gallery {
+		background-color: #fff;
+		padding: 10px;
+	}
+	#gallery ul { list-style: none; margin: 0px; }
+	#gallery ul li { display: inline; }
+	#gallery ul img {
+		border: 5px solid #6e6e6e;
+		border-width: 5px 5px 20px;
+	}
+	#gallery ul a:hover img {
+		border: 5px solid #2e2e2e;
+		border-width: 5px 5px 20px;
+		color: #2e2e2e;
+	}
+	#gallery ul a:hover { color: #2e2e2e; }
+	</style>
+        <script type="text/javascript">
+            $(function() { 
+                $('#gallery a').lightBox({
+                    fixedNavigation:true,
+                    imageLoading: '/img/lightbox-ico-loading.gif',
+                    imageBlank: '/img/lightbox-blank.gif',
+                    imageBtnClose: '/img/lightbox-btn-close.gif',
+                    imageBtnPrev: '/img/lightbox-btn-prev.gif',
+                    imageBtnNext: '/img/lightbox-btn-next.gif'
+                });
+            });
+        </script>
+        
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logo3.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="selected" href="/projects/">Projects</a></li>
+                <li><a class="" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <p> <a href="/projects/">&laquo; Back to projects</a></p>
+
+<h1 style="">Craigslist Highlighter</h1>
+<div><strong>Languages: </strong>Javascript</div>
+<div style="margin-bottom:.75em;"><strong>Summary: </strong>Helps find and highlight specific traits of apartments on craigslist</div>
+
+<h2>Details</h2>
+<p><p>It helps highlight things you&#8217;re looking for when searching for apartments or housing on craigslist. This script will follow each link on the search page and scan the individual listing&#8217;s body page for the keywords you enter. When it finds them, it will retrieve them and highlight them as positive or negative. At the moment, it should turn <a href='http://i.imgur.com/z5UVY.jpg'>this listing page</a> into <a href='http://i.imgur.com/Lg3E0.jpg'>something like this</a>, and <a href='http://i.imgur.com/9zbqA.jpg'>this item page</a> into <a href='http://i.imgur.com/78gq6.jpg'>something like this</a>.</p><p>It makes it easier to narrow attention down to the more interesting ones, but there&#8217;s still a fair way to go before I&#8217;m happy with it.</p><p><strong>Next steps:</strong></p><ul>
+<li>Set up an easy way to install it. Write instructions.</li>
+</ul></p>
+
+
+
+
+
+            </div>
+        </div>
+    </body>
+</html>

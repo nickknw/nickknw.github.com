@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="Personal web site of Nick Knowlson: projects, blog,
+        contact information">
+
+        <title>Proofreading Scripts Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/inuit.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="favicon.ico" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+        
+        <link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" />
+        <script src="/js/jquery.lightbox-0.5.pack.js"></script>
+   	<style type="text/css">
+	/* jQuery lightBox plugin - Gallery style */
+	#gallery {
+		background-color: #fff;
+		padding: 10px;
+	}
+	#gallery ul { list-style: none; margin: 0px; }
+	#gallery ul li { display: inline; }
+	#gallery ul img {
+		border: 5px solid #6e6e6e;
+		border-width: 5px 5px 20px;
+	}
+	#gallery ul a:hover img {
+		border: 5px solid #2e2e2e;
+		border-width: 5px 5px 20px;
+		color: #2e2e2e;
+	}
+	#gallery ul a:hover { color: #2e2e2e; }
+	</style>
+        <script type="text/javascript">
+            $(function() { 
+                $('#gallery a').lightBox({
+                    fixedNavigation:true,
+                    imageLoading: '/img/lightbox-ico-loading.gif',
+                    imageBlank: '/img/lightbox-blank.gif',
+                    imageBtnClose: '/img/lightbox-btn-close.gif',
+                    imageBtnPrev: '/img/lightbox-btn-prev.gif',
+                    imageBtnNext: '/img/lightbox-btn-next.gif'
+                });
+            });
+        </script>
+        
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logo3.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="selected" href="/projects/">Projects</a></li>
+                <li><a class="" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <p> <a href="/projects/">&laquo; Back to projects</a></p>
+
+<h1 style="">Proofreading Scripts</h1>
+<div><strong>Languages: </strong>Ruby</div>
+<div style="margin-bottom:.75em;"><strong>Summary: </strong>An implementation of Matt Might's proofreading scripts</div>
+
+<h2>Details</h2>
+<p><p>I wanted to make use of Matt Might&#8217;s <a href='http://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/'>proofreading scripts</a>, but I&#8217;m on a Windows machine most of the time and would rather not rely on cygwin, a so I rewrote them in Ruby and customized them a bit.</p><p>I made sure to handle the case where a suspect phrase (e.g. &#8216;is used&#8217;, or &#8216;the the&#8217;) is split between two different lines.</p><p>The output has line numbers, includes the suspect words at the beginning of the line, and is more or less readable in the windows command prompt. It uses &#62;angle brackets&#60; to mark the word instead of color and tries to stay within a fairly short width.</p><p>When run, it automatically creates a file called <code>feedback-&lt;filename&gt;</code>. If it finds weasel words or passive voice, it adds a couple of short tips from Matt&#8217;s original blog post after the list of them.</p><p>These scripts are finished and working, but if you find any bugs please let me know.</p><h2 id='usage'>Usage</h2><div class='highlight'><pre><code class='bash'>ruby proofread.rb <span class='o'>[</span>filename<span class='o'>]</span>
+</code></pre>
+</div><h2 id='example_output'>Example Output</h2><p>For a fun example, I ran this on Matt&#8217;s original blog post. It acts as a pretty decent test because the blog post itself must contain examples of suspect phrases in order to explain them.</p><p><strong>Weasel words results:</strong></p><pre><code> 73: various - My favorite salt and pepper words/phrases are &gt;various&lt;, a number of, fairly, and 
+ 73: fairly - My favorite salt and pepper words/phrases are various, a number of, &gt;fairly&lt;, and 
+ 74: quite - &gt;quite&lt;. Sentences that cut these words out become stronger. 
+ 76: quite -  Bad:    It is &gt;quite&lt; difficult to find untainted samples.  Better: It is 
+ 79: various -  Bad:    We used &gt;various&lt; methods to isolate four samples.  Better: We isolated 
+ 85: interestingly - &gt;interestingly&lt;, surprisingly, remarkably, or clearly. 
+ 85: surprisingly - interestingly, &gt;surprisingly&lt;, remarkably, or clearly. 
+ 85: remarkably - interestingly, surprisingly, &gt;remarkably&lt;, or clearly. 
+ 85: clearly - interestingly, surprisingly, remarkably, or &gt;clearly&lt;. 
+ 89: surprisingly - Bad:    False positives were &gt;surprisingly&lt; low.  Better: To our surprise, false 
+100: very - The two worst offenders in this category are the words &gt;very&lt; and extremely. These 
+100: extremely - The two worst offenders in this category are the words very and &gt;extremely&lt;. These 
+103: several - Other offenders include &gt;several&lt;, exceedingly, many, most, few, vast. 
+103: exceedingly - Other offenders include several, &gt;exceedingly&lt;, many, most, few, vast. 
+103: many - Other offenders include several, exceedingly, &gt;many&lt;, most, few, vast. 
+103: few - Other offenders include several, exceedingly, many, most, &gt;few&lt;, vast. 
+103: vast - Other offenders include several, exceedingly, many, most, few, &gt;vast&lt;. 
+105: very -  Bad:    There is &gt;very&lt; close match between the two semantics.  Better: There is 
+117: completely -  Bad:    We offer a &gt;completely&lt; different formulation of CFA.  Better: We offer a 
+207: few - A &gt;few&lt; words on marketing 
+
+Look out for:
+    Salt and Pepper words (various, fairly, quite)
+    Beholder words (interestingly, surprisingly, clearly)
+    Lazy words (very, extremely, several, most, few)
+    Adverbs
+
+
+Passive voice results:
+
+ 141: is guaranteed -  Bad:    Termination &gt;is guaranteed&lt; on any input.  Better: Termination is 
+ 141: is  guaranteed -  Bad:    Termination is guaranteed on any input.  Better: Termination is 
+ 155: were added -  OK: 4 mL HCl &gt;were added&lt; to the solution. 
+ 211: be accepted - writes has to &gt;be accepted&lt; for publication. 
+
+For each use of the passive highlighted, ask:
+    1. Is the agent relevant yet unclear?
+    2. Does the text read better with the sentence in the active?
+If the answer to both questions is &#39;yes,&#39; then change to the active.
+If only the answer to the first question is &#39;yes,&#39; then specify the agent. 
+
+
+Duplicated words results:
+
+ 175: the the -  Many readers are not aware that &gt;the the&lt; brain will automatically ignore a 
+ 180: the the -  Many readers are not aware that &gt;the the&lt; brain will automatically ignore a 
+ 181: instance instance -  second &gt;instance instance&lt; of the word &quot;the&quot; when it starts a new line.  </code></pre></p>
+
+
+
+
+
+            </div>
+        </div>
+    </body>
+</html>

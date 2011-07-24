@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="Personal web site of Nick Knowlson: projects, blog,
+        contact information">
+
+        <title>VB.Net Signature Survey Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/inuit.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="favicon.ico" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+        
+        <link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" />
+        <script src="/js/jquery.lightbox-0.5.pack.js"></script>
+   	<style type="text/css">
+	/* jQuery lightBox plugin - Gallery style */
+	#gallery {
+		background-color: #fff;
+		padding: 10px;
+	}
+	#gallery ul { list-style: none; margin: 0px; }
+	#gallery ul li { display: inline; }
+	#gallery ul img {
+		border: 5px solid #6e6e6e;
+		border-width: 5px 5px 20px;
+	}
+	#gallery ul a:hover img {
+		border: 5px solid #2e2e2e;
+		border-width: 5px 5px 20px;
+		color: #2e2e2e;
+	}
+	#gallery ul a:hover { color: #2e2e2e; }
+	</style>
+        <script type="text/javascript">
+            $(function() { 
+                $('#gallery a').lightBox({
+                    fixedNavigation:true,
+                    imageLoading: '/img/lightbox-ico-loading.gif',
+                    imageBlank: '/img/lightbox-blank.gif',
+                    imageBtnClose: '/img/lightbox-btn-close.gif',
+                    imageBtnPrev: '/img/lightbox-btn-prev.gif',
+                    imageBtnNext: '/img/lightbox-btn-next.gif'
+                });
+            });
+        </script>
+        
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logo3.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="selected" href="/projects/">Projects</a></li>
+                <li><a class="" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <p> <a href="/projects/">&laquo; Back to projects</a></p>
+
+<h1 style="">VB.Net Signature Survey</h1>
+<div><strong>Languages: </strong>Ruby</div>
+<div style="margin-bottom:.75em;"><strong>Summary: </strong>Ward Cunninham's Signature Survey, adapted for vb.net, with some enhancements of my own.</div>
+
+<h2>Details</h2>
+<p><p>A signature survey is a simple text-only visualization of source code, pioneered by Ward Cunningham. The original was written with Java in mind and essentially strips out all characters except for curly braces and semicolons.</p><h2 id='what_use_is_it'>What use is it?</h2><p>First I&#8217;ll summarize a few of the neat points of Ward Cunningham&#8217;s original <a href='http://c2.com/doc/SignatureSurvey/'>Signature Survey</a>:</p><ul>
+<li>Quick visual summary of code of a file by file basis.</li>
+
+<li>Easy to distinguish classes with low and high complexity</li>
+
+<li>Helps represent a few defining characteristics of classes in an easy to remember form</li>
+</ul><p>Here are a few improvements that I ended up implementing in mine:</p><ul>
+<li>Distinction between methods, if statements, and loops.</li>
+
+<li>Tell at a glance how big methods tend to be in a single file; whether there are lots of small ones or a few huge ones</li>
+
+<li>Added color to mitigate the amount of syntactic noise and help to highlight possible trouble points.</li>
+
+<li>Include a line count and method count before the signature line of a file.</li>
+</ul><p>And a few things that were adjusted because of language and personal preference:</p><ul>
+<li>VB.NET doesn&#8217;t use curly braces or semicolons in the same way as c-style languages, so alternatives will have to be used.</li>
+
+<li>In the &#8216;detailed view&#8217; of each file, I prefer to see just a list of methods, with parameter types and the return type, instead of the whole file. I can open the whole file in my main editor, but having a list of the methods in the order they are in is quite helpful.</li>
+</ul><h2 id='examples'>Examples</h2><p><a href='http://i.imgur.com/KRRQl.png'>(Click for full size)</a></p><p><a href='http://i.imgur.com/KRRQl.png'><img src='http://i.imgur.com/KRRQl.png' alt='Picture of a VB.NET signature survey page' /></a></p><p><strong>TODO:</strong> find an existing open source project to generate a working example from so I can link to an actual page instead of just having a screenshot</p></p>
+
+
+
+
+
+            </div>
+        </div>
+    </body>
+</html>
