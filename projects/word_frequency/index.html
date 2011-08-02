@@ -78,11 +78,11 @@ ruby word_frequency.rb 5 js
 </code></pre>
 </div><h2 id='string_frequency'>String Frequency</h2><p>I made an alternate version of the previous tool with one modification: it only searches inside of string literals in the source code. It is good for finding out there are 89 occurrences of <code>&quot;SELECT * FROM&quot;</code> (among other things). This version might be more useful for finding actual problems with code than the initial version.</p><p>It should ideally be merged with <code>word_frequency.rb</code> and be enabled with a flag, but for now it works well enough as is.</p><h2 id='example'>Example</h2><p>I&#8217;m going to use <a href='http://sourceforge.net/projects/dwsim/'>DWSIM</a> for this example. DWSIM is an open source chemical process simulator written in VB.NET. I am using it as an example for my VB.NET Signature Survey project because it is big, open source, and written in VB.NET. Since I already had it handy for that one, I&#8217;ll use it here too.</p><p><strong>Generate the word frequency files</strong></p><p>I started out by creating a convenience script for running word_frequency and string_frequency multiple times:</p><div class='highlight'><pre><code class='ruby'><span class='n'>ext</span> <span class='o'>=</span> <span class='no'>ARGV</span><span class='o'>[</span><span class='mi'>0</span><span class='o'>]</span>
 
-<span class='p'>(</span><span class='mi'>1</span><span class='o'>.</span><span class='n'>.</span><span class='mi'>10</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span><span class='o'>|</span><span class='n'>num</span><span class='o'>|</span>
+<span class='p'>(</span><span class='mi'>1</span><span class='o'>.</span><span class='n'>.</span><span class='mi'>15</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span><span class='o'>|</span><span class='n'>num</span><span class='o'>|</span>
     <span class='nb'>puts</span> <span class='sb'>`ruby -E &#39;iso-8859-1&#39; word_frequency.rb </span><span class='si'>#{</span><span class='n'>num</span><span class='si'>}</span><span class='sb'> </span><span class='si'>#{</span><span class='n'>ext</span><span class='si'>}</span><span class='sb'>`</span>
 <span class='p'>}</span>
 
-<span class='p'>(</span><span class='mi'>1</span><span class='o'>.</span><span class='n'>.</span><span class='mi'>10</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span><span class='o'>|</span><span class='n'>num</span><span class='o'>|</span>
+<span class='p'>(</span><span class='mi'>1</span><span class='o'>.</span><span class='n'>.</span><span class='mi'>15</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span><span class='o'>|</span><span class='n'>num</span><span class='o'>|</span>
     <span class='nb'>puts</span> <span class='sb'>`ruby -E &#39;iso-8859-1&#39; string_frequency.rb </span><span class='si'>#{</span><span class='n'>num</span><span class='si'>}</span><span class='sb'> </span><span class='si'>#{</span><span class='n'>ext</span><span class='si'>}</span><span class='sb'>`</span>
 <span class='p'>}</span>
 </code></pre>
@@ -123,17 +123,63 @@ total 12M
    1655: Private 
     743: Protected </code></pre><p>There are quite a lot more public functions than private ones. It doesn&#8217;t say much by itself, but learning the reason this project has this ratio could be enlightening. It might be an indicator of poor encapsulation, or just that this project has a large public API.</p><pre><code>   4969: Sub 
    3515: Function </code></pre><p>In VB.NET, a Sub is just a Function that doesn&#8217;t return any values. In C-style languages this is represented by using a <code>void</code> return type. This suggests that most methods rely on modifying shared state to make their results known. It might be explained by other things as well, but this is something I&#8217;d keep an eye out for while reading through the code.</p><pre><code>   5986: ByVal 
-    491: ByRef </code></pre><p>In VB.NET you only need to use ByRef if you want to modify a passed in <em>value</em> type (not reference type). It&#8217;s not something that should usually happen a lot, so seeing a lot of usages of ByRef could indicate a misunderstanding of what that keyword actually does or an alarming amount of modifying value type parameters.</p><p>02</p><pre><code>362: CSng(X + 
-356: Width), CSng(Y 
-355: obj As 
-355: R * 
-348: * 1.25 
-348: 1.25 * 
-346: 2 + 
-334: Or Vids(i) 
-330: Return valor 
-325: (1 + 
-289: = temp1(2, </code></pre><p>03</p><p>2192: i = 0 1521: = n + 1510: n + 1 348: * 1.25 * 1022: &#8216;UPGRADE_WARNING: Couldn&#8217;t resolve</p><p>04 285: Until j = n 285: j = n + 257: RET_VKij(), RET_VTC, RET_VPC, RET_VW,</p></p>
+    491: ByRef </code></pre><p>In VB.NET you only need to use ByRef if you want to modify a passed in <em>value</em> type (not reference type). It&#8217;s not something that should usually happen a lot, so seeing a lot of usages of ByRef could indicate a misunderstanding of what that keyword actually does or an alarming amount of modifying value type parameters.</p><p>As I go through the rest of the files, I am more looking for phrases that are repeated a surprising number of times. I try and follow the phrases through the files to see what they turn into and at one point they diverge into two phrases, etc. Here are some notes I took as I went through:</p><pre><code>02
+
+   1022: &#39;UPGRADE_WARNING: Couldn&#39;t resolve 
+    362: CSng(X + 
+    356: Width), CSng(Y 
+    348: * 1.25 
+    346: 2 + 
+    334: Or Vids(i) 
+    330: Return valor 
+    325: (1 + 
+    289: = temp1(2, </code></pre><p>Looks like some possible repeated formulas.</p><pre><code>03
+
+   2192: i = 0 
+   1521: = n + 
+   1510: n + 1 
+   1022: &#39;UPGRADE_WARNING: Couldn&#39;t resolve 
+    356: Width), CSng(Y + 
+    348: * 1.25 * 
+    338: ^ 2 + 
+    185: = temp1(2, 0) 
+    143: Return valor * 
+    138: Return valor / </code></pre><p>Not sure what the <code>i = 0</code>, <code>= n + 1</code> stuff is about yet, probably looping related. Notice <code>Return valor</code> has started splitting. It continues to split into fragments like <code>13: Return valor / 3600</code>. I won&#8217;t include it from here on but it would be worth looking into why it does this.</p><pre><code>04
+   1467: Looks up a localized 
+   1387: Loop Until i = 
+   1382: = i + 1 
+   1022: &#39;UPGRADE_WARNING: Couldn&#39;t resolve default 
+    598: i = 0 To 
+    591: For i = 0 
+    356: Width), CSng(Y + 
+    257: RET_VKij(), RET_VTC, RET_VPC, RET_VW, 
+    193: * 1.25 * Width), 
+    106: &gt; temp1(2, 0) Then 
+     73: ^ 2 + (pt.Y </code></pre><p>Yep, looping related. I also start noticing <code>RET_VKij()</code> as the extraneous repeated stuff thins out.</p><pre><code>05
+   1467: Looks up a localized string 
+   1022: Couldn&#39;t resolve default property of 
+    180: T, P, RET_VMOL(fase1), RET_VKij(), RET_VMAS(fase1), 
+    127: * 1.25 * Width), CSng(Y 
+    106: 0) &gt; temp1(2, 0) Then 
+     40: alpha(i) = (1 + (0.37464 
+     40: RET_VTC, RET_VPC, RET_VW, Me.RET_Hid(298.15, T, 
+     36: (1 + 2 ^ 0.5) 
+
+06
+   1467: &#39;&#39;&#39; Looks up a localized string 
+   1022: &#39;UPGRADE_WARNING: Couldn&#39;t resolve default property of 
+    180: T, P, RET_VMOL(fase1), RET_VKij(), RET_VMAS(fase1), RET_VTC(), 
+    127: * 1.25 * Width), CSng(Y + 
+    110: Return Me.m_props.CpCvR(&quot;L&quot;, T, P, RET_VMOL(fase1), RET_VKij(), 
+     40: alpha(i) = (1 + (0.37464 + </code></pre><p><code>temp1(2, 0)</code> splits off into two here, for brevity&#8217;s sake I won&#8217;t continue listing it here, although I think it would be worth a follow-up. First time I notice <code>Return Me.m\_props</code>, which continues showing up for a while. and eventually shows itself to be tied to <code>T, P, RET_VMOL</code>.</p><pre><code>07</code></pre><p>Here the <code>&#39;UPGRADE WARNING: Couldn&#39;t resolve default property of</code> splits off into things like: object pressure, temperature, tau, density, pSatW&#8230; I didn&#8217;t record the full list. Looks like it probably is something generated by a tool. (Confirmed later)</p><pre><code>08
+   1467: &#39;&#39;&#39; Looks up a localized string similar to 
+    180: T, P, RET_VMOL(fase1), RET_VKij(), RET_VMAS(fase1), RET_VTC(), RET_VPC(), RET_VCP(T), 
+    110: Return Me.m_props.CpCvR(&quot;L&quot;, T, P, RET_VMOL(fase1), RET_VKij(), RET_VMAS(fase1), RET_VTC(), 
+     30: alpha(i) = (1 + (0.37464 + 1.54226 * W(i) </code></pre><p>This is the last time we see <code>&#39;&#39;&#39; Looks up a localized string similar to</code> as a high number, it splits off into many names. Definitely generated by a tool as well. <code>1.25 * Width</code> has now split into at least two by now as well. It still seems odd to me, so I would look into why later.</p><p>I&#8217;m going to skip a bit here and list the rest of the phrases that I would follow up on (if I were really learning my way around this project).</p><pre><code>180: T, P, RET_VMOL(fase1), RET_VKij(), RET_VMAS(fase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), 
+110: Return Me.m_props.CpCvR(&quot;L&quot;, T, P, RET_VMOL(fase1), RET_VKij(), RET_VMAS(fase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), 
+ 65: / 1000 * subst.ConstantProperties.Molar_Weight / Me.m_props.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, 
+ 30: alpha(i) = (1 + (0.37464 + 1.54226 * W(i) - 0.26992 </code></pre><p>Might be some opportunities to get rid of magic numbers and refactor a bit.</p><p><strong>String-only</strong></p><p>The last section turned out quite a bit longer than I expected, fortunately this one turned out much much shorter! In this project I saw nothing to call attention to in the string frequency list. There are maybe a couple of opportunities to put some strings in a resource file, but that&#8217;s it.</p><p>I will keep running the strings-only part in the future though, just because of that one (small!) codebase where I really did find over a hundred uses of <code>&quot;SELECT *
+FROM&quot;</code>.</p></p>
 
 
 <div id="gallery">
