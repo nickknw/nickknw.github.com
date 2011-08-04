@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2011-08-01T22:03:21-07:00</updated>
+ <updated>2011-08-04T05:49:43-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -13,7 +13,7 @@
  
  <entry>
    <title>Hello World!</title>
-   <link href="http://nickknowlson.com/blog/2011/07/23/hello-world"/>
+   <link href="http://nickknowlson.com/blog/2011/07/23/hello-world/"/>
    <updated>2011-07-23T00:00:00-07:00</updated>
    <id>http://nickknowlson.com/blog/2011/07/23/hello-world</id>
    <content type="html">&lt;p&gt;This site is finally live! I have put a skeleton of content up here for now just so I can get it up, but over the coming months I&amp;#8217;ll be updating my Project pages with more detail as well as screenshots. I&amp;#8217;ll also put up the occasional blog post from time to time, and these will lean towards longer, more technical posts.&lt;/p&gt;
@@ -27,7 +27,7 @@
  
  <entry>
    <title>Command line file transfer</title>
-   <link href="http://nickknowlson.com/blog/2009/02/05/command-line-file-transfer"/>
+   <link href="http://nickknowlson.com/blog/2009/02/05/command-line-file-transfer/"/>
    <updated>2009-02-05T00:00:00-08:00</updated>
    <id>http://nickknowlson.com/blog/2009/02/05/command-line-file-transfer</id>
    <content type="html">&lt;p&gt;(&lt;strong&gt;**Old post alert**&lt;/strong&gt; This is an old post I dug up from sometime around college)&lt;/p&gt;
@@ -56,7 +56,7 @@ sshfs user@host: localmountpoint
  
  <entry>
    <title>Haskell for great good</title>
-   <link href="http://nickknowlson.com/blog/2009/01/14/haskell-for-great-good"/>
+   <link href="http://nickknowlson.com/blog/2009/01/14/haskell-for-great-good/"/>
    <updated>2009-01-14T00:00:00-08:00</updated>
    <id>http://nickknowlson.com/blog/2009/01/14/haskell-for-great-good</id>
    <content type="html">&lt;p&gt;(&lt;strong&gt;**Old post alert**&lt;/strong&gt; This is an old post I dug up from sometime around college)&lt;/p&gt;
@@ -70,7 +70,7 @@ sshfs user@host: localmountpoint
  
  <entry>
    <title>Vim as an IDE</title>
-   <link href="http://nickknowlson.com/blog/2008/12/16/vim-as-an-ide"/>
+   <link href="http://nickknowlson.com/blog/2008/12/16/vim-as-an-ide/"/>
    <updated>2008-12-16T00:00:00-08:00</updated>
    <id>http://nickknowlson.com/blog/2008/12/16/vim-as-an-ide</id>
    <content type="html">&lt;p&gt;(&lt;strong&gt;**Old post alert**&lt;/strong&gt; This is an old post I dug up from sometime around college)&lt;/p&gt;
