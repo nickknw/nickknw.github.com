@@ -69,8 +69,46 @@
 <div style="margin-bottom:.75em;"><strong>Source code: </strong><a href="http://github.com/nickknw/vbnet_signature_survey">github</a> <span style="font-size:.85em">[<a href="http://github.com/nickknw/vbnet_signature_survey/tarball/master">.tar.gz</a> / <a href="http://github.com/nickknw/vbnet_signature_survey/zipball/master">.zip</a>]</span></div>
 
 
+
+<div id="gallery">
+    <ul>
+        
+        <li>
+            <a href="/img/projects/vbnet-signature-survey/5.png" title="Sample VB.NET signature survey page">
+                <img src="/img/projects/vbnet-signature-survey/5.png" width="144" height="144" alt="Sample VB.NET signature survey page" />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/vbnet-signature-survey/4.png" title="">
+                <img src="/img/projects/vbnet-signature-survey/4.png" width="144" height="144" alt="" />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/vbnet-signature-survey/3.png" title="">
+                <img src="/img/projects/vbnet-signature-survey/3.png" width="144" height="144" alt="" />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/vbnet-signature-survey/2.png" title="">
+                <img src="/img/projects/vbnet-signature-survey/2.png" width="144" height="144" alt="" />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/vbnet-signature-survey/1.png" title="">
+                <img src="/img/projects/vbnet-signature-survey/1.png" width="144" height="144" alt="" />
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
 <h2>Details</h2>
-<p><p>A signature survey is a simple text-only visualization of source code, pioneered by Ward Cunningham. The original was written with Java in mind and essentially strips out all characters except for curly braces and semicolons.</p><h2 id='what_use_is_it'>What use is it?</h2><p>First I&#8217;ll summarize a few of the neat points of Ward Cunningham&#8217;s original <a href='http://c2.com/doc/SignatureSurvey/'>Signature Survey</a>:</p><ul>
+<p><p>A signature survey is a simple text-only visualization of source code, pioneered by Ward Cunningham. The original was written with Java in mind and essentially strips out all characters except for curly braces and semicolons. Check out the <a href='report/'>interactive example</a> to really get a feel for my version.</p><h2 id='what_use_is_it'>What use is it?</h2><p>First I&#8217;ll summarize a few of the neat points of Ward Cunningham&#8217;s original <a href='http://c2.com/doc/SignatureSurvey/'>Signature Survey</a>:</p><ul>
 <li>Quick visual summary of code of a file by file basis.</li>
 
 <li>Easy to distinguish classes with low and high complexity</li>
@@ -90,15 +128,7 @@
 <li>In the &#8216;detailed view&#8217; of each file, I prefer to see just a list of methods, with parameter types and the return type, instead of the whole file. I can open the whole file in my main editor, but having a list of the methods in the order they are in is quite helpful.</li>
 </ul><h2 id='usage'>Usage</h2><p>Move <code>vb_signature_survey.rb</code> to the root directory of your project, then run it.</p><div class='highlight'><pre><code class='bash'>ruby vb_signature_survey.rb
 </code></pre>
-</div><h2 id='example'>Example</h2><p>I searched around on github and sourceforge for a decent-sized vb.net project, and ended up with <a href='http://sourceforge.net/projects/dwsim/'>DWSIM</a>. DWSIM is an open source chemical process simulator written in VB.NET.</p><p>I ran the script on this project and put up the results as an <a href='report/'>interactive example</a>.</p><p><a href='http://i.imgur.com/KRRQl.png'>(Click for full size)</a></p><p><a href='http://i.imgur.com/KRRQl.png'><img alt='Picture of a VB.NET signature survey page' src='http://i.imgur.com/KRRQl.png' /></a></p><p><strong>TODO:</strong> find an existing open source project to generate a working example from so I can link to an actual page instead of just having a screenshot</p></p>
-
-
-<div id="gallery">
-    <ul>
-        
-    </ul>
-</div>
-
+</div><h2 id='example'>Example</h2><p>I searched around on github and sourceforge for a decent-sized vb.net project, and ended up with <a href='http://sourceforge.net/projects/dwsim/'>DWSIM</a>. DWSIM is an open source chemical process simulator written in VB.NET.</p><p>I ran the script on this project and put up the results as an <a href='report/'>interactive example</a>. Try browsing around and imagine having it up beside the actual source code in your editor of choice.</p></p>
 
 
 

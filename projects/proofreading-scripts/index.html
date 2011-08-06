@@ -69,6 +69,14 @@
 <div style="margin-bottom:.75em;"><strong>Source code: </strong><a href="http://github.com/nickknw/proofreading_scripts">github</a> <span style="font-size:.85em">[<a href="http://github.com/nickknw/proofreading_scripts/tarball/master">.tar.gz</a> / <a href="http://github.com/nickknw/proofreading_scripts/zipball/master">.zip</a>]</span></div>
 
 
+
+<div id="gallery">
+    <ul>
+        
+    </ul>
+</div>
+
+
 <h2>Details</h2>
 <p><p>I wanted to make use of Matt Might&#8217;s <a href='http://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/'>proofreading scripts</a>, but I&#8217;m on a Windows machine most of the time and would rather not rely on cygwin, a so I rewrote them in Ruby and customized them a bit.</p><p>I made sure to handle the case where a suspect phrase (e.g. &#8216;is used&#8217;, or &#8216;the the&#8217;) is split between two different lines.</p><p>The output has line numbers, includes the suspect words at the beginning of the line, and is more or less readable in the windows command prompt. It uses &#62;angle brackets&#60; to mark the word instead of color and tries to stay within a fairly short width.</p><p>When run, it automatically creates a file called <code>feedback-&lt;filename&gt;</code>. If it finds weasel words or passive voice, it adds a couple of short tips from Matt&#8217;s original blog post after the list of them.</p><p>These scripts are finished and working, but if you find any bugs please let me know.</p><h2 id='usage'>Usage</h2><div class='highlight'><pre><code class='bash'>ruby proofread.rb <span class='o'>[</span>filename<span class='o'>]</span>
 </code></pre>
@@ -121,14 +129,6 @@ Duplicated words results:
  175: the the -  Many readers are not aware that &gt;the the&lt; brain will automatically ignore a 
  180: the the -  Many readers are not aware that &gt;the the&lt; brain will automatically ignore a 
  181: instance instance -  second &gt;instance instance&lt; of the word &quot;the&quot; when it starts a new line.  </code></pre></p>
-
-
-<div id="gallery">
-    <ul>
-        
-    </ul>
-</div>
-
 
 
 
