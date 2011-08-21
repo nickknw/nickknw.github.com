@@ -115,9 +115,25 @@
 
 
 <h2>Details</h2>
-<p><p>It helps highlight things you&#8217;re looking for when searching for apartments or housing on craigslist. This script will follow each link on the search page and scan the individual listing&#8217;s body page for the keywords you enter. When it finds them, it will retrieve them, append them to the end of the individual listing, and highlight them green or red for positive or negative. You can pick the terms you are looking for at the top of the page, the script integrates its options panel into the search ui for craigslist.</p><p>See the screenshots above for an example of what this looks like. I have found it much easier to scan a long page of housing listings to pick out the promising ones.</p><h2 id='install'>Install</h2><ul>
-<li>Instructions on how to go to userscripts.org and install it from there.</li>
-</ul><h2 id='example'>Example</h2><p>I noticed that sometimes people just put &#8216;pets considered&#8217; in their listing and don&#8217;t check off the &#8216;cats are OK&#8217; checkbox. Using the regular cats and dogs checkboxes will filter these out and I wanted to be able to find these kinds of listings more easily.</p></p>
+<p><p>This script helps highlight things you&#8217;re looking for when searching for apartments or housing on craigslist. This script will follow each link on the search page and scan the individual listing&#8217;s body page for the keywords you enter. When it finds them, it will retrieve them, append them to the end of the individual listing, and highlight them green or red for positive or negative. You can pick the terms you are looking for at the top of the page, the script integrates its options panel into the search ui for craigslist.</p><p>See the screenshots above for an example of what this looks like.</p><h2 id='install'>Install</h2><p>This script is only supported for Firefox and Greasemonkey at the moment.</p><ol>
+<li>Install <a href='https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/'>Greasemonkey</a></li>
+
+<li>Go to the <a href='http://userscripts.org/scripts/show/110921'>userscripts page</a> for Craigslist Highlighter and click the Install button in the top right corner.</li>
+</ol><h2 id='features'>Features</h2><ul>
+<li>Finds mentions of months and highlights them in blue.</li>
+
+<li>Location, location, location. Finds good and bad locations based on your input and highlights the listing in green or red. It highlights the location in a deeper green or red for easier scanning.</li>
+
+<li>Fields where you can enter your own desirable traits, such as &#8216;garden&#8217; or &#8216;skylight&#8217;. The only real difference between these and the location boxes is the location boxes highlight the listing based on their result.</li>
+
+<li>Checkboxes for other common desirable things, like fireplaces, balconies and dishwashers. These act just like predefined lists of good and bad traits.</li>
+
+<li>Smarter pet searching. If you check &#8216;cats&#8217; it will search for a list of phrases involving cats and pets. It catches ones that would be filtered out by using the normal craigslist cats and dogs checkboxes, and can identify many bad matches (e.g. &#8216;no cats&#8217;)</li>
+
+<li>If you enter a maximum (and optionally minimum) value, it will put emphasis on the lower prices and fade out the higher ones. For best results enter both minimum and maximum values.</li>
+
+<li>Integrates smoothly into craigslist by emulating its style. Easy to disable.</li>
+</ul></p>
 
 
 
