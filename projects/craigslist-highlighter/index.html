@@ -70,11 +70,54 @@
 
 
 
+<div id="gallery">
+    <div style="font-size:.85em;color:#888;font-style:italic;">6 Screenshots</div>
+    <ul>
+        
+        <li>
+            <a href="/img/projects/craigslist/list_before.png" title="'Before' view of the search page">
+                <img src="/img/projects/craigslist/list_before_thumb.png" width="144" height="144" alt="'Before' view of the search page" />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/craigslist/list_after.png" title="'After' view of the search page">
+                <img src="/img/projects/craigslist/list_after_thumb.png" width="144" height="144" alt="'After' view of the search page" />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/craigslist/item_before.png" title="'Before' view of a single listing">
+                <img src="/img/projects/craigslist/item_before_thumb.png" width="144" height="144" alt="'Before' view of a single listing" />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/craigslist/item_after.png" title="'After' view of a single listing">
+                <img src="/img/projects/craigslist/item_after_thumb.png" width="144" height="144" alt="'After' view of a single listing" />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/craigslist/options_off.png" title="What Craigslist Highlighter looks like when disabled">
+                <img src="/img/projects/craigslist/options_off_thumb.jpg" width="144" height="144" alt="What Craigslist Highlighter looks like when disabled" />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/craigslist/options_on.png" title="What Craigslist Highlighter looks like when enabled">
+                <img src="/img/projects/craigslist/options_on_thumb.jpg" width="144" height="144" alt="What Craigslist Highlighter looks like when enabled" />
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
 
 <h2>Details</h2>
-<p><p>It helps highlight things you&#8217;re looking for when searching for apartments or housing on craigslist. This script will follow each link on the search page and scan the individual listing&#8217;s body page for the keywords you enter. When it finds them, it will retrieve them and highlight them as positive or negative. At the moment, it should turn <a href='http://i.imgur.com/z5UVY.jpg'>this listing page</a> into <a href='http://i.imgur.com/Lg3E0.jpg'>something like this</a>, and <a href='http://i.imgur.com/9zbqA.jpg'>this item page</a> into <a href='http://i.imgur.com/78gq6.jpg'>something like this</a>.</p><p>It makes it easier to narrow attention down to the more interesting ones, but there&#8217;s still a fair way to go before I&#8217;m happy with it.</p><p><strong>Next steps:</strong></p><ul>
-<li>Set up an easy way to install it. Write instructions.</li>
-</ul></p>
+<p><p>It helps highlight things you&#8217;re looking for when searching for apartments or housing on craigslist. This script will follow each link on the search page and scan the individual listing&#8217;s body page for the keywords you enter. When it finds them, it will retrieve them, append them to the end of the individual listing, and highlight them green or red for positive or negative. You can pick the terms you are looking for at the top of the page, the script integrates its options panel into the search ui for craigslist.</p><p>See the screenshots above for an example of what this looks like. I have found it much easier to scan a long page of housing listings to pick out the promising ones.</p><h2 id='install'>Install</h2><ul>
+<li>Instructions on how to go to userscripts.org and install it from there.</li>
+</ul><h2 id='example'>Example</h2><p>I noticed that sometimes people just put &#8216;pets considered&#8217; in their listing and don&#8217;t check off the &#8216;cats are OK&#8217; checkbox. Using the regular cats and dogs checkboxes will filter these out and I wanted to be able to find these kinds of listings more easily.</p></p>
 
 
 
