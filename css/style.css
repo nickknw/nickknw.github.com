@@ -41,7 +41,7 @@ blockquote {
 
 body {
     background: none;
-    background: url(/img/green_squares3.png);
+    background: url(/img/green_squares3.png) repeat scroll 0 0 #376A44;
 }
 
 #content {
