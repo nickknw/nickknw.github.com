@@ -61,7 +61,7 @@
 <p>Here&#8217;s an overview of roughly how many people thought there was a problem in each category:</p>
 
 <p><img alt='Weaknesses from State of Haskell Bar Graph' src='/img/state_of_haskell_2011_weakness.png' /></p>
-
+<h3>Libraries, Documentation, Hackage and Cabal</h3>
 <p>The category for libraries absolutely overwhelmed the rest. I ended up splitting it into three: Libraries / Packages, Documentation / Library Documentation, Cabal, and Hackage. The feedback in the general &#8216;Libraries / Packages&#8217; category ranged from requests for specific kinds of libraries to pointing out dependency problems to problems with library stability and maturity. Here&#8217;s a few samples:</p>
 
 <blockquote>
@@ -75,6 +75,20 @@
 <blockquote>
 <p>I&#8217;ve had problems with borking my packages when installing a new one. New req gets pulled in and causes global/user level dependency problems. If I didn&#8217;t already know how to fix it, there&#8217;s a good chance I&#8217;d give up.</p>
 </blockquote>
+
+<p>A few responses in the <strong>Library Documentation</strong> category walk a fine line between it and the &#8216;hard to learn&#8217; one, but enough people targeted library docs specifically that I broke it off into its own.</p>
+
+<p>The <strong>Hackage</strong> responses had a clear central theme of &#8216;we need a way to gauge the quality of packages&#8217;. People really want a way to find out how many other people are using a library, and to see what the general opinion of it is.</p>
+
+<p>The feedback that mentioned <strong>Cabal</strong> specifically was complaining about how cabal handles dependency problems and versioning. Notably, one person wrote in to champion cabal-dev as the solution to the exact problems everyone else is having:</p>
+
+<blockquote>
+<p>This isn&#8217;t a weakness exactly. In fact, having found cabal-dev, I find it is rather a strength. I would like to see more &#8220;official&#8221; development done with it, and would like to see it become a part of the Haskell Platform.</p>
+
+<p>Without cabal-dev, the &#8220;likelihood that a library will build on my machine&#8221; would be very low (a 1). With it, it jumps to 5. I put in a 4, to indicate that it is a solved problem, IF one has the right tools installed. Also, I have built up a lot of bash scripts to streamline my cabal-dev workflow.</p>
+</blockquote>
+
+<p>There is a great post on the haskell reddit where <a href='http://www.reddit.com/r/haskell/comments/f3ykj/psa_use_cabaldev_to_solve_dependency_problems/'>jmillikin goes into detail</a> about how and why cabal-dev can help with dependency hell. I am getting the impression that the real problem with cabal is just that cabal-dev needs to be promoted more!</p>
 </div>
 
 <div id="socialbuttons">
