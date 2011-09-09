@@ -47,6 +47,90 @@
                 <div style="text-align:center;"><b>Latest Posts</b> | <a href="/blog/archive/">Archive</a></div>
 
   <div>
+  <h1 style="margin:0px"><a href="/blog/2011/08/27/haskell-survey-categorized-weaknesses/">
+  Categorized Weaknesses from State of Haskell 2011
+  </a></h1>
+  <div class="faded" style="font-size:14px; margin-bottom:5px;">27 Aug 2011</div>
+  <p>After reading about the results of the <a href='http://blog.johantibell.com/2011/08/results-from-state-of-haskell-2011.html'>State of Haskell, 2011 Survey</a>, I was curious about the freeform feedback given in response to &#8220;What do you think is Haskell&#8217;s most glaring weakness / blind spot / problem?&#8221;.</p>
+
+<p>So I got the raw results and started reading through and categorizing them as I went. I didn&#8217;t intend to do the whole thing when I started &#8211; there are a LOT of answers &#8211; but over a few days I finished it off.</p>
+
+<p>As I read each one I decided whether it would fit into an existing category or whether it deserved a new one. If one person gave multiple weaknesses I split them up and put each where it belonged. A couple of times one issue really seemed to fit in two categories, so I put it in each of them, but I tried to minimize the amount of times this happened.</p>
+
+<p>If you read through it carefully enough you almost definitely will see feedback in one category that should have been in another. There were a lot of responses and with continually evolving categories it is easy to make mistakes. Feel free to let me know if you see any and I&#8217;ll update it.</p>
+
+<h2 id='so_what_were_the_results'>So what <strong>were</strong> the results?</h2>
+
+<p>Here&#8217;s an overview of roughly how many people thought there was a problem in each category:</p>
+
+<p><img alt='Weaknesses from State of Haskell Bar Graph' src='/img/state_of_haskell_2011_weakness.png' /></p>
+<h3>Libraries, Documentation, Hackage and Cabal</h3>
+<p>The category for libraries absolutely overwhelmed the rest. I ended up splitting it into three: Libraries / Packages, Documentation / Library Documentation, Cabal, and Hackage. The feedback in the general &#8216;Libraries / Packages&#8217; category ranged from requests for specific kinds of libraries to pointing out dependency problems to problems with library stability and maturity. Here&#8217;s a few samples:</p>
+
+<blockquote>
+<p>Most libraries are not ready for production use because they <br />a) are incomplete (wrt. to conformance to specifications like XML / XML InfoSet)<br />b) have inacceptable performance for non-toy use (i.e. use strings, too many allocations, etc)<br />c) too often change APIs or don&#8217;t have a stable maintained version along with an unstable development version</p>
+</blockquote>
+
+<blockquote>
+<p>Competing and incomplete libraries.</p>
+</blockquote>
+
+<blockquote>
+<p>I&#8217;ve had problems with borking my packages when installing a new one. New req gets pulled in and causes global/user level dependency problems. If I didn&#8217;t already know how to fix it, there&#8217;s a good chance I&#8217;d give up.</p>
+</blockquote>
+
+<p>A few responses in the <strong>Library Documentation</strong> category walk a fine line between it and the &#8216;hard to learn&#8217; one, but enough people targeted library docs specifically that I broke it off into its own. Aside from the general statements of &#8220;not enough, and what is there is largely not good&#8221;, something specific that was repeatedly asked for was <em>more examples</em>. There was some great feedback in this section:</p>
+
+<blockquote>
+<p>A lot of libraries seem to rely on only having &#8220;reference&#8221; documentation, that is an index of every function. This is not enough: More documentation should be written geared towards use of the library. Index and reference is good for hacking the library or doing weird stuff, but when developing, I just want to grab the library and start using it in the way the developer intended.</p>
+</blockquote>
+
+<blockquote>
+<p>By far the biggest problem is the lack of a &#8220;middle ground&#8221; in documentation. There is ample beginner/tutorial documentation, and extensive &#8220;academic expert&#8221; documentation (proofs, discussions of mathematical properties of zippers, etc). However, there is very little &#8220;application writing&#8221; documentation. The problem crops up most often with libraries. Often a library that does something very useful has no non-trivial examples included, and no discussion or tutorial of how to actually put it to use. The library&#8217;s API functions are often described in terms of their mathematical properties rather than what you would use them for in a &#8220;real&#8221; program.</p>
+
+<p>A few libraries I&#8217;ve suffered this with include fclabels, data-accessor, fgl, and especially haxml. All of these are practically indispensable for writing applications, but have almost no application-oriented documentation. Haxml was a particularly sad case; I had to give up trying to understand it entirely due to the lack of useful documentation.</p>
+
+<p>This type of documentation may seem to &#8220;fall out&#8221; from a mathematically-oriented understanding of the library (such as haxml&#8217;s combinator scheme, or the concept of &#8220;lenses&#8221; in fclabels), but an application programmer does not have time to work through proofs of lens properties and then figure out what they might be good for in a program. Instead, the application programmer needs cookbook-style documentation to get something up and running, and then s/he can come to understand and make use of the underlying math.</p>
+
+<p>One of the few libraries that does this right is Parsec. fclabels at least had a reasonable toy example, but data-accessor fails epically in this regard.</p>
+
+<p>If application programmers could &#8220;get their programs started&#8221; more easily, without having to burn so much time wading through math-oriented documentation, I believe Haskell would be more widely adopted. The existence of math-oriented documentation is a very good thing, and is quite helpful when you need to know about those properties, but such documentation is not sufficient for bootstrapping an application.</p>
+</blockquote>
+
+<p>The <strong>Hackage</strong> responses had a clear central theme of &#8216;we need a way to gauge the quality of packages&#8217;. People really want a way to find out how many other people are using a library, and to see what the general opinion of it is.</p>
+
+<blockquote>
+<p>It is still not always easy to know what the &#8220;canonical&#8221; library for a given task is, although one often exists. Hackage feels too crowded at times.</p>
+</blockquote>
+
+<blockquote>
+<p>Hackage is a mess, it&#8217;s very difficult to find libraries, it&#8217;s very difficult to know which libraries are well designed for which tasks and there are no links between libraries that are similar. There are no statistics to know which libraries are widely used and no voting system. Old libraries that no longer work are sill in Hackage and it is not possible to filter them out. Package groups like yesod are a mess on Hackage, some packages are up to date, others are old, others have been folded into larger packages and will cause errors if you try to build them.</p>
+</blockquote>
+
+<p>The feedback that mentioned <strong>Cabal</strong> specifically was complaining about how cabal handles dependency problems and versioning. Notably, one person wrote in to champion cabal-dev as the solution to the exact problems everyone else is having:</p>
+
+<blockquote>
+<p>This isn&#8217;t a weakness exactly. In fact, having found cabal-dev, I find it is rather a strength. I would like to see more &#8220;official&#8221; development done with it, and would like to see it become a part of the Haskell Platform.</p>
+
+<p>Without cabal-dev, the &#8220;likelihood that a library will build on my machine&#8221; would be very low (a 1). With it, it jumps to 5. I put in a 4, to indicate that it is a solved problem, IF one has the right tools installed. Also, I have built up a lot of bash scripts to streamline my cabal-dev workflow.</p>
+</blockquote>
+
+<p>There is a great post on the haskell reddit where <a href='http://www.reddit.com/r/haskell/comments/f3ykj/psa_use_cabaldev_to_solve_dependency_problems/'>jmillikin goes into detail</a> about how and why cabal-dev can help with dependency hell. I am getting the impression that the real problem with cabal is just that more people need to be aware of cabal-dev!</p>
+<h3>Tools and Performance</h3>
+<p>The next largest group of responses centered around the tools available. In this category I included everything from IDEs like Leksah, to requests for better debugging and profiling tools. Very closely linked to the Tools category was Performance; most people were saying that it was difficult to reason about performance, which can be alleviated by having better tools.</p>
+
+<p>The feedback that mentioned <strong>tools</strong> specifically ide stack traces space leak analysis tools profiling hard to analyze statically refactoring debugging</p>
+  </div>
+
+  <div style="margin-top:20px; font-size:14px;">
+    <a href="/blog/2011/08/27/haskell-survey-categorized-weaknesses/#disqus_thread" data-disqus-identifier="/blog/2011/08/27/haskell-survey-categorized-weaknesses">Comments</a>
+  </div>
+
+  
+    <hr class="fancyrule" />
+  
+
+  <div>
   <h1 style="margin:0px"><a href="/blog/2011/07/23/hello-world/">
   Hello World!
   </a></h1>
