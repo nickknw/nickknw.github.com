@@ -47,62 +47,6 @@
                 <div style="text-align:center;"><b>Latest Posts</b> | <a href="/blog/archive/">Archive</a></div>
 
   <div>
-  <h1 style="margin:0px"><a href="/blog/2011/08/27/haskell-survey-categorized-weaknesses/">
-  Categorized Weaknesses from State of Haskell 2011
-  </a></h1>
-  <div class="faded" style="font-size:14px; margin-bottom:5px;">27 Aug 2011</div>
-  <p>After reading about the results of the <a href='http://blog.johantibell.com/2011/08/results-from-state-of-haskell-2011.html'>State of Haskell, 2011 Survey</a>, I was curious about the freeform feedback given in response to &#8220;What do you think is Haskell&#8217;s most glaring weakness / blind spot / problem?&#8221;.</p>
-
-<p>So I got the raw results and started reading through and categorizing them as I went. I didn&#8217;t intend to do the whole thing when I started &#8211; there are a LOT of answers &#8211; but over a few days I finished it off.</p>
-
-<p>As I read each one I decided whether it would fit into an existing category or whether it deserved a new one. If one person gave multiple weaknesses I split them up and put each where it belonged. A couple of times one issue really seemed to fit in two categories, so I put it in each of them, but I tried to minimize the amount of times this happened.</p>
-
-<p>If you read through it carefully enough you almost definitely will see feedback in one category that should have been in another. There were a lot of responses and with continually evolving categories it is easy to make mistakes. Feel free to let me know if you see any and I&#8217;ll update it.</p>
-
-<h2 id='so_what_were_the_results'>So what <strong>were</strong> the results?</h2>
-
-<p>Here&#8217;s an overview of roughly how many people thought there was a problem in each category:</p>
-
-<p><img alt='Weaknesses from State of Haskell Bar Graph' src='/img/state_of_haskell_2011_weakness.png' /></p>
-<h3>Libraries, Documentation, Hackage and Cabal</h3>
-<p>The category for libraries absolutely overwhelmed the rest. I ended up splitting it into three: Libraries / Packages, Documentation / Library Documentation, Cabal, and Hackage. The feedback in the general &#8216;Libraries / Packages&#8217; category ranged from requests for specific kinds of libraries to pointing out dependency problems to problems with library stability and maturity. Here&#8217;s a few samples:</p>
-
-<blockquote>
-<p>Most libraries are not ready for production use because they <br />a) are incomplete (wrt. to conformance to specifications like XML / XML InfoSet)<br />b) have inacceptable performance for non-toy use (i.e. use strings, too many allocations, etc)<br />c) too often change APIs or don&#8217;t have a stable maintained version along with an unstable development version</p>
-</blockquote>
-
-<blockquote>
-<p>Competing and incomplete libraries.</p>
-</blockquote>
-
-<blockquote>
-<p>I&#8217;ve had problems with borking my packages when installing a new one. New req gets pulled in and causes global/user level dependency problems. If I didn&#8217;t already know how to fix it, there&#8217;s a good chance I&#8217;d give up.</p>
-</blockquote>
-
-<p>A few responses in the <strong>Library Documentation</strong> category walk a fine line between it and the &#8216;hard to learn&#8217; one, but enough people targeted library docs specifically that I broke it off into its own.</p>
-
-<p>The <strong>Hackage</strong> responses had a clear central theme of &#8216;we need a way to gauge the quality of packages&#8217;. People really want a way to find out how many other people are using a library, and to see what the general opinion of it is.</p>
-
-<p>The feedback that mentioned <strong>Cabal</strong> specifically was complaining about how cabal handles dependency problems and versioning. Notably, one person wrote in to champion cabal-dev as the solution to the exact problems everyone else is having:</p>
-
-<blockquote>
-<p>This isn&#8217;t a weakness exactly. In fact, having found cabal-dev, I find it is rather a strength. I would like to see more &#8220;official&#8221; development done with it, and would like to see it become a part of the Haskell Platform.</p>
-
-<p>Without cabal-dev, the &#8220;likelihood that a library will build on my machine&#8221; would be very low (a 1). With it, it jumps to 5. I put in a 4, to indicate that it is a solved problem, IF one has the right tools installed. Also, I have built up a lot of bash scripts to streamline my cabal-dev workflow.</p>
-</blockquote>
-
-<p>There is a great post on the haskell reddit where <a href='http://www.reddit.com/r/haskell/comments/f3ykj/psa_use_cabaldev_to_solve_dependency_problems/'>jmillikin goes into detail</a> about how and why cabal-dev can help with dependency hell. I am getting the impression that the real problem with cabal is just that cabal-dev needs to be promoted more!</p>
-  </div>
-
-  <div style="margin-top:20px; font-size:14px;">
-    <a href="/blog/2011/08/27/haskell-survey-categorized-weaknesses/#disqus_thread" data-disqus-identifier="/blog/2011/08/27/haskell-survey-categorized-weaknesses">Comments</a>
-  </div>
-
-  
-    <hr class="fancyrule" />
-  
-
-  <div>
   <h1 style="margin:0px"><a href="/blog/2011/07/23/hello-world/">
   Hello World!
   </a></h1>
