@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2011-09-09T08:50:27-07:00</updated>
+ <updated>2011-09-10T12:52:30-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -29,6 +29,8 @@
 &lt;p&gt;Here&amp;#8217;s an overview of roughly how many people thought there was a problem in each category:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt='Weaknesses from State of Haskell Bar Graph' src='/img/state_of_haskell_2011_weakness.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is probably important to note that I didn&amp;#8217;t attempt to verify the accuracy of any of the claims, so this graph represents the public &lt;strong&gt;perception&lt;/strong&gt; of where the problems are, not necessarily where the problems actually are. It is still very important information though, and likely does match up very closely with where the problems are.&lt;/p&gt;
 &lt;h3&gt;Libraries, Documentation, Hackage and Cabal&lt;/h3&gt;
 &lt;p&gt;The category for libraries absolutely overwhelmed the rest. I ended up splitting it into three: Libraries / Packages, Documentation / Library Documentation, Cabal, and Hackage. The feedback in the general &amp;#8216;Libraries / Packages&amp;#8217; category ranged from requests for specific kinds of libraries to pointing out dependency problems to problems with library stability and maturity. Here&amp;#8217;s a few samples:&lt;/p&gt;
 
@@ -84,7 +86,9 @@
 &lt;h3&gt;Tools and Performance&lt;/h3&gt;
 &lt;p&gt;The next largest group of responses centered around the tools available. In this category I included everything from IDEs like Leksah, to requests for better debugging and profiling tools. Very closely linked to the Tools category was Performance; most people were saying that it was difficult to reason about performance, which can be alleviated by having better tools.&lt;/p&gt;
 
-&lt;p&gt;The feedback that mentioned &lt;strong&gt;tools&lt;/strong&gt; specifically ide stack traces space leak analysis tools profiling hard to analyze statically refactoring debugging&lt;/p&gt;</content>
+&lt;p&gt;The feedback that mentioned &lt;strong&gt;tools&lt;/strong&gt; specifically ide stack traces space leak analysis tools profiling hard to analyze statically refactoring debugging&lt;/p&gt;
+&lt;h3&gt;Learning and Teaching, Culture&lt;/h3&gt;&lt;h3&gt;GUI, Support For Other Platforms&lt;/h3&gt;&lt;h3&gt;Mainstream Usage &lt;/h3&gt;&lt;h3&gt;Language and Laziness&lt;/h3&gt;&lt;h3&gt;Stability and GHC&lt;/h3&gt;&lt;h3&gt;Other Backends, FFI, Integration&lt;/h3&gt;&lt;h3&gt;Distribution and Deployment&lt;/h3&gt;&lt;h3&gt;Doesn't Improve Productivity&lt;/h3&gt;
+&lt;h2 id='responses_i_couldnt_fit_in_a_category'&gt;Responses I Couldn&amp;#8217;t Fit In A Category&lt;/h2&gt;</content>
  </entry>
  
  <entry>
