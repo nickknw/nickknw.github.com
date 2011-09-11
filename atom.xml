@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2011-09-11T16:09:57-07:00</updated>
+ <updated>2011-09-11T16:19:44-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -13,9 +13,9 @@
  
  <entry>
    <title>Categorized Weaknesses from the State of Haskell 2011 Survey</title>
-   <link href="http://nickknowlson.com/blog/2011/08/27/haskell-survey-categorized-weaknesses/"/>
-   <updated>2011-08-27T00:00:00-07:00</updated>
-   <id>http://nickknowlson.com/blog/2011/08/27/haskell-survey-categorized-weaknesses</id>
+   <link href="http://nickknowlson.com/blog/2011/09/12/haskell-survey-categorized-weaknesses/"/>
+   <updated>2011-09-12T00:00:00-07:00</updated>
+   <id>http://nickknowlson.com/blog/2011/09/12/haskell-survey-categorized-weaknesses</id>
    <content type="html">&lt;p&gt;After reading about the results of the &lt;a href='http://blog.johantibell.com/2011/08/results-from-state-of-haskell-2011.html'&gt;State of Haskell, 2011 Survey&lt;/a&gt;, I was curious about the free-form feedback given in response to &amp;#8220;What do you think is Haskell&amp;#8217;s most glaring weakness / blind spot / problem?&amp;#8221;.&lt;/p&gt;
 
 &lt;p&gt;So I got the raw results and started reading through and categorizing them as I went. I didn&amp;#8217;t intend to do the whole thing when I started &amp;#8211; there are a LOT of answers &amp;#8211; but over a few days I finished it off.&lt;/p&gt;
