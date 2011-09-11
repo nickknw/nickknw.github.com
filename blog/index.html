@@ -48,16 +48,18 @@
 
   <div>
   <h1 style="margin:0px"><a href="/blog/2011/08/27/haskell-survey-categorized-weaknesses/">
-  Categorized Weaknesses from State of Haskell 2011
+  Categorized Weaknesses from the State of Haskell 2011 Survey
   </a></h1>
   <div class="faded" style="font-size:14px; margin-bottom:5px;">27 Aug 2011</div>
-  <p>After reading about the results of the <a href='http://blog.johantibell.com/2011/08/results-from-state-of-haskell-2011.html'>State of Haskell, 2011 Survey</a>, I was curious about the freeform feedback given in response to &#8220;What do you think is Haskell&#8217;s most glaring weakness / blind spot / problem?&#8221;.</p>
+  <p>After reading about the results of the <a href='http://blog.johantibell.com/2011/08/results-from-state-of-haskell-2011.html'>State of Haskell, 2011 Survey</a>, I was curious about the free-form feedback given in response to &#8220;What do you think is Haskell&#8217;s most glaring weakness / blind spot / problem?&#8221;.</p>
 
 <p>So I got the raw results and started reading through and categorizing them as I went. I didn&#8217;t intend to do the whole thing when I started &#8211; there are a LOT of answers &#8211; but over a few days I finished it off.</p>
 
 <p>As I read each one I decided whether it would fit into an existing category or whether it deserved a new one. If one person gave multiple weaknesses I split them up and put each where it belonged. A couple of times one issue really seemed to fit in two categories, so I put it in each of them, but I tried to minimize the amount of times this happened.</p>
 
-<p>If you read through it carefully enough you almost definitely will see feedback in one category that should have been in another. There were a lot of responses and with continually evolving categories it is easy to make mistakes. Feel free to let me know if you see any and I&#8217;ll update it.</p>
+<p>It&#8217;s currently in <a href='https://docs.google.com/spreadsheet/ccc?key=0Aq8X8wb4SdlWdG1XM3NoLXhnWl9VR3d6OURYMTA2ZXc&amp;hl=en_US'>a spreadsheet on Google Docs</a>.</p>
+
+<p>If you read through it carefully enough you almost definitely will see feedback in one category that should have been in another. There <em>WILL BE</em> mistakes. There were a lot of responses and with continually evolving categories it is easy to mix some up. Feel free to let me know if you see any errors and I&#8217;ll update it.</p>
 
 <h2 id='so_what_were_the_results'>So what <strong>were</strong> the results?</h2>
 
@@ -70,7 +72,7 @@
 <p>The category for libraries absolutely overwhelmed the rest. I ended up splitting it into three: Libraries / Packages, Documentation / Library Documentation, Cabal, and Hackage. The feedback in the general &#8216;Libraries / Packages&#8217; category ranged from requests for specific kinds of libraries to pointing out dependency problems to problems with library stability and maturity. Here&#8217;s a few samples:</p>
 
 <blockquote>
-<p>Most libraries are not ready for production use because they <br />a) are incomplete (wrt. to conformance to specifications like XML / XML InfoSet)<br />b) have inacceptable performance for non-toy use (i.e. use strings, too many allocations, etc)<br />c) too often change APIs or don&#8217;t have a stable maintained version along with an unstable development version</p>
+<p>Most libraries are not ready for production use because they <br />a) are incomplete (wrt. to conformance to specifications like XML / XML InfoSet)<br />b) have unacceptable performance for non-toy use (i.e. use strings, too many allocations, etc)<br />c) too often change APIs or don&#8217;t have a stable maintained version along with an unstable development version</p>
 </blockquote>
 
 <blockquote>
@@ -99,7 +101,9 @@
 <p>If application programmers could &#8220;get their programs started&#8221; more easily, without having to burn so much time wading through math-oriented documentation, I believe Haskell would be more widely adopted. The existence of math-oriented documentation is a very good thing, and is quite helpful when you need to know about those properties, but such documentation is not sufficient for bootstrapping an application.</p>
 </blockquote>
 
-<p>The <strong>Hackage</strong> responses had a clear central theme of &#8216;we need a way to gauge the quality of packages&#8217;. People really want a way to find out how many other people are using a library, and to see what the general opinion of it is.</p>
+<p>What a great, detailed response.</p>
+
+<p>The <strong>Hackage</strong> responses had a clear central theme of &#8216;we need a way to gauge the quality and popularity of packages&#8217;. People really want a way to find out how many other people are using a library, and to see what the general opinion of it is.</p>
 
 <blockquote>
 <p>It is still not always easy to know what the &#8220;canonical&#8221; library for a given task is, although one often exists. Hackage feels too crowded at times.</p>
@@ -117,13 +121,363 @@
 <p>Without cabal-dev, the &#8220;likelihood that a library will build on my machine&#8221; would be very low (a 1). With it, it jumps to 5. I put in a 4, to indicate that it is a solved problem, IF one has the right tools installed. Also, I have built up a lot of bash scripts to streamline my cabal-dev workflow.</p>
 </blockquote>
 
-<p>There is a great post on the haskell reddit where <a href='http://www.reddit.com/r/haskell/comments/f3ykj/psa_use_cabaldev_to_solve_dependency_problems/'>jmillikin goes into detail</a> about how and why cabal-dev can help with dependency hell. I am getting the impression that the real problem with cabal is just that more people need to be aware of cabal-dev!</p>
+<p>There is a great post on the Haskell reddit where <a href='http://www.reddit.com/r/haskell/comments/f3ykj/psa_use_cabaldev_to_solve_dependency_problems/'>jmillikin goes into detail</a> about how and why cabal-dev can help with dependency hell. I am getting the impression that the real problem with cabal is just that more people need to be aware of cabal-dev!</p>
 <h3>Tools and Performance</h3>
-<p>The next largest group of responses centered around the tools available. In this category I included everything from IDEs like Leksah, to requests for better debugging and profiling tools. Very closely linked to the Tools category was Performance; most people were saying that it was difficult to reason about performance, which can be alleviated by having better tools.</p>
+<p>The next largest group of responses centered around the tools available. In this category I included everything from IDEs like Leksah, to requests for better debugging and profiling tools. Very closely linked to the Tools category was Performance; most responses in that category were saying that it was difficult to <em>reason</em> about performance. That performance was not typically poor, just that it was unpredictable. This problem can be alleviated by having better tools.</p>
 
-<p>The feedback that mentioned <strong>tools</strong> specifically ide stack traces space leak analysis tools profiling hard to analyze statically refactoring debugging</p>
-<h3>Learning and Teaching, Culture</h3><h3>GUI, Support For Other Platforms</h3><h3>Mainstream Usage </h3><h3>Language and Laziness</h3><h3>Stability and GHC</h3><h3>Other Backends, FFI, Integration</h3><h3>Distribution and Deployment</h3><h3>Doesn't Improve Productivity</h3>
+<p>The feedback that mentioned <strong>tools</strong> targeted a bunch of different things. These were the most commonly mentioned:</p>
+
+<ul>
+<li>IDE support (mostly: Leksah is good but could be better)</li>
+
+<li>Space leak analysis tools</li>
+
+<li>Hard to analyze statically</li>
+
+<li>Refactoring</li>
+
+<li>Debugging</li>
+</ul>
+
+<p>Some people give very specific examples, it is worth looking through these responses to hear them describe it themselves. Here are a couple samples:</p>
+
+<blockquote>
+<p>Reasoning about strictness is often difficult, but even finding simple problems like circular computations that trigger &#171;loop&#187; exceptions in the runtime system and similar exceptions are hard to trace to a particular source. +RTS -xc -RTS helps, but is often not very precise. Debugging tools to make this easier would be the most useful improvement for me (or a more robust GHCi that won&#8217;t choke on unusual projects).</p>
+</blockquote>
+
+<blockquote>
+<p>My major concerns are with runtime analysis. I find it difficult to get the stack when the head of an empty list is requested or to infer by profiling which part of a program is retaining memory which should be freed.</p>
+</blockquote>
+
+<blockquote>
+<p>Lack of a decent IDE. Leksah is the closest yet, but if you compare Haskell to other languages with good commercial penetration, it&#8217;s a glaring omission. The IDE should be cross-platform and offer a single integration point for all Haskell&#8217;s development tools, which I hope will continue to improve.</p>
+</blockquote>
+
+<p>Almost everyone giving <strong>performance</strong> feedback was echoing the same sentiments:</p>
+
+<blockquote>
+<p>hard to reason about performance,</p>
+</blockquote>
+
+<blockquote>
+<p>hard to reason about space usage</p>
+</blockquote>
+
+<blockquote>
+<p>As noted and clearly in the mind of this survey&#8217;s author, reasoning about space and time is the single most tricky thing when programming in a lazy FL. I can wax lyrical as much as anyone else about the representational benefits of Haskell and indeed all the robust compile-time type checking, but runtime performance <em>can</em> be the thorn in the flesh.</p>
+</blockquote>
+
+<blockquote>
+<p>Space leaks/how often we have to deal with them, and how difficult it can be to figure out where they are in large applications.</p>
+</blockquote>
+<h3>Learning / Teaching, Mainstream Usage, and Culture</h3>
+<p>This group is all about the barrier to entry that there is when trying to learn Haskell.</p>
+
+<p>Feedback in the <strong>Learning / Teaching</strong> category says that it is just a difficult language to learn, full of concepts that you don&#8217;t normally get exposure to in other languages. Some people also say that there could be better materials available to help people that are learning. Amusingly, one person complained that there were not enough monad tutorials.</p>
+
+<blockquote>
+<p>Height of the learning curve. To write useful code, many concepts must be understood (laziness, functional programming, declarative vs imperative code, monads, monad transformers, applicative functors) which takes a lot of time.</p>
+
+<p>This makes writing Haskell code at work hard, since nobody will be able to understand it.</p>
+
+<p>Avoid success at all costs though, right? We wouldn&#8217;t want a community like the Ruby one.</p>
+</blockquote>
+
+<blockquote>
+<p>Availability of instruction to go from beginner to intermediate</p>
+</blockquote>
+
+<blockquote>
+<p>The Haskell &#8220;way&#8221; of doing things is so different, it&#8217;s a lot of effort to adapt. That said there&#8217;s not really a way round it I don&#8217;t think. Things like LYAH and RWH help too.</p>
+</blockquote>
+
+<p>There was more feedback about how <strong>mainstream</strong> Haskell is (or isn&#8217;t) than I would have guessed. Half the responses just leave it at &#8220;not enough people using it&#8221;, the rest pinpoint specific problems or offer some solutions. Notably, one person disagrees with almost everyone who thought that Performance was a serious problem for Haskell.</p>
+
+<blockquote>
+<p>Bad public image due to FUD, such as &#8221;&#8221;It is hard to reason about performance and space usage of Haskell programs&#8221;&#8221; (not any harder in practice than for other mainstream languages given the same level of skill and experience, which is usually not the case for people who complain), &#8221;&#8221;Haskell is not suitable for enterprise commercial development&#8221;&#8221; (that&#8217;s what I do for a living now and it&#8217;s great; how hard have the people who complain tried to build a Haskell career?), etc. The problem with this kind of &#8221;&#8221;survey&#8221;&#8221; is that it tends to reinforce that kind of FUD. But it&#8217;s good to look for ways to improve; I just hope you&#8217;ll try to remove some of that bias in the tone of your results. Thanks for this great survey!</p>
+</blockquote>
+
+<blockquote>
+<p>Lack of backing in time and resources to take the language and turn it into a professional grade platform. The community has put in an incredible amount of effort, and it shows. But it just doesn&#8217;t have anywhere near the polish of commercially backed platforms such as Java or C++. This is very disappointing since the language itself and a lot of the libraries on Hackage are so incredible.</p>
+</blockquote>
+
+<blockquote>
+<p>The reputation as an &#8220;academic&#8221; language you can&#8217;t do &#8220;real world&#8221; development in is still out there and hurts adaption.</p>
+</blockquote>
+
+<p>The <strong>Culture</strong> group is pretty small and has a lot of overlap with the above two. It maybe actually should have been merged into one or the other, looking back at it now. Really what is emphasized though, is that Haskell still very much has an academic culture, and that can make it harder for people to pick it up.</p>
+
+<p>Darrin Thompson made a blog post with a good explanation of why the academic culture can make things more difficult and linked to it in the response box. I&#8217;ll include a tantalizing quote, but you really should <a href='http://willowbend.cx/2011/07/22/whats-wrong-with-learning-haskell/'>go read the rest of it</a>.</p>
+
+<blockquote>
+<p>&#8230;<br />I think especially early on that I could have had an easier time. Some mechanism to steer me away from some Haskell resources would have helped. I’m not sure what that mechanism might have looked like, so I handwave over the details here. Perhaps you formalists know handwaving over the details as the “Axiom of Choice,” no? I hearby invoke it.</p>
+
+<p>For instance, (Or in formal terms, Example 1.1) I tried to get in tune with the current practice of Haskell by lurking on Haskell-Cafe. It worked when I was learning Ruby. Not here. This was a bad idea. I learned nothing and it made me feel bad. Yeah, poor me.</p>
+
+<p>Another time (Example 1.2) I tried to read the Comonad Reader blog. Another bad idea.</p>
+
+<p>As a relative Haskell newbie, whose not-Haskell day job is web development, integrating systems, build engineering, tormenting managers, and sometimes just writing a lot shell scripts, Haskell-Cafe and the Comonad Reader are, and this important, don’t miss this: not <em>for</em> me.<br />&#8230;</p>
+
+<p><a href='http://willowbend.cx/2011/07/22/whats-wrong-with-learning-haskell/'>&#91;source&#93;</a></p>
+</blockquote>
+
+<p>I didn&#8217;t get the impression anyone was trying to target this as a <em>negative</em> thing, just point out that it does have its tradeoffs.</p>
+<h3>GUI and Support For Other Platforms</h3>
+<p>These two categories also blend together a bit. I think of the GUI responses as just a kind of special case of the Platform Support responses.</p>
+
+<p>People <em>really</em> want an easy, good cross-platform <strong>GUI</strong> toolkit to use with Haskell (as well as better platform-specific solutions).</p>
+
+<blockquote>
+<p>Easy and stable out-of-box cross-platform GUI,</p>
+</blockquote>
+
+<blockquote>
+<p>There still does not exist an obvious GUI solution for OS X, or an obvious audio solution that does not require the writing of a great deal of &#8220;boilerplate&#8221; code.</p>
+</blockquote>
+
+<blockquote>
+<p>Haskell doesn&#8217;t have a great GUI story. I think I&#8217;m allowed to say this as I maintain wxHaskell, and it&#8217;s not where I would like it to be.</p>
+</blockquote>
+
+<p>In the more general case of <strong>Platform Support</strong> responses, there were a fair amount of people saying getting programs to run on Windows was pretty difficult. Some people mentioned a problem with OS X Snow Leopard as well.</p>
+
+<blockquote>
+<p>If the goal is for Haskell to be more widely adopted, I think a number of integration details are important. Things like a stable ABI, bindings to more OS-specific services (such as Mac and Windows GUI systems), and even things like smaller compiled executables would probably make Haskell more attractive in production environments.</p>
+</blockquote>
+
+<blockquote>
+<p>Working with foreign libraries on a non-unix system (microsoft windows) is a pain. The build system could definitely need some improvements in that area.</p>
+</blockquote>
+<h3>Language and Laziness</h3>
+<p>The feedback on the <strong>language</strong> itself is going to be harder for me to sum up. There are a few obvious trends (no parameterized modules, module system, stack traces, record syntax), and a lot of detailed feedback that I can&#8217;t understand. :) I&#8217;ll try to pick out a couple of replies that looked especially well-thought out.</p>
+
+<blockquote>
+<p>Too many string-like types. Abstraction over them that would provide stable and practical API would be nice. Change String from type to class?</p>
+
+<p>I&#8217;d really like to see Functor (=&gt; Pointed) =&gt; Applicative =&gt; Monad one day.</p>
+</blockquote>
+
+<blockquote>
+<p>Then, of course, the big HList elephant. It gives much needed expressivity and generalisation to everything having to do with records, and having appropriate type-level programming capabilities to write an easy to use and extend HList library would be awesome. The current state is almost as bad as C++ templates.&#8221;</p>
+</blockquote>
+
+<blockquote>
+<p>Some of the cruft from ancient history, such as Monad not being a subclass of Pointed, Monad having “fail” and pure Prelude functions using exceptions would be nice to get fixed. Not that any of that is really a problem, just a wart.</p>
+
+<p>It would be nice to have a sufficiently powerful macro/metaprogramming system that is considerably nicer than TH (to the programmer who has to implement the generation of the AST).</p>
+
+<p>(Haskell is also missing PHP’s excellent Magic Quotes functionality.)</p>
+</blockquote>
+
+<p>I like that last person&#8217;s sense of humour.</p>
+
+<p><strong>Laziness</strong> by default was such a common item of contention (almost equaling the rest of the language feedback combined!) that I split it out into its own category. A lot of the remarks in this one are very terse (e.g. &#8216;laziness&#8217; or &#8216;being lazy by default&#8217;). Here&#8217;s one person that expanded on their thoughts a bit:</p>
+
+<blockquote>
+<p>- lazy evaluation incompatible with strong analysis of algorithms</p>
+
+<p>- lazy evaluation and parallel computing seem to be at odds in GHC. Robert Harper has commented on that.</p>
+</blockquote>
+
+<p>And here&#8217;s a counterpoint by another respondent:</p>
+
+<blockquote>
+<p>The community seems to largely believe that laziness is a weakness, when in fact it is very substantially important to getting both good performance and good compositionality.</p>
+</blockquote>
+
+<p>In any case, since Haskell is partially a long-term experiment to see how well being lazy by default works out, I don&#8217;t see this changing any time soon.</p>
+<h3>Stability and GHC</h3>
+<p>A lot of people expressed concerns about having no serious alternatives to GHC. The downsides most cited are over-dependence on GHC-specific features, and that few people are sticking to the Haskell 98 or 2010 standards. There is also some concern about how frequently GHC makes breaking changes, preventing old libraries from building on a newer version.</p>
+
+<p>This first person summarizes very well the feedback involving <strong>stability</strong>.</p>
+
+<blockquote>
+<p>API/language stability!</p>
+
+<p>When I come back to code I wrote back in 2009 and try to compile with current Haskell platform, new libraries cabal installs have different APIs, old version of libraries won&#8217;t compile on current platform. This is very different to my experience with java/python, and makes it hard to conceive of putting Haskell into production products.</p>
+
+<p>Somewhat unusually, Haskell does have a good language definition, but it&#8217;s almost useless since the vast majority of useful packages depend on non-standardised extensions. Haskell&#8217; needs enough features that the majority of Hackage can be built within the standard language so that it&#8217;s feasible to code real world applications against a standard with long term support.</p>
+</blockquote>
+
+<blockquote>
+<p>GHC is absolutely great but it would be good to have some serious alternative</p>
+</blockquote>
+
+<blockquote>
+<p>Even though Haskell is standardized, the old code seems to be breaking quite often! Either the API of the base libraries is changed, or GHC behaves differently, or cabal stops working. Sure, all languages have that phase in the beginning, but I think Haskell should be past that by now. I wish the Haskell ecosystem could be a bit more stable while still making progress.</p>
+</blockquote>
+
+<p>Some also had criticisms specific to <strong>GHC</strong>, mostly mentioning its error messages and stability.</p>
+
+<blockquote>
+<p>(not Haskell per se, but &#8230;) ghc minor version changes breaking (hackage) libraries</p>
+</blockquote>
+
+<blockquote>
+<p>Static type compiler errors, when behaviour is not as expected. Compiler diagnostic messages could be much more helpful. The user should not have to reverse engineer GHC and/or wade through weeks of sprawling academic reading material to discover what is going on.</p>
+</blockquote>
+
+<p>One person had license concerns:</p>
+
+<blockquote>
+<p>LGPL. ghc cannot be used for developing commercial software products out of the box. Many Hackage libraries that are not LGPL are still infected by it indirectly due to library dependencies.</p>
+</blockquote>
+
+<p>I would actually love it if someone could go into more detail on this. I know GHC itself uses a BSD-like license. Is this person maybe referring to <a href='http://www.well-typed.com/blog/32'>the GMP issue</a>?</p>
+<h3>Other Backends, FFI, Integration</h3>
+<p>These three categories are all about how well Haskell plays with other languages.</p>
+
+<p>I was actually pretty shocked to discover how many people thought Haskell&#8217;s most glaring weakness was not being able to <strong>run on the CLR or JVM</strong>.</p>
+
+<blockquote>
+<p>CLR/JVM/JavaScript backends</p>
+</blockquote>
+
+<blockquote>
+<p>Another problem for adopting Haskell at work would be that it doesn&#8217;t run on JVM/CLR. So there is no option for polyglotting</p>
+</blockquote>
+
+<p>There were also some less ambitious requests for a better <strong>FFI</strong> to C++, Objective-C and Python.</p>
+
+<blockquote>
+<p>Difficulty of integration with C++ (not C). Ability to import C++ headers directly and call C++ methods without inventing wrapper layers would help immensely here at Google.</p>
+</blockquote>
+
+<blockquote>
+<p>Can&#8217;t communicate with scripting languages like Python (actually possible but painful).</p>
+</blockquote>
+
+<p>There were 4 responses that I ended up putting under a general <strong>Integration</strong> category. Three were (kind of vague) requests for more integration with mainstream OOP environments, but one person had a more detailed request:</p>
+
+<blockquote>
+<p>Integration with other build systems. Pretending that cabal is the only true thing is only that, pretending. Until integration with at least auto tools is better, Haskell project will be standalone and integration Haskell into a bigger system will be painful (one has to duplicate cabal&#8217;s work in detecting libraries, library version, etc.).</p>
+</blockquote>
+<h3>Distribution and Deployment</h3>
+<p>There was only a little bit of feedback that fit into this category, but there seemed to be some pretty good points.</p>
+
+<blockquote>
+<p>We&#8217;re not looking at easy distribution in a serious way yet.</p>
+</blockquote>
+
+<blockquote>
+<p>Distribution of Haskell programs to others is still hard: at best I can tell them to get the platform, run a bunch of cabal commands, then build my program.</p>
+</blockquote>
+<h3>Doesn't Improve Productivity</h3>
+<p>I&#8217;m not sure what to say about this category. I don&#8217;t think I&#8217;ve heard of someone having this experience with Haskell before. I&#8217;m glad it doesn&#8217;t seem to be a widespread occurrence (although I will concede the survey audience is probably <em>just a little bit</em> biased).</p>
+
+<blockquote>
+<p>Although the purity and strong-type-system sound all well and good, I&#8217;m not actually convinced yet that Haskell improves productivity. Perhaps I&#8217;m not &#8220;doing it right&#8221;, but even after 8 months I generally write code and think, &#8220;I could have slogged through that faster in C++.&#8221; And at least then I could have used it at work without fear of being &#8216;that guy&#8217;.</p>
+</blockquote>
+
 <h2 id='responses_i_couldnt_fit_in_a_category'>Responses I Couldn&#8217;t Fit In A Category</h2>
+
+<p>These were the responses that either mystified me, covered too many topics to split apart and remain coherent, or were just too well written for me to be able to break them up.</p>
+
+<p>This first one was definitely one of the former!</p>
+
+<blockquote>
+<p>confusion with Pascal!</p>
+</blockquote>
+
+<p>&#8230;And now on to a few responses that I thought really deserved a highlight.</p>
+
+<blockquote>
+<p>Although it is generally regarded a good thing to have diversification, there are two items where I&#8217;d like appreciate an authoritatively dictated choice:</p>
+
+<ol>
+<li>
+<p>) The non-unified (esp. among libraries) Error/Exception handling, as well as</p>
+</li>
+
+<li>
+<p>) the record-update problem (there are the lenses/fclabels/etc packages, but again, this is a non-unified approach, and it feels clumsy to have to use underscores to mark fields &#8211; I&#8217;d prefer a GHC language extension)</p>
+</li>
+</ol>
+
+<p>These are <em>the</em> two things (among a few other minor issues) that I dislike the most</p>
+</blockquote>
+
+<blockquote>
+<p>2) Lack of support for dev environments &#8211; coming from Python where it&#8217;s extremely easy and beneficial to build a virtualenv or sandbox environment, using cabal-dev requires a lot more work. And when you&#8217;re trying to use it with packages like Yesod that rely on your main cabal folder or global variables, it either doesn&#8217;t work or requires a lot of tweaking. I&#8217;d love to see a better way to build supported virtual Haskell environments to cut down on the headaches of managing multiple dependencies and different versions of packages</p>
+</blockquote>
+
+<blockquote>
+<p>Even after 20 years we are still struggling with some basic concepts and their implementation in Haskell. A good example is iteratees: the idea is rather new, the problem that it solves is one of the most basic ones, and there are several competing implementations, so it&#8217;s not clear what should one use.</p>
+</blockquote>
+
+<p>And with that, I&#8217;ve finally reached the end of this in-depth look at the feedback on Haskell&#8217;s most glaring weakness!</p>
+
+<h2 id='raw_data'>Raw Data</h2>
+
+<p>My list that is split up by categories is currently in a <a href='https://docs.google.com/spreadsheet/ccc?key=0Aq8X8wb4SdlWdG1XM3NoLXhnWl9VR3d6OURYMTA2ZXc&amp;hl=en_US'>spreadsheet on Google Docs</a>. From there you have a bunch of different formats available download or export it in.</p>
+
+<h2 id='summary'>Summary</h2>
+<h3>First Place: Libraries</h3>
+<p>By far the largest amount of people think Haskell&#8217;s most glaring weakness is related to its libraries and the ecosystem around them. Specifically:</p>
+
+<ul>
+<li>Quality of libraries is inconsistent, and we are missing some specific kinds of libraries</li>
+
+<li>Both the quality and amount of library documentation are lacking (needs more examples!)</li>
+
+<li>Hackage needs to include a way for people to gauge package quality and popularity</li>
+
+<li>More people need to know about cabal-dev (also cabal and cabel-dev could possibly use some improvements)</li>
+</ul>
+<h3>Second Place: Tools</h3>
+<p>There seems to be a lot of room for improvement in Haskell&#8217;s toolchain as well. Some specific kinds of tools that were mentioned often were:</p>
+
+<ul>
+<li>IDE support (mostly: Leksah is good but could be better)</li>
+
+<li>Space leak analysis tools</li>
+
+<li>Hard to analyze statically</li>
+
+<li>Refactoring</li>
+
+<li>Debugging</li>
+</ul>
+
+<p>Having good tools for time and space leak analysis will also help to address all the concerns raised about performance.</p>
+<h3>Third Place: Barrier to Entry</h3>
+<p>There are several different parts to the barrier to entry. I can pick out the following common threads from the feedback available:</p>
+
+<ul>
+<li>The inherent difficulty of the language</li>
+
+<li>Gaps in instructional material between beginner and intermediate. More material that emphasizes being friendly and practical would help.</li>
+
+<li>Reputation as difficult, academic, and hard to reason about performance</li>
+
+<li>Academic culture</li>
+</ul>
+
+<p>I want to reiterate &#8212; these are not all &#8216;problems that should be fixed&#8217;. Haskell would not be what it is without the academic culture and the powerful language, for example. But, both of these have tradeoffs that should be acknowledged, and maybe rendered less important by improving the areas that <strong>do</strong> need it.</p>
+<h3>Honourable Mentions: Cross-platform support and Language</h3>
+<p>I also want to shine the spotlight on at least two more areas. There were a lot of people that wanted better cross platform support, of which the majority were most concerned with GUI support. The cross-platform feedback generally fell into two areas:</p>
+
+<ul>
+<li>The ability to easily write a simple cross-platform application</li>
+
+<li>The ability to better integrate with OS-specific libraries for a better experience</li>
+</ul>
+
+<p>There weren&#8217;t as many people with feedback on the language itself, but there was some good targeted feedback that I don&#8217;t think should be overlooked. I highlighted a couple of more detailed replies in the main section of this above, but the general trend looked like:</p>
+
+<ul>
+<li>Haskell is lazy by default</li>
+
+<li>Lack of parameterized modules</li>
+
+<li>Module system needs improvement in general</li>
+
+<li>Lack of stack traces</li>
+
+<li>Record syntax needs work</li>
+</ul>
+
+<p>And that&#8217;s it! Please feel free share your own thoughts on this or point out any errors I&#8217;ve made. I&#8217;d like to thank <a href='http://blog.johantibell.com/'>Johan Tibell</a> for running the <a href='http://blog.johantibell.com/2011/08/results-from-state-of-haskell-2011.html'>State of Haskell 2011 Survey</a>; all the respondents for providing this useful feedback; and you, dear reader, for getting this far!</p>
   </div>
 
   <div style="margin-top:20px; font-size:14px;">
