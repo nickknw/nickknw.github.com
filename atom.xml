@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2011-09-12T08:19:03-07:00</updated>
+ <updated>2011-09-15T12:28:04-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -214,7 +214,7 @@
 &lt;p&gt;Working with foreign libraries on a non-unix system (microsoft windows) is a pain. The build system could definitely need some improvements in that area.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3&gt;Language and Laziness&lt;/h3&gt;
-&lt;p&gt;The feedback on the &lt;strong&gt;language&lt;/strong&gt; itself is going to be harder for me to sum up. There are a few obvious trends (no parameterized modules, module system, stack traces, record syntax), and a lot of detailed feedback that I can&amp;#8217;t understand. :) I&amp;#8217;ll try to pick out a couple of replies that looked especially well-thought out.&lt;/p&gt;
+&lt;p&gt;The feedback on the &lt;strong&gt;language&lt;/strong&gt; itself is going to be harder for me to sum up. There are a few obvious trends (no parameterized modules, module system, stack traces, record syntax), and then there&amp;#8217;s a lot of detailed feedback that I can&amp;#8217;t understand. :) I&amp;#8217;ll try to pick out a couple of replies that looked especially well-thought out.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Too many string-like types. Abstraction over them that would provide stable and practical API would be nice. Change String from type to class?&lt;/p&gt;
@@ -235,6 +235,10 @@
 &lt;/blockquote&gt;
 
 &lt;p&gt;I like that last person&amp;#8217;s sense of humour.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;d like to also link to a very relevant Yesod blog post: &lt;a href='http://www.yesodweb.com/blog/2011/09/limitations-of-haskell'&gt;&amp;#8220;The Limitations of Haskell&amp;#8221;&lt;/a&gt; by Greg Weber. He brings the perspective of an expert Haskell-user solving practical problems, and writes clearly about it to boot. He singles out error messages, stack traces, code reloading (not mentioned by a single survey respondent as far as I can remember), dependency hell, and the record syntax issue.&lt;/p&gt;
+
+&lt;p&gt;The stack traces issue may actually be resolved &lt;a href='https://plus.google.com/u/0/107890464054636586545/posts/XE4T6hHm3tK'&gt;sometime in the near future&lt;/a&gt;, from the sound of it.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Laziness&lt;/strong&gt; by default was such a common item of contention (almost equaling the rest of the language feedback combined!) that I split it out into its own category. A lot of the remarks in this one are very terse (e.g. &amp;#8216;laziness&amp;#8217; or &amp;#8216;being lazy by default&amp;#8217;). Here&amp;#8217;s one person that expanded on their thoughts a bit:&lt;/p&gt;
 
@@ -301,6 +305,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;Another problem for adopting Haskell at work would be that it doesn&amp;#8217;t run on JVM/CLR. So there is no option for polyglotting&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;p&gt;Fortunately, there are a couple a like-minded people working on mitigating this issue right now with &lt;a href='http://code.google.com/p/frege/'&gt;Frege&lt;/a&gt; (&lt;a href='http://www.reddit.com/r/haskell/comments/kadx6/frege_haskell_like_language_on_jvm_tries_to/'&gt;discussion&lt;/a&gt;).&lt;/p&gt;
 
 &lt;p&gt;There were also some less ambitious requests for a better &lt;strong&gt;FFI&lt;/strong&gt; to C++, Objective-C and Python.&lt;/p&gt;
 
