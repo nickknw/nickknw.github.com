@@ -4,12 +4,123 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2011-11-26T08:05:15-08:00</updated>
+ <updated>2011-11-27T15:08:01-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 1</title>
+   <link href="http://nickknowlson.com/blog/2011/11/27/seven-languages-week-1-day-1/"/>
+   <updated>2011-11-27T00:00:00-08:00</updated>
+   <id>http://nickknowlson.com/blog/2011/11/27/seven-languages-week-1-day-1</id>
+   <content type="html">&lt;p&gt;Out of the seven languages in this book, Ruby is the one I was most familiar with previously. It made for an easy start, and gave me a bit of momentum before I started to tackle languages like Prolog. I&amp;#8217;m appreciative of that, because Prolog sure was a struggle for a while.&lt;/p&gt;
+
+&lt;p&gt;Day 1 of Week 1 was pretty basic - a bit of string manipulation and looping. Ruby makes things like this very short and pretty.&lt;/p&gt;
+
+&lt;p&gt;For example, being able to repeat a string like: &lt;code&gt;&amp;quot;Nick &amp;quot; * 10&lt;/code&gt; or loop like: &lt;code&gt;(1..10).each { |num| do_stuff(num) }&lt;/code&gt; is great.&lt;/p&gt;
+
+&lt;p&gt;Here is my full code listing for the exercises from Day 1 of Ruby. The home of this piece of code is with the other exercises &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day1.rb'&gt;on github&lt;/a&gt;.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;# Find:&lt;/span&gt;
+&lt;span class='c1'&gt;# 1. A method that substitutes a part of a string&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;Find:&amp;quot;&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;1.&amp;quot;&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;BAM&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;gsub&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;M&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;TMAN&amp;quot;&lt;/span&gt;
+
+
+&lt;span class='c1'&gt;# Do:&lt;/span&gt;
+&lt;span class='c1'&gt;# 1. Print the string &amp;quot;Hello World&amp;quot;&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;Do:&amp;quot;&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;1.&amp;quot;&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Hello World&amp;quot;&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 2. For the string &amp;quot;Hello, Ruby,&amp;quot; find the index of the word &amp;quot;Ruby.&amp;quot;&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;2.&amp;quot;&lt;/span&gt;
+&lt;span class='c1'&gt;# literally:&lt;/span&gt;
+&lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Hello, Ruby,&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;index&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Ruby.&amp;quot;&lt;/span&gt;
+&lt;span class='c1'&gt;# realistically:&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Hello, Ruby&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;index&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Ruby&amp;quot;&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 3. Print your name ten times&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;3.&amp;quot;&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Nick &amp;quot;&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt; &lt;span class='mi'&gt;10&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 4. Print the string &amp;quot;This is sentence number 1,&amp;quot; where the number 1 changes&lt;/span&gt;
+&lt;span class='c1'&gt;# from 1 to 10&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;4.&amp;quot;&lt;/span&gt;
+&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;.&lt;/span&gt;&lt;span class='mi'&gt;10&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt; &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;This is sentence number &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
+
+&lt;span class='c1'&gt;# Bonus: Write a program that picks a random number. Let a player guess the&lt;/span&gt;
+&lt;span class='c1'&gt;# number, telling the player whether the guess is too low or too high.&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;Bonus:&amp;quot;&lt;/span&gt;
+
+&lt;span class='n'&gt;random_number&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nb'&gt;rand&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;1000&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;
+&lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;
+
+&lt;span class='k'&gt;while&lt;/span&gt; &lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;!=&lt;/span&gt; &lt;span class='n'&gt;random_number&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+    &lt;span class='nb'&gt;print&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Pick a number between 1 and 1000: &amp;quot;&lt;/span&gt;
+    &lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nb'&gt;gets&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;to_i&lt;/span&gt;
+    &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Too low!&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='n'&gt;random_number&lt;/span&gt;
+    &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Too high!&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;random_number&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Got it! It was &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;random_number&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;And the output:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;&lt;span class='nv'&gt;$ &lt;/span&gt;ruby day1.rb
+
+Find:
+
+1.
+BATMAN
+
+Do:
+
+1.
+Hello World
+
+2.
+nil
+7
+
+3.
+Nick Nick Nick Nick Nick Nick Nick Nick Nick Nick 
+
+4.
+This is sentence number 1
+This is sentence number 2
+This is sentence number 3
+This is sentence number 4
+This is sentence number 5
+This is sentence number 6
+This is sentence number 7
+This is sentence number 8
+This is sentence number 9
+This is sentence number 10
+
+Bonus:
+Pick a number between 1 and 1000: 500
+Too high!
+Pick a number between 1 and 1000: 250
+Too high!
+Pick a number between 1 and 1000: 125
+Too low!
+Pick a number between 1 and 1000: 192
+Too high!
+Pick a number between 1 and 1000: 158
+Too high!
+Pick a number between 1 and 1000: 141
+Too high!
+Pick a number between 1 and 1000: 133
+Too high!
+Pick a number between 1 and 1000: 129
+Got it! It was 129
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content>
+ </entry>
  
  <entry>
    <title>Categorized Weaknesses from the State of Haskell 2011 Survey</title>

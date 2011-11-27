@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="">
+
+        <title>Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 1 | Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/inuit.css" >
+        <link rel="stylesheet" type="text/css" href="/css/style.css" >
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="/favicon.ico" >
+        <link href="http://feeds.feedburner.com/NickKnowlson" type="application/atom+xml" rel="alternate" title="Blog ATOM Feed" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+
+        
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-24781362-1']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logos/logo6.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="" href="/projects/">Projects</a></li>
+                <li><a class="selected" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <a href="/blog/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 1</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">27 Nov 2011</div>
+<div id="post">
+<p>Out of the seven languages in this book, Ruby is the one I was most familiar with previously. It made for an easy start, and gave me a bit of momentum before I started to tackle languages like Prolog. I&#8217;m appreciative of that, because Prolog sure was a struggle for a while.</p>
+
+<p>Day 1 of Week 1 was pretty basic - a bit of string manipulation and looping. Ruby makes things like this very short and pretty.</p>
+
+<p>For example, being able to repeat a string like: <code>&quot;Nick &quot; * 10</code> or loop like: <code>(1..10).each { |num| do_stuff(num) }</code> is great.</p>
+
+<p>Here is my full code listing for the exercises from Day 1 of Ruby. The home of this piece of code is with the other exercises <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day1.rb'>on github</a>.</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'># Find:</span>
+<span class='c1'># 1. A method that substitutes a part of a string</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>Find:&quot;</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>1.&quot;</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;BAM&quot;</span><span class='o'>.</span><span class='n'>gsub</span> <span class='s2'>&quot;M&quot;</span><span class='p'>,</span> <span class='s2'>&quot;TMAN&quot;</span>
+
+
+<span class='c1'># Do:</span>
+<span class='c1'># 1. Print the string &quot;Hello World&quot;</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>Do:&quot;</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>1.&quot;</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;Hello World&quot;</span>
+
+<span class='c1'># 2. For the string &quot;Hello, Ruby,&quot; find the index of the word &quot;Ruby.&quot;</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>2.&quot;</span>
+<span class='c1'># literally:</span>
+<span class='nb'>p</span> <span class='s2'>&quot;Hello, Ruby,&quot;</span><span class='o'>.</span><span class='n'>index</span> <span class='s2'>&quot;Ruby.&quot;</span>
+<span class='c1'># realistically:</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;Hello, Ruby&quot;</span><span class='o'>.</span><span class='n'>index</span> <span class='s2'>&quot;Ruby&quot;</span>
+
+<span class='c1'># 3. Print your name ten times</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>3.&quot;</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;Nick &quot;</span> <span class='o'>*</span> <span class='mi'>10</span>
+
+<span class='c1'># 4. Print the string &quot;This is sentence number 1,&quot; where the number 1 changes</span>
+<span class='c1'># from 1 to 10</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>4.&quot;</span>
+<span class='p'>(</span><span class='mi'>1</span><span class='o'>.</span><span class='n'>.</span><span class='mi'>10</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>num</span><span class='o'>|</span> <span class='nb'>puts</span> <span class='s2'>&quot;This is sentence number </span><span class='si'>#{</span><span class='n'>num</span><span class='si'>}</span><span class='s2'>&quot;</span> <span class='p'>}</span>
+
+<span class='c1'># Bonus: Write a program that picks a random number. Let a player guess the</span>
+<span class='c1'># number, telling the player whether the guess is too low or too high.</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>Bonus:&quot;</span>
+
+<span class='n'>random_number</span> <span class='o'>=</span> <span class='nb'>rand</span><span class='p'>(</span><span class='mi'>1000</span><span class='p'>)</span> <span class='o'>+</span> <span class='mi'>1</span>
+<span class='n'>guess</span> <span class='o'>=</span> <span class='mi'>0</span>
+
+<span class='k'>while</span> <span class='n'>guess</span> <span class='o'>!=</span> <span class='n'>random_number</span> <span class='k'>do</span>
+    <span class='nb'>print</span> <span class='s2'>&quot;Pick a number between 1 and 1000: &quot;</span>
+    <span class='n'>guess</span> <span class='o'>=</span> <span class='nb'>gets</span><span class='o'>.</span><span class='n'>to_i</span>
+    <span class='nb'>puts</span> <span class='s2'>&quot;Too low!&quot;</span> <span class='k'>if</span> <span class='n'>guess</span> <span class='o'>&lt;</span> <span class='n'>random_number</span>
+    <span class='nb'>puts</span> <span class='s2'>&quot;Too high!&quot;</span> <span class='k'>if</span> <span class='n'>guess</span> <span class='o'>&gt;</span> <span class='n'>random_number</span>
+<span class='k'>end</span>
+
+<span class='nb'>puts</span> <span class='s2'>&quot;Got it! It was </span><span class='si'>#{</span><span class='n'>random_number</span><span class='si'>}</span><span class='s2'>&quot;</span>
+</code></pre>
+</div>
+<p>And the output:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby day1.rb
+
+Find:
+
+1.
+BATMAN
+
+Do:
+
+1.
+Hello World
+
+2.
+nil
+7
+
+3.
+Nick Nick Nick Nick Nick Nick Nick Nick Nick Nick 
+
+4.
+This is sentence number 1
+This is sentence number 2
+This is sentence number 3
+This is sentence number 4
+This is sentence number 5
+This is sentence number 6
+This is sentence number 7
+This is sentence number 8
+This is sentence number 9
+This is sentence number 10
+
+Bonus:
+Pick a number between 1 and 1000: 500
+Too high!
+Pick a number between 1 and 1000: 250
+Too high!
+Pick a number between 1 and 1000: 125
+Too low!
+Pick a number between 1 and 1000: 192
+Too high!
+Pick a number between 1 and 1000: 158
+Too high!
+Pick a number between 1 and 1000: 141
+Too high!
+Pick a number between 1 and 1000: 133
+Too high!
+Pick a number between 1 and 1000: 129
+Got it! It was 129
+</code></pre>
+</div>
+</div>
+
+<div id="socialbuttons">
+<div>
+
+    <!-- G+ -->
+    <div id="google_plus_button"><g:plusone></g:plusone>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script></div>
+
+    <!-- Twitter -->
+    <div id="twitter_button"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="nickknw">Tweet</a>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+
+    <!-- Reddit -->
+    <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
+
+    <!-- Facebook -->
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2011/11/27/seven-languages-week-1-day-1/" send="false" layout="button_count" width="450" show_faces="true" action="like" font=""></fb:like></div>
+
+</div>
+</div>
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>12 Sep 2011</span> &raquo; <a href="/blog/2011/09/12/haskell-survey-categorized-weaknesses/">Categorized Weaknesses from the State of Haskell 2011 Survey</a></li>
+    
+      <li><span>23 Jul 2011</span> &raquo; <a href="/blog/2011/07/23/hello-world/">Hello World!</a></li>
+    
+      <li><span>05 Feb 2009</span> &raquo; <a href="/blog/2009/02/05/command-line-file-transfer/">Command line file transfer</a></li>
+    
+  </ul>
+</div>
+
+<hr class="fancyrule" />
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
+
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    var disqus_identifier = '/blog/2011/11/27/seven-languages-week-1-day-1';
+    var disqus_url = 'http://nickknowlson.com//blog/2011/11/27/seven-languages-week-1-day-1/';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+        </div>
+        <div id="footer">&copy; Copyright 2011 Nick Knowlson</div>
+        <div style="display: none;">Content by Nick Knowlson: <a href="https://plus.google.com/111820015518413982003?rel=author">Google+</a></div>
+        <!--  " - 2011" -->
+    </body>
+</html>
