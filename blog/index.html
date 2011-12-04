@@ -47,12 +47,263 @@
                 <div style="text-align:center;"><b>Latest Posts</b> | <a href="/blog/archive/">Archive</a></div>
 
   <div>
+  <h1 style="margin:0px"><a href="/blog/2011/12/04/seven-languages-week-1-day-2/">
+  Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 2
+  </a></h1>
+  <div class="faded" style="font-size:14px; margin-bottom:5px;">04 Dec 2011</div>
+  <p>Day 2 of Ruby covers collections, code blocks, classes and modules. I&#8217;m familiar enough with these already in Ruby, so it was mostly just a refresher. So in this case it will be hard to provide a &#8216;learning the language&#8217; perspective. Instead I will try to highlight a few of the parts of Ruby in this chapter that I particularly like.</p>
+<div class='interjection'><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2011/11/27/seven-languages-week-1-day-1/'>Week 1 (Ruby) - Day 1</a>. For an overview see the <a href='http://localhost:4000/projects/seven-languages-in-seven-weeks/'>project page</a>.)
+</p></div>
+<p>Ruby has closures and first-class functions - code blocks are one way of creating a Proc - an anonymous function. A Proc is almost but not quite a lambda - there are <a href='http://www.robertsosinski.com/2008/12/21/understanding-ruby-blocks-procs-and-lambdas/'>a few differences between them</a>, and Ruby has a separate <code>lambda</code> method for creating those.</p>
+
+<p>Ruby&#8217;s arrays and hashes are very multipurpose: hashes are frequently used to give a method named parameters; and arrays have built in methods so that they can be used as queues, stacks, sets, and matrices.</p>
+
+<p>Its syntax is consistent and pretty. Arrays are very rich, you can do ranges (<code>[1..10]</code>), negative indexes (<code>&quot;string&quot;[1..-2]</code>), and there are convenience methods for operations like push, pop, transpose, and set intersection. You have the standard high order functions equivalents (map, filter, fold/reduce).</p>
+
+<p>There are many useful methods you can call right off of number literals. One common example is <code>times</code>, which takes a code block as a parameter and executes it. This can sometimes be a nice way to express a loop: <code>4.times { puts &quot;testing&quot; }</code> or <code>4.times { |i| puts i }</code>.</p>
+
+<p>For anyone coming from C#, ruby&#8217;s blocks can substitute for <code>using</code> in many places, like when opening a file:</p>
+<div class='highlight'><pre><code class='ruby'><span class='no'>File</span><span class='o'>.</span><span class='n'>open</span><span class='p'>(</span><span class='s2'>&quot;tmp.txt&quot;</span><span class='p'>,</span> <span class='s2'>&quot;r&quot;</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>line</span><span class='o'>|</span>
+    <span class='nb'>puts</span> <span class='n'>line</span>
+<span class='p'>}</span>
+</code></pre>
+</div>
+<p>No need to worry about forgetting to <code>.close()</code> the file later on.</p>
+
+<p>Here is my full code listing for the exercises from Day 2 of Ruby. The home of this piece of code is with the other exercises <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day2.rb'>on github</a>.</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'># Find:</span>
+<span class='c1'># 1. Find out how to access files with and without code blocks. What is the</span>
+<span class='c1'># benefit of the code block?</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>Find:&quot;</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>1.&quot;</span>
+
+<span class='n'>file</span> <span class='o'>=</span> <span class='no'>File</span><span class='o'>.</span><span class='n'>open</span><span class='p'>(</span><span class='s2'>&quot;tmp.txt&quot;</span><span class='p'>,</span> <span class='s2'>&quot;w+&quot;</span><span class='p'>)</span>
+<span class='n'>file</span><span class='o'>.</span><span class='n'>puts</span> <span class='s2'>&quot;a spoonful is great but I&#39;d rather have a bowl&quot;</span>
+<span class='n'>file</span><span class='o'>.</span><span class='n'>close</span>
+
+<span class='c1'># safer, less erroro-prone, shorter, more readable</span>
+<span class='no'>File</span><span class='o'>.</span><span class='n'>open</span><span class='p'>(</span><span class='s2'>&quot;tmp.txt&quot;</span><span class='p'>,</span> <span class='s2'>&quot;r&quot;</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>line</span><span class='o'>|</span>
+    <span class='nb'>puts</span> <span class='n'>line</span>
+<span class='p'>}</span>
+
+
+<span class='c1'># 2. How would you translate a hash to an array? Can you translate arrays to</span>
+<span class='c1'># hashes?</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>2.&quot;</span>
+<span class='n'>scores</span> <span class='o'>=</span> <span class='p'>{</span> <span class='n'>gary</span><span class='p'>:</span> <span class='mi'>5</span><span class='p'>,</span> <span class='n'>nick</span><span class='p'>:</span> <span class='mi'>11</span><span class='p'>,</span> <span class='n'>ted</span><span class='p'>:</span> <span class='mi'>8</span><span class='p'>,</span> <span class='n'>the_dude</span><span class='p'>:</span><span class='mi'>9</span> <span class='p'>}</span>
+<span class='nb'>print</span> <span class='s2'>&quot;hash: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='n'>scores</span>
+<span class='nb'>print</span> <span class='s2'>&quot;array1: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='n'>scores</span><span class='o'>.</span><span class='n'>to_a</span>
+<span class='nb'>print</span> <span class='s2'>&quot;array2: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='n'>scores</span><span class='o'>.</span><span class='n'>to_a</span><span class='o'>.</span><span class='n'>flatten</span>
+
+<span class='n'>scores_array1</span> <span class='o'>=</span> <span class='n'>scores</span><span class='o'>.</span><span class='n'>to_a</span>
+<span class='nb'>print</span> <span class='s2'>&quot;array1 to hash again 1: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='n'>scores_array1</span><span class='o'>.</span><span class='n'>inject</span><span class='p'>(</span><span class='no'>Hash</span><span class='o'>.</span><span class='n'>new</span><span class='p'>)</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>memo</span><span class='p'>,</span> <span class='n'>pair</span><span class='o'>|</span> <span class='n'>memo</span><span class='o'>[</span><span class='n'>pair</span><span class='o'>.</span><span class='n'>first</span><span class='o'>]</span> <span class='o'>=</span> <span class='n'>pair</span><span class='o'>.</span><span class='n'>last</span><span class='p'>;</span> <span class='n'>memo</span> <span class='p'>}</span>
+<span class='nb'>print</span> <span class='s2'>&quot;array1 to hash again 2: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='no'>Hash</span><span class='o'>[</span><span class='n'>scores_array1</span><span class='o'>]</span>
+<span class='n'>scores_array2</span> <span class='o'>=</span> <span class='n'>scores</span><span class='o'>.</span><span class='n'>to_a</span><span class='o'>.</span><span class='n'>flatten</span>
+<span class='nb'>print</span> <span class='s2'>&quot;array2 to hash again 1: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='no'>Hash</span><span class='o'>[</span><span class='n'>scores_array2</span><span class='o'>]</span>
+<span class='nb'>print</span> <span class='s2'>&quot;array2 to hash again 2: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='no'>Hash</span><span class='o'>[*</span><span class='n'>scores_array2</span><span class='o'>]</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;Yup.&quot;</span>
+
+<span class='c1'># 3. Can you iterate through a hash?</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>3.&quot;</span>
+<span class='n'>scores</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>key</span><span class='p'>,</span> <span class='n'>value</span><span class='o'>|</span> <span class='nb'>puts</span> <span class='s2'>&quot;key:&#39;</span><span class='si'>#{</span><span class='n'>key</span><span class='si'>}</span><span class='s2'>&#39;, value:&#39;</span><span class='si'>#{</span><span class='n'>value</span><span class='si'>}</span><span class='s2'>&#39;&quot;</span> <span class='p'>}</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;Yup.&quot;</span>
+
+<span class='c1'># 4. You can use Ruby arrays as stacks. What other common data structures to</span>
+<span class='c1'># arrays support?</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>4.&quot;</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;queue/deque: &quot;</span>
+<span class='n'>deque</span> <span class='o'>=</span> <span class='o'>[].</span><span class='n'>push</span><span class='p'>(</span><span class='s2'>&quot;1&quot;</span><span class='p'>)</span><span class='o'>.</span><span class='n'>push</span><span class='p'>(</span><span class='s2'>&quot;2&quot;</span><span class='p'>)</span>
+<span class='n'>deque</span><span class='o'>.</span><span class='n'>unshift</span><span class='p'>(</span><span class='s2'>&quot;a&quot;</span><span class='p'>)</span><span class='o'>.</span><span class='n'>unshift</span><span class='p'>(</span><span class='s2'>&quot;b&quot;</span><span class='p'>)</span>
+<span class='nb'>p</span> <span class='n'>deque</span>
+<span class='nb'>puts</span> <span class='n'>deque</span><span class='o'>.</span><span class='n'>shift</span>
+<span class='nb'>puts</span> <span class='n'>deque</span><span class='o'>.</span><span class='n'>shift</span>
+<span class='nb'>puts</span> <span class='n'>deque</span><span class='o'>.</span><span class='n'>pop</span>
+<span class='nb'>puts</span> <span class='n'>deque</span><span class='o'>.</span><span class='n'>pop</span>
+
+<span class='nb'>puts</span> <span class='s2'>&quot;list: &quot;</span>
+<span class='n'>list</span> <span class='o'>=</span> <span class='o'>[</span><span class='mi'>1</span><span class='p'>,</span><span class='mi'>2</span><span class='p'>,</span><span class='mi'>3</span><span class='o'>].</span><span class='n'>insert</span><span class='p'>(</span><span class='mi'>2</span><span class='p'>,</span> <span class='s2'>&quot;c&quot;</span><span class='p'>)</span>
+<span class='nb'>puts</span> <span class='n'>list</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;removed: &quot;</span> <span class='o'>+</span> <span class='n'>list</span><span class='o'>.</span><span class='n'>delete</span><span class='p'>(</span><span class='s2'>&quot;c&quot;</span><span class='p'>)</span>
+
+<span class='nb'>puts</span> <span class='s2'>&quot;(rudimentary) bag/set:&quot;</span>
+<span class='n'>bag</span> <span class='o'>=</span> <span class='o'>[</span><span class='mi'>1</span><span class='p'>,</span><span class='mi'>2</span><span class='p'>,</span><span class='mi'>3</span><span class='p'>,</span><span class='mi'>3</span><span class='p'>,</span><span class='mi'>4</span><span class='p'>,</span><span class='mi'>5</span><span class='o'>]</span>
+<span class='nb'>p</span> <span class='n'>bag</span>
+<span class='n'>set</span> <span class='o'>=</span> <span class='n'>bag</span><span class='o'>.</span><span class='n'>uniq</span>
+<span class='n'>other_set</span> <span class='o'>=</span> <span class='o'>[</span><span class='mi'>3</span><span class='p'>,</span><span class='mi'>5</span><span class='o'>]</span>
+<span class='nb'>p</span> <span class='n'>set</span>
+<span class='nb'>p</span> <span class='n'>set</span> <span class='o'>&amp;</span> <span class='n'>other_set</span>
+
+<span class='nb'>puts</span> <span class='s2'>&quot;(rudimentary) matrix:&quot;</span>
+<span class='n'>matrix</span> <span class='o'>=</span> <span class='o'>[[</span><span class='mi'>1</span><span class='p'>,</span><span class='mi'>2</span><span class='p'>,</span><span class='mi'>3</span><span class='o'>]</span><span class='p'>,</span><span class='o'>[</span><span class='mi'>4</span><span class='p'>,</span><span class='mi'>5</span><span class='p'>,</span><span class='mi'>6</span><span class='o'>]</span><span class='p'>,</span><span class='o'>[</span><span class='mi'>7</span><span class='p'>,</span><span class='mi'>8</span><span class='p'>,</span><span class='mi'>9</span><span class='o'>]]</span>
+<span class='nb'>p</span> <span class='n'>matrix</span>
+<span class='nb'>p</span> <span class='n'>matrix</span><span class='o'>.</span><span class='n'>transpose</span>
+
+
+<span class='c1'># Do:</span>
+<span class='c1'># 1. Print the contents of an array of sixteen numbers, four numbers at a time,</span>
+<span class='c1'># using just each. Now, do the same with each_slice in Enumerable</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>Do:&quot;</span>
+<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>1.&quot;</span>
+<span class='n'>sixteen_numbers</span> <span class='o'>=</span> <span class='o'>[*</span><span class='p'>(</span><span class='mi'>1</span><span class='o'>.</span><span class='n'>.</span><span class='mi'>16</span><span class='p'>)</span><span class='o'>]</span>
+<span class='n'>sixteen_numbers</span><span class='o'>.</span><span class='n'>each</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>number</span><span class='o'>|</span>
+        <span class='nb'>p</span> <span class='n'>sixteen_numbers</span><span class='o'>[</span><span class='p'>((</span><span class='n'>number</span><span class='o'>-</span><span class='mi'>4</span><span class='p'>)</span><span class='o'>.</span><span class='n'>.</span><span class='o'>.</span><span class='n'>number</span><span class='p'>)</span><span class='o'>]</span> <span class='k'>if</span> <span class='n'>number</span> <span class='o'>%</span> <span class='mi'>4</span> <span class='o'>==</span> <span class='mi'>0</span>
+<span class='k'>end</span>
+
+<span class='nb'>puts</span> <span class='s2'>&quot;and&quot;</span>
+
+<span class='n'>sixteen_numbers</span><span class='o'>.</span><span class='n'>each_slice</span><span class='p'>(</span><span class='mi'>4</span><span class='p'>)</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>slice</span><span class='o'>|</span> <span class='nb'>p</span> <span class='n'>slice</span> <span class='p'>}</span>
+
+
+<span class='c1'># 2. The Tree class was interesting, but it did not allow you to specify a new</span>
+<span class='c1'># tree with a clean user interface. Let the initializer accept a nested</span>
+<span class='c1'># structure with hashes and arrays. You should be able to specify a tree like</span>
+<span class='c1'># this: {&#39;grandpa&#39; =&gt; {&#39;dad&#39; =&gt; &#39;child 1&#39; =&gt; {}, &#39;child 2&#39; =&gt; {} }, &#39;uncle&#39; =&gt;</span>
+<span class='c1'># {&#39;child 3&#39; =&gt; {}, &#39;child 4&#39; =&gt; {} } } }.</span>
+
+<span class='k'>class</span> <span class='nc'>Tree</span>
+    <span class='kp'>attr_accessor</span> <span class='ss'>:children</span><span class='p'>,</span> <span class='ss'>:node_name</span>
+
+    <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='nb'>name</span><span class='p'>,</span> <span class='n'>children</span><span class='o'>=[]</span><span class='p'>)</span>
+        <span class='k'>if</span> <span class='nb'>name</span><span class='o'>.</span><span class='n'>respond_to?</span><span class='p'>(</span><span class='s1'>&#39;keys&#39;</span><span class='p'>)</span> <span class='k'>then</span>
+            <span class='n'>root_node</span> <span class='o'>=</span> <span class='nb'>name</span><span class='o'>.</span><span class='n'>first</span>
+            <span class='nb'>name</span> <span class='o'>=</span> <span class='n'>root_node</span><span class='o'>[</span><span class='mi'>0</span><span class='o'>]</span>
+            <span class='n'>children</span> <span class='o'>=</span> <span class='n'>root_node</span><span class='o'>[</span><span class='mi'>1</span><span class='o'>]</span>
+        <span class='k'>end</span>
+        
+        <span class='k'>if</span> <span class='n'>children</span><span class='o'>.</span><span class='n'>respond_to?</span><span class='p'>(</span><span class='s1'>&#39;keys&#39;</span><span class='p'>)</span> <span class='k'>then</span>
+            <span class='n'>children</span> <span class='o'>=</span> <span class='n'>children</span><span class='o'>.</span><span class='n'>map</span> <span class='p'>{</span><span class='o'>|</span><span class='n'>child_name</span><span class='p'>,</span> <span class='n'>grandchildren</span><span class='o'>|</span> <span class='no'>Tree</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='n'>child_name</span><span class='p'>,</span> <span class='n'>grandchildren</span><span class='p'>)</span> <span class='p'>}</span>
+        <span class='k'>end</span>
+
+        <span class='vi'>@node_name</span> <span class='o'>=</span> <span class='nb'>name</span>
+        <span class='vi'>@children</span> <span class='o'>=</span> <span class='n'>children</span>
+    <span class='k'>end</span>
+
+    <span class='k'>def</span> <span class='nf'>visit_all</span><span class='p'>(</span><span class='o'>&amp;</span><span class='n'>block</span><span class='p'>)</span>
+        <span class='n'>visit</span><span class='p'>(</span><span class='o'>&amp;</span><span class='n'>block</span><span class='p'>)</span>
+        <span class='n'>children</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span><span class='o'>|</span><span class='n'>c</span><span class='o'>|</span> <span class='n'>c</span><span class='o'>.</span><span class='n'>visit_all</span><span class='p'>(</span><span class='o'>&amp;</span><span class='n'>block</span><span class='p'>)}</span>
+    <span class='k'>end</span>
+
+    <span class='k'>def</span> <span class='nf'>visit</span><span class='p'>(</span><span class='o'>&amp;</span><span class='n'>block</span><span class='p'>)</span>
+        <span class='n'>block</span><span class='o'>.</span><span class='n'>call</span> <span class='nb'>self</span>
+    <span class='k'>end</span>
+<span class='k'>end</span>
+
+<span class='n'>tree_test</span> <span class='o'>=</span> <span class='no'>Tree</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Ruby&quot;</span><span class='p'>,</span>
+    <span class='o'>[</span><span class='no'>Tree</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Reia&quot;</span><span class='p'>),</span>
+     <span class='no'>Tree</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;MacRuby&quot;</span><span class='p'>)</span><span class='o'>]</span> <span class='p'>)</span>
+
+<span class='n'>tree_test2</span> <span class='o'>=</span> <span class='no'>Tree</span><span class='o'>.</span><span class='n'>new</span><span class='p'>({</span><span class='s2'>&quot;Ruby&quot;</span> <span class='o'>=&gt;</span>
+    <span class='p'>{</span><span class='s2'>&quot;Reia&quot;</span> <span class='o'>=&gt;</span> <span class='p'>{},</span>
+    <span class='s2'>&quot;MacRuby&quot;</span> <span class='o'>=&gt;</span> <span class='p'>{}}</span>
+<span class='p'>})</span>
+
+<span class='n'>tree_test</span><span class='o'>.</span><span class='n'>visit_all</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>node</span><span class='o'>|</span> <span class='nb'>p</span> <span class='n'>node</span><span class='o'>.</span><span class='n'>node_name</span> <span class='p'>}</span>
+<span class='n'>tree_test2</span><span class='o'>.</span><span class='n'>visit_all</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>node</span><span class='o'>|</span> <span class='nb'>p</span> <span class='n'>node</span><span class='o'>.</span><span class='n'>node_name</span> <span class='p'>}</span>
+
+
+<span class='c1'># 3. Write a simple grep that will print the lines of a file having any</span>
+<span class='c1'># occurrences of a phrase anywhere in that line. you will need to do a simple</span>
+<span class='c1'># regular expression match and read lines from a file. (This is surprisingly</span>
+<span class='c1'># simple in Ruby.) If you want, include line numbers.</span>
+<span class='k'>def</span> <span class='nf'>rbgrep</span><span class='p'>(</span><span class='n'>pattern</span><span class='p'>,</span> <span class='n'>filename</span><span class='p'>)</span>
+    <span class='n'>regexp</span> <span class='o'>=</span> <span class='no'>Regexp</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='n'>pattern</span><span class='p'>)</span>
+    <span class='no'>File</span><span class='o'>.</span><span class='n'>foreach</span><span class='p'>(</span><span class='n'>filename</span><span class='p'>)</span><span class='o'>.</span><span class='n'>with_index</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>line</span><span class='p'>,</span> <span class='n'>line_num</span><span class='o'>|</span>
+        <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>line_num</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>line</span><span class='si'>}</span><span class='s2'>&quot;</span> <span class='k'>if</span> <span class='n'>regexp</span> <span class='o'>=~</span> <span class='n'>line</span>
+    <span class='p'>}</span>
+<span class='k'>end</span>
+
+<span class='n'>rbgrep</span><span class='p'>(</span><span class='s2'>&quot;guitar&quot;</span><span class='p'>,</span> <span class='s2'>&quot;wikipedia_page.txt&quot;</span><span class='p'>)</span>
+</code></pre>
+</div>
+<p>And the output:</p>
+
+<pre><code>$ ruby day2.rb
+
+Find:
+
+1.
+a spoonful is great but I&#39;d rather have a bowl
+
+2.
+hash: {:gary=&gt;5, :nick=&gt;11, :ted=&gt;8, :the_dude=&gt;9}
+array1: [[:gary, 5], [:nick, 11], [:ted, 8], [:the_dude, 9]]
+array2: [:gary, 5, :nick, 11, :ted, 8, :the_dude, 9]
+array1 to hash again 1: {:gary=&gt;5, :nick=&gt;11, :ted=&gt;8, :the_dude=&gt;9}
+array1 to hash again 2: {:gary=&gt;5, :nick=&gt;11, :ted=&gt;8, :the_dude=&gt;9}
+array2 to hash again 1: {}
+array2 to hash again 2: {:gary=&gt;5, :nick=&gt;11, :ted=&gt;8, :the_dude=&gt;9}
+Yup.
+
+3.
+key:&#39;gary&#39;, value:&#39;5&#39;
+key:&#39;nick&#39;, value:&#39;11&#39;
+key:&#39;ted&#39;, value:&#39;8&#39;
+key:&#39;the_dude&#39;, value:&#39;9&#39;
+Yup.
+
+4.
+queue/deque: 
+[&quot;b&quot;, &quot;a&quot;, &quot;1&quot;, &quot;2&quot;]
+b
+a
+2
+1
+list: 
+1
+2
+c
+3
+removed: c
+(rudimentary) bag/set:
+[1, 2, 3, 3, 4, 5]
+[1, 2, 3, 4, 5]
+[3, 5]
+(rudimentary) matrix:
+[[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+[[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+
+Do:
+
+1.
+[1, 2, 3, 4]
+[5, 6, 7, 8]
+[9, 10, 11, 12]
+[13, 14, 15, 16]
+and
+[1, 2, 3, 4]
+[5, 6, 7, 8]
+[9, 10, 11, 12]
+[13, 14, 15, 16]
+&quot;Ruby&quot;
+&quot;Reia&quot;
+&quot;MacRuby&quot;
+&quot;Ruby&quot;
+&quot;Reia&quot;
+&quot;MacRuby&quot;
+15: bass) and Andre Olbrich (guitar) under the name Lucifer&#39;s Heritage. The band
+17: changes: Markus Dörk (guitar) and Thomen Stauch (drums) were replaced by
+48: Nightfall, bass guitar has been played by sessional member Oliver Holzwarth,
+55: orchestral backing and a consistent vocal and guitar layering throughout.[9]
+87: Blind Guardian&#39;s music features the staccato guitars and double bass drumming
+90: the guitar and vocal tracks, creates the impression of a vast army of musicians</code></pre>
+  </div>
+
+  <div style="margin-top:20px; font-size:14px;">
+    <a href="/blog/2011/12/04/seven-languages-week-1-day-2/#disqus_thread" data-disqus-identifier="/blog/2011/12/04/seven-languages-week-1-day-2">Comments</a>
+  </div>
+
+    <hr class="fancyrule" />
+
+  <div>
   <h1 style="margin:0px"><a href="/blog/2011/11/27/seven-languages-week-1-day-1/">
   Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 1
   </a></h1>
   <div class="faded" style="font-size:14px; margin-bottom:5px;">27 Nov 2011</div>
   <p>Out of the seven languages in this book, Ruby is the one I was most familiar with previously. It made for an easy start, and gave me a bit of momentum before I started to tackle languages like Prolog. I&#8217;m appreciative of that, because Prolog sure was a struggle for a while.</p>
-
+<div class='interjection'><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. This article is the first one in the series. For an overview see the <a href='http://localhost:4000/projects/seven-languages-in-seven-weeks/'>project page</a>.)
+</p></div>
 <p>Day 1 of Week 1 was pretty basic - a bit of string manipulation and looping. Ruby makes things like this very short and pretty.</p>
 
 <p>For example, being able to repeat a string like: <code>&quot;Nick &quot; * 10</code> or loop like: <code>(1..10).each { |num| do_stuff(num) }</code> is great.</p>
@@ -155,6 +406,7 @@ Pick a number between 1 and 1000: 129
 Got it! It was 129
 </code></pre>
 </div>
+<p>Next in this series: <a href='/blog/2011/12/04/seven-languages-week-1-day-2/'>Day 2 of Ruby</a></p>
   </div>
 
   <div style="margin-top:20px; font-size:14px;">
