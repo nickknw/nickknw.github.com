@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2011-12-04T12:57:46-08:00</updated>
+ <updated>2011-12-04T12:59:58-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -18,7 +18,7 @@
    <id>http://nickknowlson.com/blog/2011/12/04/seven-languages-week-1-day-2</id>
    <content type="html">&lt;p&gt;Day 2 of Ruby covers collections, code blocks, classes and modules. I&amp;#8217;m familiar enough with these already in Ruby, so it was mostly just a refresher. So in this case it will be hard to provide a &amp;#8216;learning the language&amp;#8217; perspective. Instead I will try to highlight a few of the parts of Ruby in this chapter that I particularly like.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/11/27/seven-languages-week-1-day-1/'&gt;Week 1 (Ruby) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='http://localhost:4000/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/11/27/seven-languages-week-1-day-1/'&gt;Week 1 (Ruby) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;p&gt;Ruby has closures and first-class functions - code blocks are one way of creating a Proc - an anonymous function. A Proc is almost but not quite a lambda - there are &lt;a href='http://www.robertsosinski.com/2008/12/21/understanding-ruby-blocks-procs-and-lambdas/'&gt;a few differences between them&lt;/a&gt;, and Ruby has a separate &lt;code&gt;lambda&lt;/code&gt; method for creating those.&lt;/p&gt;
 
@@ -261,7 +261,7 @@ and
    <id>http://nickknowlson.com/blog/2011/11/27/seven-languages-week-1-day-1</id>
    <content type="html">&lt;p&gt;Out of the seven languages in this book, Ruby is the one I was most familiar with previously. It made for an easy start, and gave me a bit of momentum before I started to tackle languages like Prolog. I&amp;#8217;m appreciative of that, because Prolog sure was a struggle for a while.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. This article is the first one in the series. For an overview see the &lt;a href='http://localhost:4000/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. This article is the first one in the series. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;p&gt;Day 1 of Week 1 was pretty basic - a bit of string manipulation and looping. Ruby makes things like this very short and pretty.&lt;/p&gt;
 
