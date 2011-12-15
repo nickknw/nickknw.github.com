@@ -47,11 +47,171 @@
                 <div style="text-align:center;"><b>Latest Posts</b> | <a href="/blog/archive/">Archive</a></div>
 
   <div>
+  <h1 style="margin:0px"><a href="/blog/2011/12/15/seven-languages-week-1-day-3/">
+  Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 3
+  </a></h1>
+  <div class="faded" style="font-size:14px; margin-bottom:5px;">15 Dec 2011</div>
+  <p>Day 3 is about metaprogramming: writing code that writes code. Now we are really getting into the meat of Ruby, exploring some of the things that things that set it apart from other languages. Ruby has a powerful and varied toolset to make metaprogramming easy and natural. It gives you full control to tweak and patch built in classes, and even makes it convenient. These tools(SYN) can combine with its flexible syntax to let you create readable internal DSLs especially easily.</p>
+<div class='interjection'><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2011/12/04/seven-languages-week-1-day-2/'>Week 1 (Ruby) - Day 2</a>. For an overview see the <a href='/projects/seven-languages-in-seven-weeks/'>project page</a>.)
+</p></div>
+<h2 id='topics_covered'>Topics covered</h2>
+
+<p>This was a fairly quick week, with only a few topics and one homework question. Not that this is a bad thing necessarily &#8211; in the end it turned out to be a nice break before the tough stuff really started. The main three topics in Day 3 were: open classes, method_missing, and mixins.</p>
+<h3>Open classes</h3>
+<p>In Ruby you have the power to modify or add to any class, even the built-in ones. You can open up the String class and add a new method called <code>quack()</code>, or redefine <code>size()</code> to return a random integer. Using this power without restraint can lead to pretty impressive messes of spaghetti code.</p>
+
+<p>Modifying existing classes at runtime in this way has become known as <a href='http://en.wikipedia.org/wiki/Monkey_patch'>monkey patching</a>, and also (my favorite) <a href='http://www.ericdelabar.com/2008/05/metaprogramming-javascript.html'>duck punching</a>:</p>
+
+<blockquote>
+<p>Well, I was just totally sold by Adam, the idea being that if it walks like a duck and talks like a duck, it’s a duck, right? So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect. &#8211; Patrick Ewing</p>
+</blockquote>
+
+<p>You&#8217;ve got to just <em>punch</em> that duck.</p>
+<h3>Method_missing</h3>
+<p>This special method gets called any time a method that doesn&#8217;t exist is called. If you implement it you have access to the name and arguments of the method that was called. In the book, Bruce Tate gives an example of using this to create a nice way to specify roman numerals. The result is that you can say <code>roman.X</code>, <code>roman.III</code>, <code>roman.CXII</code>, etc.</p>
+
+<p>I saw another example of <code>method_missing</code>&#8217;s power in Chapter 8 of <a href='http://shop.oreilly.com/product/9780596516178.do'>The Ruby Programming Language</a>, where a simple DSL for generating html is created. This is what it looks like in use:</p>
+<div class='highlight'><pre><code class='ruby'><span class='n'>pagetitle</span> <span class='o'>=</span> <span class='s2'>&quot;Test Page for XML.generate&quot;</span>
+<span class='no'>XML</span><span class='o'>.</span><span class='n'>generate</span><span class='p'>(</span><span class='no'>STDOUT</span><span class='p'>)</span> <span class='k'>do</span>
+  <span class='n'>html</span> <span class='k'>do</span>
+    <span class='n'>head</span> <span class='k'>do</span>
+      <span class='n'>title</span> <span class='p'>{</span> <span class='n'>pagetitle</span> <span class='p'>}</span>
+      <span class='n'>comment</span> <span class='s2'>&quot;This is a test&quot;</span>
+    <span class='k'>end</span>
+    <span class='n'>body</span> <span class='k'>do</span>
+      <span class='n'>h1</span><span class='p'>(</span><span class='ss'>:style</span> <span class='o'>=&gt;</span> <span class='s2'>&quot;font-family:sans-serif&quot;</span><span class='p'>)</span> <span class='p'>{</span> <span class='n'>pagetitle</span> <span class='p'>}</span>
+      <span class='n'>ul</span> <span class='ss'>:type</span><span class='o'>=&gt;</span><span class='s2'>&quot;square&quot;</span> <span class='k'>do</span>
+        <span class='n'>li</span> <span class='p'>{</span> <span class='no'>Time</span><span class='o'>.</span><span class='n'>now</span> <span class='p'>}</span>
+        <span class='n'>li</span> <span class='p'>{</span> <span class='no'>RUBY_VERSION</span> <span class='p'>}</span>
+      <span class='k'>end</span>
+    <span class='k'>end</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
+<p>The implementation is fairly short: they create a basic XML class in only 53 well-commented lines. If you&#8217;re interested, the code examples are available for inspection from <a href='http://www.davidflanagan.com/rpl/'>David Flanagan&#8217;s website</a>. For convenience, here is a link <a href='/files/RPL_XML.txt'>directly to this snippet of code</a>.</p>
+<h3>Mixins</h3>
+<p>Mixins are a way for a class to include code from a module inside itself. Imagine a class including a module with a <code>Meow()</code> method. This would let you call <code>Meow()</code> on any instance of that class. Combined with open classes and the ability to add or change methods at runtime, this makes it easy to package and use code that changes code.</p>
+
+<p>As I understand it, ActiveRecord in Rails is sort of the poster child for how metaprogramming using mixins. It will customize your domain models at runtime with many things, including accessors using the column names from the database. I admit I don&#8217;t know a lot about the details of this area, but there is a whole book dedicated to <a href='http://pragprog.com/book/ppmetr/metaprogramming-ruby'>metaprogramming in Ruby</a> that I plan on reading someday.</p>
+
+<h2 id='what_was_missing'>What was missing</h2>
+
+<p>Surprisingly, an entire category of useful metaprogramming tools are are almost skipped right over in Day 3. There are a lot of great methods to interact with and create methods and classes on the fly, and these are only given a passing mention in one of the examples. Methods like <code>define_method</code>, <code>alias_method</code>, the different versions of <code>eval</code>, or <code>methods.grep</code>.</p>
+
+<p>With these tools Ruby gives you, without much effort you can do things like: find all methods that have a name like <code>/check.*/</code>, systematically rename those methods, and replace them with a method that does something (like logging) and THEN execute the method.</p>
+
+<p>Ola Bini has a great <a href='http://ola-bini.blogspot.com/2006/09/ruby-metaprogramming-techniques.html'>post about metaprogramming in Ruby</a> that talks about these techniques and more. I recommend it if you have been at all interested this post so far, it is well worth reading.</p>
+
+<h2 id='highlights_from_exercise'>Highlights from exercise</h2>
+
+<p>There was not very much to do for the homework questions this week, unfortunately, just one fairly short exercise. This day in particular was one that I think could have used some really cool examples. Metaprogramming has a lot of depth and exciting possibilities, and this chapter could have shown that off more with better exercises.</p>
+
+<p>Anyway, the exercise for this day shows some basic usage of <code>method_missing</code>. The existing ActsAsCsv module is given to you to extend, so the most interesting bit of code in the exercise is the definition of <code>method_missing</code> in CsvRow. It takes the name of the method and attempts to return the rows from the column that has that name.</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>def</span> <span class='nf'>method_missing</span> <span class='nb'>name</span><span class='p'>,</span> <span class='o'>*</span><span class='n'>args</span>
+    <span class='n'>content_index</span> <span class='o'>=</span> <span class='vi'>@header_row</span><span class='o'>.</span><span class='n'>index</span><span class='p'>(</span><span class='nb'>name</span><span class='o'>.</span><span class='n'>to_s</span><span class='p'>)</span>
+    <span class='k'>return</span> <span class='vi'>@content_row</span><span class='o'>[</span><span class='n'>content_index</span><span class='o'>]</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
+<p>Here is my full code listing for the exercises from Day 3 of Ruby. The home of this piece of code is with the other exercises <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day3.rb'>on github</a>.</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'>#Do:</span>
+<span class='c1'># 1. Modify the CSV application to support an each method to return a CsvRow</span>
+<span class='c1'># object. Use method_missing on that CsvRow to return the value for the column</span>
+<span class='c1'># for a given heading.</span>
+
+<span class='k'>module</span> <span class='nn'>ActsAsCsv</span>
+
+    <span class='k'>def</span> <span class='nc'>self</span><span class='o'>.</span><span class='nf'>included</span><span class='p'>(</span><span class='n'>base</span><span class='p'>)</span>
+        <span class='n'>base</span><span class='o'>.</span><span class='n'>extend</span> <span class='no'>ClassMethods</span>
+    <span class='k'>end</span>
+
+    <span class='k'>module</span> <span class='nn'>ClassMethods</span>
+        <span class='k'>def</span> <span class='nf'>acts_as_csv</span>
+            <span class='kp'>include</span> <span class='no'>InstanceMethods</span>
+        <span class='k'>end</span>
+    <span class='k'>end</span>
+
+    <span class='k'>module</span> <span class='nn'>InstanceMethods</span>
+
+        <span class='kp'>attr_accessor</span> <span class='ss'>:headers</span><span class='p'>,</span> <span class='ss'>:csv_rows</span>
+
+        <span class='k'>def</span> <span class='nf'>read</span>
+            <span class='vi'>@csv_rows</span> <span class='o'>=</span> <span class='o'>[]</span>
+            <span class='n'>file</span> <span class='o'>=</span> <span class='no'>File</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='nb'>self</span><span class='o'>.</span><span class='n'>class</span><span class='o'>.</span><span class='n'>to_s</span><span class='o'>.</span><span class='n'>downcase</span> <span class='o'>+</span> <span class='s1'>&#39;.txt&#39;</span><span class='p'>)</span>
+            <span class='vi'>@headers</span> <span class='o'>=</span> <span class='n'>file</span><span class='o'>.</span><span class='n'>gets</span><span class='o'>.</span><span class='n'>chomp</span><span class='o'>.</span><span class='n'>split</span><span class='p'>(</span><span class='s1'>&#39;, &#39;</span><span class='p'>)</span>
+
+            <span class='n'>file</span><span class='o'>.</span><span class='n'>each</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>row</span><span class='o'>|</span>
+                <span class='n'>csv_contents</span> <span class='o'>=</span> <span class='n'>row</span><span class='o'>.</span><span class='n'>chomp</span><span class='o'>.</span><span class='n'>split</span><span class='p'>(</span><span class='s1'>&#39;, &#39;</span><span class='p'>)</span>
+                <span class='vi'>@csv_rows</span> <span class='o'>&lt;&lt;</span> <span class='no'>CsvRow</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='vi'>@headers</span><span class='p'>,</span> <span class='n'>csv_contents</span><span class='p'>)</span>
+            <span class='k'>end</span>
+        <span class='k'>end</span>
+
+        <span class='k'>def</span> <span class='nf'>initialize</span>
+            <span class='n'>read</span>
+        <span class='k'>end</span>
+
+        <span class='k'>def</span> <span class='nf'>each</span> <span class='o'>&amp;</span><span class='n'>block</span>
+            <span class='vi'>@csv_rows</span><span class='o'>.</span><span class='n'>each</span> <span class='o'>&amp;</span><span class='n'>block</span>
+        <span class='k'>end</span>
+
+    <span class='k'>end</span>
+
+    <span class='k'>class</span> <span class='nc'>CsvRow</span>
+        <span class='kp'>attr_accessor</span> <span class='ss'>:header_row</span><span class='p'>,</span> <span class='ss'>:content_row</span>
+
+        <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='n'>header_row</span><span class='p'>,</span> <span class='n'>content_row</span><span class='p'>)</span>
+            <span class='vi'>@header_row</span> <span class='o'>=</span> <span class='n'>header_row</span>
+            <span class='vi'>@content_row</span> <span class='o'>=</span> <span class='n'>content_row</span>
+        <span class='k'>end</span>
+
+        <span class='k'>def</span> <span class='nf'>method_missing</span> <span class='nb'>name</span><span class='p'>,</span> <span class='o'>*</span><span class='n'>args</span>
+            <span class='n'>content_index</span> <span class='o'>=</span> <span class='vi'>@header_row</span><span class='o'>.</span><span class='n'>index</span><span class='p'>(</span><span class='nb'>name</span><span class='o'>.</span><span class='n'>to_s</span><span class='p'>)</span>
+            <span class='k'>return</span> <span class='vi'>@content_row</span><span class='o'>[</span><span class='n'>content_index</span><span class='o'>]</span>
+        <span class='k'>end</span>
+    <span class='k'>end</span>
+<span class='k'>end</span>
+
+<span class='k'>class</span> <span class='nc'>RubyCsv</span> 
+    <span class='kp'>include</span> <span class='no'>ActsAsCsv</span>
+    <span class='n'>acts_as_csv</span>
+<span class='k'>end</span>
+
+<span class='n'>csv</span> <span class='o'>=</span> <span class='no'>RubyCsv</span><span class='o'>.</span><span class='n'>new</span>
+<span class='n'>csv</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span><span class='o'>|</span><span class='n'>row</span><span class='o'>|</span> <span class='nb'>puts</span> <span class='n'>row</span><span class='o'>.</span><span class='n'>one</span><span class='p'>}</span>
+</code></pre>
+</div>
+<p>And the output (given the sample file in my github repo):</p>
+<div class='highlight'><pre><code class='bash'>lions
+han
+chewbacca
+r2 d2
+anakin skywalker
+leia organa
+threepio
+jawa
+emperor palpatine
+darth sidious
+bail organa
+vader
+</code></pre>
+</div>
+<p>Next in this series: Day 1 of Io</p>
+  </div>
+
+  <div style="margin-top:20px; font-size:14px;">
+    <a href="/blog/2011/12/15/seven-languages-week-1-day-3/#disqus_thread" data-disqus-identifier="/blog/2011/12/15/seven-languages-week-1-day-3">Comments</a>
+  </div>
+
+    <hr class="fancyrule" />
+
+  <div>
   <h1 style="margin:0px"><a href="/blog/2011/12/04/seven-languages-week-1-day-2/">
   Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 2
   </a></h1>
   <div class="faded" style="font-size:14px; margin-bottom:5px;">04 Dec 2011</div>
-  <p>Day 2 of Ruby covers collections, code blocks, classes and modules. I&#8217;m familiar enough with these already in Ruby, so it was mostly just a refresher. So in this case it will be hard to provide a &#8216;learning the language&#8217; perspective. Instead I will try to highlight a few of the parts of Ruby in this chapter that I particularly like.</p>
+  <p>Day 2 of Ruby covers collections, code blocks, classes and modules. I&#8217;m familiar enough with these already in Ruby so in this case it will be hard to provide a &#8216;learning the language&#8217; perspective. Instead I will try to highlight a few of the parts of Ruby in this chapter that I particularly like.</p>
 <div class='interjection'><p>
 (This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2011/11/27/seven-languages-week-1-day-1/'>Week 1 (Ruby) - Day 1</a>. For an overview see the <a href='/projects/seven-languages-in-seven-weeks/'>project page</a>.)
 </p></div>
@@ -59,7 +219,7 @@
 
 <p>Ruby&#8217;s arrays and hashes are very multipurpose: hashes are frequently used to give a method named parameters; and arrays have built in methods so that they can be used as queues, stacks, sets, and matrices.</p>
 
-<p>Its syntax is consistent and pretty. Arrays are very rich, you can do ranges (<code>[1..10]</code>), negative indexes (<code>&quot;string&quot;[1..-2]</code>), and there are convenience methods for operations like push, pop, transpose, and set intersection. You have the standard high order functions equivalents (map, filter, fold/reduce).</p>
+<p>Its syntax is consistent and pretty. Arrays are very rich, you can do ranges (<code>[1..10]</code>), negative indexes (<code>&quot;string&quot;[1..-2]</code>), and there are convenience methods for operations like push, pop, transpose, and set intersection. You have the three basic list manipulating higher order function equivalents: map, filter, reduce (fold).</p>
 
 <p>There are many useful methods you can call right off of number literals. One common example is <code>times</code>, which takes a code block as a parameter and executes it. This can sometimes be a nice way to express a loop: <code>4.times { puts &quot;testing&quot; }</code> or <code>4.times { |i| puts i }</code>.</p>
 
@@ -287,6 +447,8 @@ and
 55: orchestral backing and a consistent vocal and guitar layering throughout.[9]
 87: Blind Guardian&#39;s music features the staccato guitars and double bass drumming
 90: the guitar and vocal tracks, creates the impression of a vast army of musicians</code></pre>
+
+<p>Next in this series: <a href='/blog/2011/12/15/seven-languages-week-1-day-2/'>Day 3 of Ruby</a>.</p>
   </div>
 
   <div style="margin-top:20px; font-size:14px;">
@@ -434,7 +596,7 @@ Got it! It was 129
 
 <p>Here&#8217;s an overview of roughly how many people thought there was a problem in each category:</p>
 
-<p><img alt='Weaknesses from State of Haskell Bar Graph' src='/img/state_of_haskell_2011_weakness.png' /></p>
+<p><img src='/img/state_of_haskell_2011_weakness.png' alt='Weaknesses from State of Haskell Bar Graph' /></p>
 
 <p>It is probably important to note that I didn&#8217;t attempt to verify the accuracy of any of the claims, so this graph represents the public <strong>perception</strong> of where the problems are, not necessarily where the problems actually are. It is still very important information though, and likely does match up very closely with where the problems are.</p>
 <h3>Libraries, Documentation, Hackage and Cabal</h3>
@@ -857,26 +1019,6 @@ Got it! It was 129
 
   <div style="margin-top:20px; font-size:14px;">
     <a href="/blog/2011/09/12/haskell-survey-categorized-weaknesses/#disqus_thread" data-disqus-identifier="/blog/2011/09/12/haskell-survey-categorized-weaknesses">Comments</a>
-  </div>
-
-    <hr class="fancyrule" />
-
-  <div>
-  <h1 style="margin:0px"><a href="/blog/2011/07/23/hello-world/">
-  Hello World!
-  </a></h1>
-  <div class="faded" style="font-size:14px; margin-bottom:5px;">23 Jul 2011</div>
-  <p>This site is finally live! I have put a skeleton of content up here for now just so I can get it up, but over the coming months I&#8217;ll be updating my Project pages with more detail as well as screenshots. I&#8217;ll also put up the occasional blog post from time to time, and these will lean towards longer, more technical posts.</p>
-
-<p>I meant the logo up above to be temporary, but it is kind of growing on me, so it may stay for a while.</p>
-
-<p>The css and javascript are a bit clunky at the moment as well, but they work well enough for the moment, and there will be lots of time to optimize the heck out of them in the future.</p>
-
-<p>That&#8217;s about all for the introductory post, the next one will probably be about something more interesting!</p>
-  </div>
-
-  <div style="margin-top:20px; font-size:14px;">
-    <a href="/blog/2011/07/23/hello-world/#disqus_thread" data-disqus-identifier="/blog/2011/07/23/hello-world">Comments</a>
   </div>
 
     <hr class="fancyrule" />

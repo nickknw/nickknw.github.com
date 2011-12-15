@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="">
+
+        <title>Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 3 | Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/inuit.css" >
+        <link rel="stylesheet" type="text/css" href="/css/style.css" >
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="/favicon.ico" >
+        <link href="http://feeds.feedburner.com/NickKnowlson" type="application/atom+xml" rel="alternate" title="Blog ATOM Feed" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+
+        
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-24781362-1']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logos/logo6.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="" href="/projects/">Projects</a></li>
+                <li><a class="selected" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <a href="/blog/archive/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 3</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">15 Dec 2011</div>
+<div id="post">
+<p>Day 3 is about metaprogramming: writing code that writes code. Now we are really getting into the meat of Ruby, exploring some of the things that things that set it apart from other languages. Ruby has a powerful and varied toolset to make metaprogramming easy and natural. It gives you full control to tweak and patch built in classes, and even makes it convenient. These tools(SYN) can combine with its flexible syntax to let you create readable internal DSLs especially easily.</p>
+<div class='interjection'><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2011/12/04/seven-languages-week-1-day-2/'>Week 1 (Ruby) - Day 2</a>. For an overview see the <a href='/projects/seven-languages-in-seven-weeks/'>project page</a>.)
+</p></div>
+<h2 id='topics_covered'>Topics covered</h2>
+
+<p>This was a fairly quick week, with only a few topics and one homework question. Not that this is a bad thing necessarily &#8211; in the end it turned out to be a nice break before the tough stuff really started. The main three topics in Day 3 were: open classes, method_missing, and mixins.</p>
+<h3>Open classes</h3>
+<p>In Ruby you have the power to modify or add to any class, even the built-in ones. You can open up the String class and add a new method called <code>quack()</code>, or redefine <code>size()</code> to return a random integer. Using this power without restraint can lead to pretty impressive messes of spaghetti code.</p>
+
+<p>Modifying existing classes at runtime in this way has become known as <a href='http://en.wikipedia.org/wiki/Monkey_patch'>monkey patching</a>, and also (my favorite) <a href='http://www.ericdelabar.com/2008/05/metaprogramming-javascript.html'>duck punching</a>:</p>
+
+<blockquote>
+<p>Well, I was just totally sold by Adam, the idea being that if it walks like a duck and talks like a duck, it’s a duck, right? So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect. &#8211; Patrick Ewing</p>
+</blockquote>
+
+<p>You&#8217;ve got to just <em>punch</em> that duck.</p>
+<h3>Method_missing</h3>
+<p>This special method gets called any time a method that doesn&#8217;t exist is called. If you implement it you have access to the name and arguments of the method that was called. In the book, Bruce Tate gives an example of using this to create a nice way to specify roman numerals. The result is that you can say <code>roman.X</code>, <code>roman.III</code>, <code>roman.CXII</code>, etc.</p>
+
+<p>I saw another example of <code>method_missing</code>&#8217;s power in Chapter 8 of <a href='http://shop.oreilly.com/product/9780596516178.do'>The Ruby Programming Language</a>, where a simple DSL for generating html is created. This is what it looks like in use:</p>
+<div class='highlight'><pre><code class='ruby'><span class='n'>pagetitle</span> <span class='o'>=</span> <span class='s2'>&quot;Test Page for XML.generate&quot;</span>
+<span class='no'>XML</span><span class='o'>.</span><span class='n'>generate</span><span class='p'>(</span><span class='no'>STDOUT</span><span class='p'>)</span> <span class='k'>do</span>
+  <span class='n'>html</span> <span class='k'>do</span>
+    <span class='n'>head</span> <span class='k'>do</span>
+      <span class='n'>title</span> <span class='p'>{</span> <span class='n'>pagetitle</span> <span class='p'>}</span>
+      <span class='n'>comment</span> <span class='s2'>&quot;This is a test&quot;</span>
+    <span class='k'>end</span>
+    <span class='n'>body</span> <span class='k'>do</span>
+      <span class='n'>h1</span><span class='p'>(</span><span class='ss'>:style</span> <span class='o'>=&gt;</span> <span class='s2'>&quot;font-family:sans-serif&quot;</span><span class='p'>)</span> <span class='p'>{</span> <span class='n'>pagetitle</span> <span class='p'>}</span>
+      <span class='n'>ul</span> <span class='ss'>:type</span><span class='o'>=&gt;</span><span class='s2'>&quot;square&quot;</span> <span class='k'>do</span>
+        <span class='n'>li</span> <span class='p'>{</span> <span class='no'>Time</span><span class='o'>.</span><span class='n'>now</span> <span class='p'>}</span>
+        <span class='n'>li</span> <span class='p'>{</span> <span class='no'>RUBY_VERSION</span> <span class='p'>}</span>
+      <span class='k'>end</span>
+    <span class='k'>end</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
+<p>The implementation is fairly short: they create a basic XML class in only 53 well-commented lines. If you&#8217;re interested, the code examples are available for inspection from <a href='http://www.davidflanagan.com/rpl/'>David Flanagan&#8217;s website</a>. For convenience, here is a link <a href='/files/RPL_XML.txt'>directly to this snippet of code</a>.</p>
+<h3>Mixins</h3>
+<p>Mixins are a way for a class to include code from a module inside itself. Imagine a class including a module with a <code>Meow()</code> method. This would let you call <code>Meow()</code> on any instance of that class. Combined with open classes and the ability to add or change methods at runtime, this makes it easy to package and use code that changes code.</p>
+
+<p>As I understand it, ActiveRecord in Rails is sort of the poster child for how metaprogramming using mixins. It will customize your domain models at runtime with many things, including accessors using the column names from the database. I admit I don&#8217;t know a lot about the details of this area, but there is a whole book dedicated to <a href='http://pragprog.com/book/ppmetr/metaprogramming-ruby'>metaprogramming in Ruby</a> that I plan on reading someday.</p>
+
+<h2 id='what_was_missing'>What was missing</h2>
+
+<p>Surprisingly, an entire category of useful metaprogramming tools are are almost skipped right over in Day 3. There are a lot of great methods to interact with and create methods and classes on the fly, and these are only given a passing mention in one of the examples. Methods like <code>define_method</code>, <code>alias_method</code>, the different versions of <code>eval</code>, or <code>methods.grep</code>.</p>
+
+<p>With these tools Ruby gives you, without much effort you can do things like: find all methods that have a name like <code>/check.*/</code>, systematically rename those methods, and replace them with a method that does something (like logging) and THEN execute the method.</p>
+
+<p>Ola Bini has a great <a href='http://ola-bini.blogspot.com/2006/09/ruby-metaprogramming-techniques.html'>post about metaprogramming in Ruby</a> that talks about these techniques and more. I recommend it if you have been at all interested this post so far, it is well worth reading.</p>
+
+<h2 id='highlights_from_exercise'>Highlights from exercise</h2>
+
+<p>There was not very much to do for the homework questions this week, unfortunately, just one fairly short exercise. This day in particular was one that I think could have used some really cool examples. Metaprogramming has a lot of depth and exciting possibilities, and this chapter could have shown that off more with better exercises.</p>
+
+<p>Anyway, the exercise for this day shows some basic usage of <code>method_missing</code>. The existing ActsAsCsv module is given to you to extend, so the most interesting bit of code in the exercise is the definition of <code>method_missing</code> in CsvRow. It takes the name of the method and attempts to return the rows from the column that has that name.</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>def</span> <span class='nf'>method_missing</span> <span class='nb'>name</span><span class='p'>,</span> <span class='o'>*</span><span class='n'>args</span>
+    <span class='n'>content_index</span> <span class='o'>=</span> <span class='vi'>@header_row</span><span class='o'>.</span><span class='n'>index</span><span class='p'>(</span><span class='nb'>name</span><span class='o'>.</span><span class='n'>to_s</span><span class='p'>)</span>
+    <span class='k'>return</span> <span class='vi'>@content_row</span><span class='o'>[</span><span class='n'>content_index</span><span class='o'>]</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
+<p>Here is my full code listing for the exercises from Day 3 of Ruby. The home of this piece of code is with the other exercises <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day3.rb'>on github</a>.</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'>#Do:</span>
+<span class='c1'># 1. Modify the CSV application to support an each method to return a CsvRow</span>
+<span class='c1'># object. Use method_missing on that CsvRow to return the value for the column</span>
+<span class='c1'># for a given heading.</span>
+
+<span class='k'>module</span> <span class='nn'>ActsAsCsv</span>
+
+    <span class='k'>def</span> <span class='nc'>self</span><span class='o'>.</span><span class='nf'>included</span><span class='p'>(</span><span class='n'>base</span><span class='p'>)</span>
+        <span class='n'>base</span><span class='o'>.</span><span class='n'>extend</span> <span class='no'>ClassMethods</span>
+    <span class='k'>end</span>
+
+    <span class='k'>module</span> <span class='nn'>ClassMethods</span>
+        <span class='k'>def</span> <span class='nf'>acts_as_csv</span>
+            <span class='kp'>include</span> <span class='no'>InstanceMethods</span>
+        <span class='k'>end</span>
+    <span class='k'>end</span>
+
+    <span class='k'>module</span> <span class='nn'>InstanceMethods</span>
+
+        <span class='kp'>attr_accessor</span> <span class='ss'>:headers</span><span class='p'>,</span> <span class='ss'>:csv_rows</span>
+
+        <span class='k'>def</span> <span class='nf'>read</span>
+            <span class='vi'>@csv_rows</span> <span class='o'>=</span> <span class='o'>[]</span>
+            <span class='n'>file</span> <span class='o'>=</span> <span class='no'>File</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='nb'>self</span><span class='o'>.</span><span class='n'>class</span><span class='o'>.</span><span class='n'>to_s</span><span class='o'>.</span><span class='n'>downcase</span> <span class='o'>+</span> <span class='s1'>&#39;.txt&#39;</span><span class='p'>)</span>
+            <span class='vi'>@headers</span> <span class='o'>=</span> <span class='n'>file</span><span class='o'>.</span><span class='n'>gets</span><span class='o'>.</span><span class='n'>chomp</span><span class='o'>.</span><span class='n'>split</span><span class='p'>(</span><span class='s1'>&#39;, &#39;</span><span class='p'>)</span>
+
+            <span class='n'>file</span><span class='o'>.</span><span class='n'>each</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>row</span><span class='o'>|</span>
+                <span class='n'>csv_contents</span> <span class='o'>=</span> <span class='n'>row</span><span class='o'>.</span><span class='n'>chomp</span><span class='o'>.</span><span class='n'>split</span><span class='p'>(</span><span class='s1'>&#39;, &#39;</span><span class='p'>)</span>
+                <span class='vi'>@csv_rows</span> <span class='o'>&lt;&lt;</span> <span class='no'>CsvRow</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='vi'>@headers</span><span class='p'>,</span> <span class='n'>csv_contents</span><span class='p'>)</span>
+            <span class='k'>end</span>
+        <span class='k'>end</span>
+
+        <span class='k'>def</span> <span class='nf'>initialize</span>
+            <span class='n'>read</span>
+        <span class='k'>end</span>
+
+        <span class='k'>def</span> <span class='nf'>each</span> <span class='o'>&amp;</span><span class='n'>block</span>
+            <span class='vi'>@csv_rows</span><span class='o'>.</span><span class='n'>each</span> <span class='o'>&amp;</span><span class='n'>block</span>
+        <span class='k'>end</span>
+
+    <span class='k'>end</span>
+
+    <span class='k'>class</span> <span class='nc'>CsvRow</span>
+        <span class='kp'>attr_accessor</span> <span class='ss'>:header_row</span><span class='p'>,</span> <span class='ss'>:content_row</span>
+
+        <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='n'>header_row</span><span class='p'>,</span> <span class='n'>content_row</span><span class='p'>)</span>
+            <span class='vi'>@header_row</span> <span class='o'>=</span> <span class='n'>header_row</span>
+            <span class='vi'>@content_row</span> <span class='o'>=</span> <span class='n'>content_row</span>
+        <span class='k'>end</span>
+
+        <span class='k'>def</span> <span class='nf'>method_missing</span> <span class='nb'>name</span><span class='p'>,</span> <span class='o'>*</span><span class='n'>args</span>
+            <span class='n'>content_index</span> <span class='o'>=</span> <span class='vi'>@header_row</span><span class='o'>.</span><span class='n'>index</span><span class='p'>(</span><span class='nb'>name</span><span class='o'>.</span><span class='n'>to_s</span><span class='p'>)</span>
+            <span class='k'>return</span> <span class='vi'>@content_row</span><span class='o'>[</span><span class='n'>content_index</span><span class='o'>]</span>
+        <span class='k'>end</span>
+    <span class='k'>end</span>
+<span class='k'>end</span>
+
+<span class='k'>class</span> <span class='nc'>RubyCsv</span> 
+    <span class='kp'>include</span> <span class='no'>ActsAsCsv</span>
+    <span class='n'>acts_as_csv</span>
+<span class='k'>end</span>
+
+<span class='n'>csv</span> <span class='o'>=</span> <span class='no'>RubyCsv</span><span class='o'>.</span><span class='n'>new</span>
+<span class='n'>csv</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span><span class='o'>|</span><span class='n'>row</span><span class='o'>|</span> <span class='nb'>puts</span> <span class='n'>row</span><span class='o'>.</span><span class='n'>one</span><span class='p'>}</span>
+</code></pre>
+</div>
+<p>And the output (given the sample file in my github repo):</p>
+<div class='highlight'><pre><code class='bash'>lions
+han
+chewbacca
+r2 d2
+anakin skywalker
+leia organa
+threepio
+jawa
+emperor palpatine
+darth sidious
+bail organa
+vader
+</code></pre>
+</div>
+<p>Next in this series: Day 1 of Io</p>
+</div>
+
+
+<div id="socialbuttons">
+<div>
+    <div id="rss_button"><a href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/feed-icon-28x28.png">&nbsp;</a></div>
+    <!-- G+ -->
+    <div id="google_plus_button"><g:plusone></g:plusone>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script></div>
+
+    <!-- Twitter -->
+    <div id="twitter_button"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="nickknw">Tweet</a>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+
+    <!-- Reddit -->
+    <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
+
+    <!-- Facebook -->
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2011/12/15/seven-languages-week-1-day-3/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+
+</div>
+</div>
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>04 Dec 2011</span> &raquo; <a href="/blog/2011/12/04/seven-languages-week-1-day-2/">Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 2</a></li>
+    
+      <li><span>27 Nov 2011</span> &raquo; <a href="/blog/2011/11/27/seven-languages-week-1-day-1/">Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 1</a></li>
+    
+      <li><span>12 Sep 2011</span> &raquo; <a href="/blog/2011/09/12/haskell-survey-categorized-weaknesses/">Categorized Weaknesses from the State of Haskell 2011 Survey</a></li>
+    
+  </ul>
+</div>
+
+<hr class="fancyrule" />
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
+
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    var disqus_identifier = '/blog/2011/12/15/seven-languages-week-1-day-3';
+    var disqus_url = 'http://nickknowlson.com//blog/2011/12/15/seven-languages-week-1-day-3/';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+        </div>
+        <div id="footer">&copy; Copyright 2011 Nick Knowlson</div>
+        <div style="display: none;">Content by Nick Knowlson: <a href="https://plus.google.com/111820015518413982003?rel=author">Google+</a></div>
+        <!--  " - 2011" -->
+    </body>
+</html>

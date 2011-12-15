@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2011-12-04T12:59:58-08:00</updated>
+ <updated>2011-12-15T02:07:14-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -12,11 +12,165 @@
 
  
  <entry>
+   <title>Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 3</title>
+   <link href="http://nickknowlson.com/blog/2011/12/15/seven-languages-week-1-day-3/"/>
+   <updated>2011-12-15T00:00:00-08:00</updated>
+   <id>http://nickknowlson.com/blog/2011/12/15/seven-languages-week-1-day-3</id>
+   <content type="html">&lt;p&gt;Day 3 is about metaprogramming: writing code that writes code. Now we are really getting into the meat of Ruby, exploring some of the things that things that set it apart from other languages. Ruby has a powerful and varied toolset to make metaprogramming easy and natural. It gives you full control to tweak and patch built in classes, and even makes it convenient. These tools(SYN) can combine with its flexible syntax to let you create readable internal DSLs especially easily.&lt;/p&gt;
+&lt;div class='interjection'&gt;&lt;p&gt;
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/04/seven-languages-week-1-day-2/'&gt;Week 1 (Ruby) - Day 2&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+&lt;/p&gt;&lt;/div&gt;
+&lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
+
+&lt;p&gt;This was a fairly quick week, with only a few topics and one homework question. Not that this is a bad thing necessarily &amp;#8211; in the end it turned out to be a nice break before the tough stuff really started. The main three topics in Day 3 were: open classes, method_missing, and mixins.&lt;/p&gt;
+&lt;h3&gt;Open classes&lt;/h3&gt;
+&lt;p&gt;In Ruby you have the power to modify or add to any class, even the built-in ones. You can open up the String class and add a new method called &lt;code&gt;quack()&lt;/code&gt;, or redefine &lt;code&gt;size()&lt;/code&gt; to return a random integer. Using this power without restraint can lead to pretty impressive messes of spaghetti code.&lt;/p&gt;
+
+&lt;p&gt;Modifying existing classes at runtime in this way has become known as &lt;a href='http://en.wikipedia.org/wiki/Monkey_patch'&gt;monkey patching&lt;/a&gt;, and also (my favorite) &lt;a href='http://www.ericdelabar.com/2008/05/metaprogramming-javascript.html'&gt;duck punching&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Well, I was just totally sold by Adam, the idea being that if it walks like a duck and talks like a duck, it’s a duck, right? So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect. &amp;#8211; Patrick Ewing&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You&amp;#8217;ve got to just &lt;em&gt;punch&lt;/em&gt; that duck.&lt;/p&gt;
+&lt;h3&gt;Method_missing&lt;/h3&gt;
+&lt;p&gt;This special method gets called any time a method that doesn&amp;#8217;t exist is called. If you implement it you have access to the name and arguments of the method that was called. In the book, Bruce Tate gives an example of using this to create a nice way to specify roman numerals. The result is that you can say &lt;code&gt;roman.X&lt;/code&gt;, &lt;code&gt;roman.III&lt;/code&gt;, &lt;code&gt;roman.CXII&lt;/code&gt;, etc.&lt;/p&gt;
+
+&lt;p&gt;I saw another example of &lt;code&gt;method_missing&lt;/code&gt;&amp;#8217;s power in Chapter 8 of &lt;a href='http://shop.oreilly.com/product/9780596516178.do'&gt;The Ruby Programming Language&lt;/a&gt;, where a simple DSL for generating html is created. This is what it looks like in use:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='n'&gt;pagetitle&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Test Page for XML.generate&amp;quot;&lt;/span&gt;
+&lt;span class='no'&gt;XML&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;generate&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='no'&gt;STDOUT&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+  &lt;span class='n'&gt;html&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+    &lt;span class='n'&gt;head&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+      &lt;span class='n'&gt;title&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='n'&gt;pagetitle&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
+      &lt;span class='n'&gt;comment&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;This is a test&amp;quot;&lt;/span&gt;
+    &lt;span class='k'&gt;end&lt;/span&gt;
+    &lt;span class='n'&gt;body&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+      &lt;span class='n'&gt;h1&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='ss'&gt;:style&lt;/span&gt; &lt;span class='o'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;font-family:sans-serif&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='n'&gt;pagetitle&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
+      &lt;span class='n'&gt;ul&lt;/span&gt; &lt;span class='ss'&gt;:type&lt;/span&gt;&lt;span class='o'&gt;=&amp;gt;&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;square&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+        &lt;span class='n'&gt;li&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='no'&gt;Time&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;now&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
+        &lt;span class='n'&gt;li&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='no'&gt;RUBY_VERSION&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
+      &lt;span class='k'&gt;end&lt;/span&gt;
+    &lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;The implementation is fairly short: they create a basic XML class in only 53 well-commented lines. If you&amp;#8217;re interested, the code examples are available for inspection from &lt;a href='http://www.davidflanagan.com/rpl/'&gt;David Flanagan&amp;#8217;s website&lt;/a&gt;. For convenience, here is a link &lt;a href='/files/RPL_XML.txt'&gt;directly to this snippet of code&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Mixins&lt;/h3&gt;
+&lt;p&gt;Mixins are a way for a class to include code from a module inside itself. Imagine a class including a module with a &lt;code&gt;Meow()&lt;/code&gt; method. This would let you call &lt;code&gt;Meow()&lt;/code&gt; on any instance of that class. Combined with open classes and the ability to add or change methods at runtime, this makes it easy to package and use code that changes code.&lt;/p&gt;
+
+&lt;p&gt;As I understand it, ActiveRecord in Rails is sort of the poster child for how metaprogramming using mixins. It will customize your domain models at runtime with many things, including accessors using the column names from the database. I admit I don&amp;#8217;t know a lot about the details of this area, but there is a whole book dedicated to &lt;a href='http://pragprog.com/book/ppmetr/metaprogramming-ruby'&gt;metaprogramming in Ruby&lt;/a&gt; that I plan on reading someday.&lt;/p&gt;
+
+&lt;h2 id='what_was_missing'&gt;What was missing&lt;/h2&gt;
+
+&lt;p&gt;Surprisingly, an entire category of useful metaprogramming tools are are almost skipped right over in Day 3. There are a lot of great methods to interact with and create methods and classes on the fly, and these are only given a passing mention in one of the examples. Methods like &lt;code&gt;define_method&lt;/code&gt;, &lt;code&gt;alias_method&lt;/code&gt;, the different versions of &lt;code&gt;eval&lt;/code&gt;, or &lt;code&gt;methods.grep&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;With these tools Ruby gives you, without much effort you can do things like: find all methods that have a name like &lt;code&gt;/check.*/&lt;/code&gt;, systematically rename those methods, and replace them with a method that does something (like logging) and THEN execute the method.&lt;/p&gt;
+
+&lt;p&gt;Ola Bini has a great &lt;a href='http://ola-bini.blogspot.com/2006/09/ruby-metaprogramming-techniques.html'&gt;post about metaprogramming in Ruby&lt;/a&gt; that talks about these techniques and more. I recommend it if you have been at all interested this post so far, it is well worth reading.&lt;/p&gt;
+
+&lt;h2 id='highlights_from_exercise'&gt;Highlights from exercise&lt;/h2&gt;
+
+&lt;p&gt;There was not very much to do for the homework questions this week, unfortunately, just one fairly short exercise. This day in particular was one that I think could have used some really cool examples. Metaprogramming has a lot of depth and exciting possibilities, and this chapter could have shown that off more with better exercises.&lt;/p&gt;
+
+&lt;p&gt;Anyway, the exercise for this day shows some basic usage of &lt;code&gt;method_missing&lt;/code&gt;. The existing ActsAsCsv module is given to you to extend, so the most interesting bit of code in the exercise is the definition of &lt;code&gt;method_missing&lt;/code&gt; in CsvRow. It takes the name of the method and attempts to return the rows from the column that has that name.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;method_missing&lt;/span&gt; &lt;span class='nb'&gt;name&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;args&lt;/span&gt;
+    &lt;span class='n'&gt;content_index&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='vi'&gt;@header_row&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;index&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;name&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;to_s&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+    &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='vi'&gt;@content_row&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='n'&gt;content_index&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Here is my full code listing for the exercises from Day 3 of Ruby. The home of this piece of code is with the other exercises &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day3.rb'&gt;on github&lt;/a&gt;.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;#Do:&lt;/span&gt;
+&lt;span class='c1'&gt;# 1. Modify the CSV application to support an each method to return a CsvRow&lt;/span&gt;
+&lt;span class='c1'&gt;# object. Use method_missing on that CsvRow to return the value for the column&lt;/span&gt;
+&lt;span class='c1'&gt;# for a given heading.&lt;/span&gt;
+
+&lt;span class='k'&gt;module&lt;/span&gt; &lt;span class='nn'&gt;ActsAsCsv&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nc'&gt;self&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nf'&gt;included&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;base&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+        &lt;span class='n'&gt;base&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;extend&lt;/span&gt; &lt;span class='no'&gt;ClassMethods&lt;/span&gt;
+    &lt;span class='k'&gt;end&lt;/span&gt;
+
+    &lt;span class='k'&gt;module&lt;/span&gt; &lt;span class='nn'&gt;ClassMethods&lt;/span&gt;
+        &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;acts_as_csv&lt;/span&gt;
+            &lt;span class='kp'&gt;include&lt;/span&gt; &lt;span class='no'&gt;InstanceMethods&lt;/span&gt;
+        &lt;span class='k'&gt;end&lt;/span&gt;
+    &lt;span class='k'&gt;end&lt;/span&gt;
+
+    &lt;span class='k'&gt;module&lt;/span&gt; &lt;span class='nn'&gt;InstanceMethods&lt;/span&gt;
+
+        &lt;span class='kp'&gt;attr_accessor&lt;/span&gt; &lt;span class='ss'&gt;:headers&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='ss'&gt;:csv_rows&lt;/span&gt;
+
+        &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;read&lt;/span&gt;
+            &lt;span class='vi'&gt;@csv_rows&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;[]&lt;/span&gt;
+            &lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;File&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;self&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;class&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;to_s&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;downcase&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;.txt&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+            &lt;span class='vi'&gt;@headers&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;file&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;gets&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;chomp&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;split&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+
+            &lt;span class='n'&gt;file&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;
+                &lt;span class='n'&gt;csv_contents&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;chomp&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;split&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+                &lt;span class='vi'&gt;@csv_rows&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;CsvRow&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='vi'&gt;@headers&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;csv_contents&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+            &lt;span class='k'&gt;end&lt;/span&gt;
+        &lt;span class='k'&gt;end&lt;/span&gt;
+
+        &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;initialize&lt;/span&gt;
+            &lt;span class='n'&gt;read&lt;/span&gt;
+        &lt;span class='k'&gt;end&lt;/span&gt;
+
+        &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;each&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&lt;/span&gt;&lt;span class='n'&gt;block&lt;/span&gt;
+            &lt;span class='vi'&gt;@csv_rows&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&lt;/span&gt;&lt;span class='n'&gt;block&lt;/span&gt;
+        &lt;span class='k'&gt;end&lt;/span&gt;
+
+    &lt;span class='k'&gt;end&lt;/span&gt;
+
+    &lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;CsvRow&lt;/span&gt;
+        &lt;span class='kp'&gt;attr_accessor&lt;/span&gt; &lt;span class='ss'&gt;:header_row&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='ss'&gt;:content_row&lt;/span&gt;
+
+        &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;initialize&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;header_row&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;content_row&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+            &lt;span class='vi'&gt;@header_row&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;header_row&lt;/span&gt;
+            &lt;span class='vi'&gt;@content_row&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;content_row&lt;/span&gt;
+        &lt;span class='k'&gt;end&lt;/span&gt;
+
+        &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;method_missing&lt;/span&gt; &lt;span class='nb'&gt;name&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;args&lt;/span&gt;
+            &lt;span class='n'&gt;content_index&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='vi'&gt;@header_row&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;index&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;name&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;to_s&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+            &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='vi'&gt;@content_row&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='n'&gt;content_index&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+        &lt;span class='k'&gt;end&lt;/span&gt;
+    &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;RubyCsv&lt;/span&gt; 
+    &lt;span class='kp'&gt;include&lt;/span&gt; &lt;span class='no'&gt;ActsAsCsv&lt;/span&gt;
+    &lt;span class='n'&gt;acts_as_csv&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='n'&gt;csv&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;RubyCsv&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;
+&lt;span class='n'&gt;csv&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt; &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;one&lt;/span&gt;&lt;span class='p'&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;And the output (given the sample file in my github repo):&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;lions
+han
+chewbacca
+r2 d2
+anakin skywalker
+leia organa
+threepio
+jawa
+emperor palpatine
+darth sidious
+bail organa
+vader
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Next in this series: Day 1 of Io&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
    <title>Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 2</title>
    <link href="http://nickknowlson.com/blog/2011/12/04/seven-languages-week-1-day-2/"/>
    <updated>2011-12-04T00:00:00-08:00</updated>
    <id>http://nickknowlson.com/blog/2011/12/04/seven-languages-week-1-day-2</id>
-   <content type="html">&lt;p&gt;Day 2 of Ruby covers collections, code blocks, classes and modules. I&amp;#8217;m familiar enough with these already in Ruby, so it was mostly just a refresher. So in this case it will be hard to provide a &amp;#8216;learning the language&amp;#8217; perspective. Instead I will try to highlight a few of the parts of Ruby in this chapter that I particularly like.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Day 2 of Ruby covers collections, code blocks, classes and modules. I&amp;#8217;m familiar enough with these already in Ruby so in this case it will be hard to provide a &amp;#8216;learning the language&amp;#8217; perspective. Instead I will try to highlight a few of the parts of Ruby in this chapter that I particularly like.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
 (This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/11/27/seven-languages-week-1-day-1/'&gt;Week 1 (Ruby) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
@@ -24,7 +178,7 @@
 
 &lt;p&gt;Ruby&amp;#8217;s arrays and hashes are very multipurpose: hashes are frequently used to give a method named parameters; and arrays have built in methods so that they can be used as queues, stacks, sets, and matrices.&lt;/p&gt;
 
-&lt;p&gt;Its syntax is consistent and pretty. Arrays are very rich, you can do ranges (&lt;code&gt;[1..10]&lt;/code&gt;), negative indexes (&lt;code&gt;&amp;quot;string&amp;quot;[1..-2]&lt;/code&gt;), and there are convenience methods for operations like push, pop, transpose, and set intersection. You have the standard high order functions equivalents (map, filter, fold/reduce).&lt;/p&gt;
+&lt;p&gt;Its syntax is consistent and pretty. Arrays are very rich, you can do ranges (&lt;code&gt;[1..10]&lt;/code&gt;), negative indexes (&lt;code&gt;&amp;quot;string&amp;quot;[1..-2]&lt;/code&gt;), and there are convenience methods for operations like push, pop, transpose, and set intersection. You have the three basic list manipulating higher order function equivalents: map, filter, reduce (fold).&lt;/p&gt;
 
 &lt;p&gt;There are many useful methods you can call right off of number literals. One common example is &lt;code&gt;times&lt;/code&gt;, which takes a code block as a parameter and executes it. This can sometimes be a nice way to express a loop: &lt;code&gt;4.times { puts &amp;quot;testing&amp;quot; }&lt;/code&gt; or &lt;code&gt;4.times { |i| puts i }&lt;/code&gt;.&lt;/p&gt;
 
@@ -251,7 +405,9 @@ and
 48: Nightfall, bass guitar has been played by sessional member Oliver Holzwarth,
 55: orchestral backing and a consistent vocal and guitar layering throughout.[9]
 87: Blind Guardian&amp;#39;s music features the staccato guitars and double bass drumming
-90: the guitar and vocal tracks, creates the impression of a vast army of musicians&lt;/code&gt;&lt;/pre&gt;</content>
+90: the guitar and vocal tracks, creates the impression of a vast army of musicians&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next in this series: &lt;a href='/blog/2011/12/15/seven-languages-week-1-day-2/'&gt;Day 3 of Ruby&lt;/a&gt;.&lt;/p&gt;</content>
  </entry>
  
  <entry>
@@ -387,7 +543,7 @@ Got it! It was 129
 
 &lt;p&gt;Here&amp;#8217;s an overview of roughly how many people thought there was a problem in each category:&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt='Weaknesses from State of Haskell Bar Graph' src='/img/state_of_haskell_2011_weakness.png' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src='/img/state_of_haskell_2011_weakness.png' alt='Weaknesses from State of Haskell Bar Graph' /&gt;&lt;/p&gt;
 
 &lt;p&gt;It is probably important to note that I didn&amp;#8217;t attempt to verify the accuracy of any of the claims, so this graph represents the public &lt;strong&gt;perception&lt;/strong&gt; of where the problems are, not necessarily where the problems actually are. It is still very important information though, and likely does match up very closely with where the problems are.&lt;/p&gt;
 &lt;h3&gt;Libraries, Documentation, Hackage and Cabal&lt;/h3&gt;
