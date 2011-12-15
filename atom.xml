@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2011-12-15T02:11:45-08:00</updated>
+ <updated>2011-12-15T02:21:33-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -55,7 +55,7 @@
 &lt;span class='k'&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;The implementation is fairly short: they create a basic XML class in only 53 well-commented lines. If you&amp;#8217;re interested, the code examples are available for inspection from &lt;a href='http://www.davidflanagan.com/rpl/'&gt;David Flanagan&amp;#8217;s website&lt;/a&gt;. For convenience, here is a link &lt;a href='/files/RPL_XML.txt'&gt;directly to this snippet of code&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The implementation is fairly short: they create a basic XML class in only 53 well-commented lines. If you&amp;#8217;re interested, the code examples are available for inspection from &lt;a href='http://www.davidflanagan.com/rpl/'&gt;David Flanagan&amp;#8217;s website&lt;/a&gt;. For convenience, here is a link &lt;a href='/RPL_XML.txt'&gt;directly to this snippet of code&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;Mixins&lt;/h3&gt;
 &lt;p&gt;Mixins are a way for a class to include code from a module inside itself. Imagine a class including a module with a &lt;code&gt;Meow()&lt;/code&gt; method. This would let you call &lt;code&gt;Meow()&lt;/code&gt; on any instance of that class. Combined with open classes and the ability to add or change methods at runtime, this makes it easy to package and use code that changes code.&lt;/p&gt;
 
