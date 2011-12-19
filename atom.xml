@@ -4,12 +4,134 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2011-12-15T07:56:48-08:00</updated>
+ <updated>2011-12-19T01:22:41-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Seven Languages In Seven Weeks: Week 2 (Io) - Day 1</title>
+   <link href="http://nickknowlson.com/blog/2011/12/18/seven-languages-week-2-day-1/"/>
+   <updated>2011-12-18T00:00:00-08:00</updated>
+   <id>http://nickknowlson.com/blog/2011/12/18/seven-languages-week-2-day-1</id>
+   <content type="html">&lt;p&gt;Day 1 of Io is the first of many chapters that will give me that &amp;#8216;new at programming&amp;#8217; feeling again, where I fumble just trying to build a valid expression that does what I want it to. I actually like that feeling; it means I am learning something new and a web of structures is forming in my mind. I like it &lt;em&gt;almost&lt;/em&gt; as much as finally making that first deep connection from a group of new concepts to some of your existing ones, and starting to grasp the parallels. Fortunately for me, that is what this book is all about!&lt;/p&gt;
+&lt;div class='interjection'&gt;&lt;p&gt;
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/15/seven-languages-week-1-day-3/'&gt;Week 1 (Ruby) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+&lt;/p&gt;&lt;/div&gt;
+&lt;h2 id='how_io_feels'&gt;How Io feels&lt;/h2&gt;
+
+&lt;p&gt;Syntactically, Io is a very very lightweight language, evocative of lisps in its regularity and minimalism. It provides a nice contrast with the previous chapter on Ruby. Ruby&amp;#8217;s definition of simple code is something like &amp;#8220;The more an expression reads like a (succinct) explanation of its intent, the better&amp;#8221; whereas Io&amp;#8217;s definition of simple code is something like &amp;#8220;The less extraneous syntax that is needed to represent an expression, the better&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;Because of this approach, Io lends itself very well to metaprogramming &amp;#8211; at least as well as Ruby does, possibly better. It does not have as the wide and varied set of built-in metaprogramming tools that Ruby does, but it also needs far fewer due to the way the language is constructed. Io is a &lt;a href='http://en.wikipedia.org/wiki/Prototype-based_programming'&gt;prototype-based&lt;/a&gt; language, the first of the less familiar programming paradigms in this book. I won&amp;#8217;t go into depth about this here except to note that Javascript is prototype-based as well, so learning Io could be very beneficial to anyone that does a fair amount of programming Javascript.&lt;/p&gt;
+
+&lt;h2 id='highlights_from_exercises'&gt;Highlights from exercises&lt;/h2&gt;
+
+&lt;p&gt;The homework this week is short but well-constructed. It points out a couple of things that are important to remember for a newbie to Io. In particular, you will need &lt;code&gt;slotNames&lt;/code&gt; a lot, so remember that one!&lt;/p&gt;
+
+&lt;p&gt;Here is my full code listing for the exercises from Day 1 of Io. The home of this piece of code is with the other exercises &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day1.io'&gt;on github&lt;/a&gt;.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='c1'&gt;# Find:&lt;/span&gt;
+&lt;span class='c1'&gt;#   Some Io example problems&lt;/span&gt;
+&lt;span class='c1'&gt;#       http://www.iolanguage.com/about/samplecode/&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;#   An Io community that will answer questions&lt;/span&gt;
+&lt;span class='c1'&gt;#       http://tech.groups.yahoo.com/group/iolanguage/messages&lt;/span&gt;
+&lt;span class='c1'&gt;#       http://stackoverflow.com/questions/tagged/iolanguage&lt;/span&gt;
+&lt;span class='c1'&gt;#       #io on freenode&lt;/span&gt;
+&lt;span class='c1'&gt;#       http://www.reddit.com/r/iolanguage&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;#   A style guide with Io idioms&lt;/span&gt;
+&lt;span class='c1'&gt;#       http://en.wikibooks.org/wiki/Io_Programming/Io_Style_Guide&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# Answer:&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# 1. Evaluate 1 + 1 and then 1 + &amp;quot;one&amp;quot;. Is Io strongly typed or weakly typed?&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;#   Strongly typed. Trying to run `1 + &amp;quot;one&amp;quot;` throws an exception that says:&lt;/span&gt;
+&lt;span class='c1'&gt;#       &amp;quot;Exception: argument 0 to method &amp;#39;+&amp;#39; must be a Number, not a &amp;#39;Sequence&amp;#39;&amp;quot;&lt;/span&gt;
+&lt;span class='c1'&gt;#   &lt;/span&gt;
+&lt;span class='c1'&gt;# 2. Is 0 true or false? What about the empty string? Is nil true or false?&lt;/span&gt;
+
+&lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;   &lt;span class='c1'&gt;# true&lt;/span&gt;
+&lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;  &lt;span class='c1'&gt;# true&lt;/span&gt;
+&lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='no'&gt;nil&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt; &lt;span class='c1'&gt;# false&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 3. How can you tell what slots a prototype supports?&lt;/span&gt;
+&lt;span class='c1'&gt;# &amp;lt;prototype&amp;gt; slotNames&lt;/span&gt;
+
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;sixPool&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Zergling rush!&amp;quot;&lt;/span&gt;
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;slotNames&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;  &lt;span class='c1'&gt;# will print list(type, sixPool)&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 4. What is the difference between = (equals), := (colon equals), and ::=&lt;/span&gt;
+&lt;span class='c1'&gt;# (colon colon equals)? When would you use each one?&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# =     is used to assign something to an existing slot&lt;/span&gt;
+&lt;span class='c1'&gt;# :=    is used to assign something to a previously non-existent slot&lt;/span&gt;
+&lt;span class='c1'&gt;# ::=   is used to assign something to a previously non-existent slot as well as&lt;/span&gt;
+&lt;span class='c1'&gt;#       create a setter for that slot&lt;/span&gt;
+&lt;span class='c1'&gt;#   &lt;/span&gt;
+&lt;span class='c1'&gt;#   iolanguage.com&amp;#39;s guide puts this much much better than I did:&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# ::= 	Creates slot, creates setter, assigns value&lt;/span&gt;
+&lt;span class='c1'&gt;# := 	Creates slot, assigns value&lt;/span&gt;
+&lt;span class='c1'&gt;# = 	Assigns value to slot if it exists, otherwise raises exception &lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# Do:&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# 1. Run an Io program from a file.&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# From the command line run: io day1.io&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;successfully ran day1&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 2.Execute the code in a slot given its name.&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# I&amp;#39;m not quite sure I understood this question. I&amp;#39;ll answer the two&lt;/span&gt;
+&lt;span class='c1'&gt;# interpretations I could come up with.&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# If the code in a slot is stored as a method then just invoking the slot is&lt;/span&gt;
+&lt;span class='c1'&gt;# enough:&lt;/span&gt;
+
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;macroItUp&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Injecting larvae now!&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;macroItUp&lt;/span&gt; &lt;span class='c1'&gt;# Will print &amp;quot;Injecting larvae now!&amp;quot;&lt;/span&gt;
+
+&lt;span class='c1'&gt;# If the code in a slot is stored as a string then you should use something like&lt;/span&gt;
+&lt;span class='c1'&gt;# doString:&lt;/span&gt;
+
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;macroHarderSteps&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;\&amp;quot;Spreading creep now!\&amp;quot; println&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;macroHarder&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='k'&gt;doString&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;macroHarderSteps&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;macroHarder&lt;/span&gt;
+
+&lt;span class='c1'&gt;# Update: Re-reading this now the intent of the question seems obvious! Write a&lt;/span&gt;
+&lt;span class='c1'&gt;# method that, given a method name, will try to execute that method.&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;\nLet&amp;#39;s try that again&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;specifyMacro&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;perform&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;specifyMacro&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;macroItUp&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;specifyMacro&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;macroHarder&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;Done!&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;And the output:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;&lt;span class='nv'&gt;$ &lt;/span&gt;io day1.io
+&lt;span class='nb'&gt;true&lt;/span&gt;
+&lt;span class='nb'&gt;true&lt;/span&gt;
+&lt;span class='nb'&gt;false&lt;/span&gt;
+list&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;type&lt;/span&gt;, sixPool&lt;span class='o'&gt;)&lt;/span&gt;
+successfully ran day1
+Injecting larvae now!
+Spreading creep now!
+
+Let&lt;span class='err'&gt;&amp;#39;&lt;/span&gt;s try that again
+Injecting larvae now!
+Spreading creep now!
+Done!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content>
+ </entry>
  
  <entry>
    <title>Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 3</title>
@@ -148,7 +270,8 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;And the output (given the sample file in my github repo):&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;lions
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;&lt;span class='nv'&gt;$ &lt;/span&gt;ruby day3.rb
+lions
 han
 chewbacca
 r2 d2
@@ -162,7 +285,7 @@ bail organa
 vader
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;Next in this series: Day 1 of Io&lt;/p&gt;</content>
+&lt;p&gt;Next in this series: &lt;a href='/blog/2011/12/18/seven-languages-week-2-day-1/'&gt;Day 1 of Io&lt;/a&gt;&lt;/p&gt;</content>
  </entry>
  
  <entry>

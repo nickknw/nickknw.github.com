@@ -2,86 +2,90 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://nickknowlson.com/blog/2008/12/16/vim-as-an-ide/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/blog/2009/01/14/haskell-for-great-good/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/blog/2009/02/05/command-line-file-transfer/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/blog/2011/07/23/hello-world/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/blog/2011/09/12/haskell-survey-categorized-weaknesses/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/blog/2011/11/27/seven-languages-week-1-day-1/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/blog/2011/12/04/seven-languages-week-1-day-2/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/blog/2011/12/15/seven-languages-week-1-day-3/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-19T00:37:04-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://nickknowlson.com/blog/2011/12/18/seven-languages-week-2-day-1/</loc>
+        <lastmod>2011-12-19T01:20:50-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/404.html</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/about/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/blog/archive/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/blog/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/contact/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/projects/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/projects/proofreading-scripts/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/projects/seven-languages-in-seven-weeks/</loc>
-        <lastmod>2011-12-15T07:56:00-08:00</lastmod>
+        <lastmod>2011-12-19T00:56:19-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/projects/vbnet-signature-survey/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/projects/word_frequency/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/projects/craigslist-highlighter/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
     <url>
         <loc>http://nickknowlson.com/projects/robot-controller-simulator/</loc>
-        <lastmod>2011-12-15T07:55:32-08:00</lastmod>
+        <lastmod>2011-12-15T12:20:09-08:00</lastmod>
     </url>
 </urlset>

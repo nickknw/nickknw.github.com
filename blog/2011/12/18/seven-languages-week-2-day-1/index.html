@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="">
+
+        <title>Seven Languages In Seven Weeks: Week 2 (Io) - Day 1 | Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/inuit.css" >
+        <link rel="stylesheet" type="text/css" href="/css/style.css" >
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="/favicon.ico" >
+        <link href="http://feeds.feedburner.com/NickKnowlson" type="application/atom+xml" rel="alternate" title="Blog ATOM Feed" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+
+        
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-24781362-1']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logos/logo6.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="" href="/projects/">Projects</a></li>
+                <li><a class="selected" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <a href="/blog/archive/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Seven Languages In Seven Weeks: Week 2 (Io) - Day 1</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">18 Dec 2011</div>
+<div id="post">
+<p>Day 1 of Io is the first of many chapters that will give me that &#8216;new at programming&#8217; feeling again, where I fumble just trying to build a valid expression that does what I want it to. I actually like that feeling; it means I am learning something new and a web of structures is forming in my mind. I like it <em>almost</em> as much as finally making that first deep connection from a group of new concepts to some of your existing ones, and starting to grasp the parallels. Fortunately for me, that is what this book is all about!</p>
+<div class='interjection'><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2011/12/15/seven-languages-week-1-day-3/'>Week 1 (Ruby) - Day 3</a>. For an overview see the <a href='/projects/seven-languages-in-seven-weeks/'>project page</a>.)
+</p></div>
+<h2 id='how_io_feels'>How Io feels</h2>
+
+<p>Syntactically, Io is a very very lightweight language, evocative of lisps in its regularity and minimalism. It provides a nice contrast with the previous chapter on Ruby. Ruby&#8217;s definition of simple code is something like &#8220;The more an expression reads like a (succinct) explanation of its intent, the better&#8221; whereas Io&#8217;s definition of simple code is something like &#8220;The less extraneous syntax that is needed to represent an expression, the better&#8221;.</p>
+
+<p>Because of this approach, Io lends itself very well to metaprogramming &#8211; at least as well as Ruby does, possibly better. It does not have as the wide and varied set of built-in metaprogramming tools that Ruby does, but it also needs far fewer due to the way the language is constructed. Io is a <a href='http://en.wikipedia.org/wiki/Prototype-based_programming'>prototype-based</a> language, the first of the less familiar programming paradigms in this book. I won&#8217;t go into depth about this here except to note that Javascript is prototype-based as well, so learning Io could be very beneficial to anyone that does a fair amount of programming Javascript.</p>
+
+<h2 id='highlights_from_exercises'>Highlights from exercises</h2>
+
+<p>The homework this week is short but well-constructed. It points out a couple of things that are important to remember for a newbie to Io. In particular, you will need <code>slotNames</code> a lot, so remember that one!</p>
+
+<p>Here is my full code listing for the exercises from Day 1 of Io. The home of this piece of code is with the other exercises <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day1.io'>on github</a>.</p>
+<div class='highlight'><pre><code class='io'><span class='c1'># Find:</span>
+<span class='c1'>#   Some Io example problems</span>
+<span class='c1'>#       http://www.iolanguage.com/about/samplecode/</span>
+<span class='c1'>#</span>
+<span class='c1'>#   An Io community that will answer questions</span>
+<span class='c1'>#       http://tech.groups.yahoo.com/group/iolanguage/messages</span>
+<span class='c1'>#       http://stackoverflow.com/questions/tagged/iolanguage</span>
+<span class='c1'>#       #io on freenode</span>
+<span class='c1'>#       http://www.reddit.com/r/iolanguage</span>
+<span class='c1'>#</span>
+<span class='c1'>#   A style guide with Io idioms</span>
+<span class='c1'>#       http://en.wikibooks.org/wiki/Io_Programming/Io_Style_Guide</span>
+<span class='c1'>#</span>
+<span class='c1'># Answer:</span>
+<span class='c1'>#</span>
+<span class='c1'># 1. Evaluate 1 + 1 and then 1 + &quot;one&quot;. Is Io strongly typed or weakly typed?</span>
+<span class='c1'>#</span>
+<span class='c1'>#   Strongly typed. Trying to run `1 + &quot;one&quot;` throws an exception that says:</span>
+<span class='c1'>#       &quot;Exception: argument 0 to method &#39;+&#39; must be a Number, not a &#39;Sequence&#39;&quot;</span>
+<span class='c1'>#   </span>
+<span class='c1'># 2. Is 0 true or false? What about the empty string? Is nil true or false?</span>
+
+<span class='k'>if</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>)</span> <span class='n'>println</span>   <span class='c1'># true</span>
+<span class='k'>if</span><span class='o'>(</span><span class='s'>&quot;&quot;</span><span class='o'>)</span> <span class='n'>println</span>  <span class='c1'># true</span>
+<span class='k'>if</span><span class='o'>(</span><span class='no'>nil</span><span class='o'>)</span> <span class='n'>println</span> <span class='c1'># false</span>
+
+<span class='c1'># 3. How can you tell what slots a prototype supports?</span>
+<span class='c1'># &lt;prototype&gt; slotNames</span>
+
+<span class='n'>Zerg</span> <span class='o'>:=</span> <span class='n'>Object</span> <span class='k'>clone</span>
+<span class='n'>Zerg</span> <span class='n'>sixPool</span> <span class='o'>:=</span> <span class='s'>&quot;Zergling rush!&quot;</span>
+<span class='n'>Zerg</span> <span class='n'>slotNames</span> <span class='n'>println</span>  <span class='c1'># will print list(type, sixPool)</span>
+
+<span class='c1'># 4. What is the difference between = (equals), := (colon equals), and ::=</span>
+<span class='c1'># (colon colon equals)? When would you use each one?</span>
+<span class='c1'>#</span>
+<span class='c1'># =     is used to assign something to an existing slot</span>
+<span class='c1'># :=    is used to assign something to a previously non-existent slot</span>
+<span class='c1'># ::=   is used to assign something to a previously non-existent slot as well as</span>
+<span class='c1'>#       create a setter for that slot</span>
+<span class='c1'>#   </span>
+<span class='c1'>#   iolanguage.com&#39;s guide puts this much much better than I did:</span>
+<span class='c1'>#</span>
+<span class='c1'># ::= 	Creates slot, creates setter, assigns value</span>
+<span class='c1'># := 	Creates slot, assigns value</span>
+<span class='c1'># = 	Assigns value to slot if it exists, otherwise raises exception </span>
+<span class='c1'>#</span>
+<span class='c1'>#</span>
+<span class='c1'># Do:</span>
+<span class='c1'>#</span>
+<span class='c1'># 1. Run an Io program from a file.</span>
+<span class='c1'>#</span>
+<span class='c1'># From the command line run: io day1.io</span>
+<span class='c1'>#</span>
+
+<span class='s'>&quot;successfully ran day1&quot;</span> <span class='n'>println</span>
+
+<span class='c1'># 2.Execute the code in a slot given its name.</span>
+<span class='c1'>#</span>
+<span class='c1'># I&#39;m not quite sure I understood this question. I&#39;ll answer the two</span>
+<span class='c1'># interpretations I could come up with.</span>
+<span class='c1'>#</span>
+<span class='c1'># If the code in a slot is stored as a method then just invoking the slot is</span>
+<span class='c1'># enough:</span>
+
+<span class='n'>Zerg</span> <span class='n'>macroItUp</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='s'>&quot;Injecting larvae now!&quot;</span> <span class='n'>println</span><span class='o'>)</span>
+<span class='n'>Zerg</span> <span class='n'>macroItUp</span> <span class='c1'># Will print &quot;Injecting larvae now!&quot;</span>
+
+<span class='c1'># If the code in a slot is stored as a string then you should use something like</span>
+<span class='c1'># doString:</span>
+
+<span class='n'>Zerg</span> <span class='n'>macroHarderSteps</span> <span class='o'>:=</span> <span class='o'>(</span><span class='s'>&quot;\&quot;Spreading creep now!\&quot; println&quot;</span><span class='o'>)</span>
+<span class='n'>Zerg</span> <span class='n'>macroHarder</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='k'>doString</span><span class='o'>(</span><span class='n'>Zerg</span> <span class='n'>macroHarderSteps</span><span class='o'>))</span>
+<span class='n'>Zerg</span> <span class='n'>macroHarder</span>
+
+<span class='c1'># Update: Re-reading this now the intent of the question seems obvious! Write a</span>
+<span class='c1'># method that, given a method name, will try to execute that method.</span>
+<span class='s'>&quot;\nLet&#39;s try that again&quot;</span> <span class='n'>println</span>
+<span class='n'>Zerg</span> <span class='n'>specifyMacro</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>name</span><span class='o'>,</span> <span class='n'>perform</span><span class='o'>(</span><span class='n'>name</span><span class='o'>))</span>
+<span class='n'>Zerg</span> <span class='n'>specifyMacro</span><span class='o'>(</span><span class='s'>&quot;macroItUp&quot;</span><span class='o'>)</span>
+<span class='n'>Zerg</span> <span class='n'>specifyMacro</span><span class='o'>(</span><span class='s'>&quot;macroHarder&quot;</span><span class='o'>)</span>
+<span class='s'>&quot;Done!&quot;</span> <span class='n'>println</span>
+</code></pre>
+</div>
+<p>And the output:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>io day1.io
+<span class='nb'>true</span>
+<span class='nb'>true</span>
+<span class='nb'>false</span>
+list<span class='o'>(</span><span class='nb'>type</span>, sixPool<span class='o'>)</span>
+successfully ran day1
+Injecting larvae now!
+Spreading creep now!
+
+Let<span class='err'>&#39;</span>s try that again
+Injecting larvae now!
+Spreading creep now!
+Done!
+</code></pre>
+</div>
+</div>
+
+
+<div id="socialbuttons">
+<div>
+    <div id="rss_button"><a href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/feed-icon-28x28.png">&nbsp;</a></div>
+    <!-- G+ -->
+    <div id="google_plus_button"><g:plusone></g:plusone>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script></div>
+
+    <!-- Twitter -->
+    <div id="twitter_button"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="nickknw">Tweet</a>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+
+    <!-- Reddit -->
+    <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
+
+    <!-- Facebook -->
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2011/12/18/seven-languages-week-2-day-1/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+
+</div>
+</div>
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>15 Dec 2011</span> &raquo; <a href="/blog/2011/12/15/seven-languages-week-1-day-3/">Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 3</a></li>
+    
+      <li><span>04 Dec 2011</span> &raquo; <a href="/blog/2011/12/04/seven-languages-week-1-day-2/">Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 2</a></li>
+    
+      <li><span>27 Nov 2011</span> &raquo; <a href="/blog/2011/11/27/seven-languages-week-1-day-1/">Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 1</a></li>
+    
+  </ul>
+</div>
+
+<hr class="fancyrule" />
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
+
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    var disqus_identifier = '/blog/2011/12/18/seven-languages-week-2-day-1';
+    var disqus_url = 'http://nickknowlson.com//blog/2011/12/18/seven-languages-week-2-day-1/';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+        </div>
+        <div id="footer">&copy; Copyright 2011 Nick Knowlson</div>
+        <div style="display: none;">Content by Nick Knowlson: <a href="https://plus.google.com/111820015518413982003?rel=author">Google+</a></div>
+        <!--  " - 2011" -->
+    </body>
+</html>
