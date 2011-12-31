@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="">
+
+        <title>Transposing a matrix in Io | Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/inuit.css" >
+        <link rel="stylesheet" type="text/css" href="/css/style.css" >
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="/favicon.ico" >
+        <link href="http://feeds.feedburner.com/NickKnowlson" type="application/atom+xml" rel="alternate" title="Blog ATOM Feed" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+
+        
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-24781362-1']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logos/logo6.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="" href="/projects/">Projects</a></li>
+                <li><a class="selected" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <a href="/blog/archive/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Transposing a matrix in Io</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">30 Dec 2011</div>
+<div id="post">
+<p>While doing the exercises from Seven Languages In Seven Weeks, I came up with a neat solution to transposing a matrix that was encouraged by Io&#8217;s flexibility and free-wheeling nature. Instead of creating a new transposed matrix or attempting a complicated in-place transpose, I did something that executes in O(1), uses a negligible amount of memory, and is very short and simple.</p>
+
+<p>What? How is it possible to transpose a matrix of 1,000,000 elements in the same time it takes to transpose a matrix of 4?</p>
+
+<p>By cheating! I <strong>don&#8217;t</strong> transpose the matrix, I modify the element accessor methods so that they interpret the <code>x</code> parameter as <code>y</code>, and vice versa. To my dismay, I later found that <a href='http://en.wikipedia.org/wiki/Transpose#Implementation_of_matrix_transposition_on_computers'>this isn&#8217;t a new approach</a> to solving this problem.</p>
+
+<p>My implementation in Io still has something going for it, however. Because of Io&#8217;s extreme malleability, I can write my <code>transpose</code> method such that calling it permanently swaps the argument order in the <code>get</code> and <code>set</code> methods of that individual matrix object. In most other languages <a href='#footnote-1' class='super' id='footnote-1-link'>[1]</a> , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &#8216;transposed&#8217; or not. Which is, conceptually, nonsense. Transposing is something you <em>do to</em> matrices, not a <em>property</em> of them.</p>
+
+<p>Io lets you write this in a way that is fun, short, and elegant.</p>
+
+<h2 id='the_solution'>The Solution</h2>
+
+<p>Here is the problem statement from the book:</p>
+
+<blockquote>
+<p>Write a transpose method so that (new_matrix get(y, x)) == matrix get(x,y) on the original list</p>
+</blockquote>
+
+<p>Before we get started, this is what the final solution looks like. Try and become a little familiar with this before we move on.</p>
+<div class='highlight'><pre><code class='io'><span class='n'>flipFirstTwoArgs</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>,</span>
+    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
+        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
+        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
+        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
+    <span class='o'>)</span> <span class='n'>flatten</span><span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='n'>List2D</span> <span class='n'>transpose</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>self</span> <span class='n'>get</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span>
+    <span class='n'>self</span> <span class='n'>set</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;set&quot;</span><span class='o'>)</span>
+<span class='o'>)</span>
+</code></pre>
+</div>
+<p>List2D is a simple matrix prototype from the previous exercise. It is the thing that is being transposed.</p>
+
+<p>The <code>transpose</code> method itself is simple enough: most of the heavy lifting is done in a helper method I created, <code>flipFirstTwoArgs</code>. From its name and the name of its argument, we can tell this method is saying: &#8220;give me the name of a slot that holds a method and I will flip the first two arguments of that method&#8221;.</p>
+
+<p>Okay. So, how?</p>
+
+<h2 id='the_explanation'>The Explanation</h2>
+
+<p>The following line of code gets the method we are going to modify and sets the names of its arguments.</p>
+
+<p><strong>Line 1:</strong></p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> 
+        <span class='c1'>#list of argument names goes here </span>
+    <span class='o'>)</span>
+</code></pre>
+</div>
+<p>For a concrete example, if I just wanted to change the argument names for my &#8220;get&#8221; method from get(x, y) to get(y, x) I could hardcode in some values and call it like this:</p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span><span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;y&quot;</span><span class='o'>,</span> <span class='s'>&quot;x&quot;</span><span class='o'>))</span>
+</code></pre>
+</div>
+<p>But that wouldn&#8217;t quite be fancy enough. I&#8217;d rather write a method that would let me swap the first two arguments of <strong>any</strong> method. So, going back to the snippet above, that&#8217;s what the next two lines do:</p>
+
+<p><strong>Lines 2-3:</strong></p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
+    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
+</code></pre>
+</div>
+<p>If I wanted to keep the arguments in the same order I would have put the 0 in the first line, then the 1 in the second line. Make sense so far?</p>
+
+<p>I could have left it here, but then what would happen if I told it to change a method that looked like <code>doSomething(x, y, z)</code>? The z would get discarded and that method wouldn&#8217;t be very useful anymore. Hence the next line:</p>
+
+<p><strong>Line 4:</strong></p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
+</code></pre>
+</div>
+<p><code>rest</code> is Io&#8217;s version of <code>cdr</code> or <code>tail</code>. It is a method that returns everything except for the first element of a list. So if you call <code>rest</code> on the result of <code>rest</code> you get a list that has all its elements except for the first two. It is like saying <code>drop 2</code> in Haskell.</p>
+
+<p>Let&#8217;s recap. If I had called flipFirstTwoArgs with my fictitious <code>doSomething(x, y, z)</code> method, these previous lines would resolve into:</p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;doSomething&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
+        <span class='s'>&quot;y&quot;</span><span class='o'>,</span> 
+        <span class='s'>&quot;x&quot;</span><span class='o'>,</span> 
+        <span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;z&quot;</span><span class='o'>)</span>
+    <span class='o'>)</span> <span class='o'>)</span>
+</code></pre>
+</div>
+<p>That&#8217;s not quite right, <code>setArgumentNames</code> is expecting a simple flat list, none of this nested list stuff. So let&#8217;s flatten the list of argument names before giving it to <code>setArgumentNames</code>.</p>
+
+<p><strong>Line 5:</strong></p>
+<div class='highlight'><pre><code class='io'>    <span class='o'>)</span> <span class='n'>flatten</span> <span class='o'>)</span>
+</code></pre>
+</div>
+<p>If we apply it to the <code>doSomething</code> example, the code now looks like this:</p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;doSomething&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
+        <span class='s'>&quot;y&quot;</span><span class='o'>,</span> 
+        <span class='s'>&quot;x&quot;</span><span class='o'>,</span> 
+        <span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;z&quot;</span><span class='o'>)</span>
+    <span class='o'>)</span> <span class='n'>flatten</span> <span class='o'>)</span> 
+</code></pre>
+</div>
+<p>Which would end up resolving into:</p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;doSomething&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;y&quot;</span><span class='o'>,</span> <span class='s'>&quot;x&quot;</span><span class='o'>,</span> <span class='s'>&quot;z&quot;</span><span class='o'>)</span> <span class='o'>)</span>
+</code></pre>
+</div>
+<p>There, much better. And that explains the last line!</p>
+
+<h2 id='wrapup'>Wrap-up</h2>
+
+<p>Now, putting back together all the lines I&#8217;ve explained, here is the body of the <code>flipFirstTwoArgs</code> method again:</p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
+        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
+        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
+        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
+    <span class='o'>)</span> <span class='n'>flatten</span><span class='o'>)</span>
+</code></pre>
+</div>
+<p>If I&#8217;ve done my job right, it should make a lot more sense this time.</p>
+
+<p>You can find the rest of the code (including the List2D prototype) on github - a good place to start is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io#L72'>line 72 of day2.io</a>. To read more I&#8217;ve written about solving these exercises, check my <a href='/projects/seven-languages-in-seven-weeks/'>project page for Seven Languages in Seven Weeks</a>.</p>
+<h3>Footnotes</h3><ol><li>There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. <a href='#footnote-1-link' id='footnote-1'>↩</a></li></ol>
+</div>
+
+
+<div id="socialbuttons">
+<div>
+    <div id="rss_button"><a href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/feed-icon-28x28.png">&nbsp;</a></div>
+    <!-- G+ -->
+    <div id="google_plus_button"><g:plusone></g:plusone>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script></div>
+
+    <!-- Twitter -->
+    <div id="twitter_button"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="nickknw">Tweet</a>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+
+    <!-- Reddit -->
+    <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
+
+    <!-- Facebook -->
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2011/12/30/transposing-a-matrix-in-io/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+
+</div>
+</div>
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>01 Jan 2012</span> &raquo; <a href="/blog/2012/01/01/seven-languages-week-2-day-2/">Seven Languages In Seven Weeks: Week 2 (Io) - Day 2</a></li>
+    
+      <li><span>18 Dec 2011</span> &raquo; <a href="/blog/2011/12/18/seven-languages-week-2-day-1/">Seven Languages In Seven Weeks: Week 2 (Io) - Day 1</a></li>
+    
+      <li><span>15 Dec 2011</span> &raquo; <a href="/blog/2011/12/15/seven-languages-week-1-day-3/">Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 3</a></li>
+    
+  </ul>
+</div>
+
+<hr class="fancyrule" />
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
+
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    var disqus_identifier = '/blog/2011/12/30/transposing-a-matrix-in-io';
+    var disqus_url = 'http://nickknowlson.com//blog/2011/12/30/transposing-a-matrix-in-io/';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+        </div>
+        <div id="footer">&copy; Copyright 2011 Nick Knowlson</div>
+        <div style="display: none;">Content by Nick Knowlson: <a href="https://plus.google.com/111820015518413982003?rel=author">Google+</a></div>
+        <!--  " - 2011" -->
+    </body>
+</html>

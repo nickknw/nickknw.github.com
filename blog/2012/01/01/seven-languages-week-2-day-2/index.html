@@ -1,0 +1,404 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="">
+
+        <title>Seven Languages In Seven Weeks: Week 2 (Io) - Day 2 | Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/inuit.css" >
+        <link rel="stylesheet" type="text/css" href="/css/style.css" >
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="/favicon.ico" >
+        <link href="http://feeds.feedburner.com/NickKnowlson" type="application/atom+xml" rel="alternate" title="Blog ATOM Feed" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+
+        
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-24781362-1']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logos/logo6.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="" href="/projects/">Projects</a></li>
+                <li><a class="selected" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <a href="/blog/archive/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Seven Languages In Seven Weeks: Week 2 (Io) - Day 2</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">01 Jan 2012</div>
+<div id="post">
+<p>IN PROGRESS</p>
+
+<ul>
+<li>introduction to day 2</li>
+</ul>
+<div class='interjection'><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2011/12/15/seven-languages-week-1-day-3/'>Week 1 (Ruby) - Day 3</a>. For an overview see the <a href='/projects/seven-languages-in-seven-weeks/'>project page</a>.)
+</p></div>
+<ul>
+<li>
+<p>more details about content from day 2</p>
+</li>
+
+<li>
+<p>highlights from exercises</p>
+</li>
+</ul>
+<div class='highlight'><pre><code class='io'><span class='c1'># Do:</span>
+<span class='c1'>#</span>
+<span class='c1'># 1. Write a program to find the nth Fibonacci number. Fib(1) is 1, and fib(4)</span>
+<span class='c1'># is 3. As a bonus, solve the problem with recursion and with loops.</span>
+
+<span class='n'>fib_recur</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>num</span><span class='o'>,</span>
+    <span class='k'>if</span><span class='o'>(</span><span class='n'>num</span> <span class='o'>&lt;=</span> <span class='mf'>1</span><span class='o'>,</span> <span class='n'>num</span><span class='o'>,</span> <span class='n'>fib_recur</span><span class='o'>(</span><span class='n'>num</span> <span class='o'>-</span> <span class='mf'>1</span><span class='o'>)</span> <span class='o'>+</span> <span class='n'>fib_recur</span><span class='o'>(</span><span class='n'>num</span> <span class='o'>-</span> <span class='mf'>2</span><span class='o'>)</span> <span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='n'>fib_loop</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>num</span><span class='o'>,</span>
+    <span class='n'>old</span> <span class='o'>:=</span> <span class='mf'>0</span>
+    <span class='n'>new</span> <span class='o'>:=</span> <span class='mf'>1</span>
+    <span class='n'>next</span> <span class='o'>:=</span> <span class='mf'>0</span>
+    <span class='k'>for</span><span class='o'>(</span><span class='n'>i</span><span class='o'>,</span> <span class='n'>num</span><span class='o'>,</span> <span class='mf'>1</span><span class='o'>,</span> <span class='o'>-</span><span class='mf'>1</span><span class='o'>,</span>
+        <span class='n'>next</span> <span class='o'>=</span> <span class='n'>old</span> <span class='o'>+</span> <span class='n'>new</span>
+        <span class='n'>old</span> <span class='o'>=</span> <span class='n'>new</span>
+        <span class='n'>new</span> <span class='o'>=</span> <span class='n'>next</span>
+    <span class='o'>)</span>
+    <span class='n'>old</span>
+<span class='o'>)</span>
+<span class='s'>&quot;Fib 0&quot;</span> <span class='n'>println</span>
+<span class='n'>fib_recur</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='n'>fib_loop</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>)</span> <span class='n'>println</span>
+
+<span class='s'>&quot;Fib 4&quot;</span> <span class='n'>println</span>
+<span class='n'>fib_recur</span><span class='o'>(</span><span class='mf'>4</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='n'>fib_loop</span><span class='o'>(</span><span class='mf'>4</span><span class='o'>)</span> <span class='n'>println</span>
+
+<span class='s'>&quot;Fib 8&quot;</span> <span class='n'>println</span>
+<span class='n'>fib_recur</span><span class='o'>(</span><span class='mf'>8</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='n'>fib_loop</span><span class='o'>(</span><span class='mf'>8</span><span class='o'>)</span> <span class='n'>println</span>
+
+<span class='c1'># 2. How would you change / to return 0 if the denominator is zero?</span>
+<span class='c1'>#</span>
+<span class='c1'># The tricky bit is saving a reference to the old method:</span>
+<span class='n'>Number</span> <span class='n'>origDiv</span> <span class='o'>:=</span> <span class='n'>Number</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;/&quot;</span><span class='o'>)</span>
+
+<span class='c1'># Overriding the / method is surprisingly straightforward</span>
+<span class='n'>Number</span> <span class='o'>/</span> <span class='o'>=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>denom</span><span class='o'>,</span> <span class='k'>if</span><span class='o'>(</span><span class='n'>denom</span> <span class='o'>==</span> <span class='mf'>0</span><span class='o'>,</span> <span class='mf'>0</span><span class='o'>,</span> <span class='n'>self</span> <span class='n'>origDiv</span><span class='o'>(</span><span class='n'>denom</span><span class='o'>)))</span>
+
+<span class='s'>&quot;Testing division&quot;</span> <span class='n'>println</span>
+<span class='mf'>4</span> <span class='o'>/</span> <span class='mf'>2</span> <span class='n'>println</span>
+<span class='mf'>4</span> <span class='o'>/</span> <span class='mf'>0</span> <span class='n'>println</span>
+
+<span class='c1'># 3. Write a program to add up all of the numbers in a two-dimensional array.</span>
+<span class='n'>addUp2DArray</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>array</span><span class='o'>,</span> <span class='n'>array</span> <span class='n'>flatten</span> <span class='n'>reduce</span><span class='o'>(+))</span>
+
+<span class='s'>&quot;add up 2d array&quot;</span> <span class='n'>println</span>
+<span class='n'>addUp2DArray</span><span class='o'>(</span><span class='n'>list</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>,</span><span class='mf'>5</span><span class='o'>))</span> <span class='n'>println</span>
+<span class='n'>addUp2DArray</span><span class='o'>(</span><span class='n'>list</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span> <span class='n'>list</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>1</span><span class='o'>),</span> <span class='mf'>4</span><span class='o'>,</span><span class='mf'>5</span><span class='o'>))</span> <span class='n'>println</span>
+
+<span class='c1'># 4. Add a slot called myAverage to a list that computes the average of all the</span>
+<span class='c1'># numbers in a list. What happens if there are no numbers in a list? (Bonus:</span>
+<span class='c1'># Raise an Io exception if any item in the list is not a number.)</span>
+
+<span class='c1'># Easy way:</span>
+<span class='n'>List</span> <span class='n'>myAverage</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>self</span> <span class='n'>average</span><span class='o'>)</span>
+
+<span class='c1'># Probably the way he meant (plus bonus):</span>
+<span class='n'>List</span> <span class='n'>myAverage2</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>containsNonDigit</span> <span class='o'>:=</span> <span class='n'>select</span><span class='o'>(</span><span class='n'>x</span><span class='o'>,</span> <span class='n'>x</span> <span class='n'>asNumber</span><span class='o'>()</span> <span class='n'>isNan</span><span class='o'>())</span> <span class='n'>size</span> <span class='o'>&gt;</span> <span class='mf'>0</span>
+    <span class='k'>if</span><span class='o'>(</span><span class='n'>containsNonDigit</span><span class='o'>,</span> <span class='n'>Exception</span> <span class='n'>raise</span><span class='o'>(</span><span class='s'>&quot;An item in the list is not a number&quot;</span><span class='o'>))</span>
+
+    <span class='n'>flatList</span> <span class='o'>:=</span> <span class='n'>self</span> <span class='n'>flatten</span>
+    <span class='n'>flatList</span> <span class='n'>reduce</span><span class='o'>(+)</span> <span class='o'>/</span> <span class='n'>flatList</span> <span class='n'>size</span>
+<span class='o'>)</span>
+
+<span class='s'>&quot;Averaging the numbers in a list&quot;</span> <span class='n'>println</span>
+<span class='n'>list</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>)</span> <span class='n'>myAverage2</span> <span class='n'>println</span>
+<span class='c1'>#list(1,2,3,4,&quot;a&quot;) myAverage2 println</span>
+
+<span class='c1'># 5. Write a prototype for a two-dimensional list. The dim(x,y) method should</span>
+<span class='c1'># allocate a list of y lists that are x elements long, set(x, y, value) should</span>
+<span class='c1'># set a value, and get(x, y) should return that value.</span>
+<span class='c1'>#</span>
+<span class='n'>List2D</span> <span class='o'>:=</span> <span class='n'>List</span> <span class='k'>clone</span>
+<span class='n'>List2D</span> <span class='n'>transposed</span> <span class='o'>:=</span> <span class='no'>false</span>
+
+<span class='n'>List2D</span> <span class='n'>dim</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>x</span><span class='o'>,</span> <span class='n'>y</span><span class='o'>,</span>
+    <span class='n'>y</span> <span class='n'>repeat</span><span class='o'>(</span>
+        <span class='n'>inner</span> <span class='o'>:=</span> <span class='n'>list</span><span class='o'>()</span>
+        <span class='n'>x</span> <span class='n'>repeat</span><span class='o'>(</span><span class='n'>inner</span> <span class='n'>push</span><span class='o'>(</span><span class='no'>nil</span><span class='o'>))</span>
+        <span class='n'>self</span> <span class='n'>append</span><span class='o'>(</span><span class='n'>inner</span><span class='o'>)</span>
+    <span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='c1'># Hmmm, let&#39;s try this again</span>
+
+<span class='c1'># Make sure you have this commit before using this solution</span>
+<span class='c1'># https://github.com/stevedekorte/io/commit/4907d9d618499daa8973c0db380317678c0abd51</span>
+<span class='n'>List2D</span> <span class='n'>dim2</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>x</span><span class='o'>,</span> <span class='n'>y</span><span class='o'>,</span>
+    <span class='n'>y</span> <span class='n'>repeat</span><span class='o'>(</span><span class='n'>self</span> <span class='n'>append</span><span class='o'>(</span><span class='n'>Range</span> <span class='mf'>0</span> <span class='n'>to</span><span class='o'>(</span><span class='n'>x</span><span class='o'>)</span> <span class='n'>asList</span><span class='o'>()</span> <span class='n'>map</span><span class='o'>(</span><span class='no'>nil</span><span class='o'>)))</span>
+<span class='o'>)</span>
+
+<span class='s'>&quot;Creating matrices&quot;</span> <span class='n'>println</span>
+<span class='n'>firstMatrix</span> <span class='o'>:=</span> <span class='n'>List2D</span> <span class='k'>clone</span>
+<span class='n'>firstMatrix</span> <span class='n'>dim</span><span class='o'>(</span><span class='mf'>6</span><span class='o'>,</span><span class='mf'>7</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='s'>&quot;&quot;</span> <span class='n'>println</span>
+
+<span class='n'>secondMatrix</span> <span class='o'>:=</span> <span class='n'>List2D</span> <span class='k'>clone</span>
+<span class='n'>secondMatrix</span> <span class='n'>dim2</span><span class='o'>(</span><span class='mf'>6</span><span class='o'>,</span><span class='mf'>7</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='s'>&quot;&quot;</span> <span class='n'>println</span>
+
+<span class='c1'># The below will cause infinite loop until you apply the change in the</span>
+<span class='c1'># commit above</span>
+<span class='n'>testBounds</span> <span class='o'>:=</span> <span class='n'>List2D</span> <span class='k'>clone</span>
+<span class='n'>testBounds</span> <span class='n'>dim2</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>,</span> <span class='mf'>2</span><span class='o'>)</span>
+<span class='n'>testBounds</span> <span class='n'>dim2</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>,</span> <span class='mf'>2</span><span class='o'>)</span>
+
+<span class='n'>List2D</span> <span class='n'>set</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>x</span><span class='o'>,</span> <span class='n'>y</span><span class='o'>,</span> <span class='n'>value</span><span class='o'>,</span>
+    <span class='n'>self</span> <span class='n'>at</span><span class='o'>(</span><span class='n'>x</span><span class='o'>)</span> <span class='n'>atPut</span><span class='o'>(</span><span class='n'>y</span><span class='o'>,</span> <span class='n'>value</span><span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='n'>List2D</span> <span class='n'>get</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>x</span><span class='o'>,</span> <span class='n'>y</span><span class='o'>,</span>
+    <span class='n'>self</span> <span class='n'>at</span><span class='o'>(</span><span class='n'>x</span><span class='o'>)</span> <span class='n'>at</span><span class='o'>(</span><span class='n'>y</span><span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='s'>&quot;Setting and getting a matrix&quot;</span> <span class='n'>println</span>
+<span class='n'>firstMatrix</span> <span class='n'>set</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>,</span><span class='s'>&quot;asdfad&quot;</span><span class='o'>)</span>
+<span class='n'>firstMatrix</span> <span class='n'>println</span>
+<span class='s'>&quot;&quot;</span> <span class='n'>println</span>
+
+<span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>2</span><span class='o'>)</span> <span class='n'>println</span>
+
+<span class='c1'># 6. Bonus: Write a transpose method so that (new_matrix get(y, x)) ==</span>
+<span class='c1'># matrix get(x,y) on the original list</span>
+
+<span class='n'>flipFirstTwoArgs</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>,</span>
+    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
+        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
+        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
+        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
+    <span class='o'>)</span> <span class='n'>flatten</span><span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='n'>List2D</span> <span class='n'>transpose</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>self</span> <span class='n'>get</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span>
+    <span class='n'>self</span> <span class='n'>set</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;set&quot;</span><span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='s'>&quot;Transposing a matrix&quot;</span> <span class='n'>println</span>
+<span class='s'>&quot;2, 4: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='s'>&quot;4, 2: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>4</span><span class='o'>,</span><span class='mf'>2</span><span class='o'>)</span> <span class='n'>println</span>
+
+<span class='s'>&quot;transpose!&quot;</span> <span class='n'>println</span>
+<span class='n'>firstMatrix</span> <span class='n'>transpose</span>
+
+<span class='s'>&quot;2, 4: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='s'>&quot;4, 2: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>4</span><span class='o'>,</span><span class='mf'>2</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='s'>&quot;Set 5, 3 to NEW&quot;</span> <span class='n'>println</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>set</span><span class='o'>(</span><span class='mf'>5</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span> <span class='s'>&quot;NEW&quot;</span><span class='o'>)</span>
+<span class='s'>&quot;5, 3: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>5</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='s'>&quot;3, 5: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>3</span><span class='o'>,</span><span class='mf'>5</span><span class='o'>)</span> <span class='n'>println</span>
+
+<span class='s'>&quot;transpose again!&quot;</span> <span class='n'>println</span>
+<span class='n'>firstMatrix</span> <span class='n'>transpose</span>
+
+<span class='s'>&quot;2, 4: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='s'>&quot;4, 2: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>4</span><span class='o'>,</span><span class='mf'>2</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='s'>&quot;5, 3: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>5</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>)</span> <span class='n'>println</span>
+<span class='s'>&quot;3, 5: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>3</span><span class='o'>,</span><span class='mf'>5</span><span class='o'>)</span> <span class='n'>println</span>
+
+<span class='c1'># 7. Write the matrix to a file, and read a matrix from a file.</span>
+
+<span class='s'>&quot;Writing and reading a matrix from a file&quot;</span> <span class='n'>println</span>
+<span class='n'>file</span> <span class='o'>:=</span> <span class='n'>File</span> <span class='n'>with</span><span class='o'>(</span><span class='s'>&quot;matrix.txt&quot;</span><span class='o'>)</span>
+<span class='n'>file</span> <span class='n'>remove</span>
+<span class='n'>file</span> <span class='n'>openForUpdating</span>
+<span class='n'>file</span> <span class='n'>write</span><span class='o'>(</span><span class='n'>firstMatrix</span> <span class='n'>join</span><span class='o'>(</span><span class='s'>&quot;, &quot;</span><span class='o'>))</span>
+<span class='n'>file</span> <span class='n'>close</span>
+
+<span class='n'>file</span> <span class='o'>=</span> <span class='n'>File</span> <span class='n'>with</span><span class='o'>(</span><span class='s'>&quot;matrix.txt&quot;</span><span class='o'>)</span>
+<span class='n'>file</span> <span class='n'>openForReading</span>
+<span class='n'>lines</span> <span class='o'>:=</span> <span class='n'>file</span> <span class='n'>readLines</span>
+<span class='n'>file</span> <span class='n'>close</span>
+<span class='n'>lines</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>)</span> <span class='n'>type</span> <span class='n'>println</span>
+<span class='n'>matrixFromFile</span> <span class='o'>:=</span> <span class='n'>lines</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>)</span> <span class='n'>split</span><span class='o'>(</span><span class='s'>&quot;, &quot;</span><span class='o'>)</span>
+<span class='n'>matrixFromFile</span> <span class='n'>type</span> <span class='n'>println</span>
+<span class='n'>matrixFromFile</span> <span class='n'>println</span>
+
+<span class='c1'># 8. Write a program that gives you ten tries to guess a random number from</span>
+<span class='c1'># 1-100. If you would like, give a hint of &quot;hotter&quot; or &quot;colder&quot; after the first</span>
+<span class='c1'># guess.</span>
+
+<span class='s'>&quot;Random number guesser&quot;</span> <span class='n'>println</span>
+<span class='n'>randomNumber</span> <span class='o'>:=</span> <span class='o'>((</span><span class='n'>Random</span> <span class='n'>value</span><span class='o'>)</span> <span class='o'>*</span> <span class='mf'>100</span> <span class='o'>+</span> <span class='mf'>1</span><span class='o'>)</span> <span class='n'>floor</span>
+
+<span class='n'>i</span> <span class='o'>:=</span> <span class='mf'>0</span>
+<span class='n'>guess</span> <span class='o'>:=</span> <span class='mf'>0</span>
+<span class='n'>while</span><span class='o'>(</span><span class='n'>i</span> <span class='o'>&lt;</span> <span class='mf'>10</span> <span class='n'>and</span> <span class='n'>guess</span> <span class='o'>!=</span> <span class='n'>randomNumber</span><span class='o'>,</span>
+    <span class='o'>(</span><span class='s'>&quot;Guess a number between 1 and 100: (guess &quot;</span> <span class='o'>..</span> <span class='n'>i</span><span class='o'>+</span><span class='mf'>1</span> <span class='o'>..</span> <span class='s'>&quot; of 10): &quot;</span><span class='o'>)</span> <span class='n'>print</span>
+    <span class='n'>guess</span> <span class='o'>=</span> <span class='n'>ReadLine</span> <span class='n'>readLine</span>
+    <span class='n'>guess</span> <span class='o'>=</span> <span class='k'>if</span><span class='o'>(</span><span class='n'>guess</span> <span class='n'>asNumber</span> <span class='n'>isNan</span><span class='o'>,</span> <span class='mf'>0</span><span class='o'>,</span> <span class='n'>guess</span> <span class='n'>asNumber</span><span class='o'>)</span>
+    <span class='k'>if</span><span class='o'>(</span><span class='n'>guess</span> <span class='o'>&gt;</span> <span class='n'>randomNumber</span><span class='o'>,</span> <span class='s'>&quot;Too high&quot;</span> <span class='n'>println</span><span class='o'>)</span>
+    <span class='k'>if</span><span class='o'>(</span><span class='n'>guess</span> <span class='o'>&lt;</span> <span class='n'>randomNumber</span><span class='o'>,</span> <span class='s'>&quot;Too low&quot;</span> <span class='n'>println</span><span class='o'>)</span>
+    <span class='n'>i</span> <span class='o'>=</span> <span class='n'>i</span> <span class='o'>+</span> <span class='mf'>1</span>
+<span class='o'>)</span>
+
+<span class='k'>if</span><span class='o'>(</span><span class='n'>guess</span> <span class='o'>==</span> <span class='n'>randomNumber</span><span class='o'>,</span>
+    <span class='s'>&quot;Congrats, you did it!&quot;</span> <span class='n'>println</span><span class='o'>,</span>
+    <span class='s'>&quot;Too bad, maybe next time&quot;</span> <span class='n'>println</span><span class='o'>)</span>
+</code></pre>
+</div>
+<p>And the output:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>io day2.io
+Fib 0
+0
+0
+Fib 4
+3
+3
+Fib 8
+21
+21
+Testing division
+2
+0
+add up 2d array
+14
+17
+Averaging the numbers in a list
+2.5
+Creating matrices
+list<span class='o'>(</span>list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>))</span>
+
+list<span class='o'>(</span>list<span class='o'>(</span>nil, nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil, nil<span class='o'>))</span>
+
+Setting and getting a matrix
+list<span class='o'>(</span>list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, asdfad, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>))</span>
+
+asdfad
+nil
+Transposing a matrix
+2, 4: asdfad
+4, 2: nil
+transpose!
+2, 4: nil
+4, 2: asdfad
+Set 5, 3 to NEW
+5, 3: NEW
+3, 5: nil
+transpose again!
+2, 4: asdfad
+4, 2: nil
+5, 3: nil
+3, 5: NEW
+Writing and reading a matrix from a file
+Sequence
+List
+list<span class='o'>(</span>list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, asdfad, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, NEW<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>))</span>
+Random number guesser
+Guess a number between 1 and 100: <span class='o'>(</span>guess 1 of 10<span class='o'>)</span>: 50
+Too high
+Guess a number between 1 and 100: <span class='o'>(</span>guess 2 of 10<span class='o'>)</span>: 25
+Too low
+Guess a number between 1 and 100: <span class='o'>(</span>guess 3 of 10<span class='o'>)</span>: 38
+Too low
+Guess a number between 1 and 100: <span class='o'>(</span>guess 4 of 10<span class='o'>)</span>: 44
+Too high
+Guess a number between 1 and 100: <span class='o'>(</span>guess 5 of 10<span class='o'>)</span>: 41
+Too low
+Guess a number between 1 and 100: <span class='o'>(</span>guess 6 of 10<span class='o'>)</span>: 43
+Congrats, you did it!
+</code></pre>
+</div>
+</div>
+
+
+<div id="socialbuttons">
+<div>
+    <div id="rss_button"><a href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/feed-icon-28x28.png">&nbsp;</a></div>
+    <!-- G+ -->
+    <div id="google_plus_button"><g:plusone></g:plusone>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script></div>
+
+    <!-- Twitter -->
+    <div id="twitter_button"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="nickknw">Tweet</a>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+
+    <!-- Reddit -->
+    <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
+
+    <!-- Facebook -->
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2012/01/01/seven-languages-week-2-day-2/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+
+</div>
+</div>
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>30 Dec 2011</span> &raquo; <a href="/blog/2011/12/30/transposing-a-matrix-in-io/">Transposing a matrix in Io</a></li>
+    
+      <li><span>18 Dec 2011</span> &raquo; <a href="/blog/2011/12/18/seven-languages-week-2-day-1/">Seven Languages In Seven Weeks: Week 2 (Io) - Day 1</a></li>
+    
+      <li><span>15 Dec 2011</span> &raquo; <a href="/blog/2011/12/15/seven-languages-week-1-day-3/">Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 3</a></li>
+    
+  </ul>
+</div>
+
+<hr class="fancyrule" />
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
+
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    var disqus_identifier = '/blog/2012/01/01/seven-languages-week-2-day-2';
+    var disqus_url = 'http://nickknowlson.com//blog/2012/01/01/seven-languages-week-2-day-2/';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+        </div>
+        <div id="footer">&copy; Copyright 2011 Nick Knowlson</div>
+        <div style="display: none;">Content by Nick Knowlson: <a href="https://plus.google.com/111820015518413982003?rel=author">Google+</a></div>
+        <!--  " - 2011" -->
+    </body>
+</html>
