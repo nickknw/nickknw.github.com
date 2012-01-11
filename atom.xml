@@ -4,12 +4,334 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-01-06T20:57:38-08:00</updated>
+ <updated>2012-01-11T08:53:30-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Seven Languages In Seven Weeks: Week 2 (Io) - Day 2</title>
+   <link href="http://nickknowlson.com/blog/2012/01/11/seven-languages-week-2-day-2/"/>
+   <updated>2012-01-11T00:00:00-08:00</updated>
+   <id>http://nickknowlson.com/blog/2012/01/11/seven-languages-week-2-day-2</id>
+   <content type="html">&lt;p&gt;Day 2 of Io was the most difficult (as well as the most fun) day yet. It took me quite a while to finish all the exercises to my satisfaction, and it also had the most interesting exercises so far. One in particular (transposing a matrix) was &lt;a href='/blog/2011/12/30/transposing-a-matrix-in-io/'&gt;my favorite.&lt;/a&gt;.&lt;/p&gt;
+&lt;div class='interjection'&gt;&lt;p&gt;
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/30/seven-languages-week-2-day-1/'&gt;Week 2 (Io) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+&lt;/p&gt;&lt;/div&gt;
+&lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
+
+&lt;p&gt;Day 2 of Io went over some basic topics (conditionals, loops and operators) as well as some more complex subjects (messages and reflection).&lt;/p&gt;
+
+&lt;p&gt;Messages are a fundamental part of Io - except for comments and commas, everything is a message. Once I began thinking like this, something clicked for me. I started to really grok the code examples, and thinking and coding in Io felt easier, more natural.&lt;/p&gt;
+
+&lt;p&gt;Io has simple, straightforward reflection: it actually isn&amp;#8217;t a burden to use or read. Combined with Io&amp;#8217;s other design decisions this gives you quite a lot of power. You get ultimate control over your code, and the power to do whatever you can think of with it - no restriction can stand in your way.&lt;/p&gt;
+
+&lt;p&gt;I wonder if this is how Lisp programmers have been feeling for decades.&lt;/p&gt;
+
+&lt;h2 id='a_note_about_the_io_community'&gt;A note about the Io community&lt;/h2&gt;
+
+&lt;p&gt;While trying to find a way to write a short solution to #5, I ran across what turned out to be a bug in Io&amp;#8217;s Range library. Thanks to the well-thought out questions in Day 1, I already had a list of places to go for help. In the #io channel on freenode I had the good luck to run into &lt;a href='http://jeremy.tregunna.ca/'&gt;Jeremy Tregunna&lt;/a&gt; and told him my problem. In a remarkably short period of time (minutes) he had confirmed that it was actually a bug, made the fix, and had a pull request created on the main Io repository on github. Shortly thereafter the patch was merged into the master branch where I downloaded it, compiled it, and could run my previously-broken code!&lt;/p&gt;
+
+&lt;p&gt;It was a surprising and pleasant experience for me, and I&amp;#8217;d like to thank Jeremy in particular and the Io community in general for being so friendly, supportive, and quick. Thank you!&lt;/p&gt;
+
+&lt;h2 id='highlights_from_exercises'&gt;Highlights from exercises&lt;/h2&gt;
+
+&lt;p&gt;It was harder to pick out only a few to highlight - most of these questions were fun to solve and had interesting solutions.&lt;/p&gt;
+
+&lt;p&gt;The one that I liked best was &lt;a href='/blog/2011/12/30/transposing-a-matrix-in-io/'&gt;transposing a matrix&lt;/a&gt;, and I felt there was enough good material in there to warrant an article of its own.&lt;/p&gt;
+
+&lt;p&gt;The solution for Question #2 was unexpectedly straightforward. Once again, Io&amp;#8217;s absolute flexibility and willingness to let you shoot yourself in the foot pays off! The question was:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;2. How would you change / to return 0 if the denominator is zero?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The answer was only two short lines of code:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;Number&lt;/span&gt; &lt;span class='n'&gt;origDiv&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Number&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;Number&lt;/span&gt; &lt;span class='o'&gt;/&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;denom&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;denom&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;origDiv&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;denom&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;The tricky part at first was figuring out how to save a reference to the original division method, but in retrospect it was blindingly obvious. It&amp;#8217;s the same things I&amp;#8217;ve been doing all along with Io: taking things out of slots and putting things in slots!&lt;/p&gt;
+
+&lt;p&gt;I would also like to highlight Question #3 to show off how clean writing in a functional style is in Io. The question was:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;3. Write a program to add up all of the numbers in a two-dimensional array.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;No loops needed here - Io has &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt;, and they mix &lt;strong&gt;well&lt;/strong&gt; with Io&amp;#8217;s syntax:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;addUp2DArray&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt; &lt;span class='n'&gt;reduce&lt;/span&gt;&lt;span class='o'&gt;(+))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;That&amp;#8217;s it for the highlights, but as I mentioned earlier, all of the exercises today were pretty interesting. Here is my full code listing for the exercises from Day 2 of Io. The home of this piece of code is with the other exercises &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io'&gt;on github&lt;/a&gt;.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='c1'&gt;# Do:&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# 1. Write a program to find the nth Fibonacci number. Fib(1) is 1, and fib(4)&lt;/span&gt;
+&lt;span class='c1'&gt;# is 3. As a bonus, solve the problem with recursion and with loops.&lt;/span&gt;
+
+&lt;span class='n'&gt;fib_recur&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;=&lt;/span&gt; &lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;num&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;fib_recur&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;fib_recur&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;fib_loop&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='n'&gt;old&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;
+    &lt;span class='n'&gt;new&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='mf'&gt;1&lt;/span&gt;
+    &lt;span class='n'&gt;next&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;
+    &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;num&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+        &lt;span class='n'&gt;next&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;old&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;new&lt;/span&gt;
+        &lt;span class='n'&gt;old&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;new&lt;/span&gt;
+        &lt;span class='n'&gt;new&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;next&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;old&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;Fib 0&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;fib_recur&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;fib_loop&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;Fib 4&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;fib_recur&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;fib_loop&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;Fib 8&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;fib_recur&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;8&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;fib_loop&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;8&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 2. How would you change / to return 0 if the denominator is zero?&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# The tricky bit is saving a reference to the old method:&lt;/span&gt;
+&lt;span class='n'&gt;Number&lt;/span&gt; &lt;span class='n'&gt;origDiv&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Number&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='c1'&gt;# Overriding the / method is surprisingly straightforward&lt;/span&gt;
+&lt;span class='n'&gt;Number&lt;/span&gt; &lt;span class='o'&gt;/&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;denom&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;denom&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;origDiv&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;denom&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;Testing division&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='mf'&gt;4&lt;/span&gt; &lt;span class='o'&gt;/&lt;/span&gt; &lt;span class='mf'&gt;2&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='mf'&gt;4&lt;/span&gt; &lt;span class='o'&gt;/&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 3. Write a program to add up all of the numbers in a two-dimensional array.&lt;/span&gt;
+&lt;span class='n'&gt;addUp2DArray&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt; &lt;span class='n'&gt;reduce&lt;/span&gt;&lt;span class='o'&gt;(+))&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;add up 2d array&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;addUp2DArray&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;addUp2DArray&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt; &lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 4. Add a slot called myAverage to a list that computes the average of all the&lt;/span&gt;
+&lt;span class='c1'&gt;# numbers in a list. What happens if there are no numbers in a list? (Bonus:&lt;/span&gt;
+&lt;span class='c1'&gt;# Raise an Io exception if any item in the list is not a number.)&lt;/span&gt;
+
+&lt;span class='c1'&gt;# Easy way:&lt;/span&gt;
+&lt;span class='n'&gt;List&lt;/span&gt; &lt;span class='n'&gt;myAverage&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;average&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='c1'&gt;# Probably the way he meant (plus bonus):&lt;/span&gt;
+&lt;span class='n'&gt;List&lt;/span&gt; &lt;span class='n'&gt;myAverage2&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;containsNonDigit&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;select&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='n'&gt;asNumber&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='n'&gt;isNan&lt;/span&gt;&lt;span class='o'&gt;())&lt;/span&gt; &lt;span class='n'&gt;size&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;
+    &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;containsNonDigit&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;Exception&lt;/span&gt; &lt;span class='n'&gt;raise&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;An item in the list is not a number&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+
+    &lt;span class='n'&gt;flatList&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt;
+    &lt;span class='n'&gt;flatList&lt;/span&gt; &lt;span class='n'&gt;reduce&lt;/span&gt;&lt;span class='o'&gt;(+)&lt;/span&gt; &lt;span class='o'&gt;/&lt;/span&gt; &lt;span class='n'&gt;flatList&lt;/span&gt; &lt;span class='n'&gt;size&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;Averaging the numbers in a list&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;myAverage2&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='c1'&gt;#list(1,2,3,4,&amp;quot;a&amp;quot;) myAverage2 println&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 5. Write a prototype for a two-dimensional list. The dim(x,y) method should&lt;/span&gt;
+&lt;span class='c1'&gt;# allocate a list of y lists that are x elements long, set(x, y, value) should&lt;/span&gt;
+&lt;span class='c1'&gt;# set a value, and get(x, y) should return that value.&lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;List&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transposed&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='no'&gt;false&lt;/span&gt;
+
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;dim&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='n'&gt;y&lt;/span&gt; &lt;span class='n'&gt;repeat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;inner&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt;
+        &lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='n'&gt;repeat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;inner&lt;/span&gt; &lt;span class='n'&gt;push&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='no'&gt;nil&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;append&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;inner&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='c1'&gt;# Hmmm, let&amp;#39;s try this again&lt;/span&gt;
+
+&lt;span class='c1'&gt;# Make sure you have this commit before using this solution&lt;/span&gt;
+&lt;span class='c1'&gt;# https://github.com/stevedekorte/io/commit/4907d9d618499daa8973c0db380317678c0abd51&lt;/span&gt;
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;dim2&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='n'&gt;y&lt;/span&gt; &lt;span class='n'&gt;repeat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;append&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;Range&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt; &lt;span class='n'&gt;to&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;asList&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='n'&gt;map&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='no'&gt;nil&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;Creating matrices&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+&lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;dim&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;6&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;7&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='n'&gt;secondMatrix&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+&lt;span class='n'&gt;secondMatrix&lt;/span&gt; &lt;span class='n'&gt;dim2&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;6&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;7&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='c1'&gt;# The below will cause infinite loop until you apply the change in the&lt;/span&gt;
+&lt;span class='c1'&gt;# commit above&lt;/span&gt;
+&lt;span class='n'&gt;testBounds&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+&lt;span class='n'&gt;testBounds&lt;/span&gt; &lt;span class='n'&gt;dim2&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;testBounds&lt;/span&gt; &lt;span class='n'&gt;dim2&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;atPut&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;y&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;y&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;Setting and getting a matrix&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;asdfad&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 6. Bonus: Write a transpose method so that (new_matrix get(y, x)) ==&lt;/span&gt;
+&lt;span class='c1'&gt;# matrix get(x,y) on the original list&lt;/span&gt;
+
+&lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;set&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;Transposing a matrix&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;2, 4: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;4, 2: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;transpose!&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;2, 4: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;4, 2: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;Set 5, 3 to NEW&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;NEW&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;5, 3: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;3, 5: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;transpose again!&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;2, 4: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;4, 2: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;5, 3: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;3, 5: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 7. Write the matrix to a file, and read a matrix from a file.&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;Writing and reading a matrix from a file&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;File&lt;/span&gt; &lt;span class='n'&gt;with&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;matrix.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;remove&lt;/span&gt;
+&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;openForUpdating&lt;/span&gt;
+&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;join&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;, &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;close&lt;/span&gt;
+
+&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;File&lt;/span&gt; &lt;span class='n'&gt;with&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;matrix.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;openForReading&lt;/span&gt;
+&lt;span class='n'&gt;lines&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;readLines&lt;/span&gt;
+&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;close&lt;/span&gt;
+&lt;span class='n'&gt;lines&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;type&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;matrixFromFile&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;lines&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;split&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;, &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;matrixFromFile&lt;/span&gt; &lt;span class='n'&gt;type&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;matrixFromFile&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 8. Write a program that gives you ten tries to guess a random number from&lt;/span&gt;
+&lt;span class='c1'&gt;# 1-100. If you would like, give a hint of &amp;quot;hotter&amp;quot; or &amp;quot;colder&amp;quot; after the first&lt;/span&gt;
+&lt;span class='c1'&gt;# guess.&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;Random number guesser&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;randomNumber&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='o'&gt;((&lt;/span&gt;&lt;span class='n'&gt;Random&lt;/span&gt; &lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt; &lt;span class='mf'&gt;100&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;floor&lt;/span&gt;
+
+&lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;
+&lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;
+&lt;span class='n'&gt;while&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='mf'&gt;10&lt;/span&gt; &lt;span class='n'&gt;and&lt;/span&gt; &lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;!=&lt;/span&gt; &lt;span class='n'&gt;randomNumber&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Guess a number between 1 and 100: (guess &amp;quot;&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;+&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot; of 10): &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;
+    &lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;ReadLine&lt;/span&gt; &lt;span class='n'&gt;readLine&lt;/span&gt;
+    &lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='n'&gt;asNumber&lt;/span&gt; &lt;span class='n'&gt;isNan&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='n'&gt;asNumber&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;randomNumber&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Too high&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='n'&gt;randomNumber&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Too low&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='mf'&gt;1&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='n'&gt;randomNumber&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='s'&gt;&amp;quot;Congrats, you did it!&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='s'&gt;&amp;quot;Too bad, maybe next time&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;And the output:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;&lt;span class='nv'&gt;$ &lt;/span&gt;io day2.io
+Fib 0
+0
+0
+Fib 4
+3
+3
+Fib 8
+21
+21
+Testing division
+2
+0
+add up 2d array
+14
+17
+Averaging the numbers in a list
+2.5
+Creating matrices
+list&lt;span class='o'&gt;(&lt;/span&gt;list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;))&lt;/span&gt;
+
+list&lt;span class='o'&gt;(&lt;/span&gt;list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;))&lt;/span&gt;
+
+Setting and getting a matrix
+list&lt;span class='o'&gt;(&lt;/span&gt;list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, asdfad, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;))&lt;/span&gt;
+
+asdfad
+nil
+Transposing a matrix
+2, 4: asdfad
+4, 2: nil
+transpose!
+2, 4: nil
+4, 2: asdfad
+Set 5, 3 to NEW
+5, 3: NEW
+3, 5: nil
+transpose again!
+2, 4: asdfad
+4, 2: nil
+5, 3: nil
+3, 5: NEW
+Writing and reading a matrix from a file
+Sequence
+List
+list&lt;span class='o'&gt;(&lt;/span&gt;list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, asdfad, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, NEW&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;))&lt;/span&gt;
+Random number guesser
+Guess a number between 1 and 100: &lt;span class='o'&gt;(&lt;/span&gt;guess 1 of 10&lt;span class='o'&gt;)&lt;/span&gt;: 50
+Too high
+Guess a number between 1 and 100: &lt;span class='o'&gt;(&lt;/span&gt;guess 2 of 10&lt;span class='o'&gt;)&lt;/span&gt;: 25
+Too low
+Guess a number between 1 and 100: &lt;span class='o'&gt;(&lt;/span&gt;guess 3 of 10&lt;span class='o'&gt;)&lt;/span&gt;: 38
+Too low
+Guess a number between 1 and 100: &lt;span class='o'&gt;(&lt;/span&gt;guess 4 of 10&lt;span class='o'&gt;)&lt;/span&gt;: 44
+Too high
+Guess a number between 1 and 100: &lt;span class='o'&gt;(&lt;/span&gt;guess 5 of 10&lt;span class='o'&gt;)&lt;/span&gt;: 41
+Too low
+Guess a number between 1 and 100: &lt;span class='o'&gt;(&lt;/span&gt;guess 6 of 10&lt;span class='o'&gt;)&lt;/span&gt;: 43
+Congrats, you did it!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content>
+ </entry>
  
  <entry>
    <title>Transposing a matrix in Io</title>
@@ -249,7 +571,8 @@ Injecting larvae now!
 Spreading creep now!
 Done!
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content>
+&lt;/div&gt;
+&lt;p&gt;Next in this series: &lt;a href='/blog/2012/01/11/seven-languages-week-2-day-2/'&gt;Day 2 of Io&lt;/a&gt;&lt;/p&gt;</content>
  </entry>
  
  <entry>
@@ -649,7 +972,7 @@ and
 87: Blind Guardian&amp;#39;s music features the staccato guitars and double bass drumming
 90: the guitar and vocal tracks, creates the impression of a vast army of musicians&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Next in this series: &lt;a href='/blog/2011/12/15/seven-languages-week-1-day-2/'&gt;Day 3 of Ruby&lt;/a&gt;.&lt;/p&gt;</content>
+&lt;p&gt;Next in this series: &lt;a href='/blog/2011/12/15/seven-languages-week-1-day-3/'&gt;Day 3 of Ruby&lt;/a&gt;.&lt;/p&gt;</content>
  </entry>
  
  <entry>
