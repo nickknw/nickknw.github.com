@@ -1,0 +1,353 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="">
+
+        <title>Seven Languages In Seven Weeks: Week 2 (Io) - Day 3 | Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/site.css" >
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="/favicon.ico" >
+        <link href="http://feeds.feedburner.com/NickKnowlson" type="application/atom+xml" rel="alternate" title="Blog ATOM Feed" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+
+        
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-24781362-1']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logos/logo6.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class="" href="/">Home</a></li>
+                <li><a class="" href="/about/">About</a></li>
+                <li><a class="" href="/projects/">Projects</a></li>
+                <li><a class="selected" href="/blog/">Blog</a></li>
+                <li><a class="" href="/contact/">Contact</a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div style="padding:25px">
+                <a href="/blog/archive/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Seven Languages In Seven Weeks: Week 2 (Io) - Day 3</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">16 Jan 2012</div>
+<div id="post">
+<p>Since this is the last day of Io, I am going to reflect a bit on what I liked about it.</p>
+
+<p>I learned that a small prototype-based language like Io can still be expressive and powerful. There are no classes or modules, but you don&#8217;t need them to put things together in a way that mimics classes or modules. It was very refreshing.</p>
+
+<p>It also turned out that I got a practical result directly relevant to my current work from learning Io: it strengthened my understanding of javascript. The underlying way javascript works makes sense to me on a deeper level now. I am actually in the middle of reading <a href='http://shop.oreilly.com/product/9780596517748.do'>Javascript: The Good Parts</a>, and I can glance at the parts to do with explaining prototypes and think &#8220;Aha! This is obvious and makes total sense to me!&#8221; I am positive I would not have thought the same before this experience.</p>
+
+<p>Io&#8217;s minimalism also whetted my appetite for learning a lisp. Clojure is coming up in a few chapters, and I am looking forward to it. Scheme is also on my horizon (if a bit farther out), but that&#8217;s a subject for another post.</p>
+<div class='interjection'><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2012/01/11/seven-languages-week-2-day-2/'>Week 2 (Io) - Day 2</a>. For an overview see the <a href='/projects/seven-languages-in-seven-weeks/'>project page</a>.)
+</p></div>
+<h2 id='topics_covered'>Topics covered</h2>
+
+<p>The last day of Io covered some more advanced language features, mostly focused on metaprogramming.</p>
+
+<p><strong>Metaprogramming and internal DSLs</strong> were the main focus of the text, the examples, and the exercises. But for good reason! Again Io&#8217;s firm commitment to letting you do whatever you want to (even up to the point of allowing you to cripple core language features!) shows the power it can give.</p>
+
+<p>You can create custom behavior for curly brackets just by sticking a method into the <code>curlyBrackets</code> slot. You can redefine the colon operator by calling <code>addAssignOperator</code> with <code>:</code> and the name of the method you want to use. Io also has an equivalent to Ruby&#8217;s <code>method_missing</code>, except in Io it is called <code>forward</code> and it is a crucial part of prototypal inheritance.</p>
+
+<p><strong>Example time!</strong> Say you send a message called <code>fly</code> to an object we&#8217;ll call <code>Mallard</code>. In this example, <code>Mallard</code> is a clone of the <code>Duck</code> prototype, and has some additional slots we don&#8217;t care about right now. The important thing is that <code>Mallard</code> <em>doesn&#8217;t</em> have a <code>fly</code> slot (it is probably defined in <code>Duck</code> or somewhere else further up the chain), so when we send the <code>fly</code> message to <code>Mallard</code> it will say &#8220;Huh, can&#8217;t do anything with this&#8221; and <em>forward</em> that message to its prototype to deal with.</p>
+
+<p>Putting a method in the <code>forward</code> slot of an object lets us customize what happens when an object receives a message it doesn&#8217;t know what to do with. Instead of forwarding the message on to its prototype (as in the example above), we can start to do some pretty interesting things, which you will see in my highlights from the exercises.</p>
+
+<p><strong>Concurrency</strong> was also talked about, and Bruce showed how Io can handle that with <strong>coroutines, actors, and futures</strong>. Futures and coroutines I am already familiar with, and it was nice to see how seamless they were to use in Io. I am pretty sure I didn&#8217;t really grok the section on actors.</p>
+
+<p>In Io you can make an object into an actor just by sending an asynchronous message to it (which you do with <code>@@</code>). This may be cool but I&#8217;m not sure, because I don&#8217;t understand the implications of actors yet. Once I get to the Erlang section is likely when I&#8217;ll start learning more about them and this will start to be impressive in retrospect.</p>
+
+<h2 id='highlights_from_exercises'>Highlights from exercises</h2>
+
+<p>These exercises focused on expanding on the XML DSL example that was used to demonstrate <code>forward</code> during this chapter.</p>
+
+<p>I was not really satisfied with my solution - I couldn&#8217;t manage to make it feel as elegant as my previous ones. It might be because this problem is inherently a little bit messy, or more likely, there are still some bumps in my implementation that could be smoothed out.</p>
+
+<p>Io&#8217;s <code>forward</code> method, reflection abilities, and ability to redefine operators all played key roles in making a problem like this possible to solve with an internal (as opposed to <a href=''>external</a>) DSL. This saved a ton of time and effort on my part.</p>
+<h3>Forward</h3>
+<p>This is a simple stripped down chunk from the XML DSL example from the book. It lets you make a rudimentary XML DSL. The following section of code will turn <code>Builder div</code> into <code>&lt;div&gt;&lt;/div&gt;</code>. The downside is, it will also turn <code>Builder
+span</code> into <code>&lt;div&gt;&lt;/div&gt;</code>!</p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>Builder</span> <span class='o'>:=</span> <span class='n'>Object</span> <span class='k'>clone</span>
+
+    <span class='n'>Builder</span> <span class='n'>forward</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+        <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot;&lt;div&gt;&quot;</span><span class='o'>)</span>
+        <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot;&lt;/div&gt;&quot;</span><span class='o'>)</span>
+    <span class='o'>)</span>
+</code></pre>
+</div><h3>Reflection</h3>
+<p>Reflection in Io was covered in Day 2 of the book, but it is an important part of this example. It provides the ability to access the <em>name of the message</em> that was sent with <code>call message name</code>. It also lets us start nesting calls by passing another function call as an argument. This example is complete enough that we can do <code>Builder ul(li(&quot;One&quot;), li(&quot;Two&quot;), li(&quot;Three&quot;))</code> and it will correctly print out <code>&lt;ul&gt;&lt;li&gt;One&lt;/li&gt;&lt;li&gt;Two&lt;/li&gt;&lt;li&gt;Three&lt;/li&gt;&lt;/ul&gt;</code>.</p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>Builder</span> <span class='o'>:=</span> <span class='n'>Object</span> <span class='k'>clone</span>
+
+    <span class='n'>Builder</span> <span class='n'>forward</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+        <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot;&lt;&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>)</span>
+        <span class='n'>call</span> <span class='n'>message</span> <span class='n'>arguments</span> <span class='n'>foreach</span><span class='o'>(</span>
+            <span class='n'>arg</span><span class='o'>,</span>
+            <span class='n'>content</span> <span class='o'>:=</span> <span class='n'>self</span> <span class='n'>doMessage</span><span class='o'>(</span><span class='n'>arg</span><span class='o'>);</span>
+            <span class='k'>if</span><span class='o'>(</span><span class='n'>content</span> <span class='n'>type</span> <span class='o'>==</span> <span class='s'>&quot;Sequence&quot;</span><span class='o'>,</span> <span class='n'>write</span><span class='o'>(</span><span class='n'>content</span><span class='o'>)))</span>
+        <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot;&lt;/&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>))</span>
+</code></pre>
+</div>
+<p>Let&#8217;s go over that middle chunk that begins with <code>call message arguments</code>. Just as <code>call message name</code> will return the name, <code>call message arguments</code> returns a list of the arguments. We iterate over that list with <code>foreach</code>, and for each <code>arg</code> we do two things:</p>
+
+<ol>
+<li>Execute it with <code>self doMessage</code>. If the argument is another method call like <code>li(&quot;One&quot;)</code> then <code>Builder li</code> gets executed, <code>Builder</code> can&#8217;t find a slot with that name, and <code>forward</code> gets called again. We are recursing now, and this will continue until we hit an argument that is a simple string, like <code>&quot;One&quot;</code>. When we do, <code>doMessage</code> will just turn that argument into a string. This leads to the second step:</li>
+
+<li>If the executing argument is a simple string (<code>if(content type == &quot;Sequence&quot;,</code>) then print it out!</li>
+</ol>
+
+<p>That&#8217;s enough for a simple XML DSL in Io. The exercises are about taking this base and expanding it to handle attributes and generate xml with correct indentation. If you&#8217;re interested in seeing that, just scroll down to my full code listing!</p>
+<h3>Operator Redefinition</h3>
+<p>Now that you&#8217;ve made it through that, let&#8217;s close with something easy. Exercise #2 was simple and served as a hint for the next one. In Io you can override what <code>{1, 2, 3}</code> means by putting a method into <code>curlyBrackets</code>. The contents <code>1</code>, <code>2</code>, and <code>3</code> will be available as the arguments of the message. If you were paying attention before, you&#8217;ll realize that we already know how to turn the message arguments into a list:</p>
+<div class='highlight'><pre><code class='io'>    <span class='c1'># 2. Create a list syntax that uses brackets</span>
+    <span class='n'>curlyBrackets</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+        <span class='n'>call</span> <span class='n'>message</span> <span class='n'>arguments</span>
+    <span class='o'>)</span>
+</code></pre>
+</div>
+<p>So that&#8217;s all that is required to solve that! But that isn&#8217;t the typical way to redefine operators in Io. I&#8217;ll leave you with a final example that shows you how to tell Io &#8220;when I use the <code>:</code> operator, I really want you to call the <code>atPutNumber</code> method instead&#8221;.</p>
+<div class='highlight'><pre><code class='io'>    <span class='n'>OperatorTable</span> <span class='n'>addAssignOperator</span><span class='o'>(</span><span class='s'>&quot;:&quot;</span><span class='o'>,</span> <span class='s'>&quot;atPutNumber&quot;</span><span class='o'>)</span>
+
+    <span class='n'>Map</span> <span class='n'>atPutNumber</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+        <span class='c1'># your code goes here</span>
+    <span class='o'>)</span>
+</code></pre>
+</div>
+<h2 id='full_code_listing'>Full Code Listing</h2>
+
+<p>Here is my full code listing for the exercises from Day 3 of Io. The home of this piece of code is with the other exercises <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day3.io'>on github</a>.</p>
+<div class='highlight'><pre><code class='io'><span class='n'>Builder</span> <span class='o'>:=</span> <span class='n'>Object</span> <span class='k'>clone</span>
+
+<span class='n'>Builder</span> <span class='n'>forward</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>writeln</span><span class='o'>(</span><span class='s'>&quot;&lt;&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>)</span>
+    <span class='n'>call</span> <span class='n'>message</span> <span class='n'>arguments</span> <span class='n'>foreach</span><span class='o'>(</span>
+        <span class='n'>arg</span><span class='o'>,</span>
+        <span class='n'>content</span> <span class='o'>:=</span> <span class='n'>self</span> <span class='n'>doMessage</span><span class='o'>(</span><span class='n'>arg</span><span class='o'>);</span>
+        <span class='k'>if</span><span class='o'>(</span><span class='n'>content</span> <span class='n'>type</span> <span class='o'>==</span> <span class='s'>&quot;Sequence&quot;</span><span class='o'>,</span> <span class='n'>writeln</span><span class='o'>(</span><span class='n'>content</span><span class='o'>)))</span>
+    <span class='n'>writeln</span><span class='o'>(</span><span class='s'>&quot;&lt;/&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='c1'># Do: </span>
+<span class='c1'>#</span>
+<span class='c1'># 1. Enhance the XML program to add spaces to show the indentation structure</span>
+
+<span class='n'>Builder</span> <span class='n'>indentLevel</span> <span class='o'>:=</span> <span class='mf'>0</span>
+
+<span class='n'>Builder</span> <span class='n'>forward</span> <span class='o'>=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>writeln</span><span class='o'>(</span><span class='n'>makeIndent</span><span class='o'>()</span> <span class='o'>..</span> <span class='s'>&quot;&lt;&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>)</span>
+    <span class='n'>indentLevel</span> <span class='o'>=</span> <span class='n'>indentLevel</span> <span class='o'>+</span> <span class='mf'>1</span>
+    <span class='n'>call</span> <span class='n'>message</span> <span class='n'>arguments</span> <span class='n'>foreach</span><span class='o'>(</span>
+        <span class='n'>arg</span><span class='o'>,</span>
+        <span class='n'>content</span> <span class='o'>:=</span> <span class='n'>self</span> <span class='n'>doMessage</span><span class='o'>(</span><span class='n'>arg</span><span class='o'>);</span>
+        <span class='k'>if</span><span class='o'>(</span><span class='n'>content</span> <span class='n'>type</span> <span class='o'>==</span> <span class='s'>&quot;Sequence&quot;</span><span class='o'>,</span> <span class='n'>writeln</span><span class='o'>(</span><span class='n'>makeIndent</span><span class='o'>()</span> <span class='o'>..</span> <span class='n'>content</span><span class='o'>))</span>
+    <span class='o'>)</span>
+    <span class='n'>indentLevel</span> <span class='o'>=</span> <span class='n'>indentLevel</span> <span class='o'>-</span> <span class='mf'>1</span>
+    <span class='n'>writeln</span><span class='o'>(</span><span class='n'>makeIndent</span><span class='o'>()</span> <span class='o'>..</span> <span class='s'>&quot;&lt;/&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='n'>Builder</span> <span class='n'>makeIndent</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>spaces</span> <span class='o'>:=</span> <span class='s'>&quot;&quot;</span>
+    <span class='n'>indentLevel</span> <span class='n'>repeat</span><span class='o'>(</span><span class='n'>spaces</span> <span class='o'>=</span> <span class='n'>spaces</span> <span class='o'>..</span> <span class='s'>&quot;  &quot;</span><span class='o'>)</span>
+    <span class='n'>return</span> <span class='n'>spaces</span>
+<span class='o'>)</span>
+
+<span class='s'>&quot;\nIndented builder syntax:&quot;</span> <span class='n'>println</span>
+<span class='n'>Builder</span> <span class='n'>ul</span><span class='o'>(</span>
+            <span class='n'>li</span><span class='o'>(</span><span class='s'>&quot;Io&quot;</span><span class='o'>),</span>
+            <span class='n'>li</span><span class='o'>(</span><span class='s'>&quot;Lua&quot;</span><span class='o'>),</span>
+            <span class='n'>li</span><span class='o'>(</span><span class='s'>&quot;JavaScript&quot;</span><span class='o'>)</span>
+        <span class='o'>)</span>
+
+<span class='c1'># 2. Create a list syntax that uses brackets</span>
+
+<span class='n'>curlyBrackets</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>call</span> <span class='n'>message</span> <span class='n'>arguments</span>
+<span class='o'>)</span>
+
+<span class='s'>&quot;\nBracket list syntax:&quot;</span> <span class='n'>println</span>
+<span class='s'>&quot;{1,2,3,4,5} println&quot;</span> <span class='n'>println</span>
+<span class='o'>{</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>,</span><span class='mf'>5</span><span class='o'>}</span> <span class='n'>println</span>
+<span class='s'>&quot;{\&quot;a\&quot;, \&quot;b\&quot;, \&quot;c\&quot;, \&quot;d\&quot;, \&quot;e\&quot;} println&quot;</span> <span class='n'>println</span>
+<span class='o'>{</span><span class='s'>&quot;a&quot;</span><span class='o'>,</span> <span class='s'>&quot;b&quot;</span><span class='o'>,</span> <span class='s'>&quot;c&quot;</span><span class='o'>,</span> <span class='s'>&quot;d&quot;</span><span class='o'>,</span> <span class='s'>&quot;e&quot;</span><span class='o'>}</span> <span class='n'>println</span>
+
+<span class='c1'># that was unexpectedly easy and elegant. I almost feel like I&#39;ve missed something</span>
+
+
+<span class='c1'># 3. Enhance the XML program to handle attributes: if the first argument is a</span>
+<span class='c1'># map (use the curly brackets syntax), add attributes to the XML program. For</span>
+<span class='c1'># example: book({&quot;author&quot;: &quot;Tate&quot;}...) would print &lt;book author=&quot;Tate&quot;&gt;</span>
+
+<span class='n'>OperatorTable</span> <span class='n'>addAssignOperator</span><span class='o'>(</span><span class='s'>&quot;:&quot;</span><span class='o'>,</span> <span class='s'>&quot;atPutNumber&quot;</span><span class='o'>)</span>
+
+<span class='n'>Map</span> <span class='n'>atPutNumber</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>self</span> <span class='n'>atPut</span><span class='o'>(</span>
+        <span class='n'>call</span> <span class='n'>evalArgAt</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>)</span> <span class='n'>asMutable</span> <span class='n'>removePrefix</span><span class='o'>(</span><span class='s'>&quot;\&quot;&quot;</span><span class='o'>)</span> <span class='n'>removeSuffix</span><span class='o'>(</span><span class='s'>&quot;\&quot;&quot;</span><span class='o'>),</span>
+        <span class='n'>call</span> <span class='n'>evalArgAt</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>)</span>
+    <span class='o'>)</span>
+<span class='o'>)</span>
+        
+<span class='n'>curlyBrackets</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>r</span> <span class='o'>:=</span> <span class='n'>Map</span> <span class='k'>clone</span>
+    <span class='n'>call</span> <span class='n'>message</span> <span class='n'>arguments</span> <span class='n'>foreach</span><span class='o'>(</span><span class='n'>arg</span><span class='o'>,</span>
+        <span class='n'>r</span> <span class='n'>doMessage</span><span class='o'>(</span><span class='n'>arg</span><span class='o'>)</span>
+    <span class='o'>)</span>
+    <span class='n'>r</span>
+<span class='o'>)</span>
+
+<span class='n'>Map</span> <span class='n'>printAsAttributes</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>self</span> <span class='n'>foreach</span><span class='o'>(</span><span class='n'>k</span><span class='o'>,</span> <span class='n'>v</span><span class='o'>,</span>
+        <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot; &quot;</span> <span class='o'>..</span> <span class='n'>k</span> <span class='o'>..</span> <span class='s'>&quot;=\&quot;&quot;</span> <span class='o'>..</span> <span class='n'>v</span> <span class='o'>..</span> <span class='s'>&quot;\&quot;&quot;</span><span class='o'>)</span>
+    <span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='n'>Builder</span> <span class='n'>forward</span> <span class='o'>=</span> <span class='k'>method</span><span class='o'>(</span>
+    <span class='n'>write</span><span class='o'>(</span><span class='n'>makeIndent</span><span class='o'>()</span> <span class='o'>..</span> <span class='s'>&quot;&lt;&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>)</span>
+    <span class='n'>indentLevel</span> <span class='o'>=</span> <span class='n'>indentLevel</span> <span class='o'>+</span> <span class='mf'>1</span>
+    <span class='n'>isFirst</span> <span class='o'>:=</span> <span class='no'>true</span>
+    <span class='n'>call</span> <span class='n'>message</span> <span class='n'>arguments</span> <span class='n'>foreach</span><span class='o'>(</span>
+        <span class='n'>arg</span><span class='o'>,</span>
+        <span class='k'>if</span><span class='o'>(</span><span class='n'>isFirst</span><span class='o'>,</span>
+            <span class='k'>if</span><span class='o'>(</span><span class='n'>arg</span> <span class='n'>name</span> <span class='o'>==</span> <span class='s'>&quot;curlyBrackets&quot;</span><span class='o'>,</span> 
+                <span class='o'>(</span><span class='n'>self</span> <span class='n'>doMessage</span><span class='o'>(</span><span class='n'>arg</span><span class='o'>))</span> <span class='n'>printAsAttributes</span>
+            <span class='o'>)</span>
+
+            <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot;&gt;\n&quot;</span><span class='o'>)</span>
+            <span class='n'>isFirst</span> <span class='o'>=</span> <span class='no'>false</span>
+        <span class='o'>)</span>
+
+        <span class='n'>content</span> <span class='o'>:=</span> <span class='n'>self</span> <span class='n'>doMessage</span><span class='o'>(</span><span class='n'>arg</span><span class='o'>)</span>
+        <span class='k'>if</span><span class='o'>(</span><span class='n'>content</span> <span class='n'>type</span> <span class='o'>==</span> <span class='s'>&quot;Sequence&quot;</span><span class='o'>,</span> <span class='n'>writeln</span><span class='o'>(</span><span class='n'>makeIndent</span><span class='o'>()</span> <span class='o'>..</span> <span class='n'>content</span><span class='o'>))</span>
+    <span class='o'>)</span>
+    <span class='n'>indentLevel</span> <span class='o'>=</span> <span class='n'>indentLevel</span> <span class='o'>-</span> <span class='mf'>1</span>
+    <span class='n'>writeln</span><span class='o'>(</span><span class='n'>makeIndent</span><span class='o'>()</span> <span class='o'>..</span> <span class='s'>&quot;&lt;/&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>)</span>
+<span class='o'>)</span>
+
+<span class='s'>&quot;\nBuilder syntax with attributes:&quot;</span> <span class='n'>println</span>
+<span class='n'>s</span> <span class='o'>:=</span> <span class='n'>File</span> <span class='n'>with</span><span class='o'>(</span><span class='s'>&quot;builderSyntax.txt&quot;</span><span class='o'>)</span> <span class='n'>openForReading</span> <span class='n'>contents</span>
+<span class='n'>html</span> <span class='o'>:=</span> <span class='k'>doString</span><span class='o'>(</span><span class='n'>s</span><span class='o'>)</span>
+<span class='n'>html</span> <span class='n'>println</span>
+</code></pre>
+</div>
+<p>And the output:</p>
+
+<pre><code>Indented builder syntax:
+&lt;ul&gt;
+  &lt;li&gt;
+    Io
+  &lt;/li&gt;
+  &lt;li&gt;
+    Lua
+  &lt;/li&gt;
+  &lt;li&gt;
+    JavaScript
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+Bracket list syntax:
+{1,2,3,4,5} println
+list(1, 2, 3, 4, 5)
+{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;} println
+list(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)
+
+Builder syntax with attributes:
+&lt;ul&gt;
+  &lt;li&gt;
+    Io
+  &lt;/li&gt;
+  &lt;li display=&quot;none&quot;&gt;
+    Lua
+  &lt;/li&gt;
+  &lt;li&gt;
+    JavaScript
+  &lt;/li&gt;
+  &lt;book author=&quot;Tate&quot;&gt;
+  &lt;/book&gt;
+&lt;/ul&gt;
+nil</code></pre>
+</div>
+
+
+<div id="socialbuttons">
+<div>
+    <div id="rss_button"><a href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/feed-icon-28x28.png">&nbsp;</a></div>
+    <!-- G+ -->
+    <div id="google_plus_button"><g:plusone></g:plusone>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script></div>
+
+    <!-- Twitter -->
+    <div id="twitter_button"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="nickknw">Tweet</a>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+
+    <!-- Reddit -->
+    <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
+
+    <!-- Facebook -->
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2012/01/16/seven-languages-week-2-day-3/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+
+</div>
+</div>
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>11 Jan 2012</span> &raquo; <a href="/blog/2012/01/11/seven-languages-week-2-day-2/">Seven Languages In Seven Weeks: Week 2 (Io) - Day 2</a></li>
+    
+      <li><span>30 Dec 2011</span> &raquo; <a href="/blog/2011/12/30/transposing-a-matrix-in-io/">Transposing a matrix in Io</a></li>
+    
+      <li><span>18 Dec 2011</span> &raquo; <a href="/blog/2011/12/18/seven-languages-week-2-day-1/">Seven Languages In Seven Weeks: Week 2 (Io) - Day 1</a></li>
+    
+  </ul>
+</div>
+
+<hr class="fancyrule" />
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
+
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    var disqus_identifier = '/blog/2012/01/16/seven-languages-week-2-day-3';
+    var disqus_url = 'http://nickknowlson.com//blog/2012/01/16/seven-languages-week-2-day-3/';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+        </div>
+        <div id="footer">&copy; Copyright 2011 Nick Knowlson</div>
+        <div style="display: none;">Content by Nick Knowlson: <a href="https://plus.google.com/111820015518413982003?rel=author">Google+</a></div>
+        <!--  " - 2012" -->
+    </body>
+</html>

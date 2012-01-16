@@ -4,12 +4,251 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-01-11T08:53:30-08:00</updated>
+ <updated>2012-01-16T13:46:32-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Seven Languages In Seven Weeks: Week 2 (Io) - Day 3</title>
+   <link href="http://nickknowlson.com/blog/2012/01/16/seven-languages-week-2-day-3/"/>
+   <updated>2012-01-16T00:00:00-08:00</updated>
+   <id>http://nickknowlson.com/blog/2012/01/16/seven-languages-week-2-day-3</id>
+   <content type="html">&lt;p&gt;Since this is the last day of Io, I am going to reflect a bit on what I liked about it.&lt;/p&gt;
+
+&lt;p&gt;I learned that a small prototype-based language like Io can still be expressive and powerful. There are no classes or modules, but you don&amp;#8217;t need them to put things together in a way that mimics classes or modules. It was very refreshing.&lt;/p&gt;
+
+&lt;p&gt;It also turned out that I got a practical result directly relevant to my current work from learning Io: it strengthened my understanding of javascript. The underlying way javascript works makes sense to me on a deeper level now. I am actually in the middle of reading &lt;a href='http://shop.oreilly.com/product/9780596517748.do'&gt;Javascript: The Good Parts&lt;/a&gt;, and I can glance at the parts to do with explaining prototypes and think &amp;#8220;Aha! This is obvious and makes total sense to me!&amp;#8221; I am positive I would not have thought the same before this experience.&lt;/p&gt;
+
+&lt;p&gt;Io&amp;#8217;s minimalism also whetted my appetite for learning a lisp. Clojure is coming up in a few chapters, and I am looking forward to it. Scheme is also on my horizon (if a bit farther out), but that&amp;#8217;s a subject for another post.&lt;/p&gt;
+&lt;div class='interjection'&gt;&lt;p&gt;
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/01/11/seven-languages-week-2-day-2/'&gt;Week 2 (Io) - Day 2&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+&lt;/p&gt;&lt;/div&gt;
+&lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
+
+&lt;p&gt;The last day of Io covered some more advanced language features, mostly focused on metaprogramming.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Metaprogramming and internal DSLs&lt;/strong&gt; were the main focus of the text, the examples, and the exercises. But for good reason! Again Io&amp;#8217;s firm commitment to letting you do whatever you want to (even up to the point of allowing you to cripple core language features!) shows the power it can give.&lt;/p&gt;
+
+&lt;p&gt;You can create custom behavior for curly brackets just by sticking a method into the &lt;code&gt;curlyBrackets&lt;/code&gt; slot. You can redefine the colon operator by calling &lt;code&gt;addAssignOperator&lt;/code&gt; with &lt;code&gt;:&lt;/code&gt; and the name of the method you want to use. Io also has an equivalent to Ruby&amp;#8217;s &lt;code&gt;method_missing&lt;/code&gt;, except in Io it is called &lt;code&gt;forward&lt;/code&gt; and it is a crucial part of prototypal inheritance.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example time!&lt;/strong&gt; Say you send a message called &lt;code&gt;fly&lt;/code&gt; to an object we&amp;#8217;ll call &lt;code&gt;Mallard&lt;/code&gt;. In this example, &lt;code&gt;Mallard&lt;/code&gt; is a clone of the &lt;code&gt;Duck&lt;/code&gt; prototype, and has some additional slots we don&amp;#8217;t care about right now. The important thing is that &lt;code&gt;Mallard&lt;/code&gt; &lt;em&gt;doesn&amp;#8217;t&lt;/em&gt; have a &lt;code&gt;fly&lt;/code&gt; slot (it is probably defined in &lt;code&gt;Duck&lt;/code&gt; or somewhere else further up the chain), so when we send the &lt;code&gt;fly&lt;/code&gt; message to &lt;code&gt;Mallard&lt;/code&gt; it will say &amp;#8220;Huh, can&amp;#8217;t do anything with this&amp;#8221; and &lt;em&gt;forward&lt;/em&gt; that message to its prototype to deal with.&lt;/p&gt;
+
+&lt;p&gt;Putting a method in the &lt;code&gt;forward&lt;/code&gt; slot of an object lets us customize what happens when an object receives a message it doesn&amp;#8217;t know what to do with. Instead of forwarding the message on to its prototype (as in the example above), we can start to do some pretty interesting things, which you will see in my highlights from the exercises.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Concurrency&lt;/strong&gt; was also talked about, and Bruce showed how Io can handle that with &lt;strong&gt;coroutines, actors, and futures&lt;/strong&gt;. Futures and coroutines I am already familiar with, and it was nice to see how seamless they were to use in Io. I am pretty sure I didn&amp;#8217;t really grok the section on actors.&lt;/p&gt;
+
+&lt;p&gt;In Io you can make an object into an actor just by sending an asynchronous message to it (which you do with &lt;code&gt;@@&lt;/code&gt;). This may be cool but I&amp;#8217;m not sure, because I don&amp;#8217;t understand the implications of actors yet. Once I get to the Erlang section is likely when I&amp;#8217;ll start learning more about them and this will start to be impressive in retrospect.&lt;/p&gt;
+
+&lt;h2 id='highlights_from_exercises'&gt;Highlights from exercises&lt;/h2&gt;
+
+&lt;p&gt;These exercises focused on expanding on the XML DSL example that was used to demonstrate &lt;code&gt;forward&lt;/code&gt; during this chapter.&lt;/p&gt;
+
+&lt;p&gt;I was not really satisfied with my solution - I couldn&amp;#8217;t manage to make it feel as elegant as my previous ones. It might be because this problem is inherently a little bit messy, or more likely, there are still some bumps in my implementation that could be smoothed out.&lt;/p&gt;
+
+&lt;p&gt;Io&amp;#8217;s &lt;code&gt;forward&lt;/code&gt; method, reflection abilities, and ability to redefine operators all played key roles in making a problem like this possible to solve with an internal (as opposed to &lt;a href=''&gt;external&lt;/a&gt;) DSL. This saved a ton of time and effort on my part.&lt;/p&gt;
+&lt;h3&gt;Forward&lt;/h3&gt;
+&lt;p&gt;This is a simple stripped down chunk from the XML DSL example from the book. It lets you make a rudimentary XML DSL. The following section of code will turn &lt;code&gt;Builder div&lt;/code&gt; into &lt;code&gt;&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;. The downside is, it will also turn &lt;code&gt;Builder
+span&lt;/code&gt; into &lt;code&gt;&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;!&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+
+    &lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;forward&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;div&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;/div&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;h3&gt;Reflection&lt;/h3&gt;
+&lt;p&gt;Reflection in Io was covered in Day 2 of the book, but it is an important part of this example. It provides the ability to access the &lt;em&gt;name of the message&lt;/em&gt; that was sent with &lt;code&gt;call message name&lt;/code&gt;. It also lets us start nesting calls by passing another function call as an argument. This example is complete enough that we can do &lt;code&gt;Builder ul(li(&amp;quot;One&amp;quot;), li(&amp;quot;Two&amp;quot;), li(&amp;quot;Three&amp;quot;))&lt;/code&gt; and it will correctly print out &lt;code&gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;One&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Two&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Three&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+
+    &lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;forward&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;arguments&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+            &lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+            &lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;doMessage&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;);&lt;/span&gt;
+            &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='n'&gt;type&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Sequence&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
+        &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;/&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Let&amp;#8217;s go over that middle chunk that begins with &lt;code&gt;call message arguments&lt;/code&gt;. Just as &lt;code&gt;call message name&lt;/code&gt; will return the name, &lt;code&gt;call message arguments&lt;/code&gt; returns a list of the arguments. We iterate over that list with &lt;code&gt;foreach&lt;/code&gt;, and for each &lt;code&gt;arg&lt;/code&gt; we do two things:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Execute it with &lt;code&gt;self doMessage&lt;/code&gt;. If the argument is another method call like &lt;code&gt;li(&amp;quot;One&amp;quot;)&lt;/code&gt; then &lt;code&gt;Builder li&lt;/code&gt; gets executed, &lt;code&gt;Builder&lt;/code&gt; can&amp;#8217;t find a slot with that name, and &lt;code&gt;forward&lt;/code&gt; gets called again. We are recursing now, and this will continue until we hit an argument that is a simple string, like &lt;code&gt;&amp;quot;One&amp;quot;&lt;/code&gt;. When we do, &lt;code&gt;doMessage&lt;/code&gt; will just turn that argument into a string. This leads to the second step:&lt;/li&gt;
+
+&lt;li&gt;If the executing argument is a simple string (&lt;code&gt;if(content type == &amp;quot;Sequence&amp;quot;,&lt;/code&gt;) then print it out!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;That&amp;#8217;s enough for a simple XML DSL in Io. The exercises are about taking this base and expanding it to handle attributes and generate xml with correct indentation. If you&amp;#8217;re interested in seeing that, just scroll down to my full code listing!&lt;/p&gt;
+&lt;h3&gt;Operator Redefinition&lt;/h3&gt;
+&lt;p&gt;Now that you&amp;#8217;ve made it through that, let&amp;#8217;s close with something easy. Exercise #2 was simple and served as a hint for the next one. In Io you can override what &lt;code&gt;{1, 2, 3}&lt;/code&gt; means by putting a method into &lt;code&gt;curlyBrackets&lt;/code&gt;. The contents &lt;code&gt;1&lt;/code&gt;, &lt;code&gt;2&lt;/code&gt;, and &lt;code&gt;3&lt;/code&gt; will be available as the arguments of the message. If you were paying attention before, you&amp;#8217;ll realize that we already know how to turn the message arguments into a list:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='c1'&gt;# 2. Create a list syntax that uses brackets&lt;/span&gt;
+    &lt;span class='n'&gt;curlyBrackets&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;arguments&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;So that&amp;#8217;s all that is required to solve that! But that isn&amp;#8217;t the typical way to redefine operators in Io. I&amp;#8217;ll leave you with a final example that shows you how to tell Io &amp;#8220;when I use the &lt;code&gt;:&lt;/code&gt; operator, I really want you to call the &lt;code&gt;atPutNumber&lt;/code&gt; method instead&amp;#8221;.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;OperatorTable&lt;/span&gt; &lt;span class='n'&gt;addAssignOperator&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;:&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;atPutNumber&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+    &lt;span class='n'&gt;Map&lt;/span&gt; &lt;span class='n'&gt;atPutNumber&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='c1'&gt;# your code goes here&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h2 id='full_code_listing'&gt;Full Code Listing&lt;/h2&gt;
+
+&lt;p&gt;Here is my full code listing for the exercises from Day 3 of Io. The home of this piece of code is with the other exercises &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day3.io'&gt;on github&lt;/a&gt;.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+
+&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;forward&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;arguments&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+        &lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;doMessage&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;);&lt;/span&gt;
+        &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='n'&gt;type&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Sequence&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
+    &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;/&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='c1'&gt;# Do: &lt;/span&gt;
+&lt;span class='c1'&gt;#&lt;/span&gt;
+&lt;span class='c1'&gt;# 1. Enhance the XML program to add spaces to show the indentation structure&lt;/span&gt;
+
+&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;indentLevel&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;
+
+&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;forward&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;makeIndent&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;lt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;indentLevel&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;indentLevel&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='mf'&gt;1&lt;/span&gt;
+    &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;arguments&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+        &lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;doMessage&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;);&lt;/span&gt;
+        &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='n'&gt;type&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Sequence&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;makeIndent&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='n'&gt;content&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;indentLevel&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;indentLevel&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='mf'&gt;1&lt;/span&gt;
+    &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;makeIndent&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;lt;/&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;makeIndent&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;spaces&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class='n'&gt;indentLevel&lt;/span&gt; &lt;span class='n'&gt;repeat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;spaces&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;spaces&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;  &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;return&lt;/span&gt; &lt;span class='n'&gt;spaces&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;\nIndented builder syntax:&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;ul&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+            &lt;span class='n'&gt;li&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Io&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+            &lt;span class='n'&gt;li&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Lua&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+            &lt;span class='n'&gt;li&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;JavaScript&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='c1'&gt;# 2. Create a list syntax that uses brackets&lt;/span&gt;
+
+&lt;span class='n'&gt;curlyBrackets&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;arguments&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;\nBracket list syntax:&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;{1,2,3,4,5} println&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='o'&gt;{&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='s'&gt;&amp;quot;{\&amp;quot;a\&amp;quot;, \&amp;quot;b\&amp;quot;, \&amp;quot;c\&amp;quot;, \&amp;quot;d\&amp;quot;, \&amp;quot;e\&amp;quot;} println&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='o'&gt;{&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;c&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;e&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+
+&lt;span class='c1'&gt;# that was unexpectedly easy and elegant. I almost feel like I&amp;#39;ve missed something&lt;/span&gt;
+
+
+&lt;span class='c1'&gt;# 3. Enhance the XML program to handle attributes: if the first argument is a&lt;/span&gt;
+&lt;span class='c1'&gt;# map (use the curly brackets syntax), add attributes to the XML program. For&lt;/span&gt;
+&lt;span class='c1'&gt;# example: book({&amp;quot;author&amp;quot;: &amp;quot;Tate&amp;quot;}...) would print &amp;lt;book author=&amp;quot;Tate&amp;quot;&amp;gt;&lt;/span&gt;
+
+&lt;span class='n'&gt;OperatorTable&lt;/span&gt; &lt;span class='n'&gt;addAssignOperator&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;:&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;atPutNumber&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;Map&lt;/span&gt; &lt;span class='n'&gt;atPutNumber&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;atPut&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;evalArgAt&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;asMutable&lt;/span&gt; &lt;span class='n'&gt;removePrefix&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;removeSuffix&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;evalArgAt&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+        
+&lt;span class='n'&gt;curlyBrackets&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;r&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Map&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+    &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;arguments&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+        &lt;span class='n'&gt;r&lt;/span&gt; &lt;span class='n'&gt;doMessage&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;r&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;Map&lt;/span&gt; &lt;span class='n'&gt;printAsAttributes&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;k&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;v&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+        &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='n'&gt;k&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;=\&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='n'&gt;v&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;forward&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;makeIndent&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;lt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;indentLevel&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;indentLevel&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='mf'&gt;1&lt;/span&gt;
+    &lt;span class='n'&gt;isFirst&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='no'&gt;true&lt;/span&gt;
+    &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;arguments&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+        &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;isFirst&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+            &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;curlyBrackets&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; 
+                &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;doMessage&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='n'&gt;printAsAttributes&lt;/span&gt;
+            &lt;span class='o'&gt;)&lt;/span&gt;
+
+            &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;gt;\n&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='n'&gt;isFirst&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;false&lt;/span&gt;
+        &lt;span class='o'&gt;)&lt;/span&gt;
+
+        &lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;doMessage&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='n'&gt;type&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Sequence&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;makeIndent&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='n'&gt;content&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;indentLevel&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;indentLevel&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='mf'&gt;1&lt;/span&gt;
+    &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;makeIndent&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;lt;/&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='s'&gt;&amp;quot;\nBuilder syntax with attributes:&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;s&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;File&lt;/span&gt; &lt;span class='n'&gt;with&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;builderSyntax.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;openForReading&lt;/span&gt; &lt;span class='n'&gt;contents&lt;/span&gt;
+&lt;span class='n'&gt;html&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;doString&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;s&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;html&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;And the output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Indented builder syntax:
+&amp;lt;ul&amp;gt;
+  &amp;lt;li&amp;gt;
+    Io
+  &amp;lt;/li&amp;gt;
+  &amp;lt;li&amp;gt;
+    Lua
+  &amp;lt;/li&amp;gt;
+  &amp;lt;li&amp;gt;
+    JavaScript
+  &amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+
+Bracket list syntax:
+{1,2,3,4,5} println
+list(1, 2, 3, 4, 5)
+{&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;, &amp;quot;e&amp;quot;} println
+list(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;, &amp;quot;e&amp;quot;)
+
+Builder syntax with attributes:
+&amp;lt;ul&amp;gt;
+  &amp;lt;li&amp;gt;
+    Io
+  &amp;lt;/li&amp;gt;
+  &amp;lt;li display=&amp;quot;none&amp;quot;&amp;gt;
+    Lua
+  &amp;lt;/li&amp;gt;
+  &amp;lt;li&amp;gt;
+    JavaScript
+  &amp;lt;/li&amp;gt;
+  &amp;lt;book author=&amp;quot;Tate&amp;quot;&amp;gt;
+  &amp;lt;/book&amp;gt;
+&amp;lt;/ul&amp;gt;
+nil&lt;/code&gt;&lt;/pre&gt;</content>
+ </entry>
  
  <entry>
    <title>Seven Languages In Seven Weeks: Week 2 (Io) - Day 2</title>
@@ -18,7 +257,7 @@
    <id>http://nickknowlson.com/blog/2012/01/11/seven-languages-week-2-day-2</id>
    <content type="html">&lt;p&gt;Day 2 of Io was the most difficult (as well as the most fun) day yet. It took me quite a while to finish all the exercises to my satisfaction, and it also had the most interesting exercises so far. One in particular (transposing a matrix) was &lt;a href='/blog/2011/12/30/transposing-a-matrix-in-io/'&gt;my favorite.&lt;/a&gt;.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/30/seven-languages-week-2-day-1/'&gt;Week 2 (Io) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/18/seven-languages-week-2-day-1/'&gt;Week 2 (Io) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
 
@@ -65,7 +304,9 @@
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;addUp2DArray&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt; &lt;span class='n'&gt;reduce&lt;/span&gt;&lt;span class='o'&gt;(+))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;That&amp;#8217;s it for the highlights, but as I mentioned earlier, all of the exercises today were pretty interesting. Here is my full code listing for the exercises from Day 2 of Io. The home of this piece of code is with the other exercises &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io'&gt;on github&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id='full_code_listing'&gt;Full Code Listing&lt;/h2&gt;
+
+&lt;p&gt;That&amp;#8217;s it for the highlights, but as I mentioned earlier, all of the exercises today were pretty interesting. Here is my full code listing for the exercises from Day 2 of Io. The home of this piece of code is with the other exercises &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io'&gt;on github&lt;/a&gt;. These exercises this week are really worth taking a look at, I hope you read through some of the following.&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='c1'&gt;# Do:&lt;/span&gt;
 &lt;span class='c1'&gt;#&lt;/span&gt;
 &lt;span class='c1'&gt;# 1. Write a program to find the nth Fibonacci number. Fib(1) is 1, and fib(4)&lt;/span&gt;
@@ -330,7 +571,8 @@ Too low
 Guess a number between 1 and 100: &lt;span class='o'&gt;(&lt;/span&gt;guess 6 of 10&lt;span class='o'&gt;)&lt;/span&gt;: 43
 Congrats, you did it!
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content>
+&lt;/div&gt;
+&lt;p&gt;Next in this series: &lt;a href='/blog/2012/01/16/seven-languages-week-2-day-3/'&gt;Day 3 of Io&lt;/a&gt;&lt;/p&gt;</content>
  </entry>
  
  <entry>
@@ -470,6 +712,10 @@ Congrats, you did it!
 &lt;h2 id='highlights_from_exercises'&gt;Highlights from exercises&lt;/h2&gt;
 
 &lt;p&gt;The homework this week is short but well-constructed. It points out a couple of things that are important to remember for a newbie to Io. In particular, you will need &lt;code&gt;slotNames&lt;/code&gt; a lot, so remember that one!&lt;/p&gt;
+
+&lt;p&gt;Other than that, there isn&amp;#8217;t much to say about the homework this week. Remember &lt;code&gt;slotNames&lt;/code&gt; and read the code listing.&lt;/p&gt;
+
+&lt;h2 id='full_code_listing'&gt;Full Code Listing&lt;/h2&gt;
 
 &lt;p&gt;Here is my full code listing for the exercises from Day 1 of Io. The home of this piece of code is with the other exercises &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day1.io'&gt;on github&lt;/a&gt;.&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='c1'&gt;# Find:&lt;/span&gt;
@@ -644,6 +890,8 @@ Done!
 &lt;span class='k'&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
+&lt;h2 id='full_code_listing'&gt;Full Code Listing&lt;/h2&gt;
+
 &lt;p&gt;Here is my full code listing for the exercises from Day 3 of Ruby. The home of this piece of code is with the other exercises &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day3.rb'&gt;on github&lt;/a&gt;.&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;#Do:&lt;/span&gt;
 &lt;span class='c1'&gt;# 1. Modify the CSV application to support an each method to return a CsvRow&lt;/span&gt;
