@@ -4,12 +4,215 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-02-05T17:19:41-08:00</updated>
+ <updated>2012-02-05T18:39:56-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Seven Languages: Week 3 (Prolog) - Day 1</title>
+   <link href="http://nickknowlson.com/blog/2012/02/05/seven-languages-week-3-day-1/"/>
+   <updated>2012-02-05T00:00:00-08:00</updated>
+   <id>http://nickknowlson.com/blog/2012/02/05/seven-languages-week-3-day-1</id>
+   <content type="html">&lt;p&gt;Although I am not yet halfway through the book, I am pretty sure that Prolog will win the &amp;#8216;most foreign language&amp;#8217; category with ease. Going in, I knew Prolog was fairly old (born in 1972) and that it was a logic-based language, but I could not have estimated how, for lack of a better word, &lt;em&gt;picky&lt;/em&gt; it would be.&lt;/p&gt;
+
+&lt;p&gt;My troubles started at installation - Bruce Tate uses GNU Prolog in the book, and I spent far too long trying to get that working only to discover that some library functions essential to the exercises (&lt;code&gt;fd_domain&lt;/code&gt;, &lt;code&gt;fd_all_different&lt;/code&gt;) just caused GNU Prolog to crash on my machine. I will elaborate on this more in Day 2, but for anyone encountering this post who is in a similar situation, just go use SWI Prolog instead.&lt;/p&gt;
+
+&lt;p&gt;Prolog heavily relies on recursion but making a recursive rule is not the same as making a recursive function in functional languages. It is subtly different, and way easier to get wrong; you have to have an &lt;strong&gt;extremely&lt;/strong&gt; clear mental model of how Prolog operates (which I still don&amp;#8217;t). I will expand more on this in a future post.&lt;/p&gt;
+
+&lt;p&gt;Despite all this, during the course of Week 3 I have been convinced that logic programming can be extremely powerful. If you know how to define a problem in terms that Prolog understands, then you can write a program that solves a problem without having the slightest idea of how to actually solve it (a good example is Sudoku, which shows up in Day 3). Logic languages are the closest I have seen to the unattainable ideal of &amp;#8216;writing a program that will look at the problem and write a program to solve it for you&amp;#8217;.&lt;/p&gt;
+&lt;div class='interjection'&gt;&lt;p&gt;
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/01/16/seven-languages-week-2-day-3/'&gt;Week 2 (Io) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+&lt;/p&gt;&lt;/div&gt;
+&lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
+
+&lt;p&gt;Day 1 covered the basic structural elements of Prolog. There are three kinds of statements in a Prolog program: &lt;strong&gt;facts&lt;/strong&gt;, &lt;strong&gt;rules&lt;/strong&gt;, and &lt;strong&gt;queries&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;A fact is a simple statement that essentially adds a nugget of information to a database. Here are some facts:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+    &lt;span class='s-Atom'&gt;clear_skies&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+    &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;mouse&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;A rule is a statement that relates facts and rules together. You can almost (but not quite) think of them as functions. Here are some rules:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='nf'&gt;time_to_play&lt;/span&gt; &lt;span class='o'&gt;:-&lt;/span&gt; &lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;clear_skies&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+    &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='s-Atom'&gt;time_to_play&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;If you collect all of the preceding statements and put them in a &lt;code&gt;hello.pl&lt;/code&gt; file then you have a valid Prolog program. To actually get some useful output from it, we can load this program into the prolog interpreter, and query this database we&amp;#8217;ve built up like so:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;hello.pl&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;
+    &lt;span class='c1'&gt;% hello.pl compiled 0.00 sec, 3,352 bytes&lt;/span&gt;
+    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='c1'&gt;% Let&amp;#39;s test out the facts:&lt;/span&gt;
+
+    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;cube&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='c1'&gt;% Notice the capital letter here. Uppercase = variable, lowercase = atom.&lt;/span&gt;
+    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;earth&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;ball&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+
+    &lt;span class='c1'&gt;% And now for the rules:&lt;/span&gt;
+
+     &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='s-Atom'&gt;time_to_play&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h2 id='highlights_from_exercises'&gt;Highlights from exercises&lt;/h2&gt;
+
+&lt;p&gt;The exercises in Day 1 aren&amp;#8217;t terribly interesting, so instead I&amp;#8217;ll show you an example from an earlier part of the book that threw me into confusion for a while. The goal of the following snippet of Prolog is to assign map colours such that no state borders on another state with the same colour.&lt;/p&gt;
+
+&lt;p&gt;When I read this I flipped through the next few pages looking for the rest of the program. But there isn&amp;#8217;t any more - this is it!&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+    &lt;span class='nf'&gt;coloring&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This program aims to colour these &lt;strong&gt;five&lt;/strong&gt; states with &lt;strong&gt;three&lt;/strong&gt; colours (such that no states of the same colour share borders). When we query this we get:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;coloring&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nv'&gt;Alabama&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+    &lt;span class='nv'&gt;Mississippi&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+    &lt;span class='nv'&gt;Tennessee&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt; &lt;span class='p'&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src='/img/projects/seven-languages/state-colouring.png' alt='Coloured map of states showing Mississippi and Georgia = red, Tennessee and Florida = green, and Alabama = blue.' /&gt;&lt;/p&gt;
+
+&lt;p&gt;The program appears to be just the problem definition restated, and yet somehow Prolog can produce a correct answer!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;DISCLAIMER:&lt;/strong&gt; I am not a Prolog expert and as such the following explanation will be a bit hand wavy. Please let me know if you spot any glaring inaccuracies.&lt;/p&gt;
+
+&lt;p&gt;Prolog is trying to unify both sides of our rule and answer the question &amp;#8220;What values can I set these five variables to in order to make all of the following series of statements true&amp;#8221;. It knows there are six facts about &amp;#8220;different-ness&amp;#8221; and keeps on trying different combinations of these facts.&lt;/p&gt;
+
+&lt;p&gt;Take as an example the first statement of the &lt;strong&gt;rule&lt;/strong&gt; &lt;code&gt;different(Mississippi,
+Tennessee)&lt;/code&gt;. It might first try the &lt;strong&gt;fact&lt;/strong&gt; &lt;code&gt;different(red, green)&lt;/code&gt;, then continue on with the assumption that now &lt;code&gt;Mississippi = red&lt;/code&gt; and &lt;code&gt;Tennessee =
+green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/p&gt;
+
+&lt;p&gt;Hopefully that more or less makes sense. But in case it doesn&amp;#8217;t, &lt;strong&gt;let&amp;#8217;s take a different tack now&lt;/strong&gt;. Pretend our rule is a mathematical equation: Prolog is trying to solve for five variables, given only a little bit of knowledge about numbers. As far as it is concerned, you may as well have given it this:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+    &lt;span class='nf'&gt;solve_for&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;In which case you would receive an answer like:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;solve_for&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nv'&gt;A&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+    &lt;span class='nv'&gt;B&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+    &lt;span class='nv'&gt;D&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt; &lt;span class='p'&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Easy peasy, right?&lt;/p&gt;
+
+&lt;h2 id='full_solutions'&gt;Full solutions&lt;/h2&gt;
+
+&lt;p&gt;Here is a nicely formatted version of my solutions to the exercises from Day 1 of Prolog. The home of the following code is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-3-prolog/day1.pl'&gt;on github&lt;/a&gt; with the other exercises.&lt;/p&gt;
+&lt;h3&gt;Find:&lt;/h3&gt;&lt;h4&gt;1. Some free Prolog tutorials&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://www.lix.polytechnique.fr/~liberti/public/computing/prog/prolog/prolog-tutorial.html'&gt;http://www.lix.polytechnique.fr/~liberti/public/computing/prog/prolog/prolog-tutorial.html&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html'&gt;http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;2. A support forum (there are several)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://old.nabble.com/SWI-Prolog-f448.html'&gt;http://old.nabble.com/SWI-Prolog-f448.html&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://mail.gnu.org/pipermail/users-prolog/'&gt;http://mail.gnu.org/pipermail/users-prolog/&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://www.reddit.com/r/prolog'&gt;http://www.reddit.com/r/prolog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;3. One online reference for the Prolog version you're using&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://www.swi-prolog.org/pldoc/index.html'&gt;http://www.swi-prolog.org/pldoc/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Do:&lt;/h3&gt;&lt;h4&gt;1. Make a simple knowledge base. Represent some of your favorite books and authors.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Name Of The Wind&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Patrick Rothfuss&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Anathem&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Neal Stephenson&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Skystone&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jack Whyte&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Singing Sword&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jack Whyte&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Rapid Development&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Steve McConnell&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Pragmatic Programmer&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Andy Hunt &amp;amp; Dave Thomas&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Seven Languages In Seven Weeks&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Bruce Tate&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;h4&gt;2. Find all books in your knowledge base written by one author.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Neal Stephenson&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Anathem&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+
+    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jack White&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;The Skystone&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+
+    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;The Singing Sword&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;h4&gt;3. Make a knowledge base representing musicians and instruments. Also represent musicians and their genre of music.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Hansi Kursch&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;vocals&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Hansi Kursch&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;bass&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;guitar&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Duke Ellington&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;piano&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;guitar&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+    &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Hansi Kurch&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;metal&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;metal&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Duke Ellington&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;jazz&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+    &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;rock&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;h4&gt;4. Find all musicians who play the guitar.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;guitar&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+    
+    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+    
+    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Next in this series: Day 2 of Prolog (coming soon)&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Seven Languages: Week 2 (Io) - Day 3</title>
