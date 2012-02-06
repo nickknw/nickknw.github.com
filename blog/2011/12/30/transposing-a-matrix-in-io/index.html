@@ -55,7 +55,7 @@
 
 <p>However, my implementation in Io still has something going for it. Because of Io&#8217;s extreme malleability, I can write my <code>transpose</code> method such that calling it permanently swaps the argument order in the <code>get</code> and <code>set</code> methods of that individual matrix object. In most other languages <a href='#footnote-1' class='super' id='footnote-1-link'>[1]</a> , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &#8216;transposed&#8217; or not. This is, conceptually, nonsense: transposing is something you <em>do to</em> matrices, not a <em>property</em> of them.</p>
 
-<p>Io lets you write this in a way that is fun, short, and elegant.</p>
+<p>Io lets you write this fake transpose in a way that is fun, short, and elegant.</p>
 
 <h2 id='the_solution'>The Solution</h2>
 
@@ -97,7 +97,9 @@
 </code></pre>
 </div>
 <p>For a concrete example, if I just wanted to change the argument names for my &#8220;get&#8221; method from get(x, y) to get(y, x) I could hardcode in some values and call it like this:</p>
-<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span><span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;y&quot;</span><span class='o'>,</span> <span class='s'>&quot;x&quot;</span><span class='o'>))</span>
+<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span>
+        <span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;y&quot;</span><span class='o'>,</span> <span class='s'>&quot;x&quot;</span><span class='o'>)</span>
+    <span class='o'>)</span>
 </code></pre>
 </div>
 <p>But that wouldn&#8217;t quite be fancy enough. I&#8217;d rather write a method that would let me swap the first two arguments of <strong>any</strong> method. So, going back to the snippet above, that&#8217;s what the next two lines do:</p>
@@ -107,17 +109,17 @@
     <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
 </code></pre>
 </div>
-<p>If I wanted to keep the arguments in the same order I would have put the 0 in the first line, then the 1 in the second line. Make sense so far?</p>
+<p>If I wanted to keep the arguments in the same order I would have put the <code>0</code> in the first line, then the <code>1</code> in the second line. Make sense so far?</p>
 
-<p>I could have left it here, but then what would happen if I told it to change a method that looked like <code>doSomething(x, y, z)</code>? The z would get discarded and that method wouldn&#8217;t be very useful anymore. Hence the next line:</p>
+<p>I could have left it here, but then what would happen if I told it to change a method that looked like <code>doSomething(x, y, z)</code>? It would take the argument at position <code>1</code>, then the argument at position <code>0</code>. The <code>z</code> would get discarded and that method wouldn&#8217;t be very useful anymore. Hence the next line:</p>
 
 <p><strong>Line 4:</strong></p>
 <div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
 </code></pre>
 </div>
-<p><code>rest</code> is Io&#8217;s version of <code>cdr</code> or <code>tail</code>. It is a method that returns everything except for the first element of a list. So if you call <code>rest</code> on the result of <code>rest</code> you get a list that has all its elements except for the first two. It is like saying <code>drop 2</code> in Haskell.</p>
+<p><code>rest</code> is Io&#8217;s version of <code>cdr</code> or <code>tail</code>. It is a method that returns everything except for the first element of a list. So if you call <code>rest</code> on the result of <code>rest</code> you get a list that has all its elements except for the first two.</p>
 
-<p>Let&#8217;s recap. If I had called flipFirstTwoArgs with my fictitious <code>doSomething(x, y, z)</code> method, these previous lines would resolve into:</p>
+<p>Let&#8217;s recap. If I call this method we&#8217;re defining with my fictitious <code>doSomething(x, y, z)</code> method as the argument, these previous lines would resolve into:</p>
 <div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;doSomething&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
         <span class='s'>&quot;y&quot;</span><span class='o'>,</span> 
         <span class='s'>&quot;x&quot;</span><span class='o'>,</span> 
@@ -140,7 +142,9 @@
 </code></pre>
 </div>
 <p>Which would end up resolving into:</p>
-<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;doSomething&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;y&quot;</span><span class='o'>,</span> <span class='s'>&quot;x&quot;</span><span class='o'>,</span> <span class='s'>&quot;z&quot;</span><span class='o'>)</span> <span class='o'>)</span>
+<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;doSomething&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span>
+        <span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;y&quot;</span><span class='o'>,</span> <span class='s'>&quot;x&quot;</span><span class='o'>,</span> <span class='s'>&quot;z&quot;</span><span class='o'>)</span> 
+    <span class='o'>)</span>
 </code></pre>
 </div>
 <p>There, much better. And that explains the last line!</p>
@@ -193,11 +197,11 @@
   <h2>Related Posts</h2>
   <ul class="posts">
     
-      <li><span>16 Jan 2012</span> &raquo; <a href="/blog/2012/01/16/seven-languages-week-2-day-3/">Seven Languages In Seven Weeks: Week 2 (Io) - Day 3</a></li>
+      <li><span>16 Jan 2012</span> &raquo; <a href="/blog/2012/01/16/seven-languages-week-2-day-3/">Seven Languages: Week 2 (Io) - Day 3</a></li>
     
-      <li><span>11 Jan 2012</span> &raquo; <a href="/blog/2012/01/11/seven-languages-week-2-day-2/">Seven Languages In Seven Weeks: Week 2 (Io) - Day 2</a></li>
+      <li><span>11 Jan 2012</span> &raquo; <a href="/blog/2012/01/11/seven-languages-week-2-day-2/">Seven Languages: Week 2 (Io) - Day 2</a></li>
     
-      <li><span>18 Dec 2011</span> &raquo; <a href="/blog/2011/12/18/seven-languages-week-2-day-1/">Seven Languages In Seven Weeks: Week 2 (Io) - Day 1</a></li>
+      <li><span>18 Dec 2011</span> &raquo; <a href="/blog/2011/12/18/seven-languages-week-2-day-1/">Seven Languages: Week 2 (Io) - Day 1</a></li>
     
   </ul>
 </div>

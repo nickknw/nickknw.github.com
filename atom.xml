@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-01-16T13:46:32-08:00</updated>
+ <updated>2012-02-05T17:19:41-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -12,7 +12,7 @@
 
  
  <entry>
-   <title>Seven Languages In Seven Weeks: Week 2 (Io) - Day 3</title>
+   <title>Seven Languages: Week 2 (Io) - Day 3</title>
    <link href="http://nickknowlson.com/blog/2012/01/16/seven-languages-week-2-day-3/"/>
    <updated>2012-01-16T00:00:00-08:00</updated>
    <id>http://nickknowlson.com/blog/2012/01/16/seven-languages-week-2-day-3</id>
@@ -251,7 +251,7 @@ nil&lt;/code&gt;&lt;/pre&gt;</content>
  </entry>
  
  <entry>
-   <title>Seven Languages In Seven Weeks: Week 2 (Io) - Day 2</title>
+   <title>Seven Languages: Week 2 (Io) - Day 2</title>
    <link href="http://nickknowlson.com/blog/2012/01/11/seven-languages-week-2-day-2/"/>
    <updated>2012-01-11T00:00:00-08:00</updated>
    <id>http://nickknowlson.com/blog/2012/01/11/seven-languages-week-2-day-2</id>
@@ -588,7 +588,7 @@ Congrats, you did it!
 
 &lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a href='#footnote-1' class='super' id='footnote-1-link'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
 
-&lt;p&gt;Io lets you write this in a way that is fun, short, and elegant.&lt;/p&gt;
+&lt;p&gt;Io lets you write this fake transpose in a way that is fun, short, and elegant.&lt;/p&gt;
 
 &lt;h2 id='the_solution'&gt;The Solution&lt;/h2&gt;
 
@@ -630,7 +630,9 @@ Congrats, you did it!
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;For a concrete example, if I just wanted to change the argument names for my &amp;#8220;get&amp;#8221; method from get(x, y) to get(y, x) I could hardcode in some values and call it like this:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;But that wouldn&amp;#8217;t quite be fancy enough. I&amp;#8217;d rather write a method that would let me swap the first two arguments of &lt;strong&gt;any&lt;/strong&gt; method. So, going back to the snippet above, that&amp;#8217;s what the next two lines do:&lt;/p&gt;
@@ -640,17 +642,17 @@ Congrats, you did it!
     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;If I wanted to keep the arguments in the same order I would have put the 0 in the first line, then the 1 in the second line. Make sense so far?&lt;/p&gt;
+&lt;p&gt;If I wanted to keep the arguments in the same order I would have put the &lt;code&gt;0&lt;/code&gt; in the first line, then the &lt;code&gt;1&lt;/code&gt; in the second line. Make sense so far?&lt;/p&gt;
 
-&lt;p&gt;I could have left it here, but then what would happen if I told it to change a method that looked like &lt;code&gt;doSomething(x, y, z)&lt;/code&gt;? The z would get discarded and that method wouldn&amp;#8217;t be very useful anymore. Hence the next line:&lt;/p&gt;
+&lt;p&gt;I could have left it here, but then what would happen if I told it to change a method that looked like &lt;code&gt;doSomething(x, y, z)&lt;/code&gt;? It would take the argument at position &lt;code&gt;1&lt;/code&gt;, then the argument at position &lt;code&gt;0&lt;/code&gt;. The &lt;code&gt;z&lt;/code&gt; would get discarded and that method wouldn&amp;#8217;t be very useful anymore. Hence the next line:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Line 4:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;code&gt;rest&lt;/code&gt; is Io&amp;#8217;s version of &lt;code&gt;cdr&lt;/code&gt; or &lt;code&gt;tail&lt;/code&gt;. It is a method that returns everything except for the first element of a list. So if you call &lt;code&gt;rest&lt;/code&gt; on the result of &lt;code&gt;rest&lt;/code&gt; you get a list that has all its elements except for the first two. It is like saying &lt;code&gt;drop 2&lt;/code&gt; in Haskell.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rest&lt;/code&gt; is Io&amp;#8217;s version of &lt;code&gt;cdr&lt;/code&gt; or &lt;code&gt;tail&lt;/code&gt;. It is a method that returns everything except for the first element of a list. So if you call &lt;code&gt;rest&lt;/code&gt; on the result of &lt;code&gt;rest&lt;/code&gt; you get a list that has all its elements except for the first two.&lt;/p&gt;
 
-&lt;p&gt;Let&amp;#8217;s recap. If I had called flipFirstTwoArgs with my fictitious &lt;code&gt;doSomething(x, y, z)&lt;/code&gt; method, these previous lines would resolve into:&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s recap. If I call this method we&amp;#8217;re defining with my fictitious &lt;code&gt;doSomething(x, y, z)&lt;/code&gt; method as the argument, these previous lines would resolve into:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;doSomething&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
         &lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; 
         &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; 
@@ -673,7 +675,9 @@ Congrats, you did it!
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;Which would end up resolving into:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;doSomething&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;doSomething&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; 
+    &lt;span class='o'&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;There, much better. And that explains the last line!&lt;/p&gt;
@@ -695,7 +699,7 @@ Congrats, you did it!
  </entry>
  
  <entry>
-   <title>Seven Languages In Seven Weeks: Week 2 (Io) - Day 1</title>
+   <title>Seven Languages: Week 2 (Io) - Day 1</title>
    <link href="http://nickknowlson.com/blog/2011/12/18/seven-languages-week-2-day-1/"/>
    <updated>2011-12-18T00:00:00-08:00</updated>
    <id>http://nickknowlson.com/blog/2011/12/18/seven-languages-week-2-day-1</id>
@@ -822,7 +826,7 @@ Done!
  </entry>
  
  <entry>
-   <title>Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 3</title>
+   <title>Seven Languages: Week 1 (Ruby) - Day 3</title>
    <link href="http://nickknowlson.com/blog/2011/12/15/seven-languages-week-1-day-3/"/>
    <updated>2011-12-15T00:00:00-08:00</updated>
    <id>http://nickknowlson.com/blog/2011/12/15/seven-languages-week-1-day-3</id>
@@ -979,7 +983,7 @@ vader
  </entry>
  
  <entry>
-   <title>Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 2</title>
+   <title>Seven Languages: Week 1 (Ruby) - Day 2</title>
    <link href="http://nickknowlson.com/blog/2011/12/04/seven-languages-week-1-day-2/"/>
    <updated>2011-12-04T00:00:00-08:00</updated>
    <id>http://nickknowlson.com/blog/2011/12/04/seven-languages-week-1-day-2</id>
@@ -1224,7 +1228,7 @@ and
  </entry>
  
  <entry>
-   <title>Seven Languages In Seven Weeks: Week 1 (Ruby) - Day 1</title>
+   <title>Seven Languages: Week 1 (Ruby) - Day 1</title>
    <link href="http://nickknowlson.com/blog/2011/11/27/seven-languages-week-1-day-1/"/>
    <updated>2011-11-27T00:00:00-08:00</updated>
    <id>http://nickknowlson.com/blog/2011/11/27/seven-languages-week-1-day-1</id>
@@ -1706,7 +1710,7 @@ Got it! It was 129
 
 &lt;h2 id='raw_data'&gt;Raw Data&lt;/h2&gt;
 
-&lt;p&gt;My list that is split up by categories is currently in a &lt;a href='https://docs.google.com/spreadsheet/ccc?key=0Aq8X8wb4SdlWdG1XM3NoLXhnWl9VR3d6OURYMTA2ZXc&amp;amp;hl=en_US'&gt;spreadsheet on Google Docs&lt;/a&gt;. From there you have a bunch of different formats available download or export it in.&lt;/p&gt;
+&lt;p&gt;My list that is split up by categories is currently in a &lt;a href='https://docs.google.com/spreadsheet/ccc?key=0Aq8X8wb4SdlWdG1XM3NoLXhnWl9VR3d6OURYMTA2ZXc&amp;amp;hl=en_US'&gt;spreadsheet on Google Docs&lt;/a&gt;. From there you have a bunch of different formats available to download or export it in.&lt;/p&gt;
 
 &lt;h2 id='summary'&gt;Summary&lt;/h2&gt;
 &lt;h3&gt;First Place: Libraries&lt;/h3&gt;
