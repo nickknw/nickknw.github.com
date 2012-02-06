@@ -111,15 +111,17 @@
 <span class='k'>end</span>
 </code></pre>
 </div>
-<h2 id='full_code_listing'>Full Code Listing</h2>
+<h2 id='full_solution'>Full solution</h2>
 
-<p>Here is my full code listing for the exercises from Day 3 of Ruby. The home of this piece of code is with the other exercises <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day3.rb'>on github</a>.</p>
-<div class='highlight'><pre><code class='ruby'><span class='c1'>#Do:</span>
-<span class='c1'># 1. Modify the CSV application to support an each method to return a CsvRow</span>
-<span class='c1'># object. Use method_missing on that CsvRow to return the value for the column</span>
-<span class='c1'># for a given heading.</span>
+<p>Here is a nicely formatted version of my solution to the exercise from Day 3 of Ruby. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day3.rb'>on github</a> with the other exercises.</p>
+<div id='formatted_solutions'>
 
-<span class='k'>module</span> <span class='nn'>ActsAsCsv</span>
+<h3>Do:</h3>
+
+<h4><b>1.</b> Modify the CSV application to support an each method to return a CsvRow object. Use method_missing on that CsvRow to return the value for the column for a given heading.</h4>
+
+
+<div class='highlight'><pre><code class='ruby'><span class='k'>module</span> <span class='nn'>ActsAsCsv</span>
 
     <span class='k'>def</span> <span class='nc'>self</span><span class='o'>.</span><span class='nf'>included</span><span class='p'>(</span><span class='n'>base</span><span class='p'>)</span>
         <span class='n'>base</span><span class='o'>.</span><span class='n'>extend</span> <span class='no'>ClassMethods</span>
@@ -180,9 +182,13 @@
 <span class='n'>csv</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span><span class='o'>|</span><span class='n'>row</span><span class='o'>|</span> <span class='nb'>puts</span> <span class='n'>row</span><span class='o'>.</span><span class='n'>one</span><span class='p'>}</span>
 </code></pre>
 </div>
-<p>And the output (given the sample file in my github repo):</p>
-<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby day3.rb
-lions
+
+
+
+<h5>Output (given the sample file in my github repo)</h5> 
+
+
+<div class='highlight'><pre><code class='bash'>lions
 han
 chewbacca
 r2 d2
@@ -195,6 +201,10 @@ darth sidious
 bail organa
 vader
 </code></pre>
+</div>
+
+
+
 </div>
 <p>Next in this series: <a href='/blog/2011/12/18/seven-languages-week-2-day-1/'>Day 1 of Io</a></p>
 </div>

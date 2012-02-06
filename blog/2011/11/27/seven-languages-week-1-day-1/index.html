@@ -55,41 +55,120 @@
 
 <p>For example, being able to repeat a string like: <code>&quot;Nick &quot; * 10</code> or loop like: <code>(1..10).each { |num| do_stuff(num) }</code> is great.</p>
 
-<p>Here is my full code listing for the exercises from Day 1 of Ruby. The home of this piece of code is with the other exercises <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day1.rb'>on github</a>.</p>
-<div class='highlight'><pre><code class='ruby'><span class='c1'># Find:</span>
-<span class='c1'># 1. A method that substitutes a part of a string</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>Find:&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>1.&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;BAM&quot;</span><span class='o'>.</span><span class='n'>gsub</span> <span class='s2'>&quot;M&quot;</span><span class='p'>,</span> <span class='s2'>&quot;TMAN&quot;</span>
+<p>Here is a nicely formatted version of my solutions to the exercises from Day 1 of Ruby. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day1.rb'>on github</a> with the other exercises.</p>
+<div id='formatted_solutions'>
+
+<h3>Find:</h3>
+
+<h4><b>1.</b> A method that substitutes a part of a string</h4>
 
 
-<span class='c1'># Do:</span>
-<span class='c1'># 1. Print the string &quot;Hello World&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>Do:&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>1.&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;Hello World&quot;</span>
+<div class='highlight'><pre><code class='ruby'><span class='nb'>puts</span> <span class='s2'>&quot;BAM&quot;</span><span class='o'>.</span><span class='n'>gsub</span> <span class='s2'>&quot;M&quot;</span><span class='p'>,</span> <span class='s2'>&quot;TMAN&quot;</span>
+</code></pre>
+</div>
 
-<span class='c1'># 2. For the string &quot;Hello, Ruby,&quot; find the index of the word &quot;Ruby.&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>2.&quot;</span>
-<span class='c1'># literally:</span>
+
+
+<h5>Output:</h5>
+
+
+<div class='highlight'><pre><code class='bash'>BATMAN
+</code></pre>
+</div>
+
+
+
+<h3>Do:</h3>
+
+<h4><b>1.</b> Print the string "Hello World"</h4>
+
+
+<div class='highlight'><pre><code class='ruby'><span class='nb'>puts</span> <span class='s2'>&quot;Hello World&quot;</span>
+</code></pre>
+</div>
+
+
+
+<h5>Output:</h5>
+
+
+<div class='highlight'><pre><code class='bash'>Hello World
+</code></pre>
+</div>
+
+
+
+<h4><b>2.</b> For the string "Hello, Ruby," find the index of the word "Ruby."</h4>
+
+
+<div class='highlight'><pre><code class='ruby'><span class='c1'># literally:</span>
 <span class='nb'>p</span> <span class='s2'>&quot;Hello, Ruby,&quot;</span><span class='o'>.</span><span class='n'>index</span> <span class='s2'>&quot;Ruby.&quot;</span>
 <span class='c1'># realistically:</span>
 <span class='nb'>puts</span> <span class='s2'>&quot;Hello, Ruby&quot;</span><span class='o'>.</span><span class='n'>index</span> <span class='s2'>&quot;Ruby&quot;</span>
+</code></pre>
+</div>
 
-<span class='c1'># 3. Print your name ten times</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>3.&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;Nick &quot;</span> <span class='o'>*</span> <span class='mi'>10</span>
 
-<span class='c1'># 4. Print the string &quot;This is sentence number 1,&quot; where the number 1 changes</span>
-<span class='c1'># from 1 to 10</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>4.&quot;</span>
-<span class='p'>(</span><span class='mi'>1</span><span class='o'>.</span><span class='n'>.</span><span class='mi'>10</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>num</span><span class='o'>|</span> <span class='nb'>puts</span> <span class='s2'>&quot;This is sentence number </span><span class='si'>#{</span><span class='n'>num</span><span class='si'>}</span><span class='s2'>&quot;</span> <span class='p'>}</span>
 
-<span class='c1'># Bonus: Write a program that picks a random number. Let a player guess the</span>
-<span class='c1'># number, telling the player whether the guess is too low or too high.</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>Bonus:&quot;</span>
+<h5>Output:</h5>
 
-<span class='n'>random_number</span> <span class='o'>=</span> <span class='nb'>rand</span><span class='p'>(</span><span class='mi'>1000</span><span class='p'>)</span> <span class='o'>+</span> <span class='mi'>1</span>
+
+<div class='highlight'><pre><code class='bash'>nil
+7
+</code></pre>
+</div>
+
+
+
+<h4><b>3.</b> Print your name ten times</h4>
+
+
+<div class='highlight'><pre><code class='ruby'><span class='nb'>puts</span> <span class='s2'>&quot;Nick &quot;</span> <span class='o'>*</span> <span class='mi'>10</span>
+</code></pre>
+</div>
+
+
+
+<h5>Output:</h5>
+
+
+<div class='highlight'><pre><code class='bash'>Nick Nick Nick Nick Nick Nick Nick Nick Nick Nick 
+</code></pre>
+</div>
+
+
+
+<h4><b>4.</b> Print the string "This is sentence number 1," where the number 1 changes from 1 to 10</h4>
+
+
+<div class='highlight'><pre><code class='ruby'><span class='p'>(</span><span class='mi'>1</span><span class='o'>.</span><span class='n'>.</span><span class='mi'>10</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>num</span><span class='o'>|</span> <span class='nb'>puts</span> <span class='s2'>&quot;This is sentence number </span><span class='si'>#{</span><span class='n'>num</span><span class='si'>}</span><span class='s2'>&quot;</span> <span class='p'>}</span>
+</code></pre>
+</div>
+
+
+
+<h5>Output:</h5>
+
+
+<div class='highlight'><pre><code class='bash'>This is sentence number 1
+This is sentence number 2
+This is sentence number 3
+This is sentence number 4
+This is sentence number 5
+This is sentence number 6
+This is sentence number 7
+This is sentence number 8
+This is sentence number 9
+This is sentence number 10
+</code></pre>
+</div>
+
+
+
+<h4><b>Bonus:</b> Write a program that picks a random number. Let a player guess the number, telling the player whether the guess is too low or too high.</h4>
+
+
+<div class='highlight'><pre><code class='ruby'><span class='n'>random_number</span> <span class='o'>=</span> <span class='nb'>rand</span><span class='p'>(</span><span class='mi'>1000</span><span class='p'>)</span> <span class='o'>+</span> <span class='mi'>1</span>
 <span class='n'>guess</span> <span class='o'>=</span> <span class='mi'>0</span>
 
 <span class='k'>while</span> <span class='n'>guess</span> <span class='o'>!=</span> <span class='n'>random_number</span> <span class='k'>do</span>
@@ -102,40 +181,13 @@
 <span class='nb'>puts</span> <span class='s2'>&quot;Got it! It was </span><span class='si'>#{</span><span class='n'>random_number</span><span class='si'>}</span><span class='s2'>&quot;</span>
 </code></pre>
 </div>
-<p>And the output:</p>
-<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby day1.rb
 
-Find:
 
-1.
-BATMAN
 
-Do:
+<h5>Output:</h5>
 
-1.
-Hello World
 
-2.
-nil
-7
-
-3.
-Nick Nick Nick Nick Nick Nick Nick Nick Nick Nick 
-
-4.
-This is sentence number 1
-This is sentence number 2
-This is sentence number 3
-This is sentence number 4
-This is sentence number 5
-This is sentence number 6
-This is sentence number 7
-This is sentence number 8
-This is sentence number 9
-This is sentence number 10
-
-Bonus:
-Pick a number between 1 and 1000: 500
+<div class='highlight'><pre><code class='bash'>Pick a number between 1 and 1000: 500
 Too high!
 Pick a number between 1 and 1000: 250
 Too high!
@@ -152,6 +204,10 @@ Too high!
 Pick a number between 1 and 1000: 129
 Got it! It was 129
 </code></pre>
+</div>
+
+
+
 </div>
 <p>Next in this series: <a href='/blog/2011/12/04/seven-languages-week-1-day-2/'>Day 2 of Ruby</a></p>
 </div>

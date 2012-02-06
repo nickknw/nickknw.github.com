@@ -65,69 +65,116 @@
 
 <h2 id='full_code_listing'>Full Code Listing</h2>
 
-<p>Here is my full code listing for the exercises from Day 1 of Io. The home of this piece of code is with the other exercises <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day1.io'>on github</a>.</p>
-<div class='highlight'><pre><code class='io'><span class='c1'># Find:</span>
-<span class='c1'>#   Some Io example problems</span>
-<span class='c1'>#       http://www.iolanguage.com/about/samplecode/</span>
-<span class='c1'>#</span>
-<span class='c1'>#   An Io community that will answer questions</span>
-<span class='c1'>#       http://tech.groups.yahoo.com/group/iolanguage/messages</span>
-<span class='c1'>#       http://stackoverflow.com/questions/tagged/iolanguage</span>
-<span class='c1'>#       #io on freenode</span>
-<span class='c1'>#       http://www.reddit.com/r/iolanguage</span>
-<span class='c1'>#</span>
-<span class='c1'>#   A style guide with Io idioms</span>
-<span class='c1'>#       http://en.wikibooks.org/wiki/Io_Programming/Io_Style_Guide</span>
-<span class='c1'>#</span>
-<span class='c1'># Answer:</span>
-<span class='c1'>#</span>
-<span class='c1'># 1. Evaluate 1 + 1 and then 1 + &quot;one&quot;. Is Io strongly typed or weakly typed?</span>
-<span class='c1'>#</span>
-<span class='c1'>#   Strongly typed. Trying to run `1 + &quot;one&quot;` throws an exception that says:</span>
-<span class='c1'>#       &quot;Exception: argument 0 to method &#39;+&#39; must be a Number, not a &#39;Sequence&#39;&quot;</span>
-<span class='c1'>#   </span>
-<span class='c1'># 2. Is 0 true or false? What about the empty string? Is nil true or false?</span>
+<p>Here is a nicely formatted version of my solutions to the exercises from Day 1 of Io. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day1.io'>on github</a> with the other exercises.</p>
+<div id='formatted_solutions'>
 
-<span class='k'>if</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>)</span> <span class='n'>println</span>   <span class='c1'># true</span>
-<span class='k'>if</span><span class='o'>(</span><span class='s'>&quot;&quot;</span><span class='o'>)</span> <span class='n'>println</span>  <span class='c1'># true</span>
-<span class='k'>if</span><span class='o'>(</span><span class='no'>nil</span><span class='o'>)</span> <span class='n'>println</span> <span class='c1'># false</span>
+<h3>Find:</h3>
 
-<span class='c1'># 3. How can you tell what slots a prototype supports?</span>
-<span class='c1'># &lt;prototype&gt; slotNames</span>
+<h4>Some Io example problems</h4>
+
+<ul>
+<li><a href='http://www.iolanguage.com/about/samplecode/'>http://www.iolanguage.com/about/samplecode/</a></li>
+</ul>
+
+<h4>An Io community that will answer questions</h4>
+
+<ul>
+<li><a href='http://tech.groups.yahoo.com/group/iolanguage/messages'>http://tech.groups.yahoo.com/group/iolanguage/messages</a></li>
+<li><a href='http://stackoverflow.com/questions/tagged/iolanguage'>http://stackoverflow.com/questions/tagged/iolanguage</a></li>
+<li>#io on freenode</li>
+<li><a href='http://www.reddit.com/r/iolanguage'>http://www.reddit.com/r/iolanguage</a></li>
+</ul>
+
+<h4>A style guide with Io idioms</h4>
+
+<ul>
+<li><a href='http://en.wikibooks.org/wiki/Io_Programming/Io_Style_Guide'>http://en.wikibooks.org/wiki/Io_Programming/Io_Style_Guide</a></li>
+</ul>
+
+<h3>Answer:</h3>
+
+<h4><b>1.</b> Evaluate 1 + 1 and then 1 + "one". Is Io strongly typed or weakly
+typed?</h4>
+
+<p>
+Strongly typed. Trying to run <code>1 + "one"</code> throws an exception that says:
+<code>"Exception: argument 0 to method '+' must be a Number, not a 'Sequence'"</code>
+</p>
+  
+<h4><b>2.</b> Is 0 true or false? What about the empty string? Is nil true or
+false?</h4>
+
+
+<div class='highlight'><pre><code class='io'><span class='k'>if</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>)</span> <span class='n'>println</span>   
+<span class='k'>if</span><span class='o'>(</span><span class='s'>&quot;&quot;</span><span class='o'>)</span> <span class='n'>println</span>  
+<span class='k'>if</span><span class='o'>(</span><span class='no'>nil</span><span class='o'>)</span> <span class='n'>println</span> 
+</code></pre>
+</div>
+
+
+
+<h5>Output</h5>
+
+
+<div class='highlight'><pre><code class='bash'><span class='nb'>true</span>
+<span class='nb'>true</span>
+<span class='nb'>false</span>
+</code></pre>
+</div>
+
+
+
+<h4><b>3.</b> How can you tell what slots a prototype supports?</h4>
+
+
+<div class='highlight'><pre><code class='io'><span class='c1'># &lt;prototype&gt; slotNames</span>
 
 <span class='n'>Zerg</span> <span class='o'>:=</span> <span class='n'>Object</span> <span class='k'>clone</span>
 <span class='n'>Zerg</span> <span class='n'>sixPool</span> <span class='o'>:=</span> <span class='s'>&quot;Zergling rush!&quot;</span>
-<span class='n'>Zerg</span> <span class='n'>slotNames</span> <span class='n'>println</span>  <span class='c1'># will print list(type, sixPool)</span>
+<span class='n'>Zerg</span> <span class='n'>slotNames</span> <span class='n'>println</span> 
+</code></pre>
+</div>
 
-<span class='c1'># 4. What is the difference between = (equals), := (colon equals), and ::=</span>
-<span class='c1'># (colon colon equals)? When would you use each one?</span>
-<span class='c1'>#</span>
-<span class='c1'># =     is used to assign something to an existing slot</span>
-<span class='c1'># :=    is used to assign something to a previously non-existent slot</span>
-<span class='c1'># ::=   is used to assign something to a previously non-existent slot as well as</span>
-<span class='c1'>#       create a setter for that slot</span>
-<span class='c1'>#   </span>
-<span class='c1'>#   iolanguage.com&#39;s guide puts this much much better than I did:</span>
-<span class='c1'>#</span>
-<span class='c1'># ::= 	Creates slot, creates setter, assigns value</span>
-<span class='c1'># := 	Creates slot, assigns value</span>
-<span class='c1'># = 	Assigns value to slot if it exists, otherwise raises exception </span>
-<span class='c1'>#</span>
-<span class='c1'>#</span>
-<span class='c1'># Do:</span>
-<span class='c1'>#</span>
-<span class='c1'># 1. Run an Io program from a file.</span>
-<span class='c1'>#</span>
-<span class='c1'># From the command line run: io day1.io</span>
-<span class='c1'>#</span>
 
-<span class='s'>&quot;successfully ran day1&quot;</span> <span class='n'>println</span>
 
-<span class='c1'># 2.Execute the code in a slot given its name.</span>
-<span class='c1'>#</span>
-<span class='c1'># I&#39;m not quite sure I understood this question. I&#39;ll answer the two</span>
+<h5>Output</h5>
+
+
+<div class='highlight'><pre><code class='bash'>list<span class='o'>(</span><span class='nb'>type</span>, sixPool<span class='o'>)</span>
+</code></pre>
+</div>
+
+
+
+<h4><b>4.</b> What is the difference between = (equals), := (colon equals), and ::= (colon colon equals)? When would you use each one?</h4>
+
+<ul>
+<li>=     is used to assign something to an existing slot</li>
+<li>:=    is used to assign something to a previously non-existent slot</li>
+<li>::=   is used to assign something to a previously non-existent slot as well as create a setter for that slot</li>
+</ul>
+  
+  <p>iolanguage.com's guide puts this much much better than I did:</p>
+
+<ul>
+<li>::= 	Creates slot, creates setter, assigns value</li>
+<li>:= 	Creates slot, assigns value</li>
+<li>= 	Assigns value to slot if it exists, otherwise raises exception </li>
+</ul>
+
+
+<h3>Do:</h3>
+
+<h4><b>1.</b> Run an Io program from a file.</h4>
+
+<p> From the command line run: io day1.io</p>
+
+<h4><b>2.</b> Execute the code in a slot given its name.</h4>
+
+
+<div class='highlight'><pre><code class='io'><span class='c1'># I&#39;m not quite sure I understood this question. I&#39;ll answer the two</span>
 <span class='c1'># interpretations I could come up with.</span>
-<span class='c1'>#</span>
+
 <span class='c1'># If the code in a slot is stored as a method then just invoking the slot is</span>
 <span class='c1'># enough:</span>
 
@@ -150,14 +197,13 @@
 <span class='s'>&quot;Done!&quot;</span> <span class='n'>println</span>
 </code></pre>
 </div>
-<p>And the output:</p>
-<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>io day1.io
-<span class='nb'>true</span>
-<span class='nb'>true</span>
-<span class='nb'>false</span>
-list<span class='o'>(</span><span class='nb'>type</span>, sixPool<span class='o'>)</span>
-successfully ran day1
-Injecting larvae now!
+
+
+
+<h5>Output</h5>
+
+
+<div class='highlight'><pre><code class='bash'>Injecting larvae now!
 Spreading creep now!
 
 Let<span class='err'>&#39;</span>s try that again
@@ -165,6 +211,10 @@ Injecting larvae now!
 Spreading creep now!
 Done!
 </code></pre>
+</div>
+
+
+
 </div>
 <p>Next in this series: <a href='/blog/2012/01/11/seven-languages-week-2-day-2/'>Day 2 of Io</a></p>
 </div>

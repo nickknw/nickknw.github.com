@@ -66,18 +66,18 @@
 </blockquote>
 
 <p>Before we get started, this is what the final solution looks like. Try and become a little familiar with this before we move on (it will all be explained in detail below, don&#8217;t worry).</p>
-<div class='highlight'><pre><code class='io'><span class='n'>flipFirstTwoArgs</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>,</span>
-    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
-        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
-        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
-        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
-    <span class='o'>)</span> <span class='n'>flatten</span><span class='o'>)</span>
-<span class='o'>)</span>
-
-<span class='n'>List2D</span> <span class='n'>transpose</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
-    <span class='n'>self</span> <span class='n'>get</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span>
-    <span class='n'>self</span> <span class='n'>set</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;set&quot;</span><span class='o'>)</span>
-<span class='o'>)</span>
+<div class='highlight'><pre><code class='io'><span class='lineno'> 1</span> <span class='n'>flipFirstTwoArgs</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>,</span>
+<span class='lineno'> 2</span>     <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
+<span class='lineno'> 3</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
+<span class='lineno'> 4</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
+<span class='lineno'> 5</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
+<span class='lineno'> 6</span>     <span class='o'>)</span> <span class='n'>flatten</span><span class='o'>)</span>
+<span class='lineno'> 7</span> <span class='o'>)</span>
+<span class='lineno'> 8</span> 
+<span class='lineno'> 9</span> <span class='n'>List2D</span> <span class='n'>transpose</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+<span class='lineno'>10</span>     <span class='n'>self</span> <span class='n'>get</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span>
+<span class='lineno'>11</span>     <span class='n'>self</span> <span class='n'>set</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;set&quot;</span><span class='o'>)</span>
+<span class='lineno'>12</span> <span class='o'>)</span>
 </code></pre>
 </div>
 <p>List2D is a simple matrix prototype from the previous exercise. It is the thing that is being transposed.</p>
@@ -90,7 +90,7 @@
 
 <p>The following line of code gets the method we are going to modify and sets the names of its arguments.</p>
 
-<p><strong>Line 1:</strong></p>
+<p><strong>Line 2:</strong></p>
 <div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> 
         <span class='c1'>#list of argument names goes here </span>
     <span class='o'>)</span>
@@ -104,7 +104,7 @@
 </div>
 <p>But that wouldn&#8217;t quite be fancy enough. I&#8217;d rather write a method that would let me swap the first two arguments of <strong>any</strong> method. So, going back to the snippet above, that&#8217;s what the next two lines do:</p>
 
-<p><strong>Lines 2-3:</strong></p>
+<p><strong>Lines 3-4:</strong></p>
 <div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
     <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
 </code></pre>
@@ -113,7 +113,7 @@
 
 <p>I could have left it here, but then what would happen if I told it to change a method that looked like <code>doSomething(x, y, z)</code>? It would take the argument at position <code>1</code>, then the argument at position <code>0</code>. The <code>z</code> would get discarded and that method wouldn&#8217;t be very useful anymore. Hence the next line:</p>
 
-<p><strong>Line 4:</strong></p>
+<p><strong>Line 5:</strong></p>
 <div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
 </code></pre>
 </div>
@@ -129,7 +129,7 @@
 </div>
 <p>That&#8217;s not quite right, <code>setArgumentNames</code> is expecting a simple flat list, none of this nested list stuff. So let&#8217;s flatten the list of argument names before giving it to <code>setArgumentNames</code>.</p>
 
-<p><strong>Line 5:</strong></p>
+<p><strong>Line 6:</strong></p>
 <div class='highlight'><pre><code class='io'>    <span class='o'>)</span> <span class='n'>flatten</span> <span class='o'>)</span>
 </code></pre>
 </div>
@@ -151,12 +151,19 @@
 
 <h2 id='wrapup'>Wrap-up</h2>
 
-<p>Now, putting back together all the lines I&#8217;ve explained, here is the body of the <code>flipFirstTwoArgs</code> method again:</p>
-<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
-        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
-        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
-        <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
-    <span class='o'>)</span> <span class='n'>flatten</span><span class='o'>)</span>
+<p>Now, putting back together all the lines I&#8217;ve explained, here is the full solution again:</p>
+<div class='highlight'><pre><code class='io'><span class='lineno'> 1</span> <span class='n'>flipFirstTwoArgs</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>,</span>
+<span class='lineno'> 2</span>     <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
+<span class='lineno'> 3</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
+<span class='lineno'> 4</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
+<span class='lineno'> 5</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
+<span class='lineno'> 6</span>     <span class='o'>)</span> <span class='n'>flatten</span><span class='o'>)</span>
+<span class='lineno'> 7</span> <span class='o'>)</span>
+<span class='lineno'> 8</span> 
+<span class='lineno'> 9</span> <span class='n'>List2D</span> <span class='n'>transpose</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+<span class='lineno'>10</span>     <span class='n'>self</span> <span class='n'>get</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span>
+<span class='lineno'>11</span>     <span class='n'>self</span> <span class='n'>set</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;set&quot;</span><span class='o'>)</span>
+<span class='lineno'>12</span> <span class='o'>)</span>
 </code></pre>
 </div>
 <p>If I&#8217;ve done my job right, it should make a lot more sense this time.</p>
