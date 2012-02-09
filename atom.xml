@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-02-07T00:03:39-08:00</updated>
+ <updated>2012-02-09T00:55:28-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -31,63 +31,63 @@
 &lt;p&gt;Day 1 covered the basic structural elements of Prolog. There are three kinds of statements in a Prolog program: &lt;strong&gt;facts&lt;/strong&gt;, &lt;strong&gt;rules&lt;/strong&gt;, and &lt;strong&gt;queries&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;A fact is a simple statement that essentially adds a nugget of information to a database. Here are some facts:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
-    &lt;span class='s-Atom'&gt;clear_skies&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;clear_skies&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 
-    &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;mouse&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;mouse&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;A rule is a statement that relates facts and rules together. You can almost (but not quite) think of them as functions. Here are some rules:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='nf'&gt;time_to_play&lt;/span&gt; &lt;span class='o'&gt;:-&lt;/span&gt; &lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;clear_skies&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;time_to_play&lt;/span&gt; &lt;span class='o'&gt;:-&lt;/span&gt; &lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;clear_skies&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 
-    &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='s-Atom'&gt;time_to_play&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='s-Atom'&gt;time_to_play&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;If you collect all of the preceding statements and put them in a &lt;code&gt;hello.pl&lt;/code&gt; file then you have a valid Prolog program. To actually get some useful output from it, we can load this program into the prolog interpreter, and query this database we&amp;#8217;ve built up like so:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;hello.pl&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;
-    &lt;span class='c1'&gt;% hello.pl compiled 0.00 sec, 3,352 bytes&lt;/span&gt;
-    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;hello.pl&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;
+&lt;span class='c1'&gt;% hello.pl compiled 0.00 sec, 3,352 bytes&lt;/span&gt;
+&lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='c1'&gt;% Let&amp;#39;s test out the facts:&lt;/span&gt;
+&lt;span class='c1'&gt;% Let&amp;#39;s test out the facts:&lt;/span&gt;
 
-    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
-    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;cube&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;cube&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='c1'&gt;% Notice the capital letter here. Uppercase = variable, lowercase = atom.&lt;/span&gt;
-    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;earth&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
-    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;ball&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='c1'&gt;% Notice the capital letter here. Uppercase = variable, lowercase = atom.&lt;/span&gt;
+&lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;earth&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+&lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;ball&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
 
-    &lt;span class='c1'&gt;% And now for the rules:&lt;/span&gt;
+&lt;span class='c1'&gt;% And now for the rules:&lt;/span&gt;
 
-     &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='s-Atom'&gt;time_to_play&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
-    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+ &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='s-Atom'&gt;time_to_play&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
-    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;h2 id='highlights_from_exercises'&gt;Highlights from exercises&lt;/h2&gt;
@@ -95,26 +95,26 @@
 &lt;p&gt;The exercises in Day 1 aren&amp;#8217;t terribly interesting, so instead I&amp;#8217;ll show you an example from an earlier part of the book that threw me into confusion for a while. The goal of the following snippet of Prolog is to assign map colours such that no state borders on another state with the same colour.&lt;/p&gt;
 
 &lt;p&gt;When I read this I flipped through the next few pages looking for the rest of the program. But there isn&amp;#8217;t any more - this is it!&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 
-    &lt;span class='nf'&gt;coloring&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;coloring&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;This program aims to colour these &lt;strong&gt;five&lt;/strong&gt; states with &lt;strong&gt;three&lt;/strong&gt; colours (such that no states of the same colour share borders). When we query this we get:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;coloring&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nv'&gt;Alabama&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
-    &lt;span class='nv'&gt;Mississippi&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
-    &lt;span class='nv'&gt;Tennessee&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt; &lt;span class='p'&gt;.&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;coloring&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nv'&gt;Alabama&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+&lt;span class='nv'&gt;Mississippi&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+&lt;span class='nv'&gt;Tennessee&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt; &lt;span class='p'&gt;.&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;img src='/img/projects/seven-languages/state-colouring.png' alt='Coloured map of states showing Mississippi and Georgia = red, Tennessee and Florida = green, and Alabama = blue.' /&gt;&lt;/p&gt;
@@ -130,29 +130,113 @@ Tennessee)&lt;/code&gt;. It might first try the &lt;strong&gt;fact&lt;/strong&gt
 green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/p&gt;
 
 &lt;p&gt;Hopefully that more or less makes sense. But in case it doesn&amp;#8217;t, &lt;strong&gt;let&amp;#8217;s take a different tack now&lt;/strong&gt;. Pretend our rule is a mathematical equation: Prolog is trying to solve for five variables, given only a little bit of knowledge about numbers. As far as it is concerned, you may as well have given it this:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 
-    &lt;span class='nf'&gt;solve_for&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
-        &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;solve_for&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;In which case you would receive an answer like:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;solve_for&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nv'&gt;A&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
-    &lt;span class='nv'&gt;B&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
-    &lt;span class='nv'&gt;D&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt; &lt;span class='p'&gt;.&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;solve_for&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nv'&gt;A&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+&lt;span class='nv'&gt;B&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+&lt;span class='nv'&gt;D&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt; &lt;span class='p'&gt;.&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;Easy peasy, right?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UPDATE:&lt;/strong&gt; Thanks for the great comments, both below on my &lt;a href='#disqus_thread'&gt;blog comments&lt;/a&gt; and also &lt;a href='http://www.reddit.com/r/programming/comments/pd9z1/seven_languages_day_1_of_prolog/'&gt;on reddit&lt;/a&gt;. There are a few in particular that helped me learn more that I would like to highlight and save for posterity.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://www.storytotell.org/'&gt;Daniel Lyons&lt;/a&gt; and &lt;a href='http://users.ecs.soton.ac.uk/mal/'&gt;Michael Leuschel&lt;/a&gt; pointed out some variations on solving this map colouring problem.&lt;/p&gt;
+
+&lt;p&gt;Daniel showed how to &lt;a href='#dsq-comment-430894811'&gt;minimize redundancy&lt;/a&gt; when declaring red, green and blue as colours that are &lt;code&gt;different&lt;/code&gt; from each other:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The map example is wonderful! I would probably make the map coloring a little more abstract like so:&lt;/p&gt;
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;color&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;color&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;color&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;color&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;color&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt; &lt;span class='s-Atom'&gt;\=&lt;/span&gt; &lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;/blockquote&gt;
+&lt;p&gt;Michael Leuschel showed how &lt;a href='#dsq-comment-431117487'&gt;this solution could take advantage&lt;/a&gt; of &lt;a href='http://www.swi-prolog.org/man/clpfd.html'&gt;CLP(FD)&lt;/a&gt; (a module that can &lt;strong&gt;drastically&lt;/strong&gt; improve performance when dealing with larger data sets) and was also kind enough to &lt;a href='#dsq-comment-432664414'&gt;explain labeling to me&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+
+&lt;p&gt;Another solution would be to use the different operator &lt;code&gt;#\=&lt;/code&gt; from clp(fd):&lt;/p&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;use_module&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;library&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;clpfd&lt;/span&gt;&lt;span class='p'&gt;)).&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt; &lt;span class='s-Atom'&gt;in&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;..&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Y&lt;/span&gt; &lt;span class='s-Atom'&gt;in&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;..&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt; &lt;span class='s-Atom'&gt;#\=&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+&lt;p&gt;You would then need to add a call to &lt;code&gt;labeling&lt;/code&gt; after setting up the constraints:&lt;/p&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;solve_for&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;])&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nf'&gt;labeling&lt;/span&gt;&lt;span class='p'&gt;([],[&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+&lt;p&gt;This should be more efficient than the original, as you first set up the constraints and only *then* start enumerating candidate solutions.
+(Of course this performance difference does not matter for such a small graph; it can make a huge difference for larger graphs.)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='#dsq-comment-431117487'&gt;...continued in comments&lt;/a&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href='http://egonelbre.com/'&gt;Egon Elbre&lt;/a&gt; and &lt;a href='http://www.reddit.com/user/gecko'&gt;gecko&lt;/a&gt; both helped explain different things about Prolog to me.&lt;/p&gt;
+
+&lt;p&gt;Egon &lt;a href='https://gist.github.com/1755115'&gt;used relational databases as a metaphor&lt;/a&gt; to explain the map colouring example.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;earth&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+&lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;mouse&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+&lt;span class='c1'&gt;% I want to have tables `round` and `small`&lt;/span&gt;
+&lt;span class='c1'&gt;% `round` should contain `earth` and `ball`&lt;/span&gt;
+&lt;span class='c1'&gt;% `small` should contain `mouse` and `ball`&lt;/span&gt;
+
+&lt;span class='nf'&gt;time_to_play&lt;/span&gt; &lt;span class='o'&gt;:-&lt;/span&gt; &lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;clear_skies&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+&lt;span class='c1'&gt;% I have empty table (fact) `time_to_play` if&lt;/span&gt;
+&lt;span class='c1'&gt;% there are two other tables (facts) `daytime` and `clear_skies`&lt;/span&gt;
+
+&lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+&lt;span class='c1'&gt;% I want to have a table `suitable_for_playing_with`&lt;/span&gt;
+&lt;span class='c1'&gt;% such that each value in it must be in tables `round` and `small`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;gecko &lt;a href='http://www.reddit.com/r/programming/comments/pd9z1/seven_languages_day_1_of_prolog/c3ojly3?context=1'&gt;introduced me to Datalog&lt;/a&gt; and made me realize that knowing Prolog well can be useful and pay off even when developing systems in other languages.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;There are actually lots of languages that provide prologs for exactly this purpose. You&amp;#8217;ve found Perl&amp;#8217;s, but there&amp;#8217;s also small prologs for C#, Python, Ruby, and more. Generally, these implement a subset of Prolog called &lt;a href='https://en.wikipedia.org/wiki/Datalog'&gt;Datalog&lt;/a&gt;, which is optimized specifically to be used as a kind of query language or database from other languages.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;(part of my reply) &amp;#8230;I haven&amp;#8217;t used Prolog enough to know - do Datalog&amp;#8217;s restrictions turn out to be a big limiter in practice? Does it flat out stop you from being able to solve some things? Is it just a bit less expressive?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I&amp;#8217;ve never found it to be an issue in practice for what I&amp;#8217;ve wanted Datalog for, but I&amp;#8217;m sure it&amp;#8217;d depend on what you&amp;#8217;re doing. Datalog/Prolog-in-practice tends to show up in relatively narrow areas where the problem can be described declaratively with relative ease. The restrictions imposed by Datalog have never, in my experience, gotten in the way in those areas. On the other hand, if I were using Prolog as the sole language I wanted, rather than as an auxiliary language, I think that at least the recursion restrictions would drive me somewhat batty.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Thanks for all these informative comments everyone, I learned more about Prolog and have been given a few good reason to keep at it.&lt;/p&gt;
 
 &lt;h2 id='full_solutions'&gt;Full solutions&lt;/h2&gt;
 
@@ -175,40 +259,40 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 &lt;ul&gt;
 &lt;li&gt;&lt;a href='http://www.swi-prolog.org/pldoc/index.html'&gt;http://www.swi-prolog.org/pldoc/index.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Do:&lt;/h3&gt;&lt;h4&gt;1. Make a simple knowledge base. Represent some of your favorite books and authors.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Name Of The Wind&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Patrick Rothfuss&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Anathem&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Neal Stephenson&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Skystone&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jack Whyte&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Singing Sword&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jack Whyte&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Rapid Development&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Steve McConnell&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Pragmatic Programmer&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Andy Hunt &amp;amp; Dave Thomas&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Seven Languages In Seven Weeks&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Bruce Tate&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;h3&gt;Do:&lt;/h3&gt;&lt;h4&gt;1. Make a simple knowledge base. Represent some of your favorite books and authors.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Name Of The Wind&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Patrick Rothfuss&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Anathem&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Neal Stephenson&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Skystone&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jack Whyte&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Singing Sword&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jack Whyte&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Rapid Development&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Steve McConnell&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Pragmatic Programmer&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Andy Hunt &amp;amp; Dave Thomas&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Seven Languages In Seven Weeks&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Bruce Tate&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;h4&gt;2. Find all books in your knowledge base written by one author.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Neal Stephenson&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/div&gt;&lt;h4&gt;2. Find all books in your knowledge base written by one author.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Neal Stephenson&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 
-    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Anathem&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+&lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Anathem&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
 
-    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jack White&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jack White&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 
-    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;The Skystone&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+&lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;The Skystone&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
 
-    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;The Singing Sword&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+&lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;The Singing Sword&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;h4&gt;3. Make a knowledge base representing musicians and instruments. Also represent musicians and their genre of music.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Hansi Kursch&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;vocals&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Hansi Kursch&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;bass&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;guitar&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Duke Ellington&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;piano&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;guitar&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/div&gt;&lt;h4&gt;3. Make a knowledge base representing musicians and instruments. Also represent musicians and their genre of music.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Hansi Kursch&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;vocals&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Hansi Kursch&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;bass&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;guitar&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Duke Ellington&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;piano&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;guitar&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 
-    &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Hansi Kurch&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;metal&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;metal&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Duke Ellington&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;jazz&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-    &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;rock&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Hansi Kurch&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;metal&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;metal&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Duke Ellington&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;jazz&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;rock&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;h4&gt;4. Find all musicians who play the guitar.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;    &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;guitar&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    
-    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
-    
-    &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;
+&lt;/div&gt;&lt;h4&gt;4. Find all musicians who play the guitar.&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;musician_instrument&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;guitar&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+
+&lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
+
+&lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;Next in this series: Day 2 of Prolog (coming soon)&lt;/p&gt;</content>
