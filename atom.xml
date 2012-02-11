@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-02-09T00:55:28-08:00</updated>
+ <updated>2012-02-11T09:05:43-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -1956,7 +1956,7 @@ Got it! It was 129
 
 &lt;p&gt;It is probably important to note that I didn&amp;#8217;t attempt to verify the accuracy of any of the claims, so this graph represents the public &lt;strong&gt;perception&lt;/strong&gt; of where the problems are, not necessarily where the problems actually are. It is still very important information though, and likely does match up very closely with where the problems are.&lt;/p&gt;
 &lt;h3&gt;Libraries, Documentation, Hackage and Cabal&lt;/h3&gt;
-&lt;p&gt;The category for libraries absolutely overwhelmed the rest. I ended up splitting it into three: Libraries / Packages, Documentation / Library Documentation, Cabal, and Hackage. The feedback in the general &amp;#8216;Libraries / Packages&amp;#8217; category ranged from requests for specific kinds of libraries to pointing out dependency problems to problems with library stability and maturity. Here&amp;#8217;s a few samples:&lt;/p&gt;
+&lt;p&gt;The category for libraries absolutely overwhelmed the rest. I ended up splitting it into four: Libraries / Packages, Documentation / Library Documentation, Cabal, and Hackage. The feedback in the general &amp;#8216;Libraries / Packages&amp;#8217; category ranged from requests for specific kinds of libraries to pointing out dependency problems to problems with library stability and maturity. Here&amp;#8217;s a few samples:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Most libraries are not ready for production use because they &lt;br /&gt;a) are incomplete (wrt. to conformance to specifications like XML / XML InfoSet)&lt;br /&gt;b) have unacceptable performance for non-toy use (i.e. use strings, too many allocations, etc)&lt;br /&gt;c) too often change APIs or don&amp;#8217;t have a stable maintained version along with an unstable development version&lt;/p&gt;
