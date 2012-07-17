@@ -71,13 +71,422 @@
                 <div style="text-align:center;"><b>Latest Posts</b> | <a href="/blog/archive/">Archive</a></div>
 
   <div>
+  <h1 style="margin:0px"><a href="/blog/2012/07/17/seven-languages-week-3-day-2/">
+  Seven Languages: Week 3 (Prolog) - Day 2
+  </a></h1>
+  <div class="faded" style="font-size:14px; margin-bottom:5px;">17 Jul 2012</div>
+  <p>Day 2 of Prolog really emphasized its declarative aspects for me. Writing Prolog well <em>requires</em> you to think differently about the way you approach the problem. Yes, given enough time you can hack something together (I&#8217;ve sure proven that!), but you can get a lot more out of it by learning to structure your thoughts to fit the way Prolog works. All languages are like this to some extent, and this isn&#8217;t a bad thing. The difference is in degree - existing imperative and functional programming thought patterns help a lot less in Prolog.</p>
+
+<p>So what, in short, makes it so different? Putting aside my impulse to immediately whip out some code samples, I think characterizing it like this is an accurate enough high level summary for now:</p>
+<ul class='compact_list'>
+<li><b>Imperative programming:</b> you state what steps you want the machine to perform</li>
+<li><b>Functional programming:</b> you state what operations you want to apply to some data</li>
+<li><b>Logic programming:</b> you state what goals will make this rule true</li>
+</ul>
+<p>Like my other experiences so far with Prolog, Day 2 was a mix of &#8220;this is brilliant!&#8221; and &#8220;this is incredibly frustrating&#8221;. It is possible to do some really cool things with Prolog (and other logic languages like Curry, Mercury, and Oz. Also Datalog and constraint solving libraries, which I am covering in Day 3), but it has some decently sized stumbling blocks as well:</p>
+
+<p><strong>Documentation</strong>:</p>
+
+<ul>
+<li>
+<p>Resources for someone learning Prolog are sparse, even compared to a very new language like Io. When looking for documentation you can quickly find yourself reading academic papers. While these are interesting they are not especially useful when I just want to know more about list syntax or how to use higher order functions.</p>
+</li>
+
+<li>
+<p>As an aside, it turns out Prolog does in fact have <a href='http://www.j-paine.org/dobbs/ho_span_count.html'>higher order function</a> equivalents (or should I say higher order rules?). I didn&#8217;t actually know about this until I came back to write this post after doing the exercises .</p>
+</li>
+</ul>
+
+<p><strong>Troubleshooting</strong>:</p>
+
+<ul>
+<li>
+<p>You have an almost absolute lack of help when something goes wrong with your Prolog program.</p>
+</li>
+
+<li>
+<p>Many syntax errors don&#8217;t give you much information as to what you&#8217;ve phrased incorrectly, leaving you to go back to your program and try tweaking things that look off. For someone who has already internalized the syntax I am sure this isn&#8217;t an issue, but for people still learning it can be quite frustrating. One example of something that gave me a hard time was <code>ERROR: Arguments are not sufficiently instantiated</code>. That cryptic message is literally the only information you get: no line numbers, rule names, or any other hints.</p>
+</li>
+
+<li>
+<p>More serious than syntax is trying to fix logical errors. It was common for me to have a program with some small flaw and just get back <code>false.</code> when attempting to run it. It is hard to pick apart exactly what went wrong. Prolog is a <a href='http://www.j-paine.org/dobbs/prolog_lightbulb.html'>little bit famous for this</a>.</p>
+</li>
+</ul>
+
+<p><strong>Recursion</strong> used to be on this list, but most of the issues I had turned out to really be a lack of knowledge on my part. It <em>was</em> difficult for me to acquire that knowledge though, so I am going to document the parts that gave me the most trouble here in hopes I can save some future programmer a bit of time.</p>
+<div class='interjection'><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2012/02/05/seven-languages-week-3-day-1/'>Week 3 (Prolog) - Day 1</a>. For an overview see the <a href='/projects/seven-languages-in-seven-weeks/'>project page</a>.)
+</p></div>
+<h2 id='topics_covered'>Topics covered</h2>
+
+<p>Day 2 of Prolog went over lists, unification, and recursion.</p>
+
+<p>I am going to write about these topics with a focus on the problems I encountered while trying to write solutions to the exercises (and another simple program that calculated <a href='http://en.wikipedia.org/wiki/Combination'>combinations</a>).</p>
+<h3>Lists</h3>
+<p>Most of the trouble I had with lists was centered around the cons syntax for lists that is so useful in pattern matching. In Haskell, this looks like <code>(x:xs)</code>, <code>(x:y:tail)</code>, or even <code>(x:y:z:[])</code>. When I first learned this syntax in Prolog I didn&#8217;t have enough examples to form a correct mental model of the way it worked.</p>
+
+<p>So, here are bunch of valid examples of constructing lists.</p>
+
+<p>Basic examples:</p>
+<div class='highlight'><pre><code class='prolog'><span class='p'>[</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>,</span> <span class='nv'>Z</span><span class='p'>]</span>           <span class='c1'>% normal list syntax - list of three elements</span>
+
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Xs</span><span class='p'>]</span>              <span class='c1'>% basic use of cons operator - divide list into head (X) and tail (Xs)</span>
+
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>|[]]</span>              <span class='c1'>% appending an empty list to a single item gives you a list with one element</span>
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>]</span>                 <span class='c1'>% a shorter way to express having a list with a single element</span>
+
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>]</span>              <span class='c1'>% list with two and only two elements - regular syntax</span>
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>|[</span><span class='nv'>Y</span><span class='p'>|[]]]</span>          <span class='c1'>% same - using full cons syntax</span>
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>|[</span><span class='nv'>Y</span><span class='p'>]]</span>             <span class='c1'>% same - without the unnecessary empty list concatenation</span>
+
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>,</span> <span class='nv'>Z</span><span class='p'>]</span>           <span class='c1'>% list with three and only three elements - regular syntax</span>
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>|[</span><span class='nv'>Y</span><span class='p'>|[</span><span class='nv'>Z</span><span class='p'>]]]</span>         <span class='c1'>% same - using cons syntax</span>
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>|[</span><span class='nv'>Z</span><span class='p'>]]</span>          <span class='c1'>% same - using simplified cons syntax</span>
+</code></pre>
+</div>
+<p>But it doesn&#8217;t make sense to use cons syntax to do what regular list syntax already expresses better. Here are some more interesting examples that make use of the strengths of cons syntax:</p>
+<div class='highlight'><pre><code class='prolog'><span class='p'>[</span><span class='nv'>X</span><span class='p'>|[</span><span class='nv'>Y</span><span class='p'>|</span><span class='nv'>Ys</span><span class='p'>]]</span>        <span class='c1'>% list with at least two elements (X and Y), bind the rest of the list to Ys</span>
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>|</span><span class='nv'>Ys</span><span class='p'>]</span>         <span class='c1'>% same - using simplified cons syntax</span>
+
+<span class='p'>[</span><span class='k'>_</span><span class='p'>|[</span><span class='k'>_</span><span class='p'>|</span><span class='nv'>Tail</span><span class='p'>]]</span>      <span class='c1'>% list with at least two elements, don&#39;t bind names to first two elements, bind the rest to Tail</span>
+<span class='p'>[</span><span class='k'>_</span><span class='p'>,</span> <span class='k'>_</span><span class='p'>|</span><span class='nv'>Tail</span><span class='p'>]</span>       <span class='c1'>% same - using simplified cons syntax</span>
+
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>|[</span><span class='nv'>Y</span><span class='p'>|[</span><span class='nv'>Z</span><span class='p'>|</span><span class='k'>_</span><span class='p'>]]]</span>     <span class='c1'>% list with at least three elements, discard the tail</span>
+<span class='p'>[</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>,</span> <span class='nv'>Z</span><span class='p'>|</span><span class='k'>_</span><span class='p'>]</span>       <span class='c1'>% same - using simplified cons syntax</span>
+</code></pre>
+</div>
+<p>To cement these, here are some concrete examples of pattern matching with lists:</p>
+<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Xs</span><span class='p'>].</span>           <span class='c1'>% X = a, Xs = [b, c, d].</span>
+<span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>X</span><span class='p'>|</span><span class='k'>_</span><span class='p'>].</span>            <span class='c1'>% X = a.</span>
+<span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='k'>_</span><span class='p'>|</span><span class='nv'>Xs</span><span class='p'>].</span>           <span class='c1'>% Xs = [b, c, d].</span>
+
+<span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>W</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>,</span> <span class='nv'>Z</span><span class='p'>].</span>     <span class='c1'>% W = a, X = b, Y = c, Z = d. </span>
+<span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>W</span><span class='p'>|[</span><span class='nv'>X</span><span class='p'>|[</span><span class='nv'>Y</span><span class='p'>|[</span><span class='nv'>Z</span><span class='p'>]]].</span>   <span class='c1'>% W = a, X = b, Y = c, Z = d. </span>
+
+<span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>W</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>].</span>        <span class='c1'>% false.</span>
+<span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>W</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>|</span><span class='nv'>Y</span><span class='p'>].</span>         <span class='c1'>% W = a, X = b, Y = [c, d].</span>
+
+<span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>W</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>|</span><span class='nv'>Y</span><span class='p'>].</span>         <span class='c1'>% W = a, X = b, Y = [c, d]. </span>
+<span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='k'>_</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>|</span><span class='nv'>Y</span><span class='p'>].</span>         <span class='c1'>% X = b, Y = [c, d].</span>
+<span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>W</span><span class='p'>,</span> <span class='k'>_</span><span class='p'>|</span><span class='nv'>Y</span><span class='p'>].</span>         <span class='c1'>% W = a, Y = [c, d].</span>
+<span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>W</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>|</span><span class='k'>_</span><span class='p'>].</span>         <span class='c1'>% W = a, X = b.</span>
+</code></pre>
+</div><h3>Unification</h3>
+<p>Unification is one of Prolog&#8217;s fairly unique key features. A lot of the really neat things Prolog can do rely on unification to work (including that map colouring problem from <a href='/blog/2012/02/05/seven-languages-week-3-day-1/'>last week</a>). What is unificiation?</p>
+
+<p>To quote <a href='http://en.wikipedia.org/wiki/Unification_(computer_science\'>from Wikipedia</a>):</p>
+
+<blockquote>
+<p>The goal of unification is to find a substitution which demonstrates that two seemingly different terms are in fact either identical or just equal.</p>
+</blockquote>
+
+<p>So what does that really mean? To demonstrate the difference unification makes I am going to show you the same function written in three different languages and three different styles. I&#8217;ve picked the <code>append</code> function (append one list to another list) which is a great example, even though it&#8217;s been explained many times before. In the comments on my <a href='/blog/2012/02/05/seven-languages-week-3-day-1/'>last post</a> actually, <a href='http://www.storytotell.org/'>Daniel Lyons</a> gave a <a href='/blog/2012/02/05/seven-languages-week-3-day-1/#comment-446662856'>nice demonstration</a> of <code>append</code> in Prolog, and it is an example <a href='http://www.java.net/external?url=http://blog.rapidred.com'>Bruce Tate</a> spends a couple pages on as well.</p>
+<h4>Imperative (Javascript)</h4><div class='highlight'><pre><code class='javascript'><span class='kd'>function</span> <span class='nx'>append</span> <span class='p'>(</span><span class='nx'>xs</span><span class='p'>,</span> <span class='nx'>ys</span><span class='p'>)</span> <span class='p'>{</span>
+    <span class='kd'>var</span> <span class='nx'>result</span> <span class='o'>=</span> <span class='nx'>xs</span><span class='p'>,</span>
+    <span class='nx'>i</span><span class='p'>;</span>
+
+    <span class='k'>for</span> <span class='p'>(</span><span class='nx'>i</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>i</span> <span class='o'>&lt;</span> <span class='nx'>ys</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>i</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+        <span class='nx'>result</span><span class='p'>.</span><span class='nx'>push</span><span class='p'>(</span><span class='nx'>ys</span><span class='p'>[</span><span class='nx'>i</span><span class='p'>]);</span>
+    <span class='p'>}</span>
+
+    <span class='k'>return</span> <span class='nx'>result</span><span class='p'>;</span>
+<span class='p'>}</span>
+</code></pre>
+</div>
+<p>The most straightforward implementation of append. Callers would use it like so:</p>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>list</span> <span class='o'>=</span> <span class='nx'>append</span><span class='p'>([</span><span class='mi'>1</span><span class='p'>,</span> <span class='mi'>2</span><span class='p'>,</span> <span class='mi'>3</span><span class='p'>],</span> <span class='p'>[</span><span class='mi'>4</span><span class='p'>,</span> <span class='mi'>5</span><span class='p'>,</span> <span class='mi'>6</span><span class='p'>]);</span>
+<span class='c1'>// list is [1, 2, 3, 4, 5, 6]</span>
+</code></pre>
+</div>
+<p>Nothing fancy here! This essentially duplicates the existing <code>concat</code> method in javascript.</p>
+<h4>Functional (Haskell)</h4><div class='highlight'><pre><code class='haskell'><span class='nf'>append</span> <span class='ow'>::</span> <span class='p'>[</span><span class='n'>a</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='p'>[</span><span class='n'>a</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='p'>[</span><span class='n'>a</span><span class='p'>]</span>
+<span class='nf'>append</span> <span class='n'>xs</span> <span class='n'>ys</span> <span class='ow'>=</span> <span class='n'>foldr</span> <span class='p'>(</span><span class='kt'>:</span><span class='p'>)</span> <span class='n'>ys</span> <span class='n'>xs</span>
+</code></pre>
+</div>
+<p>Okay, this one might be a little bit fancy looking depending on your familiarity with Haskell, but once you know that <code>(:)</code> concatenates an element to the beginning of an array, and are familiar with <a href='http://www.haskell.org/haskellwiki/Fold'><code>foldr</code></a> (also known as <code>reduce</code>, <code>inject</code>, and <code>Aggregate</code>) it should more or less make sense. Once again, it is straightforward to use:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>list</span> <span class='ow'>=</span> <span class='n'>append</span> <span class='p'>[</span><span class='mi'>1</span><span class='p'>,</span> <span class='mi'>2</span><span class='p'>,</span> <span class='mi'>3</span><span class='p'>]</span> <span class='p'>[</span><span class='mi'>4</span><span class='p'>,</span> <span class='mi'>5</span><span class='p'>,</span> <span class='mi'>6</span><span class='p'>]</span>
+<span class='c1'>-- list is [1, 2, 3, 4, 5, 6]</span>
+</code></pre>
+</div>
+<p>Now that we&#8217;re in Haskell, we can of course easily take advantage of partial application and write things like:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>appendList1</span> <span class='ow'>=</span> <span class='n'>append</span> <span class='p'>[</span><span class='mi'>1</span><span class='p'>,</span> <span class='mi'>2</span><span class='p'>,</span> <span class='mi'>3</span><span class='p'>]</span>
+<span class='nf'>list2</span> <span class='ow'>=</span> <span class='n'>appendList1</span> <span class='p'>[</span><span class='mi'>4</span><span class='p'>,</span> <span class='mi'>5</span><span class='p'>,</span> <span class='mi'>6</span><span class='p'>]</span>
+<span class='c1'>-- list2 is [1, 2, 3, 4, 5, 6]</span>
+<span class='nf'>list3</span> <span class='ow'>=</span> <span class='n'>appendList1</span> <span class='p'>[</span><span class='mi'>1</span><span class='p'>,</span> <span class='mi'>2</span><span class='p'>,</span> <span class='mi'>3</span><span class='p'>]</span>
+<span class='c1'>-- list3 is [1, 2, 3, 1, 2, 3]</span>
+</code></pre>
+</div>
+<p>But this function still just appends one list to another. It&#8217;s the same as the built in <code>++</code> function, and basically equivalent to the previous javascript example.</p>
+<h4>Logic-based with unification (Prolog)</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>append</span><span class='p'>([],</span><span class='nv'>Ys</span><span class='p'>,</span><span class='nv'>Ys</span><span class='p'>).</span>
+<span class='nf'>append</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Xs</span><span class='p'>],</span><span class='nv'>Ys</span><span class='p'>,[</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Zs</span><span class='p'>])</span> <span class='p'>:-</span> <span class='nf'>append</span><span class='p'>(</span><span class='nv'>Xs</span><span class='p'>,</span><span class='nv'>Ys</span><span class='p'>,</span><span class='nv'>Zs</span><span class='p'>).</span>
+</code></pre>
+</div>
+<p>At first glance, this function is just like the previous two. It can be used like so:</p>
+<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>append</span><span class='p'>([</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>],</span> <span class='p'>[</span><span class='m'>4</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> <span class='m'>6</span><span class='p'>],</span> <span class='nv'>List</span><span class='p'>).</span>
+<span class='nv'>List</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>4</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> <span class='m'>6</span><span class='p'>].</span>
+</code></pre>
+</div>
+<p>With Prolog it is sometimes accurate to look at a rule as a function with the parameters being <code>(param1, param2, return value)</code>. If you look at the example above in this way it gives you an <em>accurate</em>, but <em>limited</em> picture of this rule. With unification, you could just as easily look at this rule as <code>(param1,
+return value, param2)</code>, like so:</p>
+<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>append</span><span class='p'>([</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>],</span> <span class='nv'>List</span><span class='p'>,</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>4</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> <span class='m'>6</span><span class='p'>]).</span>
+<span class='nv'>List</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>4</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> <span class='m'>6</span><span class='p'>].</span>
+</code></pre>
+</div>
+<p>Prolog solves for the missing parameter and correctly calculates the result! This is still not the best way to think about rules though, as it breaks down when confronted with this:</p>
+<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>append</span><span class='p'>(</span><span class='nv'>List1</span><span class='p'>,</span> <span class='nv'>List2</span><span class='p'>,</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>]).</span>
+<span class='nv'>List1</span> <span class='o'>=</span> <span class='p'>[],</span>
+<span class='nv'>List2</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>]</span> <span class='p'>;</span>
+<span class='nv'>List1</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>],</span>
+<span class='nv'>List2</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>]</span> <span class='p'>;</span>
+<span class='nv'>List1</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>],</span>
+<span class='nv'>List2</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>3</span><span class='p'>]</span> <span class='p'>;</span>
+<span class='nv'>List1</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>],</span>
+<span class='nv'>List2</span> <span class='o'>=</span> <span class='p'>[]</span> <span class='p'>;</span>
+<span class='s-Atom'>false</span><span class='p'>.</span>
+</code></pre>
+</div>
+<p>Prolog just generated all the possible ways you could combine two lists to make <code>[1, 2, 3]</code>! All this functionaliy from that tiny definition of <code>append</code> up above!</p>
+
+<p>There&#8217;s one more interesting use for append - as a lie-detector:</p>
+<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>append</span><span class='p'>([</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>],</span> <span class='p'>[</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>4</span><span class='p'>],</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>]).</span>
+<span class='s-Atom'>false</span><span class='p'>.</span>
+<span class='s-Atom'>?-</span> <span class='nf'>append</span><span class='p'>([</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>],</span> <span class='p'>[</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>4</span><span class='p'>],</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>4</span><span class='p'>]).</span>
+<span class='s-Atom'>true</span><span class='p'>.</span>
+</code></pre>
+</div>
+<p>All of this comes from the power of unification.</p>
+<h3>Recursion</h3>
+<p>When writing recursive rules in Prolog you really have to make sure to keep thinking in terms of &#8216;making this statement true&#8217; instead of your typical program execution. One thing that makes it more awkward is that you can&#8217;t use return values: every &#8216;result&#8217; has to be a another parameter. And so you end up with more intermediate variables that have little meaning, as the example below shows.</p>
+
+<p>Since there is no such thing as a for or while loop in Prolog, you end up using recursion a lot, and you will use it more than you need to if you don&#8217;t know that Prolog actually does have higher-order functions. This is important so I&#8217;m going to say it again: <strong>Prolog has higher order functions</strong>. They&#8217;re just not widely advertised and they&#8217;re barely documented. There&#8217;s Lee Naish&#8217;s paper, <a href='http://www.cs.umbc.edu/771/papers/mu_96_02.pdf'>Higher Order logic programming in Prolog</a> and there&#8217;s also <a href='http://www.j-paine.org/dobbs/ho_span_count.html'>this nice post</a> which gives good examples of <code>maplist</code> and <code>foldr</code>.</p>
+
+<p>The existence of <code>maplist</code> makes a big difference in how many lines of code it takes to write recursive rules in Prolog. Here&#8217;s the same recursive function in both Haskell and Prolog. Not being able to use return values makes it more awkward to read, but ultimately it&#8217;s actually not too different.</p>
+<h4>Haskell</h4><div class='highlight'><pre><code class='haskell'><span class='nf'>combinations</span> <span class='ow'>::</span> <span class='p'>[</span><span class='n'>a</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='p'>[[</span><span class='n'>a</span><span class='p'>]]</span>
+<span class='nf'>combinations</span> <span class='p'>[</span><span class='n'>x</span><span class='p'>]</span> <span class='ow'>=</span> <span class='p'>[[</span><span class='n'>x</span><span class='p'>]]</span>
+<span class='nf'>combinations</span> <span class='p'>(</span><span class='n'>x</span><span class='kt'>:</span><span class='n'>xs</span><span class='p'>)</span> <span class='ow'>=</span> <span class='p'>[</span><span class='n'>x</span><span class='p'>]</span> <span class='kt'>:</span> <span class='p'>(</span><span class='n'>map</span> <span class='p'>(</span><span class='n'>x</span> <span class='kt'>:</span><span class='p'>)</span> <span class='p'>(</span><span class='n'>combinations</span> <span class='n'>xs</span><span class='p'>))</span> <span class='o'>++</span> <span class='n'>combinations</span> <span class='n'>xs</span>
+</code></pre>
+</div><h4>Prolog</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>combinations</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='p'>[[</span><span class='nv'>X</span><span class='p'>]]).</span>
+<span class='nf'>combinations</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>XS</span><span class='p'>],</span> <span class='nv'>Result</span><span class='p'>)</span> <span class='p'>:-</span> 
+    <span class='nf'>combinations</span><span class='p'>(</span><span class='nv'>XS</span><span class='p'>,</span> <span class='nv'>Comb1</span><span class='p'>),</span> 
+    <span class='nf'>maplist</span><span class='p'>(</span><span class='nf'>append</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>]),</span> <span class='nv'>Comb1</span><span class='p'>,</span> <span class='nv'>Comb2</span><span class='p'>),</span>
+    <span class='nf'>append</span><span class='p'>([[</span><span class='nv'>X</span><span class='p'>]],</span> <span class='nv'>Comb1</span><span class='p'>,</span> <span class='nv'>Comb3</span><span class='p'>),</span> 
+    <span class='nf'>append</span><span class='p'>(</span><span class='nv'>Comb2</span><span class='p'>,</span> <span class='nv'>Comb3</span><span class='p'>,</span> <span class='nv'>Result</span><span class='p'>).</span>
+</code></pre>
+</div>
+<p>I still prefer the Haskell version :)</p>
+
+<h2 id='full_solutions'>Full solutions</h2>
+
+<p>Here is a nicely formatted version of my solutions to the exercises from Day 2 of Prolog. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-3-prolog/day2.pl'>on github</a> with the other exercises.</p>
+<div id='formatted_solutions'>
+
+<h3>Find:</h3>
+
+<div class='question'><b>1.</b> Some implementations of a Fibonacci series and factorials. How do they work?</div>
+
+<div class='tiny_title'>Fibonacci (from <a href='http://cubbi.com/fibonacci/prolog.html'>http://cubbi.com/fibonacci/prolog.html</a>)</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>fib</span><span class='p'>(</span><span class='m'>0</span><span class='p'>,</span><span class='m'>0</span><span class='p'>).</span>
+<span class='nf'>fib</span><span class='p'>(</span><span class='m'>1</span><span class='p'>,</span><span class='m'>1</span><span class='p'>).</span>
+<span class='nf'>fib</span><span class='p'>(</span><span class='nv'>N</span><span class='p'>,</span><span class='nv'>F</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>succ</span><span class='p'>(</span><span class='nv'>N1</span><span class='p'>,</span><span class='nv'>N</span><span class='p'>),</span> <span class='nf'>succ</span><span class='p'>(</span><span class='nv'>N2</span><span class='p'>,</span><span class='nv'>N1</span><span class='p'>),</span> <span class='nf'>fib</span><span class='p'>(</span><span class='nv'>N1</span><span class='p'>,</span><span class='nv'>F1</span><span class='p'>),</span> <span class='nf'>fib</span><span class='p'>(</span><span class='nv'>N2</span><span class='p'>,</span><span class='nv'>F2</span><span class='p'>),</span> <span class='nf'>plus</span><span class='p'>(</span><span class='nv'>F1</span><span class='p'>,</span><span class='nv'>F2</span><span class='p'>,</span><span class='nv'>F</span><span class='p'>).</span>
+</code></pre>
+</div>
+
+
+
+<div class='tiny_title'>Explanation</div>
+<div class='code_explanation'>
+First establish the two base cases.
+Next, create a rule for the recursive case:
+<ol>
+<li>Find N-1 and N-2</li>
+<li>Find the N-1th fibonacci number</li>
+<li>Find the N-2th fibonacci number</li>
+<li>Add the N-1th and the N-2th fibonacci number</li>
+<li>The result is the Nth fibonacci number</li>
+</ol>
+
+Pretty straightforward!
+</div>
+
+<div class='tiny_title'>Factorial (from <a href='http://boklm.eu/prolog/page_6.html'>http://boklm.eu/prolog/page_6.html</a>)</div>
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>factorial</span><span class='p'>(</span><span class='m'>0</span><span class='p'>,</span><span class='m'>1</span><span class='p'>).</span>
+<span class='nf'>factorial</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span><span class='nv'>Y</span><span class='p'>)</span> <span class='p'>:-</span>
+  <span class='nv'>X1</span> <span class='o'>is</span> <span class='nv'>X</span> <span class='o'>-</span> <span class='m'>1</span><span class='p'>,</span>
+  <span class='nf'>factorial</span><span class='p'>(</span><span class='nv'>X1</span><span class='p'>,</span><span class='nv'>Z</span><span class='p'>),</span>
+  <span class='nv'>Y</span> <span class='o'>is</span> <span class='nv'>Z</span> <span class='o'>*</span> <span class='nv'>X</span><span class='p'>,!.</span>
+</code></pre>
+</div>
+
+
+
+<div class='tiny_title'>Explanation</div>
+<div class='code_explanation'>
+
+First, establish the base case.
+Next, create a rule for the recursive case:
+<ol>
+<li>Find X - 1</li>
+<li>Find the factorial of X - 1</li>
+<li>Multiply the result by X</li>
+<li>The result is the factorial of X</li>
+</ol>
+</div>
+
+<div class='question'><b>2.</b> A real-world community using Prolog. What problems are they solving with it today?</div>
+
+<p>
+Nice SO question about this: 
+<ul><li><a href='http://stackoverflow.com/questions/130097/real-world-prolog-usage'>http://stackoverflow.com/questions/130097/real-world-prolog-usage</a></li></ul>
+</p>
+
+<p>
+Some companies that use Prolog:
+<ul>
+<li><a href='http://www.meridiansystems.com/products/prolog/construction-project-management.asp'>http://www.meridiansystems.com/products/prolog/construction-project-management.asp</a></li>
+<li><a href='http://www.intologic.com/'>http://www.intologic.com/</a></li>
+<li><a href='http://www.sics.se/isl/sicstuswww/site/customers.html'>http://www.sics.se/isl/sicstuswww/site/customers.html</a></li>
+<li>powerset (acquired by microsoft)</li>
+</ul>
+</p>
+
+<p>
+Dr. Dobbs article on this:
+<ul>
+<li><a href='http://drdobbs.com/architecture-and-design/184405220'>http://drdobbs.com/architecture-and-design/184405220</a></li>
+</ul>
+</p>
+
+<div class='question'><b>3. (optional)</b> What are some of the problems of dealing with "not" expressions? Why do you have to be careful with negation in Prolog?</div>
+
+<p>
+Negation in Prolog is not <i>logical negation</i>, it is <i>negation as failure</i>.  So
+<code>not(X)</code> doesn't mean that X is false (like <code>¬X</code> would), it means that X can't
+be <i>proven true</i>. Something else you have to be careful with is putting negated
+predicates in the right order. Negation as failure is implemented using the
+<code>cut</code> and <code>fail</code> predicates. The short story is: negating a predicate can
+cause subsequent predicates to be ignored.
+</p>
+
+<p>
+For a better and more in-depth explanation of <code>cut</code> and negation as failure, I
+strongly recommend the following links:
+</p>
+
+<ul>
+<li><a href='http://pwnetics.wordpress.com/2011/04/10/negation-in-prolog/'>Negation In Prolog</a> — The author uses the wallace and grommit example from this book to show how
+assuming logical negation can lead to subtle errors.</li>
+
+<li><a href='http://cs.union.edu/~striegnk/learn-prolog-now/html/node90.html#sec.l10.negation.as.failure'>Negation as failure</a> — A highly readable explanation of how negation as failure really works. Here is
+one of the opening paragraphs which really helped make it click for me:</li>
+</ul>
+
+<div class='indent'>
+    <blockquote>
+        As a first step, let's introduce another built in predicate fail/0. As its name
+        suggests, fail is a special symbol that will immediately fail when Prolog
+        encounters it as a goal. That may not sound too useful, but remember: when
+        Prolog fails, it tries to backtrack. Thus fail can be viewed as an instruction
+        to force backtracking. And when used in combination with cut, which blocks
+        backtracking, fail enables us to write some interesting programs, and in
+        particular, it lets us define exceptions to general rules.   
+    </blockquote>
+</div>
+
+<p>
+If you find you need more background information first, try the page where they
+<a href='http://cs.union.edu/~striegnk/learn-prolog-now/html/node88.html#sec.l10.cut'>introduce cut:</a>
+</p>
+
+<h3>Do:</h3>
+
+<div class='question'><b>1.</b> Reverse the elements of a list</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>reverse</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>R</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>reverse</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,[],</span><span class='nv'>R</span><span class='p'>).</span>
+<span class='nf'>reverse</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Y</span><span class='p'>],</span><span class='nv'>Z</span><span class='p'>,</span><span class='nv'>W</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>reverse</span><span class='p'>(</span><span class='nv'>Y</span><span class='p'>,[</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Z</span><span class='p'>],</span><span class='nv'>W</span><span class='p'>).</span>
+<span class='nf'>reverse</span><span class='p'>([],</span><span class='nv'>X</span><span class='p'>,</span><span class='nv'>X</span><span class='p'>).</span>
+</code></pre>
+</div>
+
+
+
+<div class='tiny_title'>Notes</div>
+
+<div class='code_explanation'>
+I ended up using an example from a tutorial - even then it still took a bit to make sense to me. The middle accumulation parameter specifically. I'm going to try the problem that the tutorial gives immediately after:
+
+<blockquote>
+<p>Write a two-parameter version of 'reverse' that does not use the accumulating parameter idea. Use 'append' instead, for example, where one rule would be paraphrased like this ...</p>
+  
+<code>reverse list [X|R] by reversing R to get T, then append T to [X]</code>
+
+<p>What about the efficiency of this version? Compare it to the given 'reverse' above.</p>
+</blockquote>
+
+This is the way I was attempting to do it first as well. It is (probably) less efficient than the first version, because when I append an element to the end of the list it likely has to walk the list each time. Don't know for sure without measuring though.
+</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>reverseA</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>R</span><span class='p'>],</span> <span class='nv'>Result</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>reverse</span><span class='p'>(</span><span class='nv'>R</span><span class='p'>,</span> <span class='nv'>T</span><span class='p'>),</span> <span class='nf'>append</span><span class='p'>(</span><span class='nv'>T</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>X</span><span class='p'>],</span> <span class='nv'>Result</span><span class='p'>).</span>
+<span class='nf'>reverseA</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='nv'>X</span><span class='p'>).</span>
+</code></pre>
+</div>
+
+
+
+<div class='question'><b>2.</b> Find the smallest element of a list</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>min</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>A</span><span class='p'>).</span>
+<span class='nf'>min</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nv'>B</span> <span class='o'>&lt;</span> <span class='nv'>A</span><span class='p'>.</span>
+<span class='nf'>min</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>,</span><span class='nv'>A</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nv'>A</span> <span class='o'>&lt;</span> <span class='nv'>B</span><span class='p'>.</span>
+
+<span class='nf'>minInList</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>XS</span><span class='p'>],</span> <span class='nv'>M</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>minInList</span><span class='p'>(</span><span class='nv'>XS</span><span class='p'>,</span> <span class='nv'>M1</span><span class='p'>),</span> <span class='nf'>min</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>M1</span><span class='p'>,</span> <span class='nv'>M</span><span class='p'>).</span>
+<span class='nf'>minInList</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='nv'>X</span><span class='p'>).</span>
+</code></pre>
+</div>
+
+
+
+<div class='question'><b>3.</b> Sort the elements of a list.</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='c1'>% I&#39;m just going to go for a very simple sort.</span>
+
+<span class='nf'>takeout</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>R</span><span class='p'>],</span> <span class='nv'>R</span><span class='p'>).</span>
+<span class='nf'>takeout</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>F</span><span class='p'>|</span><span class='nv'>R</span><span class='p'>],</span> <span class='p'>[</span><span class='nv'>F</span><span class='p'>|</span><span class='nv'>S</span><span class='p'>])</span> <span class='p'>:-</span> <span class='nf'>takeout</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span><span class='nv'>R</span><span class='p'>,</span><span class='nv'>S</span><span class='p'>).</span>
+
+<span class='nf'>mySort</span><span class='p'>(</span><span class='nv'>List</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>Min</span><span class='p'>|</span><span class='nv'>Sorted</span><span class='p'>])</span> <span class='p'>:-</span> 
+    <span class='nf'>minInList</span><span class='p'>(</span><span class='nv'>List</span><span class='p'>,</span> <span class='nv'>Min</span><span class='p'>),</span> 
+    <span class='nf'>takeout</span><span class='p'>(</span><span class='nv'>Min</span><span class='p'>,</span> <span class='nv'>List</span><span class='p'>,</span> <span class='nv'>Rest</span><span class='p'>),</span> 
+    <span class='nf'>mySort</span><span class='p'>(</span><span class='nv'>Rest</span><span class='p'>,</span> <span class='nv'>Sorted</span><span class='p'>).</span>
+<span class='nf'>mySort</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='p'>[</span><span class='nv'>X</span><span class='p'>]).</span>
+</code></pre>
+</div>
+
+
+
+</div>
+<p>Next in this series: Day 3 of Prolog (coming soon)</p>
+  </div>
+
+  <div style="margin-top:20px; font-size:14px;">
+    <a href="/blog/2012/07/17/seven-languages-week-3-day-2/#disqus_thread" data-disqus-identifier="/blog/2012/07/17/seven-languages-week-3-day-2">Comments</a>
+  </div>
+
+    <hr class="fancyrule" />
+
+  <div>
   <h1 style="margin:0px"><a href="/blog/2012/02/05/seven-languages-week-3-day-1/">
   Seven Languages: Week 3 (Prolog) - Day 1
   </a></h1>
   <div class="faded" style="font-size:14px; margin-bottom:5px;">05 Feb 2012</div>
   <p>Although I am not yet halfway through the book, I am pretty sure that Prolog will win the &#8216;most foreign language&#8217; category with ease. Going in, I knew Prolog was fairly old (born in 1972) and that it was a logic-based language, but I could not have estimated how, for lack of a better word, <em>picky</em> it would be.</p>
 
-<p>My troubles started at installation - Bruce Tate uses GNU Prolog in the book, and I spent far too long trying to get that working only to discover that some library functions essential to the exercises (<code>fd_domain</code>, <code>fd_all_different</code>) just caused GNU Prolog to crash on my machine. I will elaborate on this more in Day 2, but for anyone encountering this post who is in a similar situation, just go use SWI Prolog instead.</p>
+<p>My troubles started at installation - Bruce Tate uses GNU Prolog in the book, and I spent far too long trying to get that working only to discover that some library functions essential to the exercises (<code>fd_domain</code>, <code>fd_all_different</code>) just caused GNU Prolog to crash on my machine. I will elaborate on this more in Day 3, but for anyone encountering this post who is in a similar situation, just go use SWI Prolog instead.</p>
 
 <p>Prolog heavily relies on recursion but making a recursive rule is not the same as making a recursive function in functional languages. It is subtly different, and way easier to get wrong; you have to have an <strong>extremely</strong> clear mental model of how Prolog operates (which I still don&#8217;t). I will expand more on this in a future post.</p>
 
@@ -300,25 +709,38 @@ green</code>, and see if it can still make the other statements true.</p>
 <h2 id='full_solutions'>Full solutions</h2>
 
 <p>Here is a nicely formatted version of my solutions to the exercises from Day 1 of Prolog. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-3-prolog/day1.pl'>on github</a> with the other exercises.</p>
-<h3>Find:</h3><h4>1. Some free Prolog tutorials</h4>
+<div id='formatted_solutions'>
+
+<h3>Find:</h3>
+
+<div class='question'>1. Some free Prolog tutorials</div>
+
 <ul>
 <li><a href='http://www.lix.polytechnique.fr/~liberti/public/computing/prog/prolog/prolog-tutorial.html'>http://www.lix.polytechnique.fr/~liberti/public/computing/prog/prolog/prolog-tutorial.html</a></li>
-
 <li><a href='http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html'>http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html</a></li>
 </ul>
-<h4>2. A support forum (there are several)</h4>
+
+<div class='question'>2. A support forum (there are several)</div>
+
 <ul>
 <li><a href='http://old.nabble.com/SWI-Prolog-f448.html'>http://old.nabble.com/SWI-Prolog-f448.html</a></li>
-
 <li><a href='http://mail.gnu.org/pipermail/users-prolog/'>http://mail.gnu.org/pipermail/users-prolog/</a></li>
-
 <li><a href='http://www.reddit.com/r/prolog'>http://www.reddit.com/r/prolog</a></li>
 </ul>
-<h4>3. One online reference for the Prolog version you're using</h4>
+
+
+<div class='question'>3. One online reference for the Prolog version you're using</div>
+
 <ul>
 <li><a href='http://www.swi-prolog.org/pldoc/index.html'>http://www.swi-prolog.org/pldoc/index.html</a></li>
 </ul>
-<h3>Do:</h3><h4>1. Make a simple knowledge base. Represent some of your favorite books and authors.</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Name Of The Wind&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Patrick Rothfuss&#39;</span><span class='p'>).</span>
+
+<h3>Do:</h3>
+
+<div class='question'>1. Make a simple knowledge base. Represent some of your favorite books and authors.</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Name Of The Wind&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Patrick Rothfuss&#39;</span><span class='p'>).</span>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;Anathem&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Neal Stephenson&#39;</span><span class='p'>).</span>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Skystone&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Jack Whyte&#39;</span><span class='p'>).</span>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Singing Sword&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Jack Whyte&#39;</span><span class='p'>).</span>
@@ -326,7 +748,14 @@ green</code>, and see if it can still make the other statements true.</p>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Pragmatic Programmer&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Andy Hunt &amp; Dave Thomas&#39;</span><span class='p'>).</span>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;Seven Languages In Seven Weeks&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Bruce Tate&#39;</span><span class='p'>).</span>
 </code></pre>
-</div><h4>2. Find all books in your knowledge base written by one author.</h4><div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>book</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>&#39;Neal Stephenson&#39;</span><span class='p'>).</span>
+</div>
+
+
+
+<div class='question'>2. Find all books in your knowledge base written by one author.</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>book</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>&#39;Neal Stephenson&#39;</span><span class='p'>).</span>
 
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Anathem&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
 
@@ -336,7 +765,14 @@ green</code>, and see if it can still make the other statements true.</p>
 
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;The Singing Sword&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
 </code></pre>
-</div><h4>3. Make a knowledge base representing musicians and instruments. Also represent musicians and their genre of music.</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Hansi Kursch&#39;</span><span class='p'>,</span> <span class='s-Atom'>vocals</span><span class='p'>).</span>
+</div>
+
+
+
+<div class='question'>3. Make a knowledge base representing musicians and instruments. Also represent musicians and their genre of music.</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Hansi Kursch&#39;</span><span class='p'>,</span> <span class='s-Atom'>vocals</span><span class='p'>).</span>
 <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Hansi Kursch&#39;</span><span class='p'>,</span> <span class='s-Atom'>bass</span><span class='p'>).</span>
 <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Andre Olbrich&#39;</span><span class='p'>,</span> <span class='s-Atom'>guitar</span><span class='p'>).</span>
 <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Duke Ellington&#39;</span><span class='p'>,</span> <span class='s-Atom'>piano</span><span class='p'>).</span>
@@ -347,14 +783,25 @@ green</code>, and see if it can still make the other statements true.</p>
 <span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Duke Ellington&#39;</span><span class='p'>,</span> <span class='s-Atom'>jazz</span><span class='p'>).</span>
 <span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Jimi Hendrix&#39;</span><span class='p'>,</span> <span class='s-Atom'>rock</span><span class='p'>).</span>
 </code></pre>
-</div><h4>4. Find all musicians who play the guitar.</h4><div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>guitar</span><span class='p'>)</span>
+</div>
+
+
+
+<div class='question'>4. Find all musicians who play the guitar.</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>guitar</span><span class='p'>)</span>
 
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Andre Olbrich&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
 
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Jimi Hendrix&#39;</span>
 </code></pre>
 </div>
-<p>Next in this series: Day 2 of Prolog (coming soon)</p>
+
+
+
+</div>
+<p>Next in this series: <a href='/blog/2012/07/17/seven-languages-week-3-day-2'>Day 2 of Prolog</a></p>
   </div>
 
   <div style="margin-top:20px; font-size:14px;">
@@ -474,8 +921,8 @@ span</code> into <code>&lt;div&gt;&lt;/div&gt;</code>!</p>
 
 <h3>Do: </h3>
 
-<h4><b>1.</b> Enhance the XML program to add spaces to show the indentation
-structure</h4>
+<div class='question'><b>1.</b> Enhance the XML program to add spaces to show the indentation
+structure</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>Builder</span> <span class='n'>indentLevel</span> <span class='o'>:=</span> <span class='mf'>0</span>
@@ -508,7 +955,7 @@ structure</h4>
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='html'><span class='nt'>&lt;ul&gt;</span>
@@ -527,7 +974,7 @@ structure</h4>
 
 
 
-<h4><b>2.</b> Create a list syntax that uses brackets</h4>
+<div class='question'><b>2.</b> Create a list syntax that uses brackets</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>curlyBrackets</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
@@ -543,7 +990,7 @@ structure</h4>
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>list</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span> <span class='mf'>2</span><span class='o'>,</span> <span class='mf'>3</span><span class='o'>,</span> <span class='mf'>4</span><span class='o'>,</span> <span class='mf'>5</span><span class='o'>)</span>
@@ -554,7 +1001,7 @@ structure</h4>
 
 
 
-<h4><b>3.</b> Enhance the XML program to handle attributes: if the first argument is a map (use the curly brackets syntax), add attributes to the XML program. For example: book({"author": "Tate"}...) would print &lt;book author="Tate"&gt;</h4>
+<div class='question'><b>3.</b> Enhance the XML program to handle attributes: if the first argument is a map (use the curly brackets syntax), add attributes to the XML program. For example: book({"author": "Tate"}...) would print &lt;book author="Tate"&gt;</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>OperatorTable</span> <span class='n'>addAssignOperator</span><span class='o'>(</span><span class='s'>&quot;:&quot;</span><span class='o'>,</span> <span class='s'>&quot;atPutNumber&quot;</span><span class='o'>)</span>
@@ -609,7 +1056,7 @@ structure</h4>
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='html'><span class='nt'>&lt;ul&gt;</span>
@@ -701,7 +1148,7 @@ structure</h4>
 
 <h3>Do:</h3>
 
-<h4><b>1.</b> Write a program to find the nth Fibonacci number. Fib(1) is 1, and fib(4) is 3. As a bonus, solve the problem with recursion and with loops.</h4>
+<div class='question'><b>1.</b> Write a program to find the nth Fibonacci number. Fib(1) is 1, and fib(4) is 3. As a bonus, solve the problem with recursion and with loops.</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>fib_recur</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>num</span><span class='o'>,</span>
@@ -736,7 +1183,7 @@ structure</h4>
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>Fib 0
@@ -753,7 +1200,7 @@ Fib 8
 
 
 
-<h4><b>2.</b> How would you change / to return 0 if the denominator is zero?</h4>
+<div class='question'><b>2.</b> How would you change / to return 0 if the denominator is zero?</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='c1'># The tricky bit is saving a reference to the old method:</span>
@@ -769,7 +1216,7 @@ Fib 8
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>2
@@ -779,8 +1226,8 @@ Fib 8
 
 
 
-<h4><b>3.</b> Write a program to add up all of the numbers in a two-dimensional
-array.</h4>
+<div class='question'><b>3.</b> Write a program to add up all of the numbers in a two-dimensional
+array.</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>addUp2DArray</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>array</span><span class='o'>,</span> <span class='n'>array</span> <span class='n'>flatten</span> <span class='n'>reduce</span><span class='o'>(+))</span>
@@ -792,7 +1239,7 @@ array.</h4>
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>14
@@ -802,7 +1249,7 @@ array.</h4>
 
 
 
-<h4><b>4.</b> Add a slot called myAverage to a list that computes the average of all the numbers in a list. What happens if there are no numbers in a list? (<b>Bonus:</b> Raise an Io exception if any item in the list is not a number.)</h4>
+<div class='question'><b>4.</b> Add a slot called myAverage to a list that computes the average of all the numbers in a list. What happens if there are no numbers in a list? (<b>Bonus:</b> Raise an Io exception if any item in the list is not a number.)</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='c1'># Easy way:</span>
@@ -825,7 +1272,7 @@ array.</h4>
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>2.5
@@ -834,7 +1281,7 @@ array.</h4>
 
 
 
-<h4><b>5.</b> Write a prototype for a two-dimensional list. The dim(x,y) method should allocate a list of y lists that are x elements long, set(x, y, value) should set a value, and get(x, y) should return that value.</h4>
+<div class='question'><b>5.</b> Write a prototype for a two-dimensional list. The dim(x,y) method should allocate a list of y lists that are x elements long, set(x, y, value) should set a value, and get(x, y) should return that value.</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>List2D</span> <span class='o'>:=</span> <span class='n'>List</span> <span class='k'>clone</span>
@@ -890,7 +1337,7 @@ array.</h4>
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>list<span class='o'>(</span>list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>))</span>
@@ -907,7 +1354,7 @@ nil
 
 
 
-<h4><b>6. Bonus:</b> Write a transpose method so that (new_matrix get(y, x)) == matrix get(x,y) on the original list</h4>
+<div class='question'><b>6. Bonus:</b> Write a transpose method so that (new_matrix get(y, x)) == matrix get(x,y) on the original list</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>flipFirstTwoArgs</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>,</span>
@@ -947,7 +1394,7 @@ nil
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>2, 4: asdfad
@@ -968,7 +1415,7 @@ transpose again!
 
 
 
-<h4><b>7.</b> Write the matrix to a file, and read a matrix from a file.</h4>
+<div class='question'><b>7.</b> Write the matrix to a file, and read a matrix from a file.</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>file</span> <span class='o'>:=</span> <span class='n'>File</span> <span class='n'>with</span><span class='o'>(</span><span class='s'>&quot;matrix.txt&quot;</span><span class='o'>)</span>
@@ -990,7 +1437,7 @@ transpose again!
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>Sequence
@@ -1001,7 +1448,7 @@ list<span class='o'>(</span>list<span class='o'>(</span>nil, nil, nil, nil, nil,
 
 
 
-<h4><b>8.</b> Write a program that gives you ten tries to guess a random number from 1-100. If you would like, give a hint of "hotter" or "colder" after the first guess.</h4>
+<div class='question'><b>8.</b> Write a program that gives you ten tries to guess a random number from 1-100. If you would like, give a hint of "hotter" or "colder" after the first guess.</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>randomNumber</span> <span class='o'>:=</span> <span class='o'>((</span><span class='n'>Random</span> <span class='n'>value</span><span class='o'>)</span> <span class='o'>*</span> <span class='mf'>100</span> <span class='o'>+</span> <span class='mf'>1</span><span class='o'>)</span> <span class='n'>floor</span>
@@ -1025,7 +1472,7 @@ list<span class='o'>(</span>list<span class='o'>(</span>nil, nil, nil, nil, nil,
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>Guess a number between 1 and 100: <span class='o'>(</span>guess 1 of 10<span class='o'>)</span>: 50
@@ -1051,142 +1498,6 @@ Congrats, you did it!
 
   <div style="margin-top:20px; font-size:14px;">
     <a href="/blog/2012/01/11/seven-languages-week-2-day-2/#disqus_thread" data-disqus-identifier="/blog/2012/01/11/seven-languages-week-2-day-2">Comments</a>
-  </div>
-
-    <hr class="fancyrule" />
-
-  <div>
-  <h1 style="margin:0px"><a href="/blog/2011/12/30/transposing-a-matrix-in-io/">
-  Transposing a matrix in Io
-  </a></h1>
-  <div class="faded" style="font-size:14px; margin-bottom:5px;">30 Dec 2011</div>
-  <p>While doing the exercises from Seven Languages In Seven Weeks, I came up with a neat solution to transposing a matrix that was encouraged by Io&#8217;s flexibility and free-wheeling nature. Instead of creating a new transposed matrix or attempting a complicated in-place transpose, I did something that executes in O(1), uses a negligible amount of memory, and is very short and simple.</p>
-
-<p>What? How is it possible to transpose a matrix of 1,000,000 elements in the same time it takes to transpose a matrix of 4?</p>
-
-<p>By cheating! I <strong>don&#8217;t</strong> transpose the matrix, I modify the element accessor methods so that they interpret the <code>x</code> parameter as <code>y</code>, and vice versa. To my dismay, I later found that <a href='http://en.wikipedia.org/wiki/Transpose#Implementation_of_matrix_transposition_on_computers'>this isn&#8217;t a new approach</a> to solving this problem.</p>
-
-<p>However, my implementation in Io still has something going for it. Because of Io&#8217;s extreme malleability, I can write my <code>transpose</code> method such that calling it permanently swaps the argument order in the <code>get</code> and <code>set</code> methods of that individual matrix object. In most other languages <a href='#footnote-1' class='super' id='footnote-1-link'>[1]</a> , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &#8216;transposed&#8217; or not. This is, conceptually, nonsense: transposing is something you <em>do to</em> matrices, not a <em>property</em> of them.</p>
-
-<p>Io lets you write this fake transpose in a way that is fun, short, and elegant.</p>
-
-<h2 id='the_solution'>The Solution</h2>
-
-<p>Here is the problem statement from the book:</p>
-
-<blockquote>
-<p>Write a transpose method so that (new_matrix get(y, x)) == matrix get(x,y) on the original list</p>
-</blockquote>
-
-<p>Before we get started, this is what the final solution looks like. Try and become a little familiar with this before we move on (it will all be explained in detail below, don&#8217;t worry).</p>
-<div class='highlight'><pre><code class='io'><span class='lineno'> 1</span> <span class='n'>flipFirstTwoArgs</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>,</span>
-<span class='lineno'> 2</span>     <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
-<span class='lineno'> 3</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
-<span class='lineno'> 4</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
-<span class='lineno'> 5</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
-<span class='lineno'> 6</span>     <span class='o'>)</span> <span class='n'>flatten</span><span class='o'>)</span>
-<span class='lineno'> 7</span> <span class='o'>)</span>
-<span class='lineno'> 8</span> 
-<span class='lineno'> 9</span> <span class='n'>List2D</span> <span class='n'>transpose</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
-<span class='lineno'>10</span>     <span class='n'>self</span> <span class='n'>get</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span>
-<span class='lineno'>11</span>     <span class='n'>self</span> <span class='n'>set</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;set&quot;</span><span class='o'>)</span>
-<span class='lineno'>12</span> <span class='o'>)</span>
-</code></pre>
-</div>
-<p>List2D is a simple matrix prototype from the previous exercise. It is the thing that is being transposed.</p>
-
-<p>The <code>transpose</code> method itself is simple enough: most of the heavy lifting is done in a helper method I created, <code>flipFirstTwoArgs</code>. From its name and the name of its argument, we can tell this method is saying: &#8220;give me the name of a slot that holds a method and I will flip the first two arguments of that method&#8221;.</p>
-
-<p>Okay. So, how?</p>
-
-<h2 id='the_explanation'>The Explanation</h2>
-
-<p>The following line of code gets the method we are going to modify and sets the names of its arguments.</p>
-
-<p><strong>Line 2:</strong></p>
-<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> 
-        <span class='c1'>#list of argument names goes here </span>
-    <span class='o'>)</span>
-</code></pre>
-</div>
-<p>For a concrete example, if I just wanted to change the argument names for my &#8220;get&#8221; method from get(x, y) to get(y, x) I could hardcode in some values and call it like this:</p>
-<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span>
-        <span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;y&quot;</span><span class='o'>,</span> <span class='s'>&quot;x&quot;</span><span class='o'>)</span>
-    <span class='o'>)</span>
-</code></pre>
-</div>
-<p>But that wouldn&#8217;t quite be fancy enough. I&#8217;d rather write a method that would let me swap the first two arguments of <strong>any</strong> method. So, going back to the snippet above, that&#8217;s what the next two lines do:</p>
-
-<p><strong>Lines 3-4:</strong></p>
-<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
-    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
-</code></pre>
-</div>
-<p>If I wanted to keep the arguments in the same order I would have put the <code>0</code> in the first line, then the <code>1</code> in the second line. Make sense so far?</p>
-
-<p>I could have left it here, but then what would happen if I told it to change a method that looked like <code>doSomething(x, y, z)</code>? It would take the argument at position <code>1</code>, then the argument at position <code>0</code>. The <code>z</code> would get discarded and that method wouldn&#8217;t be very useful anymore. Hence the next line:</p>
-
-<p><strong>Line 5:</strong></p>
-<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
-</code></pre>
-</div>
-<p><code>rest</code> is Io&#8217;s version of <code>cdr</code> or <code>tail</code>. It is a method that returns everything except for the first element of a list. So if you call <code>rest</code> on the result of <code>rest</code> you get a list that has all its elements except for the first two.</p>
-
-<p>Let&#8217;s recap. If I call this method we&#8217;re defining with my fictitious <code>doSomething(x, y, z)</code> method as the argument, these previous lines would resolve into:</p>
-<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;doSomething&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
-        <span class='s'>&quot;y&quot;</span><span class='o'>,</span> 
-        <span class='s'>&quot;x&quot;</span><span class='o'>,</span> 
-        <span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;z&quot;</span><span class='o'>)</span>
-    <span class='o'>)</span> <span class='o'>)</span>
-</code></pre>
-</div>
-<p>That&#8217;s not quite right, <code>setArgumentNames</code> is expecting a simple flat list, none of this nested list stuff. So let&#8217;s flatten the list of argument names before giving it to <code>setArgumentNames</code>.</p>
-
-<p><strong>Line 6:</strong></p>
-<div class='highlight'><pre><code class='io'>    <span class='o'>)</span> <span class='n'>flatten</span> <span class='o'>)</span>
-</code></pre>
-</div>
-<p>If we apply it to the <code>doSomething</code> example, the code now looks like this:</p>
-<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;doSomething&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
-        <span class='s'>&quot;y&quot;</span><span class='o'>,</span> 
-        <span class='s'>&quot;x&quot;</span><span class='o'>,</span> 
-        <span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;z&quot;</span><span class='o'>)</span>
-    <span class='o'>)</span> <span class='n'>flatten</span> <span class='o'>)</span> 
-</code></pre>
-</div>
-<p>Which would end up resolving into:</p>
-<div class='highlight'><pre><code class='io'>    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;doSomething&quot;</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span>
-        <span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;y&quot;</span><span class='o'>,</span> <span class='s'>&quot;x&quot;</span><span class='o'>,</span> <span class='s'>&quot;z&quot;</span><span class='o'>)</span> 
-    <span class='o'>)</span>
-</code></pre>
-</div>
-<p>There, much better. And that explains the last line!</p>
-
-<h2 id='wrapup'>Wrap-up</h2>
-
-<p>Now, putting back together all the lines I&#8217;ve explained, here is the full solution again:</p>
-<div class='highlight'><pre><code class='io'><span class='lineno'> 1</span> <span class='n'>flipFirstTwoArgs</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>,</span>
-<span class='lineno'> 2</span>     <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
-<span class='lineno'> 3</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
-<span class='lineno'> 4</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
-<span class='lineno'> 5</span>         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
-<span class='lineno'> 6</span>     <span class='o'>)</span> <span class='n'>flatten</span><span class='o'>)</span>
-<span class='lineno'> 7</span> <span class='o'>)</span>
-<span class='lineno'> 8</span> 
-<span class='lineno'> 9</span> <span class='n'>List2D</span> <span class='n'>transpose</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
-<span class='lineno'>10</span>     <span class='n'>self</span> <span class='n'>get</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;get&quot;</span><span class='o'>)</span>
-<span class='lineno'>11</span>     <span class='n'>self</span> <span class='n'>set</span> <span class='o'>=</span> <span class='n'>flipFirstTwoArgs</span><span class='o'>(</span><span class='s'>&quot;set&quot;</span><span class='o'>)</span>
-<span class='lineno'>12</span> <span class='o'>)</span>
-</code></pre>
-</div>
-<p>If I&#8217;ve done my job right, it should make a lot more sense this time.</p>
-
-<p>You can find the rest of the code (including the List2D prototype) on github - a good place to start is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io#L72'>line 72 of day2.io</a>. To read more I&#8217;ve written about solving these exercises, check my <a href='/projects/seven-languages-in-seven-weeks/'>project page for Seven Languages in Seven Weeks</a>.</p>
-<h3>Footnotes</h3><ol><li>There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. <a href='#footnote-1-link' id='footnote-1'>↩</a></li></ol>
-  </div>
-
-  <div style="margin-top:20px; font-size:14px;">
-    <a href="/blog/2011/12/30/transposing-a-matrix-in-io/#disqus_thread" data-disqus-identifier="/blog/2011/12/30/transposing-a-matrix-in-io">Comments</a>
   </div>
 
     <hr class="fancyrule" />

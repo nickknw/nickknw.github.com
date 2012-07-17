@@ -74,7 +74,7 @@
 <div id="post">
 <p>Although I am not yet halfway through the book, I am pretty sure that Prolog will win the &#8216;most foreign language&#8217; category with ease. Going in, I knew Prolog was fairly old (born in 1972) and that it was a logic-based language, but I could not have estimated how, for lack of a better word, <em>picky</em> it would be.</p>
 
-<p>My troubles started at installation - Bruce Tate uses GNU Prolog in the book, and I spent far too long trying to get that working only to discover that some library functions essential to the exercises (<code>fd_domain</code>, <code>fd_all_different</code>) just caused GNU Prolog to crash on my machine. I will elaborate on this more in Day 2, but for anyone encountering this post who is in a similar situation, just go use SWI Prolog instead.</p>
+<p>My troubles started at installation - Bruce Tate uses GNU Prolog in the book, and I spent far too long trying to get that working only to discover that some library functions essential to the exercises (<code>fd_domain</code>, <code>fd_all_different</code>) just caused GNU Prolog to crash on my machine. I will elaborate on this more in Day 3, but for anyone encountering this post who is in a similar situation, just go use SWI Prolog instead.</p>
 
 <p>Prolog heavily relies on recursion but making a recursive rule is not the same as making a recursive function in functional languages. It is subtly different, and way easier to get wrong; you have to have an <strong>extremely</strong> clear mental model of how Prolog operates (which I still don&#8217;t). I will expand more on this in a future post.</p>
 
@@ -297,25 +297,38 @@ green</code>, and see if it can still make the other statements true.</p>
 <h2 id='full_solutions'>Full solutions</h2>
 
 <p>Here is a nicely formatted version of my solutions to the exercises from Day 1 of Prolog. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-3-prolog/day1.pl'>on github</a> with the other exercises.</p>
-<h3>Find:</h3><h4>1. Some free Prolog tutorials</h4>
+<div id='formatted_solutions'>
+
+<h3>Find:</h3>
+
+<div class='question'>1. Some free Prolog tutorials</div>
+
 <ul>
 <li><a href='http://www.lix.polytechnique.fr/~liberti/public/computing/prog/prolog/prolog-tutorial.html'>http://www.lix.polytechnique.fr/~liberti/public/computing/prog/prolog/prolog-tutorial.html</a></li>
-
 <li><a href='http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html'>http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html</a></li>
 </ul>
-<h4>2. A support forum (there are several)</h4>
+
+<div class='question'>2. A support forum (there are several)</div>
+
 <ul>
 <li><a href='http://old.nabble.com/SWI-Prolog-f448.html'>http://old.nabble.com/SWI-Prolog-f448.html</a></li>
-
 <li><a href='http://mail.gnu.org/pipermail/users-prolog/'>http://mail.gnu.org/pipermail/users-prolog/</a></li>
-
 <li><a href='http://www.reddit.com/r/prolog'>http://www.reddit.com/r/prolog</a></li>
 </ul>
-<h4>3. One online reference for the Prolog version you're using</h4>
+
+
+<div class='question'>3. One online reference for the Prolog version you're using</div>
+
 <ul>
 <li><a href='http://www.swi-prolog.org/pldoc/index.html'>http://www.swi-prolog.org/pldoc/index.html</a></li>
 </ul>
-<h3>Do:</h3><h4>1. Make a simple knowledge base. Represent some of your favorite books and authors.</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Name Of The Wind&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Patrick Rothfuss&#39;</span><span class='p'>).</span>
+
+<h3>Do:</h3>
+
+<div class='question'>1. Make a simple knowledge base. Represent some of your favorite books and authors.</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Name Of The Wind&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Patrick Rothfuss&#39;</span><span class='p'>).</span>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;Anathem&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Neal Stephenson&#39;</span><span class='p'>).</span>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Skystone&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Jack Whyte&#39;</span><span class='p'>).</span>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Singing Sword&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Jack Whyte&#39;</span><span class='p'>).</span>
@@ -323,7 +336,14 @@ green</code>, and see if it can still make the other statements true.</p>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Pragmatic Programmer&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Andy Hunt &amp; Dave Thomas&#39;</span><span class='p'>).</span>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;Seven Languages In Seven Weeks&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Bruce Tate&#39;</span><span class='p'>).</span>
 </code></pre>
-</div><h4>2. Find all books in your knowledge base written by one author.</h4><div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>book</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>&#39;Neal Stephenson&#39;</span><span class='p'>).</span>
+</div>
+
+
+
+<div class='question'>2. Find all books in your knowledge base written by one author.</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>book</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>&#39;Neal Stephenson&#39;</span><span class='p'>).</span>
 
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Anathem&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
 
@@ -333,7 +353,14 @@ green</code>, and see if it can still make the other statements true.</p>
 
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;The Singing Sword&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
 </code></pre>
-</div><h4>3. Make a knowledge base representing musicians and instruments. Also represent musicians and their genre of music.</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Hansi Kursch&#39;</span><span class='p'>,</span> <span class='s-Atom'>vocals</span><span class='p'>).</span>
+</div>
+
+
+
+<div class='question'>3. Make a knowledge base representing musicians and instruments. Also represent musicians and their genre of music.</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Hansi Kursch&#39;</span><span class='p'>,</span> <span class='s-Atom'>vocals</span><span class='p'>).</span>
 <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Hansi Kursch&#39;</span><span class='p'>,</span> <span class='s-Atom'>bass</span><span class='p'>).</span>
 <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Andre Olbrich&#39;</span><span class='p'>,</span> <span class='s-Atom'>guitar</span><span class='p'>).</span>
 <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Duke Ellington&#39;</span><span class='p'>,</span> <span class='s-Atom'>piano</span><span class='p'>).</span>
@@ -344,14 +371,25 @@ green</code>, and see if it can still make the other statements true.</p>
 <span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Duke Ellington&#39;</span><span class='p'>,</span> <span class='s-Atom'>jazz</span><span class='p'>).</span>
 <span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Jimi Hendrix&#39;</span><span class='p'>,</span> <span class='s-Atom'>rock</span><span class='p'>).</span>
 </code></pre>
-</div><h4>4. Find all musicians who play the guitar.</h4><div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>guitar</span><span class='p'>)</span>
+</div>
+
+
+
+<div class='question'>4. Find all musicians who play the guitar.</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>guitar</span><span class='p'>)</span>
 
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Andre Olbrich&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
 
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Jimi Hendrix&#39;</span>
 </code></pre>
 </div>
-<p>Next in this series: Day 2 of Prolog (coming soon)</p>
+
+
+
+</div>
+<p>Next in this series: <a href='/blog/2012/07/17/seven-languages-week-3-day-2'>Day 2 of Prolog</a></p>
 </div>
 
 
@@ -386,11 +424,11 @@ green</code>, and see if it can still make the other statements true.</p>
   <h2>Related Posts</h2>
   <ul class="posts">
     
+      <li><span>17 Jul 2012</span> &raquo; <a href="/blog/2012/07/17/seven-languages-week-3-day-2/">Seven Languages: Week 3 (Prolog) - Day 2</a></li>
+    
       <li><span>16 Jan 2012</span> &raquo; <a href="/blog/2012/01/16/seven-languages-week-2-day-3/">Seven Languages: Week 2 (Io) - Day 3</a></li>
     
       <li><span>11 Jan 2012</span> &raquo; <a href="/blog/2012/01/11/seven-languages-week-2-day-2/">Seven Languages: Week 2 (Io) - Day 2</a></li>
-    
-      <li><span>30 Dec 2011</span> &raquo; <a href="/blog/2011/12/30/transposing-a-matrix-in-io/">Transposing a matrix in Io</a></li>
     
   </ul>
 </div>

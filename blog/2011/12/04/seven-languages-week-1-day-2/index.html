@@ -101,7 +101,7 @@
 
 <h3>Find:</h3>
 
-<h4><b>1.</b> Find out how to access files with and without code blocks. What is the benefit of the code block?</h4>
+<div class='question'><b>1.</b> Find out how to access files with and without code blocks. What is the benefit of the code block?</div>
 
 
 <div class='highlight'><pre><code class='ruby'><span class='n'>file</span> <span class='o'>=</span> <span class='no'>File</span><span class='o'>.</span><span class='n'>open</span><span class='p'>(</span><span class='s2'>&quot;tmp.txt&quot;</span><span class='p'>,</span> <span class='s2'>&quot;w+&quot;</span><span class='p'>)</span>
@@ -117,7 +117,7 @@
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>a spoonful is great but I<span class='err'>&#39;</span>d rather have a bowl
@@ -126,7 +126,7 @@
 
 
 
-<h4><b>2.</b> How would you translate a hash to an array? Can you translate arrays to hashes?</h4>
+<div class='question'><b>2.</b> How would you translate a hash to an array? Can you translate arrays to hashes?</div>
 
 
 <div class='highlight'><pre><code class='ruby'><span class='n'>scores</span> <span class='o'>=</span> <span class='p'>{</span> <span class='n'>gary</span><span class='p'>:</span> <span class='mi'>5</span><span class='p'>,</span> <span class='n'>nick</span><span class='p'>:</span> <span class='mi'>11</span><span class='p'>,</span> <span class='n'>ted</span><span class='p'>:</span> <span class='mi'>8</span><span class='p'>,</span> <span class='n'>the_dude</span><span class='p'>:</span><span class='mi'>9</span> <span class='p'>}</span>
@@ -146,7 +146,7 @@
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'><span class='nb'>hash</span>: <span class='o'>{</span>:gary<span class='o'>=</span>&gt;5, :nick<span class='o'>=</span>&gt;11, :ted<span class='o'>=</span>&gt;8, :the_dude<span class='o'>=</span>&gt;9<span class='o'>}</span>
@@ -162,7 +162,7 @@ Yup.
 
 
 
-<h4><b>3.</b> Can you iterate through a hash?</h4>
+<div class='question'><b>3.</b> Can you iterate through a hash?</div>
 
 
 <div class='highlight'><pre><code class='ruby'><span class='n'>scores</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>key</span><span class='p'>,</span> <span class='n'>value</span><span class='o'>|</span> <span class='nb'>puts</span> <span class='s2'>&quot;key:&#39;</span><span class='si'>#{</span><span class='n'>key</span><span class='si'>}</span><span class='s2'>&#39;, value:&#39;</span><span class='si'>#{</span><span class='n'>value</span><span class='si'>}</span><span class='s2'>&#39;&quot;</span> <span class='p'>}</span>
@@ -172,7 +172,7 @@ Yup.
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>key:<span class='s1'>&#39;gary&#39;</span>, value:<span class='s1'>&#39;5&#39;</span>
@@ -185,7 +185,7 @@ Yup.
 
 
 
-<h4><b>4.</b> You can use Ruby arrays as stacks. What other common data structures to arrays support?</h4>
+<div class='question'><b>4.</b> You can use Ruby arrays as stacks. What other common data structures to arrays support?</div>
 
 
 <div class='highlight'><pre><code class='ruby'><span class='nb'>puts</span> <span class='s2'>&quot;queue/deque: &quot;</span>
@@ -219,7 +219,7 @@ Yup.
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>queue/deque: 
@@ -248,7 +248,7 @@ removed: c
 
 
 <h3>Do:</h3>
-<h4><b>1.</b> Print the contents of an array of sixteen numbers, four numbers at a time, using just each. Now, do the same with each_slice in Enumerable</h4>
+<div class='question'><b>1.</b> Print the contents of an array of sixteen numbers, four numbers at a time, using just each. Now, do the same with each_slice in Enumerable</div>
 
 
 <div class='highlight'><pre><code class='ruby'><span class='n'>sixteen_numbers</span> <span class='o'>=</span> <span class='o'>[*</span><span class='p'>(</span><span class='mi'>1</span><span class='o'>.</span><span class='n'>.</span><span class='mi'>16</span><span class='p'>)</span><span class='o'>]</span>
@@ -264,7 +264,7 @@ removed: c
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'><span class='o'>[</span>1, 2, 3, 4<span class='o'>]</span>
@@ -282,7 +282,7 @@ and
 
 
 
-<h4><b>2.</b> The Tree class was interesting, but it did not allow you to specify a new tree with a clean user interface. Let the initializer accept a nested structure with hashes and arrays. You should be able to specify a tree like this: {'grandpa' => {'dad' => 'child 1' => {}, 'child 2' => {} }, 'uncle' => {'child 3' => {}, 'child 4' => {} } } }.</h4>
+<div class='question'><b>2.</b> The Tree class was interesting, but it did not allow you to specify a new tree with a clean user interface. Let the initializer accept a nested structure with hashes and arrays. You should be able to specify a tree like this: {'grandpa' => {'dad' => 'child 1' => {}, 'child 2' => {} }, 'uncle' => {'child 3' => {}, 'child 4' => {} } } }.</div>
 
 
 <div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Tree</span>
@@ -329,7 +329,7 @@ and
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'><span class='s2'>&quot;Ruby&quot;</span>
@@ -344,7 +344,7 @@ and
 
 
 
-<h4><b>3.</b> Write a simple grep that will print the lines of a file having any occurrences of a phrase anywhere in that line. you will need to do a simple regular expression match and read lines from a file. (This is surprisingly simple in Ruby.) If you want, include line numbers.</h4>
+<div class='question'><b>3.</b> Write a simple grep that will print the lines of a file having any occurrences of a phrase anywhere in that line. you will need to do a simple regular expression match and read lines from a file. (This is surprisingly simple in Ruby.) If you want, include line numbers.</div>
 
 
 <div class='highlight'><pre><code class='ruby'><span class='k'>def</span> <span class='nf'>rbgrep</span><span class='p'>(</span><span class='n'>pattern</span><span class='p'>,</span> <span class='n'>filename</span><span class='p'>)</span>
@@ -360,7 +360,7 @@ and
 
 
 
-<h5>Output</h5>
+<div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>15: bass<span class='o'>)</span> and Andre Olbrich <span class='o'>(</span>guitar<span class='o'>)</span> under the name Lucifer<span class='s1'>&#39;s Heritage. The band</span>
@@ -410,11 +410,11 @@ and
   <h2>Related Posts</h2>
   <ul class="posts">
     
+      <li><span>17 Jul 2012</span> &raquo; <a href="/blog/2012/07/17/seven-languages-week-3-day-2/">Seven Languages: Week 3 (Prolog) - Day 2</a></li>
+    
       <li><span>05 Feb 2012</span> &raquo; <a href="/blog/2012/02/05/seven-languages-week-3-day-1/">Seven Languages: Week 3 (Prolog) - Day 1</a></li>
     
       <li><span>16 Jan 2012</span> &raquo; <a href="/blog/2012/01/16/seven-languages-week-2-day-3/">Seven Languages: Week 2 (Io) - Day 3</a></li>
-    
-      <li><span>11 Jan 2012</span> &raquo; <a href="/blog/2012/01/11/seven-languages-week-2-day-2/">Seven Languages: Week 2 (Io) - Day 2</a></li>
     
   </ul>
 </div>
