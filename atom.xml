@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-07-17T10:39:46-07:00</updated>
+ <updated>2012-07-18T15:25:10-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -123,7 +123,7 @@
 
 &lt;p&gt;So what does that really mean? To demonstrate the difference unification makes I am going to show you the same function written in three different languages and three different styles. I&amp;#8217;ve picked the &lt;code&gt;append&lt;/code&gt; function (append one list to another list) which is a great example, even though it&amp;#8217;s been explained many times before. In the comments on my &lt;a href='/blog/2012/02/05/seven-languages-week-3-day-1/'&gt;last post&lt;/a&gt; actually, &lt;a href='http://www.storytotell.org/'&gt;Daniel Lyons&lt;/a&gt; gave a &lt;a href='/blog/2012/02/05/seven-languages-week-3-day-1/#comment-446662856'&gt;nice demonstration&lt;/a&gt; of &lt;code&gt;append&lt;/code&gt; in Prolog, and it is an example &lt;a href='http://www.java.net/external?url=http://blog.rapidred.com'&gt;Bruce Tate&lt;/a&gt; spends a couple pages on as well.&lt;/p&gt;
 &lt;h4&gt;Imperative (Javascript)&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='javascript'&gt;&lt;span class='kd'&gt;function&lt;/span&gt; &lt;span class='nx'&gt;append&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;xs&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nx'&gt;ys&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    &lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;result&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;xs&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+    &lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;result&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;xs&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;slice&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
     &lt;span class='nx'&gt;i&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
 
     &lt;span class='k'&gt;for&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;i&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;i&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='nx'&gt;ys&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;length&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;i&lt;/span&gt;&lt;span class='o'&gt;++&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
