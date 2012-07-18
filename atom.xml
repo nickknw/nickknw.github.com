@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-07-18T15:58:32-07:00</updated>
+ <updated>2012-07-18T16:00:02-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -187,7 +187,7 @@ return value, param2)&lt;/code&gt;, like so:&lt;/p&gt;
 &lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;Prolog just generated all the possible ways you could combine two lists to make &lt;code&gt;[1, 2, 3]&lt;/code&gt;! All this functionaliy from that tiny definition of &lt;code&gt;append&lt;/code&gt; up above!&lt;/p&gt;
+&lt;p&gt;Prolog just generated all the possible ways you could combine two lists to make &lt;code&gt;[1, 2, 3]&lt;/code&gt;! All this functionality from that tiny definition of &lt;code&gt;append&lt;/code&gt; up above!&lt;/p&gt;
 
 &lt;p&gt;There&amp;#8217;s one more interesting use for append - as a lie-detector:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;4&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;
