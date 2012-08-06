@@ -1,0 +1,460 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="">
+
+        <title>Seven Languages: Week 3 (Prolog) - Day 3 - Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/site.css" >
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="/favicon.ico" >
+        <link href="http://feeds.feedburner.com/NickKnowlson" type="application/atom+xml" rel="alternate" title="Blog ATOM Feed" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        if (typeof jQuery == 'undefined')
+        {
+            document.write(decodeURIComponent("%3Cscript src='/js/jquery-1.6.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+        }
+        </script>
+        
+
+        
+        <script type="text/javascript">
+        // TODO: convert to css hover sometime
+        $(document).ready(function () {
+            $("#rss-nav-icon img").hover(function () {
+                $(this).attr("src","/img/rss-icon-lit.png");
+            }, function() {
+                $(this).attr("src","/img/rss-icon-dim.png");
+            });
+            $("#twitter-nav-icon img").hover(function () {
+                $(this).attr("src","/img/twitter-icon-lit.png");
+            }, function() {
+                $(this).attr("src","/img/twitter-icon-dim.png");
+            });
+        });
+        </script>
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+
+          if (document.location.hostname !== "localhost") {
+              _gaq.push(['_setAccount', 'UA-24781362-1']);
+              _gaq.push(['_trackPageview']);
+
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+          }
+        </script>
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logos/logo6.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class=" nav-link" href="/">Home</a></li>
+                <li><a class=" nav-link" href="/about/">About</a></li>
+                <li><a class=" nav-link" href="/projects/">Projects</a></li>
+                <li><a class="selected nav-link" href="/blog/">Blog</a></li>
+                <li><a class=" nav-link" href="/contact/">Contact</a></li>
+                <li><a id="rss-nav-icon" href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/rss-icon-dim.png" /></a></li>
+                <li><a id="twitter-nav-icon" href="http://twitter.com/#!/nickknw"><img src="/img/twitter-icon-dim.png" /></a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div id="content-padding">
+                <a href="/blog/archive/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Seven Languages: Week 3 (Prolog) - Day 3</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">06 Aug 2012</div>
+<div id="post">
+<p>Day 3 tackled some bigger examples: solving sudoku and the eight queens problem. In today&#8217;s post however, I&#8217;m going to go a bit off the rails and talk a bit about how logic programming can be beneficial in more practical ways.</p>
+<div class='interjection'><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2012/07/17/seven-languages-week-3-day-2/'>Week 3 (Prolog) - Day 2</a>. For an overview see the <a href='/projects/seven-languages-in-seven-weeks/'>project page</a>.)
+</p></div><h3>Datalog</h3>
+<p>Datalog is a subset of Prolog oriented towards querying that was designed to be embeddable in other languages. Many languages have datalog engines, such as <a href='http://iris-reasoner.org/'>Java</a>, <a href='https://sites.google.com/site/pydatalog/'>Python</a>, <a href='http://code.google.com/p/clojure-contrib/wiki/DatalogOverview'>Clojure</a> and <a href='http://docs.racket-lang.org/datalog/'>Racket</a>. It has become more well-known recently for being the query language of choice for <a href='http://www.datomic.com/'>Datomic</a>, a promising new distributed database. <a href='http://blog.fogus.me/'>Michael Fogus</a> is even giving a talk at this upcoming <a href='https://thestrangeloop.com/'>Strange Loop</a> about <a href='https://thestrangeloop.com/sessions/the-reemergence-of-datalog'>&#8220;The Reemergence of Datalog&#8221;</a>.</p>
+<h3>Constraint Programming</h3>
+<p>Every time in these past examples when I use the Prolog library <code>clp(fd)</code> (which stands for Constraint Logic Programming over a Finite Domain), I&#8217;m doing constraint programming. A lot of the time it is mixed in with logic programming, but it <em>doesn&#8217;t have to be</em>: there are constraint programming libraries for a lot of other languages. It can be really beneficial to know how to use even if you never write a line of Prolog.</p>
+
+<p>In fact, the prolog solution to sudoku below owes a lot of its conciseness to constraint programming. Sudoku solver implementations in other languages that have a constraint programming library can be about the same length! Another property of solutions using constraints is that they are usually a lot faster than an equivalent logic programming only solution.</p>
+<h3>Other logic languages</h3>
+<p>Prolog is the most widely used logic language, but it isn&#8217;t the only one. Here are a few other interesting ones that caught my eye.</p>
+
+<ul>
+<li><a href='http://www.mercury.csse.unimelb.edu.au/'>Mercury</a> is a functional logic programming language that shares Prolog&#8217;s syntax but has a strong static type system.</li>
+
+<li><a href='http://www-ps.informatik.uni-kiel.de/currywiki/'>Curry</a> is a functional logic programming language based on Haskell. It has constraint programming support built in.</li>
+
+<li><a href='http://www.mozart-oz.org/'>Oz</a> is a dynamically typed multi-paradigm language. The (reportedly excellent) book <a href='http://www.info.ucl.ac.be/~pvr/book.html'>Concepts, Techniques, and Models of Computer Programming</a> uses Oz as its language of choice.</li>
+</ul>
+<h3>Logic libraries</h3>
+<p>Surprisingly, you can get logic programming functionality in library form as well! These libraries are less common than constraint programming libraries, I could only find a few:</p>
+
+<ul>
+<li>Scheme: <a href='http://kanren.sourceforge.net/'>Kanren</a>, miniKanren and <a href='https://github.com/calvis/cKanren'>cKanren</a>. Kanren is the original implementation, miniKanren is a simplified implementation (~300 lines) for ease of teaching, and cKanren modifies miniKanren to support constraint logic programming.</li>
+
+<li>Clojure: <a href='https://github.com/clojure/core.logic/'>core.logic</a>. This library was actually based off of miniKanren originally, and cKanren functionality is currently in progress.</li>
+
+<li>C++: <a href='http://people.cs.umass.edu/~yannis/lc++/'>LC++</a></li>
+</ul>
+
+<h2 id='highlights_from_exercises'>Highlights from exercises</h2>
+
+<p>The exercises in this chapter were pretty interesting, but also pretty exhausting for a newbie to logic programming. I ended up with two implementations of a sudoku solver. The second one was about a fifth the size of the first and I learned a ton in the process of writing it. I think my implementation is fairly readable, so if you&#8217;re interested please feel free to scroll down to the <a href='#formatted_solutions'>formatted solutions</a> and take a look.</p>
+
+<p>That&#8217;s not what I&#8217;ll be highlighting here though. I&#8217;ll be pitting a Prolog solution against a solution from a regular (i.e. not logical) programming language that uses a constraint programming library. Since next week is Scala, I&#8217;ll arbitrarily pick Scala as the language and <a href='http://www.jacop.eu/'>JaCoP</a> as the constraint programming library. This is a light comparison done for my own fun and enlightenment, it isn&#8217;t meant to be comprehensive.</p>
+
+<p>Since I&#8217;m just a beginner with logic and constraint programming, it would be meaningless to compare implementations I wrote myself; the properties of the solutions would have more to do with my limitations than the languages they&#8217;re written in. So for these examples I will be leaning on more experienced minds.</p>
+<h3>Prolog</h3>
+<p>This Prolog solution is taken from the <a href='http://www.swi-prolog.org/man/clpfd.html'>clp(fd) documentation</a>.</p>
+<div class='highlight'><pre><code class='prolog'><span class='p'>:-</span> <span class='nf'>use_module</span><span class='p'>(</span><span class='nf'>library</span><span class='p'>(</span><span class='s-Atom'>clpfd</span><span class='p'>)).</span>
+
+<span class='nf'>sudoku</span><span class='p'>(</span><span class='nv'>Rows</span><span class='p'>)</span> <span class='p'>:-</span>
+        <span class='nf'>length</span><span class='p'>(</span><span class='nv'>Rows</span><span class='p'>,</span> <span class='m'>9</span><span class='p'>),</span> <span class='nf'>maplist</span><span class='p'>(</span><span class='nf'>length_</span><span class='p'>(</span><span class='m'>9</span><span class='p'>),</span> <span class='nv'>Rows</span><span class='p'>),</span>
+        <span class='nf'>append</span><span class='p'>(</span><span class='nv'>Rows</span><span class='p'>,</span> <span class='nv'>Vs</span><span class='p'>),</span> <span class='nv'>Vs</span> <span class='s-Atom'>ins</span> <span class='m'>1</span><span class='p'>..</span><span class='m'>9</span><span class='p'>,</span>
+        <span class='nf'>maplist</span><span class='p'>(</span><span class='s-Atom'>all_distinct</span><span class='p'>,</span> <span class='nv'>Rows</span><span class='p'>),</span>
+        <span class='nf'>transpose</span><span class='p'>(</span><span class='nv'>Rows</span><span class='p'>,</span> <span class='nv'>Columns</span><span class='p'>),</span> <span class='nf'>maplist</span><span class='p'>(</span><span class='s-Atom'>all_distinct</span><span class='p'>,</span> <span class='nv'>Columns</span><span class='p'>),</span>
+        <span class='nv'>Rows</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>,</span><span class='nv'>C</span><span class='p'>,</span><span class='nv'>D</span><span class='p'>,</span><span class='nv'>E</span><span class='p'>,</span><span class='nv'>F</span><span class='p'>,</span><span class='nv'>G</span><span class='p'>,</span><span class='nv'>H</span><span class='p'>,</span><span class='nv'>I</span><span class='p'>],</span>
+        <span class='nf'>blocks</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>),</span> <span class='nf'>blocks</span><span class='p'>(</span><span class='nv'>D</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>,</span> <span class='nv'>F</span><span class='p'>),</span> <span class='nf'>blocks</span><span class='p'>(</span><span class='nv'>G</span><span class='p'>,</span> <span class='nv'>H</span><span class='p'>,</span> <span class='nv'>I</span><span class='p'>).</span>
+
+<span class='nf'>length_</span><span class='p'>(</span><span class='nv'>L</span><span class='p'>,</span> <span class='nv'>Ls</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>length</span><span class='p'>(</span><span class='nv'>Ls</span><span class='p'>,</span> <span class='nv'>L</span><span class='p'>).</span>
+
+<span class='nf'>blocks</span><span class='p'>([],</span> <span class='p'>[],</span> <span class='p'>[]).</span>
+<span class='nf'>blocks</span><span class='p'>([</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>,</span><span class='nv'>C</span><span class='p'>|</span><span class='nv'>Bs1</span><span class='p'>],</span> <span class='p'>[</span><span class='nv'>D</span><span class='p'>,</span><span class='nv'>E</span><span class='p'>,</span><span class='nv'>F</span><span class='p'>|</span><span class='nv'>Bs2</span><span class='p'>],</span> <span class='p'>[</span><span class='nv'>G</span><span class='p'>,</span><span class='nv'>H</span><span class='p'>,</span><span class='nv'>I</span><span class='p'>|</span><span class='nv'>Bs3</span><span class='p'>])</span> <span class='p'>:-</span>
+        <span class='nf'>all_distinct</span><span class='p'>([</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>,</span><span class='nv'>C</span><span class='p'>,</span><span class='nv'>D</span><span class='p'>,</span><span class='nv'>E</span><span class='p'>,</span><span class='nv'>F</span><span class='p'>,</span><span class='nv'>G</span><span class='p'>,</span><span class='nv'>H</span><span class='p'>,</span><span class='nv'>I</span><span class='p'>]),</span>
+        <span class='nf'>blocks</span><span class='p'>(</span><span class='nv'>Bs1</span><span class='p'>,</span> <span class='nv'>Bs2</span><span class='p'>,</span> <span class='nv'>Bs3</span><span class='p'>).</span>
+</code></pre>
+</div><h3>Scala + JaCoP</h3>
+<p>This Scala solution is taken from <a href='http://www.hakank.org/constraint_programming_blog/2011/08/a_first_look_at_scalajacop_scala_wrapper_for_jacop.html'>Hakan Kjellerstrand&#8217;s scalaJaCoP page</a>. Here is a direct link to <a href='http://www.hakank.org/jacop/Sudoku.scala'>the file itself</a>.</p>
+<div class='highlight'><pre><code class='scala'><span class='k'>import</span> <span class='nn'>scalaJaCoP._</span>
+
+<span class='k'>object</span> <span class='nc'>Sudoku</span> <span class='k'>extends</span> <span class='nc'>App</span> <span class='k'>with</span> <span class='n'>jacop</span> <span class='o'>{</span>
+  <span class='k'>val</span> <span class='n'>n</span> <span class='k'>=</span> <span class='mi'>9</span>
+  <span class='k'>val</span> <span class='n'>reg</span> <span class='k'>=</span> <span class='mi'>3</span>
+
+  <span class='c1'>// data</span>
+  <span class='k'>val</span> <span class='n'>problem</span> <span class='k'>=</span> <span class='o'>...</span> <span class='c1'>// omitted</span>
+
+  <span class='k'>val</span> <span class='n'>x</span> <span class='k'>=</span> <span class='nc'>List</span><span class='o'>.</span><span class='n'>tabulate</span><span class='o'>(</span><span class='n'>n</span><span class='o'>)(</span><span class='n'>i</span><span class='k'>=&gt;</span> 
+                <span class='nc'>List</span><span class='o'>.</span><span class='n'>tabulate</span><span class='o'>(</span><span class='n'>n</span><span class='o'>)(</span><span class='n'>j</span><span class='k'>=&gt;</span>
+                  <span class='k'>new</span> <span class='nc'>IntVar</span><span class='o'>(</span><span class='s'>&quot;x(&quot;</span><span class='o'>+</span><span class='n'>i</span><span class='o'>+</span><span class='s'>&quot;,&quot;</span><span class='o'>+</span><span class='n'>j</span><span class='o'>+</span><span class='s'>&quot;)&quot;</span><span class='o'>,</span> <span class='mi'>1</span><span class='o'>,</span> <span class='n'>n</span><span class='o'>)))</span>
+
+  <span class='c1'>// constraints</span>
+
+  <span class='c1'>// fill with the hints</span>
+  <span class='k'>for</span><span class='o'>(</span><span class='n'>i</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>n</span><span class='o'>)</span> <span class='o'>{</span>
+    <span class='k'>for</span><span class='o'>(</span><span class='n'>j</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>n</span><span class='o'>)</span> <span class='o'>{</span>
+      <span class='k'>if</span> <span class='o'>(</span><span class='n'>problem</span><span class='o'>(</span><span class='n'>i</span><span class='o'>)(</span><span class='n'>j</span><span class='o'>)</span> <span class='o'>&gt;</span> <span class='mi'>0</span><span class='o'>)</span> <span class='o'>{</span>
+        <span class='n'>x</span><span class='o'>(</span><span class='n'>i</span><span class='o'>)(</span><span class='n'>j</span><span class='o'>)</span> <span class='err'>#</span><span class='k'>=</span> <span class='n'>problem</span><span class='o'>(</span><span class='n'>i</span><span class='o'>)(</span><span class='n'>j</span><span class='o'>)</span>
+      <span class='o'>}</span>
+    <span class='o'>}</span>
+  <span class='o'>}</span>
+  
+  <span class='c1'>// rows and columns</span>
+  <span class='k'>for</span><span class='o'>(</span><span class='n'>i</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>n</span><span class='o'>)</span> <span class='o'>{</span>
+    <span class='n'>alldifferent</span><span class='o'>(</span> <span class='nc'>Array</span><span class='o'>.</span><span class='n'>tabulate</span><span class='o'>(</span><span class='n'>n</span><span class='o'>)(</span><span class='n'>j</span><span class='k'>=&gt;</span> <span class='n'>x</span><span class='o'>(</span><span class='n'>i</span><span class='o'>)(</span><span class='n'>j</span><span class='o'>))</span> <span class='o'>)</span>
+    <span class='n'>alldifferent</span><span class='o'>(</span> <span class='nc'>Array</span><span class='o'>.</span><span class='n'>tabulate</span><span class='o'>(</span><span class='n'>n</span><span class='o'>)(</span><span class='n'>j</span><span class='k'>=&gt;</span> <span class='n'>x</span><span class='o'>(</span><span class='n'>j</span><span class='o'>)(</span><span class='n'>i</span><span class='o'>))</span> <span class='o'>)</span> 
+  <span class='o'>}</span>
+
+  <span class='c1'>// blocks</span>
+  <span class='k'>for</span><span class='o'>(</span><span class='n'>i</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>reg</span><span class='o'>;</span> <span class='n'>j</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>reg</span><span class='o'>)</span> <span class='o'>{</span>
+    <span class='n'>alldifferent</span><span class='o'>(</span>  <span class='o'>(</span><span class='k'>for</span><span class='o'>{</span> <span class='n'>r</span> <span class='k'>&lt;-</span> <span class='n'>i</span><span class='o'>*</span><span class='n'>reg</span> <span class='n'>until</span> <span class='n'>i</span><span class='o'>*</span><span class='n'>reg</span><span class='o'>+</span><span class='n'>reg</span><span class='o'>;</span>
+                        <span class='n'>c</span> <span class='k'>&lt;-</span> <span class='n'>j</span><span class='o'>*</span><span class='n'>reg</span> <span class='n'>until</span> <span class='n'>j</span><span class='o'>*</span><span class='n'>reg</span><span class='o'>+</span><span class='n'>reg</span>
+                     <span class='o'>}</span> <span class='k'>yield</span> <span class='n'>x</span><span class='o'>(</span><span class='n'>r</span><span class='o'>)(</span><span class='n'>c</span><span class='o'>)).</span><span class='n'>toArray</span>
+               <span class='o'>)</span>
+  <span class='o'>}</span>
+
+   <span class='c1'>// search</span>
+  <span class='k'>val</span> <span class='n'>result</span> <span class='k'>=</span> <span class='n'>satisfyAll</span><span class='o'>(</span><span class='n'>search</span><span class='o'>(</span><span class='n'>x</span><span class='o'>.</span><span class='n'>flatten</span><span class='o'>,</span> <span class='n'>max_regret</span><span class='o'>,</span> <span class='n'>indomain_max</span><span class='o'>),</span> <span class='n'>printIt</span><span class='o'>)</span> 
+
+  <span class='k'>def</span> <span class='n'>printIt</span><span class='o'>()</span> <span class='o'>{</span> <span class='o'>...</span> <span class='o'>}</span> <span class='c1'>// omitted</span>
+<span class='o'>}</span> 
+</code></pre>
+</div>
+<p>For brevity I&#8217;m omitting how the Prolog solution is queried and how the Scala solution is printed. I want to keep the focus on the interesting parts of these programs. For the full source code, check the links above or the <a href='https://github.com/nickknw/constraint-programming-benchmarks'>benchmark source code</a> on github.</p>
+<h3>Scoring</h3><h4>Size</h4>
+<p>The Prolog program is just over half as long at <strong>13</strong> lines instead of <strong>25</strong> for Scala (not counting comments or whitespace). Although this is definitely a win for Prolog, the Scala version is still far shorter than any Sudoku solvers that don&#8217;t take advantage of constraint programming.</p>
+<h4>Readability</h4>
+<p>Ah, the most subjective benchmark! This one is hard for me to judge fairly, since I&#8217;ve spent a lot of time inside of Prolog recently, and none using Scala or JaCoP. That said, even trying to account for my bias I think the Prolog solution has a big advantage here. It reads a lot more declaratively than the Scala solution and doesn&#8217;t have to worry about as many details.</p>
+
+<p>Given my bias I would be very interested to hear feedback on this topic. Which solution did <strong>you</strong> think was more readable?</p>
+<h4>Speed</h4>
+<p>Now we are into interesting territory. Prolog has a few decades&#8217; headstart on JaCoP, but JaCoP has the speed of the highly optimized JVM behind it. Let&#8217;s see who comes out on top!</p>
+
+<p><strong>Disclaimer:</strong> I acknowledge that benchmarking is an easy thing to do incorrectly. I&#8217;ve made the <a href='https://github.com/nickknw/constraint-programming-benchmarks'>source code for these benchmarks</a> available on github and included instructions to allow you to (hopefully!) easily replicate my results. Please feel free to double check what I&#8217;ve done, I am more than happy to receive feedback telling me I am wrong. Contributions using other libraries or languages are also welcome.</p>
+
+<p><strong>Results:</strong></p>
+
+<p>SWI-Prolog managed to solve the sample sudoku problem in an average of <strong>78 milliseconds</strong> on my machine.</p>
+
+<p>JaCoP managed to solve the sample sudoku problem in an average of <strong>95 milliseconds</strong> on my machine.</p>
+
+<p>The Scala version is <strong>1.2 times</strong> slower than the Prolog version. Honestly, this was an unexpected result for me; I would have guessed JaCoP had the edge. Regardless, they are both <em>pretty damn fast</em> solutions for not a lot of effort. Both win here.</p>
+<h4>Conclusions</h4>
+<p>Given the close results, there is only one clear conclusion I can draw from this comparison: Scala + JaCoP can roughly match the expressiveness and speed of a Prolog solution, at least for Sudoku. But that&#8217;s boring! If I may hypothesize, I would guess that: for a large class of problems, constraint programming libraries can give you most of the benefits of a logic programming solution while only sacrificing a little bit of declarative conciseness and elegance.</p>
+
+<p>Good news for the working programmer who doesn&#8217;t feel he has time to learn Prolog!</p>
+<h4>More constraint programming examples</h4>
+<p>Hakan Kjellerstrand has a <a href='http://www.hakank.org/constraint_programming/'>fantastic collection of problems</a> solved using many different constraint programming libraries. It is a great resource and can be fun to compare different implementations of the same problem.</p>
+
+<h2 id='full_code_listing'>Full Code Listing</h2>
+
+<p>Here is a nicely formatted version of my solutions to the exercises from Day 3 of Prolog. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-3-prolog/day3.pl'>on github</a> with the other exercises.</p>
+<div id='formatted_solutions'>
+
+<h3>Find:</h3>
+
+<div class='question'><b>1.</b> Prolog has some input/output features as well. Find print predicates that print out variables.</div>
+
+<div class='code_explanation'>
+There's 'write'. I'll paste my minInList function in here and make it
+write each element of the list while it checks them.
+Aha, 'format' and 'writef' are very nice too.
+</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>min</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>A</span><span class='p'>).</span>
+<span class='nf'>min</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nv'>B</span> <span class='o'>&lt;</span> <span class='nv'>A</span><span class='p'>.</span>
+<span class='nf'>min</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>,</span><span class='nv'>A</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nv'>A</span> <span class='o'>&lt;</span> <span class='nv'>B</span><span class='p'>.</span>
+
+<span class='nf'>minInList</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>XS</span><span class='p'>],</span> <span class='nv'>M</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>minInList</span><span class='p'>(</span><span class='nv'>XS</span><span class='p'>,</span> <span class='nv'>M1</span><span class='p'>),</span> <span class='nf'>min</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>M1</span><span class='p'>,</span> <span class='nv'>M</span><span class='p'>),</span> <span class='nf'>format</span><span class='p'>(</span><span class='s-Atom'>&#39;~a, &#39;</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>).</span>
+<span class='nf'>minInList</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='nv'>X</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>format</span><span class='p'>(</span><span class='s-Atom'>&#39;~a, &#39;</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>).</span>
+</code></pre>
+</div>
+
+
+
+<div class='question'><b>2.</b> Find a way to use the print predicates to print only successful solutions. How do they work?</div>
+
+<div class='code_explanation'>
+To answer this one... I guess I want to use a rule that can have multiple
+correct answers. I'll take an example from the book.
+</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>red</span><span class='p'>,</span> <span class='s-Atom'>green</span><span class='p'>).</span> <span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>red</span><span class='p'>,</span> <span class='s-Atom'>blue</span><span class='p'>).</span>
+<span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>green</span><span class='p'>,</span> <span class='s-Atom'>red</span><span class='p'>).</span> <span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>green</span><span class='p'>,</span> <span class='s-Atom'>blue</span><span class='p'>).</span>
+<span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>blue</span><span class='p'>,</span> <span class='s-Atom'>red</span><span class='p'>).</span> <span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>blue</span><span class='p'>,</span> <span class='s-Atom'>green</span><span class='p'>).</span>
+
+<span class='nf'>coloring</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Mississippi</span><span class='p'>,</span> <span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>)</span> <span class='p'>:-</span>
+    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Mississippi</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>),</span>
+    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Mississippi</span><span class='p'>,</span> <span class='nv'>Alabama</span><span class='p'>),</span>
+    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>),</span>
+    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Mississippi</span><span class='p'>),</span>
+    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Georgia</span><span class='p'>),</span>
+    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>),</span>
+    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>),</span>
+    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>),</span>
+    <span class='nf'>format</span><span class='p'>(</span><span class='s-Atom'>&#39;~a, ~a, ~a, ~a, ~a&#39;</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Mississippi</span><span class='p'>,</span> <span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>]).</span>
+</code></pre>
+</div>
+
+
+
+<div class='code_explanation'>
+Well, that will only print successful solutions, but I kind of feel like I've
+missed the point. All this will do is repeat the information that you already
+receive. Oh well, if I figure it out I'll come back to it.
+</div>
+
+
+<h3>Do:</h3>
+
+<div class='question'><b>1.</b> Modify the Sudoku solver to work on six-by-six puzzles (squares are 3x2) and 9x9 puzzles)</div>
+
+<div class='code_explanation'>
+I wrote a long awful version of this first, then cheated to write a better one.
+I looked at <a href='http://stackoverflow.com/questions/1768274/prolog-learning-by-example'>this sudoku solver</a> (found in the [clp(fd) documentation](http://www.swi-prolog.org/man/clpfd.html)), understood how it worked, then closed it and wrote my own. This is the version that you see below. I also chose to do just 9x9.
+</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='p'>:-</span> <span class='nf'>use_module</span><span class='p'>(</span><span class='nf'>library</span><span class='p'>(</span><span class='s-Atom'>clpfd</span><span class='p'>)).</span>
+
+<span class='nf'>sudoku</span><span class='p'>(</span><span class='nv'>Rows</span><span class='p'>)</span> <span class='p'>:-</span>
+    <span class='c1'>% split into rows</span>
+    <span class='nv'>Rows</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>,</span> <span class='nv'>F</span><span class='p'>,</span> <span class='nv'>G</span><span class='p'>,</span> <span class='nv'>H</span><span class='p'>,</span> <span class='nv'>I</span><span class='p'>],</span>
+    <span class='c1'>% and columns</span>
+    <span class='nf'>transpose</span><span class='p'>(</span><span class='nv'>Rows</span><span class='p'>,</span> <span class='nv'>Columns</span><span class='p'>),</span> 
+
+    <span class='c1'>% some bounds checking</span>
+    <span class='nf'>append</span><span class='p'>(</span><span class='nv'>Rows</span><span class='p'>,</span> <span class='nv'>FlattenedRows</span><span class='p'>),</span> <span class='nv'>FlattenedRows</span> <span class='s-Atom'>ins</span> <span class='m'>1</span><span class='p'>..</span><span class='m'>9</span><span class='p'>,</span>
+    <span class='nf'>length</span><span class='p'>(</span><span class='nv'>Rows</span><span class='p'>,</span> <span class='m'>9</span><span class='p'>),</span>
+    <span class='nf'>length</span><span class='p'>(</span><span class='nv'>Columns</span><span class='p'>,</span> <span class='m'>9</span><span class='p'>),</span>
+
+    <span class='c1'>% all rows valid</span>
+    <span class='nf'>maplist</span><span class='p'>(</span><span class='s-Atom'>all_distinct</span><span class='p'>,</span> <span class='nv'>Rows</span><span class='p'>),</span>
+
+    <span class='c1'>% all columns valid</span>
+    <span class='nf'>maplist</span><span class='p'>(</span><span class='s-Atom'>all_distinct</span><span class='p'>,</span> <span class='nv'>Columns</span><span class='p'>),</span>
+
+    <span class='c1'>% all blocks valid</span>
+    <span class='nf'>valid_blocks</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>),</span>
+    <span class='nf'>valid_blocks</span><span class='p'>(</span><span class='nv'>D</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>,</span> <span class='nv'>F</span><span class='p'>),</span>
+    <span class='nf'>valid_blocks</span><span class='p'>(</span><span class='nv'>G</span><span class='p'>,</span> <span class='nv'>H</span><span class='p'>,</span> <span class='nv'>I</span><span class='p'>),</span>
+
+    <span class='nf'>prettier_print</span><span class='p'>(</span><span class='nv'>FlattenedRows</span><span class='p'>).</span>
+
+<span class='nf'>valid_blocks</span><span class='p'>([],</span> <span class='p'>[],</span> <span class='p'>[]).</span>  
+<span class='nf'>valid_blocks</span><span class='p'>([</span><span class='nv'>A1</span><span class='p'>,</span> <span class='nv'>A2</span><span class='p'>,</span> <span class='nv'>A3</span> <span class='p'>|</span> <span class='nv'>As</span><span class='p'>],</span> <span class='p'>[</span><span class='nv'>B1</span><span class='p'>,</span> <span class='nv'>B2</span><span class='p'>,</span> <span class='nv'>B3</span> <span class='p'>|</span> <span class='nv'>Bs</span><span class='p'>],</span> <span class='p'>[</span><span class='nv'>C1</span><span class='p'>,</span> <span class='nv'>C2</span><span class='p'>,</span> <span class='nv'>C3</span> <span class='p'>|</span> <span class='nv'>Cs</span><span class='p'>])</span> <span class='p'>:-</span>
+    <span class='nf'>maplist</span><span class='p'>(</span><span class='s-Atom'>all_distinct</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>A1</span><span class='p'>,</span> <span class='nv'>A2</span><span class='p'>,</span> <span class='nv'>A3</span><span class='p'>,</span> <span class='nv'>B1</span><span class='p'>,</span> <span class='nv'>B2</span><span class='p'>,</span> <span class='nv'>B3</span><span class='p'>,</span> <span class='nv'>C1</span><span class='p'>,</span> <span class='nv'>C2</span><span class='p'>,</span> <span class='nv'>C3</span><span class='p'>]),</span>
+    <span class='nf'>valid_blocks</span><span class='p'>(</span><span class='nv'>As</span><span class='p'>,</span> <span class='nv'>Bs</span><span class='p'>,</span> <span class='nv'>Cs</span><span class='p'>).</span>
+
+
+<span class='nf'>problem</span><span class='p'>(</span><span class='m'>1</span><span class='p'>,</span> <span class='p'>[[</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>],</span>                                   
+            <span class='p'>[</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>3</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>8</span><span class='p'>,</span><span class='m'>5</span><span class='p'>],</span>                                   
+            <span class='p'>[</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>1</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>2</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>],</span>                                   
+            <span class='p'>[</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>5</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>7</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>],</span>                                   
+            <span class='p'>[</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>4</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>1</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>],</span>                                   
+            <span class='p'>[</span><span class='k'>_</span><span class='p'>,</span><span class='m'>9</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>],</span>                                  
+            <span class='p'>[</span><span class='m'>5</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>7</span><span class='p'>,</span><span class='m'>3</span><span class='p'>],</span>                                  
+            <span class='p'>[</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>2</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>1</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>],</span>                                   
+            <span class='p'>[</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>4</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='k'>_</span><span class='p'>,</span><span class='m'>9</span><span class='p'>]]).</span>
+
+<span class='c1'>% can test with:</span>
+<span class='c1'>% ?- problem(1, Board), sudoku(Board).</span>
+</code></pre>
+</div>
+
+
+
+<div class='question'><b>2.</b> Make the Sudoku solver print prettier
+solutions.</div>
+
+
+<div class='highlight'><pre><code class='prolog'><span class='nf'>prettier_print</span><span class='p'>([]).</span>
+<span class='nf'>prettier_print</span><span class='p'>(</span><span class='nv'>Puzzle</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>prettier_print</span><span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='nv'>Puzzle</span><span class='p'>).</span>
+
+<span class='nf'>prettier_print</span><span class='p'>(</span><span class='m'>0</span><span class='p'>,</span> <span class='nv'>Puzzle</span><span class='p'>)</span> <span class='p'>:-</span> 
+    <span class='nf'>writeln</span><span class='p'>(</span><span class='s-Atom'>&#39;┌───────┬───────┬───────┐&#39;</span><span class='p'>),</span> 
+    <span class='nf'>prettier_print</span><span class='p'>(</span><span class='m'>1</span><span class='p'>,</span> <span class='nv'>Puzzle</span><span class='p'>).</span>
+<span class='nf'>prettier_print</span><span class='p'>(</span><span class='m'>4</span><span class='p'>,</span> <span class='nv'>Puzzle</span><span class='p'>)</span> <span class='p'>:-</span> 
+    <span class='nf'>writeln</span><span class='p'>(</span><span class='s-Atom'>&#39;│───────┼───────┼───────│&#39;</span><span class='p'>),</span> 
+    <span class='nf'>prettier_print</span><span class='p'>(</span><span class='m'>5</span><span class='p'>,</span> <span class='nv'>Puzzle</span><span class='p'>).</span>
+<span class='nf'>prettier_print</span><span class='p'>(</span><span class='m'>8</span><span class='p'>,</span> <span class='nv'>Puzzle</span><span class='p'>)</span> <span class='p'>:-</span> 
+    <span class='nf'>writeln</span><span class='p'>(</span><span class='s-Atom'>&#39;│───────┼───────┼───────│&#39;</span><span class='p'>),</span> 
+    <span class='nf'>prettier_print</span><span class='p'>(</span><span class='m'>9</span><span class='p'>,</span> <span class='nv'>Puzzle</span><span class='p'>).</span>
+<span class='nf'>prettier_print</span><span class='p'>(</span><span class='m'>12</span><span class='p'>,</span> <span class='p'>[])</span> <span class='p'>:-</span> 
+    <span class='nf'>writeln</span><span class='p'>(</span><span class='s-Atom'>&#39;└───────┴───────┴───────┘&#39;</span><span class='p'>).</span>
+
+<span class='nf'>prettier_print</span><span class='p'>(</span><span class='nv'>N</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>Col1</span><span class='p'>,</span> <span class='nv'>Col2</span><span class='p'>,</span> <span class='nv'>Col3</span><span class='p'>,</span> <span class='nv'>Col4</span><span class='p'>,</span> <span class='nv'>Col5</span><span class='p'>,</span> <span class='nv'>Col6</span><span class='p'>,</span> <span class='nv'>Col7</span><span class='p'>,</span> <span class='nv'>Col8</span><span class='p'>,</span> <span class='nv'>Col9</span> <span class='p'>|</span> <span class='nv'>Puzzle</span><span class='p'>])</span> <span class='p'>:-</span> 
+    <span class='nf'>member</span><span class='p'>(</span><span class='nv'>N</span><span class='p'>,</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span><span class='m'>2</span><span class='p'>,</span><span class='m'>3</span><span class='p'>,</span><span class='m'>5</span><span class='p'>,</span><span class='m'>6</span><span class='p'>,</span><span class='m'>7</span><span class='p'>,</span><span class='m'>9</span><span class='p'>,</span><span class='m'>10</span><span class='p'>,</span><span class='m'>11</span><span class='p'>]),</span>
+    <span class='c1'>%N =\= 0, N =\= 4, N =\= 8, N =\= 13,</span>
+    <span class='c1'>% note to self about above: remember, prolog&#39;s pattern matching isn&#39;t</span>
+    <span class='c1'>% like pattern matching in other languages</span>
+
+    <span class='nf'>format</span><span class='p'>(</span><span class='s-Atom'>&#39;│ ~d ~d ~d │ ~d ~d ~d │ ~d ~d ~d │~n&#39;</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>Col1</span><span class='p'>,</span> <span class='nv'>Col2</span><span class='p'>,</span> <span class='nv'>Col3</span><span class='p'>,</span> <span class='nv'>Col4</span><span class='p'>,</span> <span class='nv'>Col5</span><span class='p'>,</span> <span class='nv'>Col6</span><span class='p'>,</span> <span class='nv'>Col7</span><span class='p'>,</span> <span class='nv'>Col8</span><span class='p'>,</span> <span class='nv'>Col9</span><span class='p'>]),</span> 
+    <span class='nf'>succ</span><span class='p'>(</span><span class='nv'>N</span><span class='p'>,</span> <span class='nv'>N1</span><span class='p'>),</span>
+    <span class='nf'>prettier_print</span><span class='p'>(</span><span class='nv'>N1</span><span class='p'>,</span> <span class='nv'>Puzzle</span><span class='p'>).</span>
+</code></pre>
+</div>
+
+
+
+<div class='tiny_title'>Output</div>
+
+<div class='symmetrical_line_height'>
+
+<div class='highlight'><pre><code class='bash'>?- problem<span class='o'>(</span>1, Board<span class='o'>)</span>, sudoku<span class='o'>(</span>Board<span class='o'>)</span>.
+
+┌───────┬───────┬───────┐
+│ 9 8 7 │ 6 5 4 │ 3 2 1 │
+│ 2 4 6 │ 1 7 3 │ 9 8 5 │
+│ 3 5 1 │ 9 2 8 │ 7 4 6 │
+│───────┼───────┼───────│
+│ 1 2 8 │ 5 3 7 │ 6 9 4 │
+│ 6 3 4 │ 8 9 2 │ 1 5 7 │
+│ 7 9 5 │ 4 6 1 │ 8 3 2 │
+│───────┼───────┼───────│
+│ 5 1 9 │ 2 8 6 │ 4 7 3 │
+│ 4 7 2 │ 3 1 9 │ 5 6 8 │
+│ 8 6 3 │ 7 4 5 │ 2 1 9 │
+└───────┴───────┴───────┘
+</code></pre>
+</div>
+
+
+</div>
+
+<div class='question'><b>3.</b> Solve the Eight Queens problem by taking a list of queens. Rather than a
+tuple, represent each queen with an integer, from 1-8. Get the row of a queen
+by its position in the list and the column by the value in the list.
+</div>
+
+<div class='code_explanation'>...I think I'm just going to leave this one. I'd
+like to move on to Scala at this point</div>
+
+</div>
+<p>Next in this series: Day 1 of Scala (coming soon)</p>
+</div>
+
+
+<div id="socialbuttons">
+<div>
+    <div id="rss_button"><a href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/feed-icon-28x28.png">&nbsp;</a></div>
+    <!-- G+ -->
+    <div id="google_plus_button"><g:plusone></g:plusone>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script></div>
+
+    <!-- Twitter -->
+    <div id="twitter_button"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="nickknw">Tweet</a>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+
+    <!-- Reddit -->
+    <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
+
+    <!-- Facebook -->
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2012/08/06/seven-languages-week-3-day-3/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+
+</div>
+</div>
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>17 Jul 2012</span> &raquo; <a href="/blog/2012/07/17/seven-languages-week-3-day-2/">Seven Languages: Week 3 (Prolog) - Day 2</a></li>
+    
+      <li><span>05 Feb 2012</span> &raquo; <a href="/blog/2012/02/05/seven-languages-week-3-day-1/">Seven Languages: Week 3 (Prolog) - Day 1</a></li>
+    
+      <li><span>16 Jan 2012</span> &raquo; <a href="/blog/2012/01/16/seven-languages-week-2-day-3/">Seven Languages: Week 2 (Io) - Day 3</a></li>
+    
+  </ul>
+</div>
+
+<hr class="fancyrule" />
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
+
+    var disqus_identifier = '/blog/2012/08/06/seven-languages-week-3-day-3';
+    var disqus_url = 'http://nickknowlson.com//blog/2012/08/06/seven-languages-week-3-day-3/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+        </div>
+        <div id="footer">&copy; Copyright 2012 Nick Knowlson</div>
+        <div style="display: none;">Content by Nick Knowlson: <a href="https://plus.google.com/104462106474002996122?rel=author" rel="me">Google+</a></div>
+        <!--hacky way of reducing image loading lag when hovering over rss and twitter icons for now --><span style="display: none;"><img src="/img/rss-icon-lit.png" /><img src="/img/twitter-icon-lit.png" /></span>
+    </body>
+</html>

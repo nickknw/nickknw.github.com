@@ -4,12 +4,336 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-07-19T12:30:25-07:00</updated>
+ <updated>2012-08-06T05:01:04-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Seven Languages: Week 3 (Prolog) - Day 3</title>
+   <link href="http://nickknowlson.com/blog/2012/08/06/seven-languages-week-3-day-3/"/>
+   <updated>2012-08-06T00:00:00-07:00</updated>
+   <id>http://nickknowlson.com/blog/2012/08/06/seven-languages-week-3-day-3</id>
+   <content type="html">&lt;p&gt;Day 3 tackled some bigger examples: solving sudoku and the eight queens problem. In today&amp;#8217;s post however, I&amp;#8217;m going to go a bit off the rails and talk a bit about how logic programming can be beneficial in more practical ways.&lt;/p&gt;
+&lt;div class='interjection'&gt;&lt;p&gt;
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/07/17/seven-languages-week-3-day-2/'&gt;Week 3 (Prolog) - Day 2&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+&lt;/p&gt;&lt;/div&gt;&lt;h3&gt;Datalog&lt;/h3&gt;
+&lt;p&gt;Datalog is a subset of Prolog oriented towards querying that was designed to be embeddable in other languages. Many languages have datalog engines, such as &lt;a href='http://iris-reasoner.org/'&gt;Java&lt;/a&gt;, &lt;a href='https://sites.google.com/site/pydatalog/'&gt;Python&lt;/a&gt;, &lt;a href='http://code.google.com/p/clojure-contrib/wiki/DatalogOverview'&gt;Clojure&lt;/a&gt; and &lt;a href='http://docs.racket-lang.org/datalog/'&gt;Racket&lt;/a&gt;. It has become more well-known recently for being the query language of choice for &lt;a href='http://www.datomic.com/'&gt;Datomic&lt;/a&gt;, a promising new distributed database. &lt;a href='http://blog.fogus.me/'&gt;Michael Fogus&lt;/a&gt; is even giving a talk at this upcoming &lt;a href='https://thestrangeloop.com/'&gt;Strange Loop&lt;/a&gt; about &lt;a href='https://thestrangeloop.com/sessions/the-reemergence-of-datalog'&gt;&amp;#8220;The Reemergence of Datalog&amp;#8221;&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Constraint Programming&lt;/h3&gt;
+&lt;p&gt;Every time in these past examples when I use the Prolog library &lt;code&gt;clp(fd)&lt;/code&gt; (which stands for Constraint Logic Programming over a Finite Domain), I&amp;#8217;m doing constraint programming. A lot of the time it is mixed in with logic programming, but it &lt;em&gt;doesn&amp;#8217;t have to be&lt;/em&gt;: there are constraint programming libraries for a lot of other languages. It can be really beneficial to know how to use even if you never write a line of Prolog.&lt;/p&gt;
+
+&lt;p&gt;In fact, the prolog solution to sudoku below owes a lot of its conciseness to constraint programming. Sudoku solver implementations in other languages that have a constraint programming library can be about the same length! Another property of solutions using constraints is that they are usually a lot faster than an equivalent logic programming only solution.&lt;/p&gt;
+&lt;h3&gt;Other logic languages&lt;/h3&gt;
+&lt;p&gt;Prolog is the most widely used logic language, but it isn&amp;#8217;t the only one. Here are a few other interesting ones that caught my eye.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://www.mercury.csse.unimelb.edu.au/'&gt;Mercury&lt;/a&gt; is a functional logic programming language that shares Prolog&amp;#8217;s syntax but has a strong static type system.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://www-ps.informatik.uni-kiel.de/currywiki/'&gt;Curry&lt;/a&gt; is a functional logic programming language based on Haskell. It has constraint programming support built in.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://www.mozart-oz.org/'&gt;Oz&lt;/a&gt; is a dynamically typed multi-paradigm language. The (reportedly excellent) book &lt;a href='http://www.info.ucl.ac.be/~pvr/book.html'&gt;Concepts, Techniques, and Models of Computer Programming&lt;/a&gt; uses Oz as its language of choice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Logic libraries&lt;/h3&gt;
+&lt;p&gt;Surprisingly, you can get logic programming functionality in library form as well! These libraries are less common than constraint programming libraries, I could only find a few:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Scheme: &lt;a href='http://kanren.sourceforge.net/'&gt;Kanren&lt;/a&gt;, miniKanren and &lt;a href='https://github.com/calvis/cKanren'&gt;cKanren&lt;/a&gt;. Kanren is the original implementation, miniKanren is a simplified implementation (~300 lines) for ease of teaching, and cKanren modifies miniKanren to support constraint logic programming.&lt;/li&gt;
+
+&lt;li&gt;Clojure: &lt;a href='https://github.com/clojure/core.logic/'&gt;core.logic&lt;/a&gt;. This library was actually based off of miniKanren originally, and cKanren functionality is currently in progress.&lt;/li&gt;
+
+&lt;li&gt;C++: &lt;a href='http://people.cs.umass.edu/~yannis/lc++/'&gt;LC++&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='highlights_from_exercises'&gt;Highlights from exercises&lt;/h2&gt;
+
+&lt;p&gt;The exercises in this chapter were pretty interesting, but also pretty exhausting for a newbie to logic programming. I ended up with two implementations of a sudoku solver. The second one was about a fifth the size of the first and I learned a ton in the process of writing it. I think my implementation is fairly readable, so if you&amp;#8217;re interested please feel free to scroll down to the &lt;a href='#formatted_solutions'&gt;formatted solutions&lt;/a&gt; and take a look.&lt;/p&gt;
+
+&lt;p&gt;That&amp;#8217;s not what I&amp;#8217;ll be highlighting here though. I&amp;#8217;ll be pitting a Prolog solution against a solution from a regular (i.e. not logical) programming language that uses a constraint programming library. Since next week is Scala, I&amp;#8217;ll arbitrarily pick Scala as the language and &lt;a href='http://www.jacop.eu/'&gt;JaCoP&lt;/a&gt; as the constraint programming library. This is a light comparison done for my own fun and enlightenment, it isn&amp;#8217;t meant to be comprehensive.&lt;/p&gt;
+
+&lt;p&gt;Since I&amp;#8217;m just a beginner with logic and constraint programming, it would be meaningless to compare implementations I wrote myself; the properties of the solutions would have more to do with my limitations than the languages they&amp;#8217;re written in. So for these examples I will be leaning on more experienced minds.&lt;/p&gt;
+&lt;h3&gt;Prolog&lt;/h3&gt;
+&lt;p&gt;This Prolog solution is taken from the &lt;a href='http://www.swi-prolog.org/man/clpfd.html'&gt;clp(fd) documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;use_module&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;library&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;clpfd&lt;/span&gt;&lt;span class='p'&gt;)).&lt;/span&gt;
+
+&lt;span class='nf'&gt;sudoku&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
+        &lt;span class='nf'&gt;length&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;9&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;maplist&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;length_&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;9&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Vs&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nv'&gt;Vs&lt;/span&gt; &lt;span class='s-Atom'&gt;ins&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;..&lt;/span&gt;&lt;span class='m'&gt;9&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+        &lt;span class='nf'&gt;maplist&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;all_distinct&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nf'&gt;transpose&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Columns&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;maplist&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;all_distinct&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Columns&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+        &lt;span class='nv'&gt;Rows&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;F&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;G&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;H&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;I&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;
+        &lt;span class='nf'&gt;blocks&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;blocks&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;F&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;blocks&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;G&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;H&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;I&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+&lt;span class='nf'&gt;length_&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;L&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Ls&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;length&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Ls&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;L&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+&lt;span class='nf'&gt;blocks&lt;/span&gt;&lt;span class='p'&gt;([],&lt;/span&gt; &lt;span class='p'&gt;[],&lt;/span&gt; &lt;span class='p'&gt;[]).&lt;/span&gt;
+&lt;span class='nf'&gt;blocks&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Bs1&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;F&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Bs2&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;G&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;H&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;I&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Bs3&lt;/span&gt;&lt;span class='p'&gt;])&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
+        &lt;span class='nf'&gt;all_distinct&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;F&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;G&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;H&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;I&lt;/span&gt;&lt;span class='p'&gt;]),&lt;/span&gt;
+        &lt;span class='nf'&gt;blocks&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Bs1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Bs2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Bs3&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;h3&gt;Scala + JaCoP&lt;/h3&gt;
+&lt;p&gt;This Scala solution is taken from &lt;a href='http://www.hakank.org/constraint_programming_blog/2011/08/a_first_look_at_scalajacop_scala_wrapper_for_jacop.html'&gt;Hakan Kjellerstrand&amp;#8217;s scalaJaCoP page&lt;/a&gt;. Here is a direct link to &lt;a href='http://www.hakank.org/jacop/Sudoku.scala'&gt;the file itself&lt;/a&gt;.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;import&lt;/span&gt; &lt;span class='nn'&gt;scalaJaCoP._&lt;/span&gt;
+
+&lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;Sudoku&lt;/span&gt; &lt;span class='k'&gt;extends&lt;/span&gt; &lt;span class='nc'&gt;App&lt;/span&gt; &lt;span class='k'&gt;with&lt;/span&gt; &lt;span class='n'&gt;jacop&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+  &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;n&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;9&lt;/span&gt;
+  &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;reg&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;3&lt;/span&gt;
+
+  &lt;span class='c1'&gt;// data&lt;/span&gt;
+  &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;problem&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;...&lt;/span&gt; &lt;span class='c1'&gt;// omitted&lt;/span&gt;
+
+  &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;List&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;tabulate&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; 
+                &lt;span class='nc'&gt;List&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;tabulate&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='k'&gt;=&amp;gt;&lt;/span&gt;
+                  &lt;span class='k'&gt;new&lt;/span&gt; &lt;span class='nc'&gt;IntVar&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;x(&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;+&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;+&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;+&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;+&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;)&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
+
+  &lt;span class='c1'&gt;// constraints&lt;/span&gt;
+
+  &lt;span class='c1'&gt;// fill with the hints&lt;/span&gt;
+  &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+      &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;problem&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='err'&gt;#&lt;/span&gt;&lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;problem&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+      &lt;span class='o'&gt;}&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+  &lt;span class='o'&gt;}&lt;/span&gt;
+  
+  &lt;span class='c1'&gt;// rows and columns&lt;/span&gt;
+  &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='n'&gt;alldifferent&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nc'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;tabulate&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;alldifferent&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nc'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;tabulate&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt; 
+  &lt;span class='o'&gt;}&lt;/span&gt;
+
+  &lt;span class='c1'&gt;// blocks&lt;/span&gt;
+  &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;reg&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;j&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;reg&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='n'&gt;alldifferent&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;  &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='n'&gt;r&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;reg&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;reg&lt;/span&gt;&lt;span class='o'&gt;+&lt;/span&gt;&lt;span class='n'&gt;reg&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt;
+                        &lt;span class='n'&gt;c&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;reg&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;reg&lt;/span&gt;&lt;span class='o'&gt;+&lt;/span&gt;&lt;span class='n'&gt;reg&lt;/span&gt;
+                     &lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='k'&gt;yield&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;c&lt;/span&gt;&lt;span class='o'&gt;)).&lt;/span&gt;&lt;span class='n'&gt;toArray&lt;/span&gt;
+               &lt;span class='o'&gt;)&lt;/span&gt;
+  &lt;span class='o'&gt;}&lt;/span&gt;
+
+   &lt;span class='c1'&gt;// search&lt;/span&gt;
+  &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;result&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;satisfyAll&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;search&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;flatten&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;max_regret&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;indomain_max&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt; &lt;span class='n'&gt;printIt&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; 
+
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;printIt&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='o'&gt;...&lt;/span&gt; &lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='c1'&gt;// omitted&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;For brevity I&amp;#8217;m omitting how the Prolog solution is queried and how the Scala solution is printed. I want to keep the focus on the interesting parts of these programs. For the full source code, check the links above or the &lt;a href='https://github.com/nickknw/constraint-programming-benchmarks'&gt;benchmark source code&lt;/a&gt; on github.&lt;/p&gt;
+&lt;h3&gt;Scoring&lt;/h3&gt;&lt;h4&gt;Size&lt;/h4&gt;
+&lt;p&gt;The Prolog program is just over half as long at &lt;strong&gt;13&lt;/strong&gt; lines instead of &lt;strong&gt;25&lt;/strong&gt; for Scala (not counting comments or whitespace). Although this is definitely a win for Prolog, the Scala version is still far shorter than any Sudoku solvers that don&amp;#8217;t take advantage of constraint programming.&lt;/p&gt;
+&lt;h4&gt;Readability&lt;/h4&gt;
+&lt;p&gt;Ah, the most subjective benchmark! This one is hard for me to judge fairly, since I&amp;#8217;ve spent a lot of time inside of Prolog recently, and none using Scala or JaCoP. That said, even trying to account for my bias I think the Prolog solution has a big advantage here. It reads a lot more declaratively than the Scala solution and doesn&amp;#8217;t have to worry about as many details.&lt;/p&gt;
+
+&lt;p&gt;Given my bias I would be very interested to hear feedback on this topic. Which solution did &lt;strong&gt;you&lt;/strong&gt; think was more readable?&lt;/p&gt;
+&lt;h4&gt;Speed&lt;/h4&gt;
+&lt;p&gt;Now we are into interesting territory. Prolog has a few decades&amp;#8217; headstart on JaCoP, but JaCoP has the speed of the highly optimized JVM behind it. Let&amp;#8217;s see who comes out on top!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; I acknowledge that benchmarking is an easy thing to do incorrectly. I&amp;#8217;ve made the &lt;a href='https://github.com/nickknw/constraint-programming-benchmarks'&gt;source code for these benchmarks&lt;/a&gt; available on github and included instructions to allow you to (hopefully!) easily replicate my results. Please feel free to double check what I&amp;#8217;ve done, I am more than happy to receive feedback telling me I am wrong. Contributions using other libraries or languages are also welcome.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Results:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;SWI-Prolog managed to solve the sample sudoku problem in an average of &lt;strong&gt;78 milliseconds&lt;/strong&gt; on my machine.&lt;/p&gt;
+
+&lt;p&gt;JaCoP managed to solve the sample sudoku problem in an average of &lt;strong&gt;95 milliseconds&lt;/strong&gt; on my machine.&lt;/p&gt;
+
+&lt;p&gt;The Scala version is &lt;strong&gt;1.2 times&lt;/strong&gt; slower than the Prolog version. Honestly, this was an unexpected result for me; I would have guessed JaCoP had the edge. Regardless, they are both &lt;em&gt;pretty damn fast&lt;/em&gt; solutions for not a lot of effort. Both win here.&lt;/p&gt;
+&lt;h4&gt;Conclusions&lt;/h4&gt;
+&lt;p&gt;Given the close results, there is only one clear conclusion I can draw from this comparison: Scala + JaCoP can roughly match the expressiveness and speed of a Prolog solution, at least for Sudoku. But that&amp;#8217;s boring! If I may hypothesize, I would guess that: for a large class of problems, constraint programming libraries can give you most of the benefits of a logic programming solution while only sacrificing a little bit of declarative conciseness and elegance.&lt;/p&gt;
+
+&lt;p&gt;Good news for the working programmer who doesn&amp;#8217;t feel he has time to learn Prolog!&lt;/p&gt;
+&lt;h4&gt;More constraint programming examples&lt;/h4&gt;
+&lt;p&gt;Hakan Kjellerstrand has a &lt;a href='http://www.hakank.org/constraint_programming/'&gt;fantastic collection of problems&lt;/a&gt; solved using many different constraint programming libraries. It is a great resource and can be fun to compare different implementations of the same problem.&lt;/p&gt;
+
+&lt;h2 id='full_code_listing'&gt;Full Code Listing&lt;/h2&gt;
+
+&lt;p&gt;Here is a nicely formatted version of my solutions to the exercises from Day 3 of Prolog. The home of the following code is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-3-prolog/day3.pl'&gt;on github&lt;/a&gt; with the other exercises.&lt;/p&gt;
+&lt;div id='formatted_solutions'&gt;
+
+&lt;h3&gt;Find:&lt;/h3&gt;
+
+&lt;div class='question'&gt;&lt;b&gt;1.&lt;/b&gt; Prolog has some input/output features as well. Find print predicates that print out variables.&lt;/div&gt;
+
+&lt;div class='code_explanation'&gt;
+There's 'write'. I'll paste my minInList function in here and make it
+write each element of the list while it checks them.
+Aha, 'format' and 'writef' are very nice too.
+&lt;/div&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;min&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;min&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+&lt;span class='nf'&gt;min&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nv'&gt;A&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
+
+&lt;span class='nf'&gt;minInList&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;XS&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;M&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;minInList&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;XS&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;M1&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;min&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;M1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;M&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;format&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;~a, &amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;minInList&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;format&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;~a, &amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; Find a way to use the print predicates to print only successful solutions. How do they work?&lt;/div&gt;
+
+&lt;div class='code_explanation'&gt;
+To answer this one... I guess I want to use a rule that can have multiple
+correct answers. I'll take an example from the book.
+&lt;/div&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+&lt;span class='nf'&gt;coloring&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;format&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;~a, ~a, ~a, ~a, ~a&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class='code_explanation'&gt;
+Well, that will only print successful solutions, but I kind of feel like I've
+missed the point. All this will do is repeat the information that you already
+receive. Oh well, if I figure it out I'll come back to it.
+&lt;/div&gt;
+
+
+&lt;h3&gt;Do:&lt;/h3&gt;
+
+&lt;div class='question'&gt;&lt;b&gt;1.&lt;/b&gt; Modify the Sudoku solver to work on six-by-six puzzles (squares are 3x2) and 9x9 puzzles)&lt;/div&gt;
+
+&lt;div class='code_explanation'&gt;
+I wrote a long awful version of this first, then cheated to write a better one.
+I looked at &lt;a href='http://stackoverflow.com/questions/1768274/prolog-learning-by-example'&gt;this sudoku solver&lt;/a&gt; (found in the [clp(fd) documentation](http://www.swi-prolog.org/man/clpfd.html)), understood how it worked, then closed it and wrote my own. This is the version that you see below. I also chose to do just 9x9.
+&lt;/div&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;use_module&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;library&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;clpfd&lt;/span&gt;&lt;span class='p'&gt;)).&lt;/span&gt;
+
+&lt;span class='nf'&gt;sudoku&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
+    &lt;span class='c1'&gt;% split into rows&lt;/span&gt;
+    &lt;span class='nv'&gt;Rows&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;F&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;G&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;H&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;I&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;
+    &lt;span class='c1'&gt;% and columns&lt;/span&gt;
+    &lt;span class='nf'&gt;transpose&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Columns&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; 
+
+    &lt;span class='c1'&gt;% some bounds checking&lt;/span&gt;
+    &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;FlattenedRows&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nv'&gt;FlattenedRows&lt;/span&gt; &lt;span class='s-Atom'&gt;ins&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;..&lt;/span&gt;&lt;span class='m'&gt;9&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+    &lt;span class='nf'&gt;length&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;9&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;length&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Columns&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;9&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+
+    &lt;span class='c1'&gt;% all rows valid&lt;/span&gt;
+    &lt;span class='nf'&gt;maplist&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;all_distinct&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Rows&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+
+    &lt;span class='c1'&gt;% all columns valid&lt;/span&gt;
+    &lt;span class='nf'&gt;maplist&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;all_distinct&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Columns&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+
+    &lt;span class='c1'&gt;% all blocks valid&lt;/span&gt;
+    &lt;span class='nf'&gt;valid_blocks&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;valid_blocks&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;F&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;valid_blocks&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;G&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;H&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;I&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+
+    &lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;FlattenedRows&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+&lt;span class='nf'&gt;valid_blocks&lt;/span&gt;&lt;span class='p'&gt;([],&lt;/span&gt; &lt;span class='p'&gt;[],&lt;/span&gt; &lt;span class='p'&gt;[]).&lt;/span&gt;  
+&lt;span class='nf'&gt;valid_blocks&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;A1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;A2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;A3&lt;/span&gt; &lt;span class='p'&gt;|&lt;/span&gt; &lt;span class='nv'&gt;As&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;B1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B3&lt;/span&gt; &lt;span class='p'&gt;|&lt;/span&gt; &lt;span class='nv'&gt;Bs&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;C1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C3&lt;/span&gt; &lt;span class='p'&gt;|&lt;/span&gt; &lt;span class='nv'&gt;Cs&lt;/span&gt;&lt;span class='p'&gt;])&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
+    &lt;span class='nf'&gt;maplist&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;all_distinct&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;A1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;A2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;A3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C3&lt;/span&gt;&lt;span class='p'&gt;]),&lt;/span&gt;
+    &lt;span class='nf'&gt;valid_blocks&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;As&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Bs&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Cs&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+
+&lt;span class='nf'&gt;problem&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[[&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;                                   
+            &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;8&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;5&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;                                   
+            &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;                                   
+            &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;7&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;                                   
+            &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;                                   
+            &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;9&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;                                  
+            &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;7&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;                                  
+            &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;                                   
+            &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;9&lt;/span&gt;&lt;span class='p'&gt;]]).&lt;/span&gt;
+
+&lt;span class='c1'&gt;% can test with:&lt;/span&gt;
+&lt;span class='c1'&gt;% ?- problem(1, Board), sudoku(Board).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; Make the Sudoku solver print prettier
+solutions.&lt;/div&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;([]).&lt;/span&gt;
+&lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;0&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+&lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;0&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; 
+    &lt;span class='nf'&gt;writeln&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;┌───────┬───────┬───────┐&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; 
+    &lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; 
+    &lt;span class='nf'&gt;writeln&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;│───────┼───────┼───────│&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; 
+    &lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;8&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; 
+    &lt;span class='nf'&gt;writeln&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;│───────┼───────┼───────│&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; 
+    &lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;9&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;12&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[])&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; 
+    &lt;span class='nf'&gt;writeln&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;└───────┴───────┴───────┘&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+
+&lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;Col1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col6&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col7&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col8&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col9&lt;/span&gt; &lt;span class='p'&gt;|&lt;/span&gt; &lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;])&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; 
+    &lt;span class='nf'&gt;member&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;6&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;7&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;9&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;10&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;11&lt;/span&gt;&lt;span class='p'&gt;]),&lt;/span&gt;
+    &lt;span class='c1'&gt;%N =\= 0, N =\= 4, N =\= 8, N =\= 13,&lt;/span&gt;
+    &lt;span class='c1'&gt;% note to self about above: remember, prolog&amp;#39;s pattern matching isn&amp;#39;t&lt;/span&gt;
+    &lt;span class='c1'&gt;% like pattern matching in other languages&lt;/span&gt;
+
+    &lt;span class='nf'&gt;format&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;│ ~d ~d ~d │ ~d ~d ~d │ ~d ~d ~d │~n&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;Col1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col6&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col7&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col8&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col9&lt;/span&gt;&lt;span class='p'&gt;]),&lt;/span&gt; 
+    &lt;span class='nf'&gt;succ&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;N1&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
+    &lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class='tiny_title'&gt;Output&lt;/div&gt;
+
+&lt;div class='symmetrical_line_height'&gt;
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;?- problem&lt;span class='o'&gt;(&lt;/span&gt;1, Board&lt;span class='o'&gt;)&lt;/span&gt;, sudoku&lt;span class='o'&gt;(&lt;/span&gt;Board&lt;span class='o'&gt;)&lt;/span&gt;.
+
+┌───────┬───────┬───────┐
+│ 9 8 7 │ 6 5 4 │ 3 2 1 │
+│ 2 4 6 │ 1 7 3 │ 9 8 5 │
+│ 3 5 1 │ 9 2 8 │ 7 4 6 │
+│───────┼───────┼───────│
+│ 1 2 8 │ 5 3 7 │ 6 9 4 │
+│ 6 3 4 │ 8 9 2 │ 1 5 7 │
+│ 7 9 5 │ 4 6 1 │ 8 3 2 │
+│───────┼───────┼───────│
+│ 5 1 9 │ 2 8 6 │ 4 7 3 │
+│ 4 7 2 │ 3 1 9 │ 5 6 8 │
+│ 8 6 3 │ 7 4 5 │ 2 1 9 │
+└───────┴───────┴───────┘
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;/div&gt;
+
+&lt;div class='question'&gt;&lt;b&gt;3.&lt;/b&gt; Solve the Eight Queens problem by taking a list of queens. Rather than a
+tuple, represent each queen with an integer, from 1-8. Get the row of a queen
+by its position in the list and the column by the value in the list.
+&lt;/div&gt;
+
+&lt;div class='code_explanation'&gt;...I think I'm just going to leave this one. I'd
+like to move on to Scala at this point&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Next in this series: Day 1 of Scala (coming soon)&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Seven Languages: Week 3 (Prolog) - Day 2</title>
@@ -412,7 +736,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 
 
 &lt;/div&gt;
-&lt;p&gt;Next in this series: Day 3 of Prolog (coming soon)&lt;/p&gt;</content>
+&lt;p&gt;Next in this series: &lt;a href='/blog/2012/08/06/seven-languages-week-3-day-3/'&gt;Day 3 of Prolog&lt;/a&gt;&lt;/p&gt;</content>
  </entry>
  
  <entry>
@@ -521,7 +845,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 &lt;span class='nv'&gt;Tennessee&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt; &lt;span class='p'&gt;.&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;img src='/img/projects/seven-languages/state-colouring.png' alt='Coloured map of states showing Mississippi and Georgia = red, Tennessee and Florida = green, and Alabama = blue.' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt='Coloured map of states showing Mississippi and Georgia = red, Tennessee and Florida = green, and Alabama = blue.' src='/img/projects/seven-languages/state-colouring.png' /&gt;&lt;/p&gt;
 
 &lt;p&gt;The program appears to be just the problem definition restated, and yet somehow Prolog can produce a correct answer!&lt;/p&gt;
 
@@ -1431,7 +1755,7 @@ Congrats, you did it!
 
 &lt;p&gt;By cheating! I &lt;strong&gt;don&amp;#8217;t&lt;/strong&gt; transpose the matrix, I modify the element accessor methods so that they interpret the &lt;code&gt;x&lt;/code&gt; parameter as &lt;code&gt;y&lt;/code&gt;, and vice versa. To my dismay, I later found that &lt;a href='http://en.wikipedia.org/wiki/Transpose#Implementation_of_matrix_transposition_on_computers'&gt;this isn&amp;#8217;t a new approach&lt;/a&gt; to solving this problem.&lt;/p&gt;
 
-&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a href='#footnote-1' class='super' id='footnote-1-link'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
+&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a class='super' id='footnote-1-link' href='#footnote-1'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
 
 &lt;p&gt;Io lets you write this fake transpose in a way that is fun, short, and elegant.&lt;/p&gt;
 
@@ -1547,7 +1871,7 @@ Congrats, you did it!
 &lt;p&gt;If I&amp;#8217;ve done my job right, it should make a lot more sense this time.&lt;/p&gt;
 
 &lt;p&gt;You can find the rest of the code (including the List2D prototype) on github - a good place to start is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io#L72'&gt;line 72 of day2.io&lt;/a&gt;. To read more I&amp;#8217;ve written about solving these exercises, check my &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page for Seven Languages in Seven Weeks&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a href='#footnote-1-link' id='footnote-1'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
+&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a id='footnote-1' href='#footnote-1-link'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
  </entry>
  
  <entry>
@@ -2395,7 +2719,7 @@ Got it! It was 129
 
 &lt;p&gt;Here&amp;#8217;s an overview of roughly how many people thought there was a problem in each category:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src='/img/state_of_haskell_2011_weakness.png' alt='Weaknesses from State of Haskell Bar Graph' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt='Weaknesses from State of Haskell Bar Graph' src='/img/state_of_haskell_2011_weakness.png' /&gt;&lt;/p&gt;
 
 &lt;p&gt;It is probably important to note that I didn&amp;#8217;t attempt to verify the accuracy of any of the claims, so this graph represents the public &lt;strong&gt;perception&lt;/strong&gt; of where the problems are, not necessarily where the problems actually are. It is still very important information though, and likely does match up very closely with where the problems are.&lt;/p&gt;
 &lt;h3&gt;Libraries, Documentation, Hackage and Cabal&lt;/h3&gt;
