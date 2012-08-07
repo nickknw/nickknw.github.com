@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-08-06T05:08:13-07:00</updated>
+ <updated>2012-08-07T01:32:47-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -137,7 +137,7 @@
 
 &lt;p&gt;JaCoP managed to solve the sample sudoku problem in an average of &lt;strong&gt;95 milliseconds&lt;/strong&gt; on my machine.&lt;/p&gt;
 
-&lt;p&gt;The Scala version is &lt;strong&gt;1.2 times&lt;/strong&gt; slower than the Prolog version. Honestly, this was an unexpected result for me; I would have guessed JaCoP had the edge. Regardless, they are both &lt;em&gt;pretty damn fast&lt;/em&gt; solutions for not a lot of effort. Both win here.&lt;/p&gt;
+&lt;p&gt;The Scala version takes &lt;strong&gt;1.2 times&lt;/strong&gt; longer to run than the Prolog version. Honestly, this was an unexpected result for me; I would have guessed JaCoP had the edge. Regardless, they are both &lt;em&gt;pretty damn fast&lt;/em&gt; solutions for not a lot of effort. Both win here.&lt;/p&gt;
 &lt;h4&gt;Conclusions&lt;/h4&gt;
 &lt;p&gt;Given the close results, there is only one clear conclusion I can draw from this comparison: Scala + JaCoP can roughly match the expressiveness and speed of a Prolog solution, at least for Sudoku. But that&amp;#8217;s boring! If I may hypothesize, I would guess that: for a large class of problems, constraint programming libraries can give you most of the benefits of a logic programming solution while only sacrificing a little bit of declarative conciseness and elegance.&lt;/p&gt;
 
@@ -1755,7 +1755,7 @@ Congrats, you did it!
 
 &lt;p&gt;By cheating! I &lt;strong&gt;don&amp;#8217;t&lt;/strong&gt; transpose the matrix, I modify the element accessor methods so that they interpret the &lt;code&gt;x&lt;/code&gt; parameter as &lt;code&gt;y&lt;/code&gt;, and vice versa. To my dismay, I later found that &lt;a href='http://en.wikipedia.org/wiki/Transpose#Implementation_of_matrix_transposition_on_computers'&gt;this isn&amp;#8217;t a new approach&lt;/a&gt; to solving this problem.&lt;/p&gt;
 
-&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a id='footnote-1-link' class='super' href='#footnote-1'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
+&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a class='super' href='#footnote-1' id='footnote-1-link'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
 
 &lt;p&gt;Io lets you write this fake transpose in a way that is fun, short, and elegant.&lt;/p&gt;
 
@@ -1871,7 +1871,7 @@ Congrats, you did it!
 &lt;p&gt;If I&amp;#8217;ve done my job right, it should make a lot more sense this time.&lt;/p&gt;
 
 &lt;p&gt;You can find the rest of the code (including the List2D prototype) on github - a good place to start is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io#L72'&gt;line 72 of day2.io&lt;/a&gt;. To read more I&amp;#8217;ve written about solving these exercises, check my &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page for Seven Languages in Seven Weeks&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a id='footnote-1' href='#footnote-1-link'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
+&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a href='#footnote-1-link' id='footnote-1'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
  </entry>
  
  <entry>
