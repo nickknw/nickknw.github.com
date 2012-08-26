@@ -4,12 +4,70 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-08-26T11:49:13-07:00</updated>
+ <updated>2012-08-26T12:56:13-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Ludum Dare &#35;24 - Post-mortem</title>
+   <link href="http://nickknowlson.com/blog/2012/08/26/ludum-dare-24-finished/"/>
+   <updated>2012-08-26T00:00:00-07:00</updated>
+   <id>http://nickknowlson.com/blog/2012/08/26/ludum-dare-24-finished</id>
+   <content type="html">&lt;p&gt;All right, that&amp;#8217;s it - for better or for worse, I&amp;#8217;m out of time. There were several major features in my game that I didn&amp;#8217;t finish, but the end result is actually playable, so I consider it a wild success!&lt;/p&gt;
+
+&lt;p&gt;For a description of the game and screenshots, take a look at the project page here: &lt;a href='http://nickknowlson.com/projects/conways-revenge/'&gt;Conway&amp;#8217;s Revenge&lt;/a&gt;. Also, here is my official &lt;a href='http://www.ludumdare.com/compo/ludum-dare-24/?action=preview&amp;amp;uid=15084'&gt;Ludum Dare entry page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id='what_was_missing'&gt;What was missing&lt;/h2&gt;
+
+&lt;h3 id='soundtrack'&gt;Soundtrack&lt;/h3&gt;
+
+&lt;p&gt;I originally had big plans for a procedurally generated soundtrack. It would be based off the action currently happening on the screen - each tribe of cells would be a different instrument/sound, and the x,y positions would determine the pitch somehow. For example, if green was winning on the top side you might hear a lot of higher pitched trumpets.&lt;/p&gt;
+
+&lt;p&gt;This turned out to be too ambitious for the limited time frame. I think somewhere deep inside I knew this, and that&amp;#8217;s why I left it until last and implemented other, more key, features first.&lt;/p&gt;
+
+&lt;h3 id='campaign'&gt;Campaign&lt;/h3&gt;
+
+&lt;p&gt;Campaign mode was the way I envisioned turning Conway&amp;#8217;s Revenge from more of a toy into an actual game. I had in mind a set of puzzle levels where you face off against progressively more difficult enemy formations. You would have to experiment to find the fastest growing formations with a limited amount of cells to place.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately it took me too long to finish everything else, and I never did get started on this.&lt;/p&gt;
+
+&lt;h3 id='multiple_colour_placement_and_scoring'&gt;Multiple colour placement and Scoring&lt;/h3&gt;
+
+&lt;p&gt;Two more minor features I wanted to get done were: allowing the player to place all 4 (or more) cell colours, and giving them a score. I had thought about assigning points for each enemy cell you kill. This would give you more points for longer games, so instead of rewarding you for dominating your opponent it rewards you for judging the minimum amount of force necessary to eliminate them, which I thought was kind of interesting.&lt;/p&gt;
+
+&lt;h2 id='what_was_accomplished'&gt;What was accomplished&lt;/h2&gt;
+
+&lt;p&gt;Quite a lot, considering how unfamiliar with my tools I was. I came up with a modified live/die algorithm that I&amp;#8217;m actually quite happy with. It suits multiple players well, has a tendency to grow and eat up space, avoids deadlock/tie scenarios, still allows for stable formations and spinners, and can generate some lovely-looking &amp;#8216;explosions&amp;#8217;.&lt;/p&gt;
+
+&lt;p&gt;I implemented two game modes, &lt;strong&gt;Sandbox&lt;/strong&gt; and &lt;strong&gt;Battle Royale&lt;/strong&gt;. They&amp;#8217;re pretty similar internally, but different enough to the user that it makes sense to separate them in the UI.&lt;/p&gt;
+
+&lt;p&gt;I made a craptastic main menu and instruction screens. My idea was small enough in scope that I had time to do these, which I&amp;#8217;m happy about.&lt;/p&gt;
+
+&lt;p&gt;Finally, I learned a bit about flash development, and discovered that I actually quite like it. Combined with a good game framework (I used &lt;a href='http://flashpunk.net/'&gt;FlashPunk&lt;/a&gt;) it gives you a lot of help, and makes common tasks really easy.&lt;/p&gt;
+
+&lt;h2 id='what_went_wrong'&gt;What went wrong&lt;/h2&gt;
+
+&lt;p&gt;I couldn&amp;#8217;t make up my mind on what set of development tools to use - I picked FlashPunk on my third attempt. Before the competition started I decided to use Unity and read few tutorials and created a small sample project. When I finally decided on my idea I realized that it would be using exactly zero of Unity&amp;#8217;s strengths and decided to change to something that made simple things easier. I initially tried XNA, downloaded it and installed Visual Studio Express, etc. then suddenly changed my mind because it would make running my game more of a pain and because people in the Ludum Dare chat were talking about how much of a pain XNA was to use.&lt;/p&gt;
+
+&lt;p&gt;In the end Flashpunk was a good choice (I &lt;em&gt;almost&lt;/em&gt; used Flixel, and may try it next time), but it took me too long to make and I jumped into it several hours late without knowing the slightest thing about using it. Not the best strategy.&lt;/p&gt;
+
+&lt;h2 id='what_went_right'&gt;What went right&lt;/h2&gt;
+
+&lt;p&gt;I took my time coming up with a good idea. I must have thrown out the first ten or so I had for various reasons (unoriginal, not fun, too nebulous to implement). I personally find this idea really interesting, and it was small enough in scope that it fit my ability to implement it in less than 48 hours.&lt;/p&gt;
+
+&lt;p&gt;Another thing I did right was prioritizing tasks and cutting down on scope at more or less the right times. I don&amp;#8217;t have a lot of half-done things left in the game - what is there is mostly complete (with a few exceptions of course). I focused on what I thought was possible to do within the limited time frame and deferred the rest until later (after the competition, even).&lt;/p&gt;
+
+&lt;p&gt;Of course, if I had more experience, everything would look more polished and I might have been able to finish a few more of those missing bits, but the most important stuff got done. And that&amp;#8217;s what counts.&lt;/p&gt;
+
+&lt;h2 id='closing_thoughts'&gt;Closing thoughts&lt;/h2&gt;
+
+&lt;p&gt;I really enjoyed doing this. Quite a few times over the last few years I&amp;#8217;ve watched this event happen and thought I wasn&amp;#8217;t skilled enough to take part. I&amp;#8217;m glad I decided to join in anyway. Before the event started I was full of trepidation and self-doubt, but now that I&amp;#8217;m finished I feel exhilarated, exhausted, and I have a great feeling of accomplishment. I learned a lot of new skills, had fun with other people (I recommend joining in on the IRC channel), and I even have a cool new project to show off for it!&lt;/p&gt;
+
+&lt;p&gt;If you&amp;#8217;re on the sidelines trying to decide whether to take part next time, I heartily recommend it. I know I will be.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Ludum Dare &#35;24 - Halfway!</title>
@@ -1793,7 +1851,7 @@ Congrats, you did it!
 
 &lt;p&gt;By cheating! I &lt;strong&gt;don&amp;#8217;t&lt;/strong&gt; transpose the matrix, I modify the element accessor methods so that they interpret the &lt;code&gt;x&lt;/code&gt; parameter as &lt;code&gt;y&lt;/code&gt;, and vice versa. To my dismay, I later found that &lt;a href='http://en.wikipedia.org/wiki/Transpose#Implementation_of_matrix_transposition_on_computers'&gt;this isn&amp;#8217;t a new approach&lt;/a&gt; to solving this problem.&lt;/p&gt;
 
-&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a id='footnote-1-link' href='#footnote-1' class='super'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
+&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a href='#footnote-1' id='footnote-1-link' class='super'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
 
 &lt;p&gt;Io lets you write this fake transpose in a way that is fun, short, and elegant.&lt;/p&gt;
 
@@ -1909,7 +1967,7 @@ Congrats, you did it!
 &lt;p&gt;If I&amp;#8217;ve done my job right, it should make a lot more sense this time.&lt;/p&gt;
 
 &lt;p&gt;You can find the rest of the code (including the List2D prototype) on github - a good place to start is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io#L72'&gt;line 72 of day2.io&lt;/a&gt;. To read more I&amp;#8217;ve written about solving these exercises, check my &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page for Seven Languages in Seven Weeks&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a id='footnote-1' href='#footnote-1-link'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
+&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a href='#footnote-1-link' id='footnote-1'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
  </entry>
  
  <entry>

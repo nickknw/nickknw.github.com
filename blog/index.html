@@ -71,6 +71,70 @@
                 <div style="text-align:center;"><b>Latest Posts</b> | <a href="/blog/archive/">Archive</a></div>
 
   <div>
+  <h1 style="margin:0px"><a href="/blog/2012/08/26/ludum-dare-24-finished/">
+  Ludum Dare &#35;24 - Post-mortem
+  </a></h1>
+  <div class="faded" style="font-size:14px; margin-bottom:5px;">26 Aug 2012</div>
+  <p>All right, that&#8217;s it - for better or for worse, I&#8217;m out of time. There were several major features in my game that I didn&#8217;t finish, but the end result is actually playable, so I consider it a wild success!</p>
+
+<p>For a description of the game and screenshots, take a look at the project page here: <a href='http://nickknowlson.com/projects/conways-revenge/'>Conway&#8217;s Revenge</a>. Also, here is my official <a href='http://www.ludumdare.com/compo/ludum-dare-24/?action=preview&amp;uid=15084'>Ludum Dare entry page</a>.</p>
+
+<h2 id='what_was_missing'>What was missing</h2>
+
+<h3 id='soundtrack'>Soundtrack</h3>
+
+<p>I originally had big plans for a procedurally generated soundtrack. It would be based off the action currently happening on the screen - each tribe of cells would be a different instrument/sound, and the x,y positions would determine the pitch somehow. For example, if green was winning on the top side you might hear a lot of higher pitched trumpets.</p>
+
+<p>This turned out to be too ambitious for the limited time frame. I think somewhere deep inside I knew this, and that&#8217;s why I left it until last and implemented other, more key, features first.</p>
+
+<h3 id='campaign'>Campaign</h3>
+
+<p>Campaign mode was the way I envisioned turning Conway&#8217;s Revenge from more of a toy into an actual game. I had in mind a set of puzzle levels where you face off against progressively more difficult enemy formations. You would have to experiment to find the fastest growing formations with a limited amount of cells to place.</p>
+
+<p>Unfortunately it took me too long to finish everything else, and I never did get started on this.</p>
+
+<h3 id='multiple_colour_placement_and_scoring'>Multiple colour placement and Scoring</h3>
+
+<p>Two more minor features I wanted to get done were: allowing the player to place all 4 (or more) cell colours, and giving them a score. I had thought about assigning points for each enemy cell you kill. This would give you more points for longer games, so instead of rewarding you for dominating your opponent it rewards you for judging the minimum amount of force necessary to eliminate them, which I thought was kind of interesting.</p>
+
+<h2 id='what_was_accomplished'>What was accomplished</h2>
+
+<p>Quite a lot, considering how unfamiliar with my tools I was. I came up with a modified live/die algorithm that I&#8217;m actually quite happy with. It suits multiple players well, has a tendency to grow and eat up space, avoids deadlock/tie scenarios, still allows for stable formations and spinners, and can generate some lovely-looking &#8216;explosions&#8217;.</p>
+
+<p>I implemented two game modes, <strong>Sandbox</strong> and <strong>Battle Royale</strong>. They&#8217;re pretty similar internally, but different enough to the user that it makes sense to separate them in the UI.</p>
+
+<p>I made a craptastic main menu and instruction screens. My idea was small enough in scope that I had time to do these, which I&#8217;m happy about.</p>
+
+<p>Finally, I learned a bit about flash development, and discovered that I actually quite like it. Combined with a good game framework (I used <a href='http://flashpunk.net/'>FlashPunk</a>) it gives you a lot of help, and makes common tasks really easy.</p>
+
+<h2 id='what_went_wrong'>What went wrong</h2>
+
+<p>I couldn&#8217;t make up my mind on what set of development tools to use - I picked FlashPunk on my third attempt. Before the competition started I decided to use Unity and read few tutorials and created a small sample project. When I finally decided on my idea I realized that it would be using exactly zero of Unity&#8217;s strengths and decided to change to something that made simple things easier. I initially tried XNA, downloaded it and installed Visual Studio Express, etc. then suddenly changed my mind because it would make running my game more of a pain and because people in the Ludum Dare chat were talking about how much of a pain XNA was to use.</p>
+
+<p>In the end Flashpunk was a good choice (I <em>almost</em> used Flixel, and may try it next time), but it took me too long to make and I jumped into it several hours late without knowing the slightest thing about using it. Not the best strategy.</p>
+
+<h2 id='what_went_right'>What went right</h2>
+
+<p>I took my time coming up with a good idea. I must have thrown out the first ten or so I had for various reasons (unoriginal, not fun, too nebulous to implement). I personally find this idea really interesting, and it was small enough in scope that it fit my ability to implement it in less than 48 hours.</p>
+
+<p>Another thing I did right was prioritizing tasks and cutting down on scope at more or less the right times. I don&#8217;t have a lot of half-done things left in the game - what is there is mostly complete (with a few exceptions of course). I focused on what I thought was possible to do within the limited time frame and deferred the rest until later (after the competition, even).</p>
+
+<p>Of course, if I had more experience, everything would look more polished and I might have been able to finish a few more of those missing bits, but the most important stuff got done. And that&#8217;s what counts.</p>
+
+<h2 id='closing_thoughts'>Closing thoughts</h2>
+
+<p>I really enjoyed doing this. Quite a few times over the last few years I&#8217;ve watched this event happen and thought I wasn&#8217;t skilled enough to take part. I&#8217;m glad I decided to join in anyway. Before the event started I was full of trepidation and self-doubt, but now that I&#8217;m finished I feel exhilarated, exhausted, and I have a great feeling of accomplishment. I learned a lot of new skills, had fun with other people (I recommend joining in on the IRC channel), and I even have a cool new project to show off for it!</p>
+
+<p>If you&#8217;re on the sidelines trying to decide whether to take part next time, I heartily recommend it. I know I will be.</p>
+  </div>
+
+  <div style="margin-top:20px; font-size:14px;">
+    <a href="/blog/2012/08/26/ludum-dare-24-finished/#disqus_thread" data-disqus-identifier="/blog/2012/08/26/ludum-dare-24-finished">Comments</a>
+  </div>
+
+    <hr class="fancyrule" />
+
+  <div>
   <h1 style="margin:0px"><a href="/blog/2012/08/25/ludum-dare-24-halfway/">
   Ludum Dare &#35;24 - Halfway!
   </a></h1>
@@ -850,337 +914,6 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 
   <div style="margin-top:20px; font-size:14px;">
     <a href="/blog/2012/07/17/seven-languages-week-3-day-2/#disqus_thread" data-disqus-identifier="/blog/2012/07/17/seven-languages-week-3-day-2">Comments</a>
-  </div>
-
-    <hr class="fancyrule" />
-
-  <div>
-  <h1 style="margin:0px"><a href="/blog/2012/02/05/seven-languages-week-3-day-1/">
-  Seven Languages: Week 3 (Prolog) - Day 1
-  </a></h1>
-  <div class="faded" style="font-size:14px; margin-bottom:5px;">05 Feb 2012</div>
-  <p>Although I am not yet halfway through the book, I am pretty sure that Prolog will win the &#8216;most foreign language&#8217; category with ease. Going in, I knew Prolog was fairly old (born in 1972) and that it was a logic-based language, but I could not have estimated how, for lack of a better word, <em>picky</em> it would be.</p>
-
-<p>My troubles started at installation - Bruce Tate uses GNU Prolog in the book, and I spent far too long trying to get that working only to discover that some library functions essential to the exercises (<code>fd_domain</code>, <code>fd_all_different</code>) just caused GNU Prolog to crash on my machine. I will elaborate on this more in Day 3, but for anyone encountering this post who is in a similar situation, just go use SWI Prolog instead.</p>
-
-<p>Prolog heavily relies on recursion but making a recursive rule is not the same as making a recursive function in functional languages. It is subtly different, and way easier to get wrong; you have to have an <strong>extremely</strong> clear mental model of how Prolog operates (which I still don&#8217;t). I will expand more on this in a future post.</p>
-
-<p>Despite all this, during the course of Week 3 I have been convinced that logic programming can be extremely powerful. If you know how to define a problem in terms that Prolog understands, then you can write a program that solves a problem without having the slightest idea of how to actually solve it (a good example is Sudoku, which shows up in Day 3). Logic languages are the closest I have seen to the unattainable ideal of &#8216;writing a program that will look at the problem and write a program to solve it for you&#8217;.</p>
-<div class='interjection'><p>
-(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2012/01/16/seven-languages-week-2-day-3/'>Week 2 (Io) - Day 3</a>. For an overview see the <a href='/projects/seven-languages-in-seven-weeks/'>project page</a>.)
-</p></div>
-<h2 id='topics_covered'>Topics covered</h2>
-
-<p>Day 1 covered the basic structural elements of Prolog. There are three kinds of statements in a Prolog program: <strong>facts</strong>, <strong>rules</strong>, and <strong>queries</strong>.</p>
-
-<p>A fact is a simple statement that essentially adds a nugget of information to a database. Here are some facts:</p>
-<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>daytime</span><span class='p'>.</span>
-<span class='s-Atom'>clear_skies</span><span class='p'>.</span>
-
-<span class='nf'>round</span><span class='p'>(</span><span class='s-Atom'>earth</span><span class='p'>).</span>
-<span class='nf'>round</span><span class='p'>(</span><span class='s-Atom'>ball</span><span class='p'>).</span>
-
-<span class='nf'>small</span><span class='p'>(</span><span class='s-Atom'>mouse</span><span class='p'>).</span>
-<span class='nf'>small</span><span class='p'>(</span><span class='s-Atom'>ball</span><span class='p'>).</span>
-</code></pre>
-</div>
-<p>A rule is a statement that relates facts and rules together. You can almost (but not quite) think of them as functions. Here are some rules:</p>
-<div class='highlight'><pre><code class='prolog'><span class='nf'>time_to_play</span> <span class='o'>:-</span> <span class='s-Atom'>daytime</span><span class='p'>,</span> <span class='s-Atom'>clear_skies</span><span class='p'>.</span>
-
-<span class='nf'>suitable_for_playing_with</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>round</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>),</span> <span class='nf'>small</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>).</span>
-
-<span class='nf'>does_nick_want_to_play_with</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>)</span> <span class='p'>:-</span> <span class='s-Atom'>time_to_play</span><span class='p'>,</span> <span class='nf'>suitable_for_playing_with</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>).</span>
-</code></pre>
-</div>
-<p>If you collect all of the preceding statements and put them in a <code>hello.pl</code> file then you have a valid Prolog program. To actually get some useful output from it, we can load this program into the prolog interpreter, and query this database we&#8217;ve built up like so:</p>
-<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>&#39;hello.pl&#39;</span><span class='p'>].</span>
-<span class='c1'>% hello.pl compiled 0.00 sec, 3,352 bytes</span>
-<span class='s-Atom'>true</span><span class='p'>.</span>
-
-<span class='c1'>% Let&#39;s test out the facts:</span>
-
-<span class='s-Atom'>?-</span> <span class='s-Atom'>daytime</span><span class='p'>.</span>
-<span class='s-Atom'>true</span><span class='p'>.</span>
-
-<span class='s-Atom'>?-</span> <span class='nf'>round</span><span class='p'>(</span><span class='s-Atom'>earth</span><span class='p'>).</span>
-<span class='s-Atom'>true</span><span class='p'>.</span>
-
-<span class='s-Atom'>?-</span> <span class='nf'>round</span><span class='p'>(</span><span class='s-Atom'>cube</span><span class='p'>).</span>
-<span class='s-Atom'>false</span><span class='p'>.</span>
-
-<span class='s-Atom'>?-</span> <span class='nf'>round</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>).</span> <span class='c1'>% Notice the capital letter here. Uppercase = variable, lowercase = atom.</span>
-<span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>earth</span> <span class='p'>;</span>
-<span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>ball</span> <span class='p'>;</span>
-
-<span class='c1'>% And now for the rules:</span>
-
- <span class='s-Atom'>?-</span> <span class='s-Atom'>time_to_play</span><span class='p'>.</span>
-<span class='s-Atom'>true</span><span class='p'>.</span>
-
-<span class='s-Atom'>?-</span> <span class='nf'>suitable_for_playing_with</span><span class='p'>(</span><span class='s-Atom'>earth</span><span class='p'>).</span>
-<span class='s-Atom'>false</span><span class='p'>.</span>
-
-<span class='s-Atom'>?-</span> <span class='nf'>suitable_for_playing_with</span><span class='p'>(</span><span class='s-Atom'>ball</span><span class='p'>).</span>
-<span class='s-Atom'>true</span><span class='p'>.</span>
-
-<span class='s-Atom'>?-</span> <span class='nf'>does_nick_want_to_play_with</span><span class='p'>(</span><span class='s-Atom'>earth</span><span class='p'>).</span>
-<span class='s-Atom'>false</span><span class='p'>.</span>
-
-<span class='s-Atom'>?-</span> <span class='nf'>does_nick_want_to_play_with</span><span class='p'>(</span><span class='s-Atom'>ball</span><span class='p'>).</span>
-<span class='s-Atom'>true</span><span class='p'>.</span>
-
-<span class='s-Atom'>?-</span> <span class='nf'>does_nick_want_to_play_with</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>).</span>
-<span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>ball</span><span class='p'>.</span>
-</code></pre>
-</div>
-<h2 id='highlights_from_exercises'>Highlights from exercises</h2>
-
-<p>The exercises in Day 1 aren&#8217;t terribly interesting, so instead I&#8217;ll show you an example from an earlier part of the book that threw me into confusion for a while. The goal of the following snippet of Prolog is to assign map colours such that no state borders on another state with the same colour.</p>
-
-<p>When I read this I flipped through the next few pages looking for the rest of the program. But there isn&#8217;t any more - this is it!</p>
-<div class='highlight'><pre><code class='prolog'><span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>red</span><span class='p'>,</span> <span class='s-Atom'>green</span><span class='p'>).</span> <span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>red</span><span class='p'>,</span> <span class='s-Atom'>blue</span><span class='p'>).</span>
-<span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>green</span><span class='p'>,</span> <span class='s-Atom'>red</span><span class='p'>).</span> <span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>green</span><span class='p'>,</span> <span class='s-Atom'>blue</span><span class='p'>).</span>
-<span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>blue</span><span class='p'>,</span> <span class='s-Atom'>red</span><span class='p'>).</span> <span class='nf'>different</span><span class='p'>(</span><span class='s-Atom'>blue</span><span class='p'>,</span> <span class='s-Atom'>green</span><span class='p'>).</span>
-
-<span class='nf'>coloring</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Mississippi</span><span class='p'>,</span> <span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>)</span> <span class='p'>:-</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Mississippi</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Mississippi</span><span class='p'>,</span> <span class='nv'>Alabama</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Mississippi</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Georgia</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>).</span>
-</code></pre>
-</div>
-<p>This program aims to colour these <strong>five</strong> states with <strong>three</strong> colours (such that no states of the same colour share borders). When we query this we get:</p>
-<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>coloring</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Mississippi</span><span class='p'>,</span> <span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>).</span>
-<span class='nv'>Alabama</span> <span class='o'>=</span> <span class='s-Atom'>blue</span><span class='p'>,</span>
-<span class='nv'>Mississippi</span> <span class='o'>=</span> <span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Georgia</span> <span class='o'>=</span> <span class='s-Atom'>red</span><span class='p'>,</span>
-<span class='nv'>Tennessee</span> <span class='o'>=</span> <span class='nv'>Florida</span><span class='p'>,</span> <span class='nv'>Florida</span> <span class='o'>=</span> <span class='s-Atom'>green</span> <span class='p'>.</span>
-</code></pre>
-</div>
-<p><img src='/img/projects/seven-languages/state-colouring.png' alt='Coloured map of states showing Mississippi and Georgia = red, Tennessee and Florida = green, and Alabama = blue.' /></p>
-
-<p>The program appears to be just the problem definition restated, and yet somehow Prolog can produce a correct answer!</p>
-
-<p><strong>DISCLAIMER:</strong> I am not a Prolog expert and as such the following explanation will be a bit hand wavy. Please let me know if you spot any glaring inaccuracies.</p>
-
-<p>Prolog is trying to unify both sides of our rule and answer the question &#8220;What values can I set these five variables to in order to make all of the following series of statements true&#8221;. It knows there are six facts about &#8220;different-ness&#8221; and keeps on trying different combinations of these facts.</p>
-
-<p>Take as an example the first statement of the <strong>rule</strong> <code>different(Mississippi,
-Tennessee)</code>. It might first try the <strong>fact</strong> <code>different(red, green)</code>, then continue on with the assumption that now <code>Mississippi = red</code> and <code>Tennessee =
-green</code>, and see if it can still make the other statements true.</p>
-
-<p>Hopefully that more or less makes sense. But in case it doesn&#8217;t, <strong>let&#8217;s take a different tack now</strong>. Pretend our rule is a mathematical equation: Prolog is trying to solve for five variables, given only a little bit of knowledge about numbers. As far as it is concerned, you may as well have given it this:</p>
-<div class='highlight'><pre><code class='prolog'><span class='nf'>different</span><span class='p'>(</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>).</span> <span class='nf'>different</span><span class='p'>(</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>).</span>
-<span class='nf'>different</span><span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>).</span> <span class='nf'>different</span><span class='p'>(</span><span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>).</span>
-<span class='nf'>different</span><span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>1</span><span class='p'>).</span> <span class='nf'>different</span><span class='p'>(</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>).</span>
-
-<span class='nf'>solve_for</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>)</span> <span class='p'>:-</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>B</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>B</span><span class='p'>,</span> <span class='nv'>A</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>C</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>),</span>
-    <span class='nf'>different</span><span class='p'>(</span><span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>).</span>
-</code></pre>
-</div>
-<p>In which case you would receive an answer like:</p>
-<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>solve_for</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>).</span>
-<span class='nv'>A</span> <span class='o'>=</span> <span class='m'>3</span><span class='p'>,</span>
-<span class='nv'>B</span> <span class='o'>=</span> <span class='nv'>C</span><span class='p'>,</span> <span class='nv'>C</span> <span class='o'>=</span> <span class='m'>1</span><span class='p'>,</span>
-<span class='nv'>D</span> <span class='o'>=</span> <span class='nv'>E</span><span class='p'>,</span> <span class='nv'>E</span> <span class='o'>=</span> <span class='m'>2</span> <span class='p'>.</span>
-</code></pre>
-</div>
-<p>Easy peasy, right?</p>
-
-<p><strong>UPDATE:</strong> Thanks for the great comments, both below on my <a href='#disqus_thread'>blog comments</a> and also <a href='http://www.reddit.com/r/programming/comments/pd9z1/seven_languages_day_1_of_prolog/'>on reddit</a>. There are a few in particular that helped me learn more that I would like to highlight and save for posterity.</p>
-
-<p><a href='http://www.storytotell.org/'>Daniel Lyons</a> and <a href='http://users.ecs.soton.ac.uk/mal/'>Michael Leuschel</a> pointed out some variations on solving this map colouring problem.</p>
-
-<p>Daniel showed how to <a href='#dsq-comment-430894811'>minimize redundancy</a> when declaring red, green and blue as colours that are <code>different</code> from each other:</p>
-<blockquote>
-<p>The map example is wonderful! I would probably make the map coloring a little more abstract like so:</p>
-
-<div class='highlight'><pre><code class='prolog'><span class='nf'>color</span><span class='p'>(</span><span class='s-Atom'>red</span><span class='p'>).</span> <span class='nf'>color</span><span class='p'>(</span><span class='s-Atom'>green</span><span class='p'>).</span> <span class='nf'>color</span><span class='p'>(</span><span class='s-Atom'>blue</span><span class='p'>).</span>
-<span class='nf'>different</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>color</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>),</span> <span class='nf'>color</span><span class='p'>(</span><span class='nv'>Y</span><span class='p'>),</span> <span class='nv'>X</span> <span class='s-Atom'>\=</span> <span class='nv'>Y</span><span class='p'>.</span>
-</code></pre>
-</div>
-
-
-</blockquote>
-<p>Michael Leuschel showed how <a href='#dsq-comment-431117487'>this solution could take advantage</a> of <a href='http://www.swi-prolog.org/man/clpfd.html'>CLP(FD)</a> (a module that can <strong>drastically</strong> improve performance when dealing with larger data sets) and was also kind enough to <a href='#dsq-comment-432664414'>explain labeling to me</a>:</p>
-<blockquote>
-
-<p>Another solution would be to use the different operator <code>#\=</code> from clp(fd):</p>
-
-
-<div class='highlight'><pre><code class='prolog'><span class='p'>:-</span> <span class='nf'>use_module</span><span class='p'>(</span><span class='nf'>library</span><span class='p'>(</span><span class='s-Atom'>clpfd</span><span class='p'>)).</span>
-<span class='nf'>different</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span><span class='nv'>Y</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nv'>X</span> <span class='s-Atom'>in</span> <span class='m'>1</span><span class='p'>..</span><span class='m'>3</span><span class='p'>,</span> <span class='nv'>Y</span> <span class='s-Atom'>in</span> <span class='m'>1</span><span class='p'>..</span><span class='m'>3</span><span class='p'>,</span> <span class='nv'>X</span> <span class='s-Atom'>#\=</span><span class='nv'>Y</span><span class='p'>.</span>
-</code></pre>
-</div>
-
-
-
-<p>You would then need to add a call to <code>labeling</code> after setting up the constraints:</p>
-
-
-<div class='highlight'><pre><code class='prolog'><span class='nf'>solve_for</span><span class='p'>([</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>])</span> <span class='p'>:-</span>
-<span class='nf'>different</span><span class='p'>(</span><span class='nv'>B</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>),</span> <span class='nf'>different</span><span class='p'>(</span><span class='nv'>B</span><span class='p'>,</span> <span class='nv'>A</span><span class='p'>),</span> <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>),</span> <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>),</span>
-<span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>),</span> <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>),</span>
-<span class='nf'>different</span><span class='p'>(</span><span class='nv'>C</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>),</span> <span class='nf'>different</span><span class='p'>(</span><span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>)</span> <span class='p'>,</span><span class='nf'>labeling</span><span class='p'>([],[</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>]).</span>
-</code></pre>
-</div>
-
-
-
-<p>This should be more efficient than the original, as you first set up the constraints and only *then* start enumerating candidate solutions.
-(Of course this performance difference does not matter for such a small graph; it can make a huge difference for larger graphs.)</p>
-
-<p><a href='#dsq-comment-431117487'>...continued in comments</a></p>
-
-</blockquote>
-<p><a href='http://egonelbre.com/'>Egon Elbre</a> and <a href='http://www.reddit.com/user/gecko'>gecko</a> both helped explain different things about Prolog to me.</p>
-
-<p>Egon <a href='https://gist.github.com/1755115'>used relational databases as a metaphor</a> to explain the map colouring example.</p>
-<div class='highlight'><pre><code class='prolog'><span class='nf'>round</span><span class='p'>(</span><span class='s-Atom'>earth</span><span class='p'>).</span>
-<span class='nf'>round</span><span class='p'>(</span><span class='s-Atom'>ball</span><span class='p'>).</span>
-
-<span class='nf'>small</span><span class='p'>(</span><span class='s-Atom'>mouse</span><span class='p'>).</span>
-<span class='nf'>small</span><span class='p'>(</span><span class='s-Atom'>ball</span><span class='p'>).</span>
-
-<span class='c1'>% I want to have tables `round` and `small`</span>
-<span class='c1'>% `round` should contain `earth` and `ball`</span>
-<span class='c1'>% `small` should contain `mouse` and `ball`</span>
-
-<span class='nf'>time_to_play</span> <span class='o'>:-</span> <span class='s-Atom'>daytime</span><span class='p'>,</span> <span class='s-Atom'>clear_skies</span><span class='p'>.</span>
-
-<span class='c1'>% I have empty table (fact) `time_to_play` if</span>
-<span class='c1'>% there are two other tables (facts) `daytime` and `clear_skies`</span>
-
-<span class='nf'>suitable_for_playing_with</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>round</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>),</span> <span class='nf'>small</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>).</span>
-
-<span class='c1'>% I want to have a table `suitable_for_playing_with`</span>
-<span class='c1'>% such that each value in it must be in tables `round` and `small`</span>
-</code></pre>
-</div>
-<p>gecko <a href='http://www.reddit.com/r/programming/comments/pd9z1/seven_languages_day_1_of_prolog/c3ojly3?context=1'>introduced me to Datalog</a> and made me realize that knowing Prolog well can be useful and pay off even when developing systems in other languages.</p>
-
-<blockquote>
-<p>There are actually lots of languages that provide prologs for exactly this purpose. You&#8217;ve found Perl&#8217;s, but there&#8217;s also small prologs for C#, Python, Ruby, and more. Generally, these implement a subset of Prolog called <a href='https://en.wikipedia.org/wiki/Datalog'>Datalog</a>, which is optimized specifically to be used as a kind of query language or database from other languages.</p>
-
-<blockquote>
-<p>(part of my reply) &#8230;I haven&#8217;t used Prolog enough to know - do Datalog&#8217;s restrictions turn out to be a big limiter in practice? Does it flat out stop you from being able to solve some things? Is it just a bit less expressive?</p>
-</blockquote>
-
-<p>I&#8217;ve never found it to be an issue in practice for what I&#8217;ve wanted Datalog for, but I&#8217;m sure it&#8217;d depend on what you&#8217;re doing. Datalog/Prolog-in-practice tends to show up in relatively narrow areas where the problem can be described declaratively with relative ease. The restrictions imposed by Datalog have never, in my experience, gotten in the way in those areas. On the other hand, if I were using Prolog as the sole language I wanted, rather than as an auxiliary language, I think that at least the recursion restrictions would drive me somewhat batty.</p>
-</blockquote>
-
-<p>Thanks for all these informative comments everyone, I learned more about Prolog and have been given a few good reason to keep at it.</p>
-
-<h2 id='full_solutions'>Full solutions</h2>
-
-<p>Here is a nicely formatted version of my solutions to the exercises from Day 1 of Prolog. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-3-prolog/day1.pl'>on github</a> with the other exercises.</p>
-<div id='formatted_solutions'>
-
-<h3>Find:</h3>
-
-<div class='question'>1. Some free Prolog tutorials</div>
-
-<ul>
-<li><a href='http://www.lix.polytechnique.fr/~liberti/public/computing/prog/prolog/prolog-tutorial.html'>http://www.lix.polytechnique.fr/~liberti/public/computing/prog/prolog/prolog-tutorial.html</a></li>
-<li><a href='http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html'>http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html</a></li>
-</ul>
-
-<div class='question'>2. A support forum (there are several)</div>
-
-<ul>
-<li><a href='http://old.nabble.com/SWI-Prolog-f448.html'>http://old.nabble.com/SWI-Prolog-f448.html</a></li>
-<li><a href='http://mail.gnu.org/pipermail/users-prolog/'>http://mail.gnu.org/pipermail/users-prolog/</a></li>
-<li><a href='http://www.reddit.com/r/prolog'>http://www.reddit.com/r/prolog</a></li>
-</ul>
-
-
-<div class='question'>3. One online reference for the Prolog version you're using</div>
-
-<ul>
-<li><a href='http://www.swi-prolog.org/pldoc/index.html'>http://www.swi-prolog.org/pldoc/index.html</a></li>
-</ul>
-
-<h3>Do:</h3>
-
-<div class='question'>1. Make a simple knowledge base. Represent some of your favorite books and authors.</div>
-
-
-<div class='highlight'><pre><code class='prolog'><span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Name Of The Wind&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Patrick Rothfuss&#39;</span><span class='p'>).</span>
-<span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;Anathem&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Neal Stephenson&#39;</span><span class='p'>).</span>
-<span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Skystone&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Jack Whyte&#39;</span><span class='p'>).</span>
-<span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Singing Sword&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Jack Whyte&#39;</span><span class='p'>).</span>
-<span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;Rapid Development&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Steve McConnell&#39;</span><span class='p'>).</span>
-<span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Pragmatic Programmer&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Andy Hunt &amp; Dave Thomas&#39;</span><span class='p'>).</span>
-<span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;Seven Languages In Seven Weeks&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Bruce Tate&#39;</span><span class='p'>).</span>
-</code></pre>
-</div>
-
-
-
-<div class='question'>2. Find all books in your knowledge base written by one author.</div>
-
-
-<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>book</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>&#39;Neal Stephenson&#39;</span><span class='p'>).</span>
-
-<span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Anathem&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
-
-<span class='s-Atom'>?-</span> <span class='nf'>book</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>&#39;Jack White&#39;</span><span class='p'>).</span>
-
-<span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;The Skystone&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
-
-<span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;The Singing Sword&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
-</code></pre>
-</div>
-
-
-
-<div class='question'>3. Make a knowledge base representing musicians and instruments. Also represent musicians and their genre of music.</div>
-
-
-<div class='highlight'><pre><code class='prolog'><span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Hansi Kursch&#39;</span><span class='p'>,</span> <span class='s-Atom'>vocals</span><span class='p'>).</span>
-<span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Hansi Kursch&#39;</span><span class='p'>,</span> <span class='s-Atom'>bass</span><span class='p'>).</span>
-<span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Andre Olbrich&#39;</span><span class='p'>,</span> <span class='s-Atom'>guitar</span><span class='p'>).</span>
-<span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Duke Ellington&#39;</span><span class='p'>,</span> <span class='s-Atom'>piano</span><span class='p'>).</span>
-<span class='nf'>musician_instrument</span><span class='p'>(</span><span class='s-Atom'>&#39;Jimi Hendrix&#39;</span><span class='p'>,</span> <span class='s-Atom'>guitar</span><span class='p'>).</span>
-
-<span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Hansi Kurch&#39;</span><span class='p'>,</span> <span class='s-Atom'>metal</span><span class='p'>).</span>
-<span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Andre Olbrich&#39;</span><span class='p'>,</span> <span class='s-Atom'>metal</span><span class='p'>).</span>
-<span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Duke Ellington&#39;</span><span class='p'>,</span> <span class='s-Atom'>jazz</span><span class='p'>).</span>
-<span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Jimi Hendrix&#39;</span><span class='p'>,</span> <span class='s-Atom'>rock</span><span class='p'>).</span>
-</code></pre>
-</div>
-
-
-
-<div class='question'>4. Find all musicians who play the guitar.</div>
-
-
-<div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>musician_instrument</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>,</span> <span class='s-Atom'>guitar</span><span class='p'>)</span>
-
-<span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Andre Olbrich&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
-
-<span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Jimi Hendrix&#39;</span>
-</code></pre>
-</div>
-
-
-
-</div>
-<p>Next in this series: <a href='/blog/2012/07/17/seven-languages-week-3-day-2'>Day 2 of Prolog</a></p>
-  </div>
-
-  <div style="margin-top:20px; font-size:14px;">
-    <a href="/blog/2012/02/05/seven-languages-week-3-day-1/#disqus_thread" data-disqus-identifier="/blog/2012/02/05/seven-languages-week-3-day-1">Comments</a>
   </div>
 
     <hr class="fancyrule" />
