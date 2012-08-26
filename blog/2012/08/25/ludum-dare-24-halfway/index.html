@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
         <meta name="description" content="">
 
-        <title>Haskell for great good - Nick Knowlson</title>
+        <title>Ludum Dare &#35;24 - Halfway! - Nick Knowlson</title>
 
         <link rel="stylesheet" type="text/css" href="/css/site.css" >
         <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
@@ -69,16 +69,38 @@
         <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
             <div id="content-padding">
                 <a href="/blog/archive/">&laquo; Back to posts</a>
-<h1 style="margin:0px;;">Haskell for great good</h1>
-<div class="faded" style="font-size:14px; margin-bottom:5px;">14 Jan 2009</div>
+<h1 style="margin:0px;;">Ludum Dare &#35;24 - Halfway!</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">25 Aug 2012</div>
 <div id="post">
-<p>(<strong>**Old post alert**</strong> This is an old post I dug up from sometime around college)</p>
+<p>Well, a little past halfway in my case, since I’m going to a Barcraft tomorrow!</p>
 
-<p>So I&#8217;ve been doing bits of the <a href='http://learnyouahaskell.com/'>Learn You A Haskell For Great Good</a> tutorial every now and then, and I just came across this <a href='http://intoverflow.wordpress.com/2009/01/13/why-haskell-is-beyond-ready-for-prime-time/'>blog post</a> on Integer Overflow about why Haskell is &#8220;ready for Prime Time&#8221;.</p>
+<p><a href='http://imgur.com/a/RLnJk#0'>Here is an imgur album of what the game looks like right now</a></p>
 
-<p>Now that I&#8217;ve learned a bit about the basics, being told that I am able to search a repository of libraries by <em>type signature</em> is really exciting. His example really drives it home even for those who don&#8217;t know any Haskell.</p>
+<p><strong>What is it?</strong></p>
 
-<p>From the other things I&#8217;ve read about Haskell in other articles (mostly that it will introduce you to new paradigms and <em>blow your mind</em>) I am now more firmly committed than ever to do some kind of project in Haskell, just to see what it feels like.</p>
+<p>My game is essentially a multiplayer Conway’s Game of Life (loosely related to the theme). I’ve decided to call it “Conway’s Revenge”. It doesn’t follow the original rules for the Game of Life – I’ve made changes to the live/die algorithm to account for multiple players and to prevent spending too long in a deadlock scenario, while making sure it’s not too hard to get your cells to grow and expand.</p>
+
+<p>I’m more or less happy with the live/die algorithm now; I’ve got pause, play and step forward buttons; and you can draw new red or green tiles.</p>
+
+<p><strong>So what’s next?</strong></p>
+
+<p>I have something interesting planned for the music that I’d really like to get done. I want to have a main menu screen as well as some instructions (maybe on the main menu?). To give the game a bit of actual replay value I’d like to do one or some of the following:</p>
+
+<ol>
+<li>Implement a progressively more difficult set of levels where you face off against different enemy formations</li>
+
+<li>Let you pick the number of players and place tiles of all colours so you can set up your own scenarios to see how they play out.</li>
+
+<li>(This is the way it works right now, but I’d like to keep this as an option) A ‘Battle Royale’ mode where all colours spawn randomly and fight it out to the death.</li>
+</ol>
+
+<p>If I have enough time, the ideal would be to have these three as three different game modes that you can pick right off the main menu with their own instruction screens.</p>
+
+<p>I think the way to go is to fully implement the main menu with one game mode (probably ‘Battle Royale’) including instructions, then move on to working on the music.</p>
+
+<p>If I still have time at the end, I’ll spend it on implementing the other game modes.</p>
+
+<p>(This post was originally published on the <a href='http://www.ludumdare.com/compo/2012/08/25/halfway-4/'>shared Ludum Dare blog</a>)</p>
 </div>
 
 
@@ -103,7 +125,7 @@
     <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
 
     <!-- Facebook -->
-    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2009/01/14/haskell-for-great-good/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2012/08/25/ludum-dare-24-halfway/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
 
 </div>
 </div>
@@ -113,11 +135,11 @@
   <h2>Related Posts</h2>
   <ul class="posts">
     
-      <li><span>25 Aug 2012</span> &raquo; <a href="/blog/2012/08/25/ludum-dare-24-halfway/">Ludum Dare &#35;24 - Halfway!</a></li>
-    
       <li><span>06 Aug 2012</span> &raquo; <a href="/blog/2012/08/06/seven-languages-week-3-day-3/">Seven Languages: Week 3 (Prolog) - Day 3</a></li>
     
       <li><span>17 Jul 2012</span> &raquo; <a href="/blog/2012/07/17/seven-languages-week-3-day-2/">Seven Languages: Week 3 (Prolog) - Day 2</a></li>
+    
+      <li><span>05 Feb 2012</span> &raquo; <a href="/blog/2012/02/05/seven-languages-week-3-day-1/">Seven Languages: Week 3 (Prolog) - Day 1</a></li>
     
   </ul>
 </div>
@@ -128,8 +150,8 @@
 <script type="text/javascript">
     var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
 
-    var disqus_identifier = '/blog/2009/01/14/haskell-for-great-good';
-    var disqus_url = 'http://nickknowlson.com//blog/2009/01/14/haskell-for-great-good/';
+    var disqus_identifier = '/blog/2012/08/25/ludum-dare-24-halfway';
+    var disqus_url = 'http://nickknowlson.com//blog/2012/08/25/ludum-dare-24-halfway/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

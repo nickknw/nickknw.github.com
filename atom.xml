@@ -4,12 +4,48 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-08-07T02:45:25-07:00</updated>
+ <updated>2012-08-25T21:26:23-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Ludum Dare &#35;24 - Halfway!</title>
+   <link href="http://nickknowlson.com/blog/2012/08/25/ludum-dare-24-halfway/"/>
+   <updated>2012-08-25T00:00:00-07:00</updated>
+   <id>http://nickknowlson.com/blog/2012/08/25/ludum-dare-24-halfway</id>
+   <content type="html">&lt;p&gt;Well, a little past halfway in my case, since I’m going to a Barcraft tomorrow!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://imgur.com/a/RLnJk#0'&gt;Here is an imgur album of what the game looks like right now&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is it?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;My game is essentially a multiplayer Conway’s Game of Life (loosely related to the theme). I’ve decided to call it “Conway’s Revenge”. It doesn’t follow the original rules for the Game of Life – I’ve made changes to the live/die algorithm to account for multiple players and to prevent spending too long in a deadlock scenario, while making sure it’s not too hard to get your cells to grow and expand.&lt;/p&gt;
+
+&lt;p&gt;I’m more or less happy with the live/die algorithm now; I’ve got pause, play and step forward buttons; and you can draw new red or green tiles.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;So what’s next?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I have something interesting planned for the music that I’d really like to get done. I want to have a main menu screen as well as some instructions (maybe on the main menu?). To give the game a bit of actual replay value I’d like to do one or some of the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Implement a progressively more difficult set of levels where you face off against different enemy formations&lt;/li&gt;
+
+&lt;li&gt;Let you pick the number of players and place tiles of all colours so you can set up your own scenarios to see how they play out.&lt;/li&gt;
+
+&lt;li&gt;(This is the way it works right now, but I’d like to keep this as an option) A ‘Battle Royale’ mode where all colours spawn randomly and fight it out to the death.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If I have enough time, the ideal would be to have these three as three different game modes that you can pick right off the main menu with their own instruction screens.&lt;/p&gt;
+
+&lt;p&gt;I think the way to go is to fully implement the main menu with one game mode (probably ‘Battle Royale’) including instructions, then move on to working on the music.&lt;/p&gt;
+
+&lt;p&gt;If I still have time at the end, I’ll spend it on implementing the other game modes.&lt;/p&gt;
+
+&lt;p&gt;(This post was originally published on the &lt;a href='http://www.ludumdare.com/compo/2012/08/25/halfway-4/'&gt;shared Ludum Dare blog&lt;/a&gt;)&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Seven Languages: Week 3 (Prolog) - Day 3</title>
@@ -1755,7 +1791,7 @@ Congrats, you did it!
 
 &lt;p&gt;By cheating! I &lt;strong&gt;don&amp;#8217;t&lt;/strong&gt; transpose the matrix, I modify the element accessor methods so that they interpret the &lt;code&gt;x&lt;/code&gt; parameter as &lt;code&gt;y&lt;/code&gt;, and vice versa. To my dismay, I later found that &lt;a href='http://en.wikipedia.org/wiki/Transpose#Implementation_of_matrix_transposition_on_computers'&gt;this isn&amp;#8217;t a new approach&lt;/a&gt; to solving this problem.&lt;/p&gt;
 
-&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a class='super' href='#footnote-1' id='footnote-1-link'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
+&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a class='super' id='footnote-1-link' href='#footnote-1'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
 
 &lt;p&gt;Io lets you write this fake transpose in a way that is fun, short, and elegant.&lt;/p&gt;
 
@@ -1871,7 +1907,7 @@ Congrats, you did it!
 &lt;p&gt;If I&amp;#8217;ve done my job right, it should make a lot more sense this time.&lt;/p&gt;
 
 &lt;p&gt;You can find the rest of the code (including the List2D prototype) on github - a good place to start is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io#L72'&gt;line 72 of day2.io&lt;/a&gt;. To read more I&amp;#8217;ve written about solving these exercises, check my &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page for Seven Languages in Seven Weeks&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a href='#footnote-1-link' id='footnote-1'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
+&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a id='footnote-1' href='#footnote-1-link'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
  </entry>
  
  <entry>
