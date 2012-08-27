@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-08-26T12:56:13-07:00</updated>
+ <updated>2012-08-26T19:02:23-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -941,7 +941,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 &lt;span class='nv'&gt;Tennessee&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt; &lt;span class='p'&gt;.&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;img src='/img/projects/seven-languages/state-colouring.png' alt='Coloured map of states showing Mississippi and Georgia = red, Tennessee and Florida = green, and Alabama = blue.' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt='Coloured map of states showing Mississippi and Georgia = red, Tennessee and Florida = green, and Alabama = blue.' src='/img/projects/seven-languages/state-colouring.png' /&gt;&lt;/p&gt;
 
 &lt;p&gt;The program appears to be just the problem definition restated, and yet somehow Prolog can produce a correct answer!&lt;/p&gt;
 
@@ -1851,7 +1851,7 @@ Congrats, you did it!
 
 &lt;p&gt;By cheating! I &lt;strong&gt;don&amp;#8217;t&lt;/strong&gt; transpose the matrix, I modify the element accessor methods so that they interpret the &lt;code&gt;x&lt;/code&gt; parameter as &lt;code&gt;y&lt;/code&gt;, and vice versa. To my dismay, I later found that &lt;a href='http://en.wikipedia.org/wiki/Transpose#Implementation_of_matrix_transposition_on_computers'&gt;this isn&amp;#8217;t a new approach&lt;/a&gt; to solving this problem.&lt;/p&gt;
 
-&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a href='#footnote-1' id='footnote-1-link' class='super'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
+&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a id='footnote-1-link' class='super' href='#footnote-1'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
 
 &lt;p&gt;Io lets you write this fake transpose in a way that is fun, short, and elegant.&lt;/p&gt;
 
@@ -1967,7 +1967,7 @@ Congrats, you did it!
 &lt;p&gt;If I&amp;#8217;ve done my job right, it should make a lot more sense this time.&lt;/p&gt;
 
 &lt;p&gt;You can find the rest of the code (including the List2D prototype) on github - a good place to start is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io#L72'&gt;line 72 of day2.io&lt;/a&gt;. To read more I&amp;#8217;ve written about solving these exercises, check my &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page for Seven Languages in Seven Weeks&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a href='#footnote-1-link' id='footnote-1'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
+&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a id='footnote-1' href='#footnote-1-link'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
  </entry>
  
  <entry>
@@ -2815,7 +2815,7 @@ Got it! It was 129
 
 &lt;p&gt;Here&amp;#8217;s an overview of roughly how many people thought there was a problem in each category:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src='/img/state_of_haskell_2011_weakness.png' alt='Weaknesses from State of Haskell Bar Graph' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt='Weaknesses from State of Haskell Bar Graph' src='/img/state_of_haskell_2011_weakness.png' /&gt;&lt;/p&gt;
 
 &lt;p&gt;It is probably important to note that I didn&amp;#8217;t attempt to verify the accuracy of any of the claims, so this graph represents the public &lt;strong&gt;perception&lt;/strong&gt; of where the problems are, not necessarily where the problems actually are. It is still very important information though, and likely does match up very closely with where the problems are.&lt;/p&gt;
 &lt;h3&gt;Libraries, Documentation, Hackage and Cabal&lt;/h3&gt;
