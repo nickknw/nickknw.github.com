@@ -4,12 +4,54 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2012-08-26T19:02:23-07:00</updated>
+ <updated>2013-02-17T12:36:01-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Using core.match with function arguments</title>
+   <link href="http://nickknowlson.com/blog/2013/02/17/using-core-match-with-command-line-arguments/"/>
+   <updated>2013-02-17T00:00:00-08:00</updated>
+   <id>http://nickknowlson.com/blog/2013/02/17/using-core-match-with-command-line-arguments</id>
+   <content type="html">&lt;p&gt;Recently I started learning Clojure (partly in preparation for its upcoming section in &lt;a href='http://nickknowlson.com/projects/seven-languages-in-seven-weeks/'&gt;my tour through seven languages&lt;/a&gt;) and I ran into a problem when trying to pattern match on arguments. You can&amp;#8217;t just pass them straight to &lt;code&gt;match&lt;/code&gt; and expect to follow most current online examples. The types aren&amp;#8217;t quite right! You&amp;#8217;ll always get back the &lt;code&gt;:else&lt;/code&gt; clause or some other odd behaviour.&lt;/p&gt;
+
+&lt;p&gt;Function arguments in Clojure are of type &lt;code&gt;ArraySeq&lt;/code&gt; (&lt;a href='http://stackoverflow.com/questions/8205209/why-argument-list-as-arrayseq'&gt;and for good reason&lt;/a&gt;), but using core.match with Seqs requires a different (slightly more verbose) syntax. The simplest way to make things work as you might expect is to convert the arguments into a Vector first.&lt;/p&gt;
+
+&lt;h2 id='solution'&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;Use &lt;a href='http://clojuredocs.org/clojure_core/clojure.core/vec'&gt;vec&lt;/a&gt; to convert the function arguments into a vector before passing them to &lt;code&gt;match&lt;/code&gt;:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='clojure'&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;use&lt;/span&gt; &lt;span class='o'&gt;&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;clojure&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nv'&gt;core&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nv'&gt;match&lt;/span&gt; &lt;span class='nv'&gt;:only&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;match&lt;/span&gt;&lt;span class='p'&gt;)])&lt;/span&gt;
+
+&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='k'&gt;defn &lt;/span&gt;&lt;span class='nv'&gt;-main&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;&amp;amp;&lt;/span&gt; &lt;span class='nv'&gt;args&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
+    &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;println &lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;match&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;vec&lt;/span&gt; &lt;span class='nv'&gt;args&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+        &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;echo&amp;quot;&lt;/span&gt; &lt;span class='nv'&gt;word&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='nv'&gt;word&lt;/span&gt;
+        &lt;span class='nv'&gt;:else&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Invalid command&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h2 id='alternate_solution'&gt;Alternate Solution&lt;/h2&gt;
+
+&lt;p&gt;If spending time and processing power just to spare some syntax is unappealing to you, then I&amp;#8217;d recommend using core.match&amp;#8217;s &lt;a href='https://github.com/clojure/core.match/wiki/Overview'&gt;Seq Matching&lt;/a&gt; capabilities directly:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='clojure'&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;use&lt;/span&gt; &lt;span class='o'&gt;&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;clojure&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nv'&gt;core&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nv'&gt;match&lt;/span&gt; &lt;span class='nv'&gt;:only&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;match&lt;/span&gt;&lt;span class='p'&gt;)])&lt;/span&gt;
+
+&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='k'&gt;defn &lt;/span&gt;&lt;span class='nv'&gt;-main&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;&amp;amp;&lt;/span&gt; &lt;span class='nv'&gt;args&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
+    &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;println &lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;match&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;args&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
+        &lt;span class='p'&gt;[([&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;echo&amp;quot;&lt;/span&gt; &lt;span class='nv'&gt;word&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='nv'&gt;:seq&lt;/span&gt;&lt;span class='p'&gt;)]&lt;/span&gt; &lt;span class='nv'&gt;word&lt;/span&gt;
+        &lt;span class='nv'&gt;:else&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Invalid command&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Note the differences:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;(match [args]&lt;/code&gt; - The arguments are &lt;em&gt;wrapped&lt;/em&gt; in a vector instead of being &lt;em&gt;converted&lt;/em&gt; to one&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;[([&amp;quot;echo&amp;quot; word] :seq)] word&lt;/code&gt; - Any pattern &lt;code&gt;x&lt;/code&gt; is enclosed like so: &lt;code&gt;[(x :seq)]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Hope this has helped!&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Ludum Dare &#35;24 - Post-mortem</title>
@@ -1851,7 +1893,7 @@ Congrats, you did it!
 
 &lt;p&gt;By cheating! I &lt;strong&gt;don&amp;#8217;t&lt;/strong&gt; transpose the matrix, I modify the element accessor methods so that they interpret the &lt;code&gt;x&lt;/code&gt; parameter as &lt;code&gt;y&lt;/code&gt;, and vice versa. To my dismay, I later found that &lt;a href='http://en.wikipedia.org/wiki/Transpose#Implementation_of_matrix_transposition_on_computers'&gt;this isn&amp;#8217;t a new approach&lt;/a&gt; to solving this problem.&lt;/p&gt;
 
-&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a id='footnote-1-link' class='super' href='#footnote-1'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
+&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a href='#footnote-1' class='super' id='footnote-1-link'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
 
 &lt;p&gt;Io lets you write this fake transpose in a way that is fun, short, and elegant.&lt;/p&gt;
 
@@ -1967,7 +2009,7 @@ Congrats, you did it!
 &lt;p&gt;If I&amp;#8217;ve done my job right, it should make a lot more sense this time.&lt;/p&gt;
 
 &lt;p&gt;You can find the rest of the code (including the List2D prototype) on github - a good place to start is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io#L72'&gt;line 72 of day2.io&lt;/a&gt;. To read more I&amp;#8217;ve written about solving these exercises, check my &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page for Seven Languages in Seven Weeks&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a id='footnote-1' href='#footnote-1-link'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
+&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a href='#footnote-1-link' id='footnote-1'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
  </entry>
  
  <entry>

@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
         <meta name="description" content="">
 
-        <title>Haskell for great good - Nick Knowlson</title>
+        <title>Using core.match with function arguments - Nick Knowlson</title>
 
         <link rel="stylesheet" type="text/css" href="/css/site.css" >
         <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
@@ -69,16 +69,44 @@
         <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
             <div id="content-padding">
                 <a href="/blog/archive/">&laquo; Back to posts</a>
-<h1 style="margin:0px;;">Haskell for great good</h1>
-<div class="faded" style="font-size:14px; margin-bottom:5px;">14 Jan 2009</div>
+<h1 style="margin:0px;;">Using core.match with function arguments</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">17 Feb 2013</div>
 <div id="post">
-<p>(<strong>**Old post alert**</strong> This is an old post I dug up from sometime around college)</p>
+<p>Recently I started learning Clojure (partly in preparation for its upcoming section in <a href='http://nickknowlson.com/projects/seven-languages-in-seven-weeks/'>my tour through seven languages</a>) and I ran into a problem when trying to pattern match on arguments. You can&#8217;t just pass them straight to <code>match</code> and expect to follow most current online examples. The types aren&#8217;t quite right! You&#8217;ll always get back the <code>:else</code> clause or some other odd behaviour.</p>
 
-<p>So I&#8217;ve been doing bits of the <a href='http://learnyouahaskell.com/'>Learn You A Haskell For Great Good</a> tutorial every now and then, and I just came across this <a href='http://intoverflow.wordpress.com/2009/01/13/why-haskell-is-beyond-ready-for-prime-time/'>blog post</a> on Integer Overflow about why Haskell is &#8220;ready for Prime Time&#8221;.</p>
+<p>Function arguments in Clojure are of type <code>ArraySeq</code> (<a href='http://stackoverflow.com/questions/8205209/why-argument-list-as-arrayseq'>and for good reason</a>), but using core.match with Seqs requires a different (slightly more verbose) syntax. The simplest way to make things work as you might expect is to convert the arguments into a Vector first.</p>
 
-<p>Now that I&#8217;ve learned a bit about the basics, being told that I am able to search a repository of libraries by <em>type signature</em> is really exciting. His example really drives it home even for those who don&#8217;t know any Haskell.</p>
+<h2 id='solution'>Solution</h2>
 
-<p>From the other things I&#8217;ve read about Haskell in other articles (mostly that it will introduce you to new paradigms and <em>blow your mind</em>) I am now more firmly committed than ever to do some kind of project in Haskell, just to see what it feels like.</p>
+<p>Use <a href='http://clojuredocs.org/clojure_core/clojure.core/vec'>vec</a> to convert the function arguments into a vector before passing them to <code>match</code>:</p>
+<div class='highlight'><pre><code class='clojure'><span class='p'>(</span><span class='nf'>use</span> <span class='o'>&#39;</span><span class='p'>[</span><span class='nv'>clojure</span><span class='o'>.</span><span class='nv'>core</span><span class='o'>.</span><span class='nv'>match</span> <span class='nv'>:only</span> <span class='p'>(</span><span class='nf'>match</span><span class='p'>)])</span>
+
+<span class='p'>(</span><span class='k'>defn </span><span class='nv'>-main</span> <span class='p'>[</span><span class='nv'>&amp;</span> <span class='nv'>args</span><span class='p'>]</span>
+    <span class='p'>(</span><span class='nb'>println </span><span class='p'>(</span><span class='nf'>match</span> <span class='p'>(</span><span class='nf'>vec</span> <span class='nv'>args</span><span class='p'>)</span>
+        <span class='p'>[</span><span class='s'>&quot;echo&quot;</span> <span class='nv'>word</span><span class='p'>]</span> <span class='nv'>word</span>
+        <span class='nv'>:else</span> <span class='s'>&quot;Invalid command&quot;</span><span class='p'>)))</span>
+</code></pre>
+</div>
+<h2 id='alternate_solution'>Alternate Solution</h2>
+
+<p>If spending time and processing power just to spare some syntax is unappealing to you, then I&#8217;d recommend using core.match&#8217;s <a href='https://github.com/clojure/core.match/wiki/Overview'>Seq Matching</a> capabilities directly:</p>
+<div class='highlight'><pre><code class='clojure'><span class='p'>(</span><span class='nf'>use</span> <span class='o'>&#39;</span><span class='p'>[</span><span class='nv'>clojure</span><span class='o'>.</span><span class='nv'>core</span><span class='o'>.</span><span class='nv'>match</span> <span class='nv'>:only</span> <span class='p'>(</span><span class='nf'>match</span><span class='p'>)])</span>
+
+<span class='p'>(</span><span class='k'>defn </span><span class='nv'>-main</span> <span class='p'>[</span><span class='nv'>&amp;</span> <span class='nv'>args</span><span class='p'>]</span>
+    <span class='p'>(</span><span class='nb'>println </span><span class='p'>(</span><span class='nf'>match</span> <span class='p'>[</span><span class='nv'>args</span><span class='p'>]</span>
+        <span class='p'>[([</span><span class='s'>&quot;echo&quot;</span> <span class='nv'>word</span><span class='p'>]</span> <span class='nv'>:seq</span><span class='p'>)]</span> <span class='nv'>word</span>
+        <span class='nv'>:else</span> <span class='s'>&quot;Invalid command&quot;</span><span class='p'>)))</span>
+</code></pre>
+</div>
+<p>Note the differences:</p>
+
+<ol>
+<li><code>(match [args]</code> - The arguments are <em>wrapped</em> in a vector instead of being <em>converted</em> to one</li>
+
+<li><code>[([&quot;echo&quot; word] :seq)] word</code> - Any pattern <code>x</code> is enclosed like so: <code>[(x :seq)]</code></li>
+</ol>
+
+<p>Hope this has helped!</p>
 </div>
 
 
@@ -103,7 +131,7 @@
     <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
 
     <!-- Facebook -->
-    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2009/01/14/haskell-for-great-good/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2013/02/17/using-core-match-with-command-line-arguments/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
 
 </div>
 </div>
@@ -113,11 +141,11 @@
   <h2>Related Posts</h2>
   <ul class="posts">
     
-      <li><span>17 Feb 2013</span> &raquo; <a href="/blog/2013/02/17/using-core-match-with-command-line-arguments/">Using core.match with function arguments</a></li>
-    
       <li><span>26 Aug 2012</span> &raquo; <a href="/blog/2012/08/26/ludum-dare-24-finished/">Ludum Dare &#35;24 - Post-mortem</a></li>
     
       <li><span>25 Aug 2012</span> &raquo; <a href="/blog/2012/08/25/ludum-dare-24-halfway/">Ludum Dare &#35;24 - Halfway!</a></li>
+    
+      <li><span>06 Aug 2012</span> &raquo; <a href="/blog/2012/08/06/seven-languages-week-3-day-3/">Seven Languages: Week 3 (Prolog) - Day 3</a></li>
     
   </ul>
 </div>
@@ -128,8 +156,8 @@
 <script type="text/javascript">
     var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
 
-    var disqus_identifier = '/blog/2009/01/14/haskell-for-great-good';
-    var disqus_url = 'http://nickknowlson.com//blog/2009/01/14/haskell-for-great-good/';
+    var disqus_identifier = '/blog/2013/02/17/using-core-match-with-command-line-arguments';
+    var disqus_url = 'http://nickknowlson.com//blog/2013/02/17/using-core-match-with-command-line-arguments/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
