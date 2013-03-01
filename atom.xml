@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-03-01T14:34:12-08:00</updated>
+ <updated>2013-03-01T15:01:23-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -593,7 +593,7 @@ like to move on to Scala at this point&lt;/div&gt;
 &lt;span class='c1'&gt;-- list3 is [1, 2, 3, 1, 2, 3]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;But this function still just appends one list to another. It&amp;#8217;s the same as the built in &lt;code&gt;++&lt;/code&gt; function, and basically equivalent to the previous javascript example.&lt;/p&gt;
-&lt;h4&gt;Logic-based with unification (Prolog)&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([],&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
+&lt;h4&gt;Logic-based (Prolog)&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([],&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Xs&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;,[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Zs&lt;/span&gt;&lt;span class='p'&gt;])&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Xs&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;Zs&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;At first glance, this function is just like the previous two. Note how similar it is to the Haskell example in particular, since it too is just a simple recursive function. It can be used like so:&lt;/p&gt;

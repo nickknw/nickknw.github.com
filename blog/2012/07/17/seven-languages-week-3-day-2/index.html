@@ -201,7 +201,7 @@
 <span class='c1'>-- list3 is [1, 2, 3, 1, 2, 3]</span>
 </code></pre></div>
 <p>But this function still just appends one list to another. It&#8217;s the same as the built in <code>++</code> function, and basically equivalent to the previous javascript example.</p>
-<h4>Logic-based with unification (Prolog)</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>append</span><span class='p'>([],</span><span class='nv'>Ys</span><span class='p'>,</span><span class='nv'>Ys</span><span class='p'>).</span>
+<h4>Logic-based (Prolog)</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>append</span><span class='p'>([],</span><span class='nv'>Ys</span><span class='p'>,</span><span class='nv'>Ys</span><span class='p'>).</span>
 <span class='nf'>append</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Xs</span><span class='p'>],</span><span class='nv'>Ys</span><span class='p'>,[</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Zs</span><span class='p'>])</span> <span class='p'>:-</span> <span class='nf'>append</span><span class='p'>(</span><span class='nv'>Xs</span><span class='p'>,</span><span class='nv'>Ys</span><span class='p'>,</span><span class='nv'>Zs</span><span class='p'>).</span>
 </code></pre></div>
 <p>At first glance, this function is just like the previous two. Note how similar it is to the Haskell example in particular, since it too is just a simple recursive function. It can be used like so:</p>
