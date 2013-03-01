@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-02-18T09:43:33-08:00</updated>
+ <updated>2013-03-01T12:02:03-08:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -23,25 +23,23 @@
 &lt;h2 id='solution'&gt;Solution&lt;/h2&gt;
 
 &lt;p&gt;Use &lt;a href='http://clojuredocs.org/clojure_core/clojure.core/vec'&gt;vec&lt;/a&gt; to convert the function arguments into a vector before passing them to &lt;code&gt;match&lt;/code&gt;:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='clojure'&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;use&lt;/span&gt; &lt;span class='o'&gt;&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;clojure&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nv'&gt;core&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nv'&gt;match&lt;/span&gt; &lt;span class='nv'&gt;:only&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;match&lt;/span&gt;&lt;span class='p'&gt;)])&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='clojure'&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;use&lt;/span&gt; &lt;span class='o'&gt;&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;clojure.core.match&lt;/span&gt; &lt;span class='ss'&gt;:only&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;match&lt;/span&gt;&lt;span class='p'&gt;)])&lt;/span&gt;
 
-&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='k'&gt;defn &lt;/span&gt;&lt;span class='nv'&gt;-main&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;&amp;amp;&lt;/span&gt; &lt;span class='nv'&gt;args&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
+&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kd'&gt;defn &lt;/span&gt;&lt;span class='nv'&gt;-main&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='o'&gt;&amp;amp;&lt;/span&gt; &lt;span class='nv'&gt;args&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
     &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;println &lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;match&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;vec&lt;/span&gt; &lt;span class='nv'&gt;args&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
         &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;echo&amp;quot;&lt;/span&gt; &lt;span class='nv'&gt;word&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='nv'&gt;word&lt;/span&gt;
-        &lt;span class='nv'&gt;:else&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Invalid command&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+        &lt;span class='ss'&gt;:else&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Invalid command&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id='alternate_solution'&gt;Alternate Solution&lt;/h2&gt;
 
 &lt;p&gt;If spending time and processing power just to spare some syntax is unappealing to you, then I&amp;#8217;d recommend using core.match&amp;#8217;s &lt;a href='https://github.com/clojure/core.match/wiki/Overview'&gt;Seq Matching&lt;/a&gt; capabilities directly:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='clojure'&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;use&lt;/span&gt; &lt;span class='o'&gt;&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;clojure&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nv'&gt;core&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nv'&gt;match&lt;/span&gt; &lt;span class='nv'&gt;:only&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;match&lt;/span&gt;&lt;span class='p'&gt;)])&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='clojure'&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;use&lt;/span&gt; &lt;span class='o'&gt;&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;clojure.core.match&lt;/span&gt; &lt;span class='ss'&gt;:only&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;match&lt;/span&gt;&lt;span class='p'&gt;)])&lt;/span&gt;
 
-&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='k'&gt;defn &lt;/span&gt;&lt;span class='nv'&gt;-main&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;&amp;amp;&lt;/span&gt; &lt;span class='nv'&gt;args&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
+&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kd'&gt;defn &lt;/span&gt;&lt;span class='nv'&gt;-main&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='o'&gt;&amp;amp;&lt;/span&gt; &lt;span class='nv'&gt;args&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
     &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;println &lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;match&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;args&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
-        &lt;span class='p'&gt;[([&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;echo&amp;quot;&lt;/span&gt; &lt;span class='nv'&gt;word&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='nv'&gt;:seq&lt;/span&gt;&lt;span class='p'&gt;)]&lt;/span&gt; &lt;span class='nv'&gt;word&lt;/span&gt;
-        &lt;span class='nv'&gt;:else&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Invalid command&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+        &lt;span class='p'&gt;[([&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;echo&amp;quot;&lt;/span&gt; &lt;span class='nv'&gt;word&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='ss'&gt;:seq&lt;/span&gt;&lt;span class='p'&gt;)]&lt;/span&gt; &lt;span class='nv'&gt;word&lt;/span&gt;
+        &lt;span class='ss'&gt;:else&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Invalid command&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note the differences:&lt;/p&gt;
 
 &lt;ol&gt;
@@ -209,8 +207,7 @@
 &lt;span class='nf'&gt;blocks&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Bs1&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;F&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Bs2&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;G&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;H&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;I&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Bs3&lt;/span&gt;&lt;span class='p'&gt;])&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt;
         &lt;span class='nf'&gt;all_distinct&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;F&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;G&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;H&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;I&lt;/span&gt;&lt;span class='p'&gt;]),&lt;/span&gt;
         &lt;span class='nf'&gt;blocks&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Bs1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Bs2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Bs3&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;h3&gt;Scala + JaCoP&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Scala + JaCoP&lt;/h3&gt;
 &lt;p&gt;This Scala solution is taken from &lt;a href='http://www.hakank.org/constraint_programming_blog/2011/08/a_first_look_at_scalajacop_scala_wrapper_for_jacop.html'&gt;Hakan Kjellerstrand&amp;#8217;s scalaJaCoP page&lt;/a&gt;. Here is a direct link to &lt;a href='http://www.hakank.org/jacop/Sudoku.scala'&gt;the file itself&lt;/a&gt;.&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;import&lt;/span&gt; &lt;span class='nn'&gt;scalaJaCoP._&lt;/span&gt;
 
@@ -231,7 +228,7 @@
   &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
     &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
       &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;problem&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
-        &lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='err'&gt;#&lt;/span&gt;&lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;problem&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;#&lt;/span&gt;&lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;problem&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
       &lt;span class='o'&gt;}&lt;/span&gt;
     &lt;span class='o'&gt;}&lt;/span&gt;
   &lt;span class='o'&gt;}&lt;/span&gt;
@@ -255,8 +252,7 @@
 
   &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;printIt&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='o'&gt;...&lt;/span&gt; &lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='c1'&gt;// omitted&lt;/span&gt;
 &lt;span class='o'&gt;}&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;For brevity I&amp;#8217;m omitting how the Prolog solution is queried and how the Scala solution is printed. I want to keep the focus on the interesting parts of these programs. For the full source code, check the links above or the &lt;a href='https://github.com/nickknw/constraint-programming-benchmarks'&gt;benchmark source code&lt;/a&gt; on github.&lt;/p&gt;
 &lt;h3&gt;Scoring&lt;/h3&gt;&lt;h4&gt;Size&lt;/h4&gt;
 &lt;p&gt;The Prolog program is just over half as long at &lt;strong&gt;13&lt;/strong&gt; lines instead of &lt;strong&gt;25&lt;/strong&gt; for Scala (not counting comments or whitespace). Although this is definitely a win for Prolog, the Scala version is still far shorter than any Sudoku solvers that don&amp;#8217;t take advantage of constraint programming.&lt;/p&gt;
@@ -305,9 +301,7 @@ Aha, 'format' and 'writef' are very nice too.
 
 &lt;span class='nf'&gt;minInList&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;XS&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;M&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;minInList&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;XS&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;M1&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;min&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;M1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;M&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;format&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;~a, &amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;minInList&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;format&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;~a, &amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; Find a way to use the print predicates to print only successful solutions. How do they work?&lt;/div&gt;
@@ -332,9 +326,7 @@ correct answers. I'll take an example from the book.
     &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
     &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
     &lt;span class='nf'&gt;format&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;~a, ~a, ~a, ~a, ~a&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='code_explanation'&gt;
@@ -398,9 +390,7 @@ I looked at &lt;a href='http://stackoverflow.com/questions/1768274/prolog-learni
 
 &lt;span class='c1'&gt;% can test with:&lt;/span&gt;
 &lt;span class='c1'&gt;% ?- problem(1, Board), sudoku(Board).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; Make the Sudoku solver print prettier
@@ -431,9 +421,7 @@ solutions.&lt;/div&gt;
     &lt;span class='nf'&gt;format&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;│ ~d ~d ~d │ ~d ~d ~d │ ~d ~d ~d │~n&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;Col1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col6&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col7&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col8&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Col9&lt;/span&gt;&lt;span class='p'&gt;]),&lt;/span&gt; 
     &lt;span class='nf'&gt;succ&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;N1&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
     &lt;span class='nf'&gt;prettier_print&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Puzzle&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -455,9 +443,7 @@ solutions.&lt;/div&gt;
 │ 4 7 2 │ 3 1 9 │ 5 6 8 │
 │ 8 6 3 │ 7 4 5 │ 2 1 9 │
 └───────┴───────┴───────┘
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 
@@ -545,8 +531,7 @@ like to move on to Scala at this point&lt;/div&gt;
 &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Z&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;           &lt;span class='c1'&gt;% list with three and only three elements - regular syntax&lt;/span&gt;
 &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|[&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;|[&lt;/span&gt;&lt;span class='nv'&gt;Z&lt;/span&gt;&lt;span class='p'&gt;]]]&lt;/span&gt;         &lt;span class='c1'&gt;% same - using cons syntax&lt;/span&gt;
 &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;|[&lt;/span&gt;&lt;span class='nv'&gt;Z&lt;/span&gt;&lt;span class='p'&gt;]]&lt;/span&gt;          &lt;span class='c1'&gt;% same - using simplified cons syntax&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;But it doesn&amp;#8217;t make sense to use cons syntax to do what regular list syntax already expresses better. Here are some more interesting examples that make use of the strengths of cons syntax:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|[&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;]]&lt;/span&gt;        &lt;span class='c1'&gt;% list with at least two elements (X and Y), bind the rest of the list to Ys&lt;/span&gt;
 &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;         &lt;span class='c1'&gt;% same - using simplified cons syntax&lt;/span&gt;
@@ -556,8 +541,7 @@ like to move on to Scala at this point&lt;/div&gt;
 
 &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|[&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;|[&lt;/span&gt;&lt;span class='nv'&gt;Z&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;]]]&lt;/span&gt;     &lt;span class='c1'&gt;% list with at least three elements, discard the tail&lt;/span&gt;
 &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Z&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;       &lt;span class='c1'&gt;% same - using simplified cons syntax&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To cement these, here are some concrete examples of pattern matching with lists:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s-Atom'&gt;a&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;b&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;c&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;d&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Xs&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;           &lt;span class='c1'&gt;% X = a, Xs = [b, c, d].&lt;/span&gt;
 &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s-Atom'&gt;a&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;b&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;c&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;d&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;            &lt;span class='c1'&gt;% X = a.&lt;/span&gt;
@@ -573,17 +557,10 @@ like to move on to Scala at this point&lt;/div&gt;
 &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s-Atom'&gt;a&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;b&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;c&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;d&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;         &lt;span class='c1'&gt;% X = b, Y = [c, d].&lt;/span&gt;
 &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s-Atom'&gt;a&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;b&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;c&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;d&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;W&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;         &lt;span class='c1'&gt;% W = a, Y = [c, d].&lt;/span&gt;
 &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s-Atom'&gt;a&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;b&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;c&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;d&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;W&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='k'&gt;_&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;         &lt;span class='c1'&gt;% W = a, X = b.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;h3&gt;Unification&lt;/h3&gt;
-&lt;p&gt;Unification is one of Prolog&amp;#8217;s fairly unique key features. A lot of the really neat things Prolog can do rely on unification to work (including that map colouring problem from &lt;a href='/blog/2012/02/05/seven-languages-week-3-day-1/'&gt;last week&lt;/a&gt;). What is unificiation?&lt;/p&gt;
-
-&lt;p&gt;To quote &lt;a href='http://en.wikipedia.org/wiki/Unification_(computer_science\'&gt;from Wikipedia&lt;/a&gt;):&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The goal of unification is to find a substitution which demonstrates that two seemingly different terms are in fact either identical or just equal.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So what does that really mean? To demonstrate the difference unification makes I am going to show you the same function written in three different languages and three different styles. I&amp;#8217;ve picked the &lt;code&gt;append&lt;/code&gt; function (append one list to another list) which is a great example, even though it&amp;#8217;s been explained many times before. In the comments on my &lt;a href='/blog/2012/02/05/seven-languages-week-3-day-1/'&gt;last post&lt;/a&gt; actually, &lt;a href='http://www.storytotell.org/'&gt;Daniel Lyons&lt;/a&gt; gave a &lt;a href='/blog/2012/02/05/seven-languages-week-3-day-1/#comment-446662856'&gt;nice demonstration&lt;/a&gt; of &lt;code&gt;append&lt;/code&gt; in Prolog, and it is an example &lt;a href='http://www.java.net/external?url=http://blog.rapidred.com'&gt;Bruce Tate&lt;/a&gt; spends a couple pages on as well.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Unification&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;UPDATE:&lt;/strong&gt; Turns out I had a massive misunderstanding about what unification was. I had conflated it with a number of other concepts that combined together form Prolog&amp;#8217;s execution model. I&amp;#8217;ve removed what I wrote about unification and may some day do a follow-up article on Prolog&amp;#8217;s execution model.&lt;/p&gt;
+&lt;h3&gt;The logic programming difference&lt;/h3&gt;
+&lt;p&gt;So what does having that fancy execution model really mean? To demonstrate the difference it can make I am going to show you the same function written in three different languages and three different styles. I&amp;#8217;ve picked the &lt;code&gt;append&lt;/code&gt; function (append one list to another list) which is a great example, even though it&amp;#8217;s been explained many times before. In the comments on my &lt;a href='/blog/2012/02/05/seven-languages-week-3-day-1/'&gt;last post&lt;/a&gt; actually, &lt;a href='http://www.storytotell.org/'&gt;Daniel Lyons&lt;/a&gt; gave a &lt;a href='/blog/2012/02/05/seven-languages-week-3-day-1/#comment-446662856'&gt;nice demonstration&lt;/a&gt; of &lt;code&gt;append&lt;/code&gt; in Prolog, and it is an example &lt;a href='http://www.java.net/external?url=http://blog.rapidred.com'&gt;Bruce Tate&lt;/a&gt; spends a couple pages on as well.&lt;/p&gt;
 &lt;h4&gt;Imperative (Javascript)&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='javascript'&gt;&lt;span class='kd'&gt;function&lt;/span&gt; &lt;span class='nx'&gt;append&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;xs&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nx'&gt;ys&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
     &lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;result&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;xs&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;slice&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
     &lt;span class='nx'&gt;i&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
@@ -594,48 +571,40 @@ like to move on to Scala at this point&lt;/div&gt;
 
     &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='nx'&gt;result&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
 &lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The most straightforward implementation of append. Callers would use it like so:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='javascript'&gt;&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;list&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;3&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='mi'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;6&lt;/span&gt;&lt;span class='p'&gt;]);&lt;/span&gt;
 &lt;span class='c1'&gt;// list is [1, 2, 3, 4, 5, 6]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Nothing fancy here! This essentially duplicates the existing &lt;code&gt;concat&lt;/code&gt; method in javascript.&lt;/p&gt;
 &lt;h4&gt;Functional (Haskell)&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='haskell'&gt;&lt;span class='nf'&gt;append&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;a&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='ow'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;a&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='ow'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;a&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
 &lt;span class='nf'&gt;append&lt;/span&gt; &lt;span class='kt'&gt;[]&lt;/span&gt; &lt;span class='n'&gt;ys&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='n'&gt;ys&lt;/span&gt;
 &lt;span class='nf'&gt;append&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='kt'&gt;:&lt;/span&gt;&lt;span class='n'&gt;xs&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='n'&gt;ys&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='kt'&gt;:&lt;/span&gt; &lt;span class='n'&gt;append&lt;/span&gt; &lt;span class='n'&gt;xs&lt;/span&gt; &lt;span class='n'&gt;ys&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;A basic recursive implementation of append. Once again, it is straightforward to use:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='haskell'&gt;&lt;span class='nf'&gt;list&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='n'&gt;append&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;3&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='mi'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;6&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
 &lt;span class='c1'&gt;-- list is [1, 2, 3, 4, 5, 6]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now that we&amp;#8217;re in Haskell, we can of course easily take advantage of partial application and write things like:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='haskell'&gt;&lt;span class='nf'&gt;appendList1&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='n'&gt;append&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;3&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
 &lt;span class='nf'&gt;list2&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='n'&gt;appendList1&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='mi'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;6&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
 &lt;span class='c1'&gt;-- list2 is [1, 2, 3, 4, 5, 6]&lt;/span&gt;
 &lt;span class='nf'&gt;list3&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='n'&gt;appendList1&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;3&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
 &lt;span class='c1'&gt;-- list3 is [1, 2, 3, 1, 2, 3]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;But this function still just appends one list to another. It&amp;#8217;s the same as the built in &lt;code&gt;++&lt;/code&gt; function, and basically equivalent to the previous javascript example.&lt;/p&gt;
 &lt;h4&gt;Logic-based with unification (Prolog)&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([],&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Xs&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;,[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Zs&lt;/span&gt;&lt;span class='p'&gt;])&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Xs&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;Ys&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;Zs&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;At first glance, this function is just like the previous two. Note how similar it is to the Haskell example in particular, since it too is just a simple recursive function. It can be used like so:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;6&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;List&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nv'&gt;List&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;6&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With Prolog it is sometimes accurate to look at a rule as a function with the parameters being &lt;code&gt;(param1, param2, return value)&lt;/code&gt;. If you look at the example above in this way it gives you an &lt;em&gt;accurate&lt;/em&gt;, but &lt;em&gt;limited&lt;/em&gt; picture of this rule. With unification, you could just as easily look at this rule as &lt;code&gt;(param1,
 return value, param2)&lt;/code&gt;, like so:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;List&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;6&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;
 &lt;span class='nv'&gt;List&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;6&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Prolog solves for the missing parameter and correctly calculates the result! This is the major difference between traditional languages and a logic language. But &lt;code&gt;(param1, return value, param2)&lt;/code&gt; is still not the best way to think about rules, as it breaks down when confronted with something like this:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;List1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;List2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;
 &lt;span class='nv'&gt;List1&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[],&lt;/span&gt;
@@ -647,8 +616,7 @@ return value, param2)&lt;/code&gt;, like so:&lt;/p&gt;
 &lt;span class='nv'&gt;List1&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;
 &lt;span class='nv'&gt;List2&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[]&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
 &lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Prolog just generated all the possible ways you could combine two lists to make &lt;code&gt;[1, 2, 3]&lt;/code&gt;! All this functionality from that tiny definition of &lt;code&gt;append&lt;/code&gt; up above!&lt;/p&gt;
 
 &lt;p&gt;There&amp;#8217;s one more interesting use for append - as a lie-detector:&lt;/p&gt;
@@ -656,8 +624,7 @@ return value, param2)&lt;/code&gt;, like so:&lt;/p&gt;
 &lt;span class='s-Atom'&gt;false&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;4&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='m'&gt;4&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;
 &lt;span class='s-Atom'&gt;true&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;All of this comes from the power of unification.&lt;/p&gt;
 &lt;h3&gt;Recursion&lt;/h3&gt;
 &lt;p&gt;When writing recursive rules in Prolog you really have to make sure to keep thinking in terms of &amp;#8216;making this statement true&amp;#8217; instead of your typical program execution. One thing that makes it more awkward is that you can&amp;#8217;t use return values: every &amp;#8216;result&amp;#8217; has to be a another parameter. And so you end up with more intermediate variables that have little meaning, as the example below shows.&lt;/p&gt;
@@ -668,15 +635,13 @@ return value, param2)&lt;/code&gt;, like so:&lt;/p&gt;
 &lt;h4&gt;Haskell&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='haskell'&gt;&lt;span class='nf'&gt;combinations&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;a&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='ow'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='p'&gt;[[&lt;/span&gt;&lt;span class='n'&gt;a&lt;/span&gt;&lt;span class='p'&gt;]]&lt;/span&gt;
 &lt;span class='nf'&gt;combinations&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[[&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='p'&gt;]]&lt;/span&gt;
 &lt;span class='nf'&gt;combinations&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='kt'&gt;:&lt;/span&gt;&lt;span class='n'&gt;xs&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='kt'&gt;:&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;map&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='kt'&gt;:&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;combinations&lt;/span&gt; &lt;span class='n'&gt;xs&lt;/span&gt;&lt;span class='p'&gt;))&lt;/span&gt; &lt;span class='o'&gt;++&lt;/span&gt; &lt;span class='n'&gt;combinations&lt;/span&gt; &lt;span class='n'&gt;xs&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;h4&gt;Prolog&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;combinations&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;]]).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4&gt;Prolog&lt;/h4&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;combinations&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;]]).&lt;/span&gt;
 &lt;span class='nf'&gt;combinations&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;XS&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;Result&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; 
     &lt;span class='nf'&gt;combinations&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;XS&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Comb1&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; 
     &lt;span class='nf'&gt;maplist&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;]),&lt;/span&gt; &lt;span class='nv'&gt;Comb1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Comb2&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
     &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;([[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;]],&lt;/span&gt; &lt;span class='nv'&gt;Comb1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Comb3&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; 
     &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Comb2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Comb3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Result&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I still prefer the Haskell version :)&lt;/p&gt;
 
 &lt;h2 id='full_solutions'&gt;Full solutions&lt;/h2&gt;
@@ -694,9 +659,7 @@ return value, param2)&lt;/code&gt;, like so:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;fib&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;0&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;0&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;fib&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;fib&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;F&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;succ&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;N&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;succ&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;N1&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;fib&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;F1&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;fib&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;N2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;F2&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;plus&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;F1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;F2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;F&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Explanation&lt;/div&gt;
@@ -721,9 +684,7 @@ Pretty straightforward!
   &lt;span class='nv'&gt;X1&lt;/span&gt; &lt;span class='o'&gt;is&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
   &lt;span class='nf'&gt;factorial&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;Z&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
   &lt;span class='nv'&gt;Y&lt;/span&gt; &lt;span class='o'&gt;is&lt;/span&gt; &lt;span class='nv'&gt;Z&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,!.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Explanation&lt;/div&gt;
@@ -812,9 +773,7 @@ If you find you need more background information first, try the page where they
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;reverse&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;R&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;reverse&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,[],&lt;/span&gt;&lt;span class='nv'&gt;R&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;reverse&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;&lt;span class='nv'&gt;Z&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;W&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;reverse&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;,[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;Z&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt;&lt;span class='nv'&gt;W&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;reverse&lt;/span&gt;&lt;span class='p'&gt;([],&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Notes&lt;/div&gt;
@@ -836,9 +795,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;reverseA&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;R&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;Result&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;reverse&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;R&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;T&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;append&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;T&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;Result&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;reverseA&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; Find the smallest element of a list&lt;/div&gt;
@@ -850,9 +807,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 
 &lt;span class='nf'&gt;minInList&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;|&lt;/span&gt;&lt;span class='nv'&gt;XS&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;M&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;minInList&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;XS&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;M1&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;min&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;M1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;M&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;minInList&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;3.&lt;/b&gt; Sort the elements of a list.&lt;/div&gt;
@@ -868,9 +823,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
     &lt;span class='nf'&gt;takeout&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Min&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;List&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Rest&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; 
     &lt;span class='nf'&gt;mySort&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Rest&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Sorted&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;mySort&lt;/span&gt;&lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;],&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/div&gt;
@@ -905,16 +858,14 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 
 &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;mouse&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;A rule is a statement that relates facts and rules together. You can almost (but not quite) think of them as functions. Here are some rules:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;time_to_play&lt;/span&gt; &lt;span class='o'&gt;:-&lt;/span&gt; &lt;span class='s-Atom'&gt;daytime&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;clear_skies&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
 
 &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;round&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;small&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 
 &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='s-Atom'&gt;time_to_play&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nf'&gt;suitable_for_playing_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If you collect all of the preceding statements and put them in a &lt;code&gt;hello.pl&lt;/code&gt; file then you have a valid Prolog program. To actually get some useful output from it, we can load this program into the prolog interpreter, and query this database we&amp;#8217;ve built up like so:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;hello.pl&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;
 &lt;span class='c1'&gt;% hello.pl compiled 0.00 sec, 3,352 bytes&lt;/span&gt;
@@ -954,8 +905,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 
 &lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;does_nick_want_to_play_with&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;What&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;ball&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id='highlights_from_exercises'&gt;Highlights from exercises&lt;/h2&gt;
 
 &lt;p&gt;The exercises in Day 1 aren&amp;#8217;t terribly interesting, so instead I&amp;#8217;ll show you an example from an earlier part of the book that threw me into confusion for a while. The goal of the following snippet of Prolog is to assign map colours such that no state borders on another state with the same colour.&lt;/p&gt;
@@ -974,15 +924,13 @@ This is the way I was attempting to do it first as well. It is (probably) less e
     &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
     &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
     &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This program aims to colour these &lt;strong&gt;five&lt;/strong&gt; states with &lt;strong&gt;three&lt;/strong&gt; colours (such that no states of the same colour share borders). When we query this we get:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;coloring&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Alabama&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Mississippi&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Tennessee&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nv'&gt;Alabama&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
 &lt;span class='nv'&gt;Mississippi&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Georgia&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
 &lt;span class='nv'&gt;Tennessee&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Florida&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;green&lt;/span&gt; &lt;span class='p'&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img alt='Coloured map of states showing Mississippi and Georgia = red, Tennessee and Florida = green, and Alabama = blue.' src='/img/projects/seven-languages/state-colouring.png' /&gt;&lt;/p&gt;
 
 &lt;p&gt;The program appears to be just the problem definition restated, and yet somehow Prolog can produce a correct answer!&lt;/p&gt;
@@ -1009,15 +957,13 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
     &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
     &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
     &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In which case you would receive an answer like:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='s-Atom'&gt;?-&lt;/span&gt; &lt;span class='nf'&gt;solve_for&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nv'&gt;A&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
 &lt;span class='nv'&gt;B&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
 &lt;span class='nv'&gt;D&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='m'&gt;2&lt;/span&gt; &lt;span class='p'&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Easy peasy, right?&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;UPDATE:&lt;/strong&gt; Thanks for the great comments, both below on my &lt;a href='#disqus_thread'&gt;blog comments&lt;/a&gt; and also &lt;a href='http://www.reddit.com/r/programming/comments/pd9z1/seven_languages_day_1_of_prolog/'&gt;on reddit&lt;/a&gt;. There are a few in particular that helped me learn more that I would like to highlight and save for posterity.&lt;/p&gt;
@@ -1030,9 +976,7 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='nf'&gt;color&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;red&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;color&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;green&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt; &lt;span class='nf'&gt;color&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;blue&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;color&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;color&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt; &lt;span class='s-Atom'&gt;\=&lt;/span&gt; &lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/blockquote&gt;
 &lt;p&gt;Michael Leuschel showed how &lt;a href='#dsq-comment-431117487'&gt;this solution could take advantage&lt;/a&gt; of &lt;a href='http://www.swi-prolog.org/man/clpfd.html'&gt;CLP(FD)&lt;/a&gt; (a module that can &lt;strong&gt;drastically&lt;/strong&gt; improve performance when dealing with larger data sets) and was also kind enough to &lt;a href='#dsq-comment-432664414'&gt;explain labeling to me&lt;/a&gt;:&lt;/p&gt;
@@ -1043,9 +987,7 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='prolog'&gt;&lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nf'&gt;use_module&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nf'&gt;library&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;clpfd&lt;/span&gt;&lt;span class='p'&gt;)).&lt;/span&gt;
 &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;X&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:-&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt; &lt;span class='s-Atom'&gt;in&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;..&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;Y&lt;/span&gt; &lt;span class='s-Atom'&gt;in&lt;/span&gt; &lt;span class='m'&gt;1&lt;/span&gt;&lt;span class='p'&gt;..&lt;/span&gt;&lt;span class='m'&gt;3&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;X&lt;/span&gt; &lt;span class='s-Atom'&gt;#\=&lt;/span&gt;&lt;span class='nv'&gt;Y&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;You would then need to add a call to &lt;code&gt;labeling&lt;/code&gt; after setting up the constraints:&lt;/p&gt;
@@ -1055,9 +997,7 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
 &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt;
 &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;),&lt;/span&gt; &lt;span class='nf'&gt;different&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='nf'&gt;labeling&lt;/span&gt;&lt;span class='p'&gt;([],[&lt;/span&gt;&lt;span class='nv'&gt;A&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;B&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;C&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;D&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nv'&gt;E&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This should be more efficient than the original, as you first set up the constraints and only *then* start enumerating candidate solutions.
@@ -1088,8 +1028,7 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 
 &lt;span class='c1'&gt;% I want to have a table `suitable_for_playing_with`&lt;/span&gt;
 &lt;span class='c1'&gt;% such that each value in it must be in tables `round` and `small`&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;gecko &lt;a href='http://www.reddit.com/r/programming/comments/pd9z1/seven_languages_day_1_of_prolog/c3ojly3?context=1'&gt;introduced me to Datalog&lt;/a&gt; and made me realize that knowing Prolog well can be useful and pay off even when developing systems in other languages.&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -1145,9 +1084,7 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Rapid Development&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Steve McConnell&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;The Pragmatic Programmer&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Andy Hunt &amp;amp; Dave Thomas&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;book&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Seven Languages In Seven Weeks&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Bruce Tate&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;2. Find all books in your knowledge base written by one author.&lt;/div&gt;
@@ -1162,9 +1099,7 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;The Skystone&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
 
 &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;The Singing Sword&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;3. Make a knowledge base representing musicians and instruments. Also represent musicians and their genre of music.&lt;/div&gt;
@@ -1180,9 +1115,7 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;metal&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Duke Ellington&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;jazz&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
 &lt;span class='nf'&gt;musician_genre&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s-Atom'&gt;rock&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;4. Find all musicians who play the guitar.&lt;/div&gt;
@@ -1193,9 +1126,7 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Andre Olbrich&amp;#39;&lt;/span&gt; &lt;span class='s-Atom'&gt;?&lt;/span&gt; &lt;span class='p'&gt;;&lt;/span&gt;
 
 &lt;span class='nv'&gt;What&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s-Atom'&gt;&amp;#39;Jimi Hendrix&amp;#39;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/div&gt;
@@ -1243,16 +1174,15 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 &lt;h3&gt;Forward&lt;/h3&gt;
 &lt;p&gt;This is a simple stripped down chunk from the XML DSL example from the book. It lets you make a rudimentary XML DSL. The following section of code will turn &lt;code&gt;Builder div&lt;/code&gt; into &lt;code&gt;&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;. The downside is, it will also turn &lt;code&gt;Builder
 span&lt;/code&gt; into &lt;code&gt;&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;!&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='nb'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
 
 &lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;forward&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
     &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;div&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
     &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;/div&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;h3&gt;Reflection&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Reflection&lt;/h3&gt;
 &lt;p&gt;Reflection in Io was covered in Day 2 of the book, but it is an important part of this example. It provides the ability to access the &lt;em&gt;name of the message&lt;/em&gt; that was sent with &lt;code&gt;call message name&lt;/code&gt;. It also lets us start nesting calls by passing another function call as an argument. This example is complete enough that we can do &lt;code&gt;Builder ul(li(&amp;quot;One&amp;quot;), li(&amp;quot;Two&amp;quot;), li(&amp;quot;Three&amp;quot;))&lt;/code&gt; and it will correctly print out &lt;code&gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;One&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Two&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Three&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='nb'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
 
 &lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;forward&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
     &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
@@ -1261,8 +1191,7 @@ span&lt;/code&gt; into &lt;code&gt;&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;&lt;/c
         &lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;doMessage&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;);&lt;/span&gt;
         &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='n'&gt;type&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Sequence&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
     &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;/&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Let&amp;#8217;s go over that middle chunk that begins with &lt;code&gt;call message arguments&lt;/code&gt;. Just as &lt;code&gt;call message name&lt;/code&gt; will return the name, &lt;code&gt;call message arguments&lt;/code&gt; returns a list of the arguments. We iterate over that list with &lt;code&gt;foreach&lt;/code&gt;, and for each &lt;code&gt;arg&lt;/code&gt; we do two things:&lt;/p&gt;
 
 &lt;ol&gt;
@@ -1278,16 +1207,14 @@ span&lt;/code&gt; into &lt;code&gt;&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;&lt;/c
 &lt;span class='n'&gt;curlyBrackets&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
     &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;arguments&lt;/span&gt;
 &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;So that&amp;#8217;s all that is required to solve that! But that isn&amp;#8217;t the typical way to redefine operators in Io. I&amp;#8217;ll leave you with a final example that shows you how to tell Io &amp;#8220;when I use the &lt;code&gt;:&lt;/code&gt; operator, I really want you to call the &lt;code&gt;atPutNumber&lt;/code&gt; method instead&amp;#8221;.&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;OperatorTable&lt;/span&gt; &lt;span class='n'&gt;addAssignOperator&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;:&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;atPutNumber&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 
-&lt;span class='n'&gt;Map&lt;/span&gt; &lt;span class='n'&gt;atPutNumber&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+&lt;span class='nb'&gt;Map&lt;/span&gt; &lt;span class='n'&gt;atPutNumber&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
     &lt;span class='c1'&gt;# your code goes here&lt;/span&gt;
 &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id='full_solutions'&gt;Full solutions&lt;/h2&gt;
 
 &lt;p&gt;Here is a nicely formatted version of my solutions to the exercises from Day 3 of Io. The home of the following code is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day3.io'&gt;on github&lt;/a&gt; with the other exercises.&lt;/p&gt;
@@ -1296,7 +1223,7 @@ span&lt;/code&gt; into &lt;code&gt;&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;&lt;/c
 &lt;h3&gt;Code Given&lt;/h3&gt;
 
 
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='nb'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
 
 &lt;span class='n'&gt;Builder&lt;/span&gt; &lt;span class='n'&gt;forward&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
     &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
@@ -1306,9 +1233,7 @@ span&lt;/code&gt; into &lt;code&gt;&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;&lt;/c
         &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt; &lt;span class='n'&gt;type&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Sequence&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
     &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;lt;/&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Do: &lt;/h3&gt;
@@ -1342,9 +1267,7 @@ structure&lt;/div&gt;
     &lt;span class='n'&gt;li&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Lua&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
     &lt;span class='n'&gt;li&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;JavaScript&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -1361,9 +1284,7 @@ structure&lt;/div&gt;
     JavaScript
   &lt;span class='nt'&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
 &lt;span class='nt'&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; Create a list syntax that uses brackets&lt;/div&gt;
@@ -1377,19 +1298,15 @@ structure&lt;/div&gt;
 &lt;span class='o'&gt;{&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;c&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;e&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
 
 &lt;span class='c1'&gt;# that was unexpectedly easy and elegant. I almost feel like I&amp;#39;ve missed something&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
 
 
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;c&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;e&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;c&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;e&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 
@@ -1398,7 +1315,7 @@ structure&lt;/div&gt;
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;OperatorTable&lt;/span&gt; &lt;span class='n'&gt;addAssignOperator&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;:&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;atPutNumber&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 
-&lt;span class='n'&gt;Map&lt;/span&gt; &lt;span class='n'&gt;atPutNumber&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+&lt;span class='nb'&gt;Map&lt;/span&gt; &lt;span class='n'&gt;atPutNumber&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;atPut&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
         &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;evalArgAt&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;asMutable&lt;/span&gt; &lt;span class='n'&gt;removePrefix&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;removeSuffix&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
         &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;evalArgAt&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
@@ -1406,14 +1323,14 @@ structure&lt;/div&gt;
 &lt;span class='o'&gt;)&lt;/span&gt;
         
 &lt;span class='n'&gt;curlyBrackets&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-    &lt;span class='n'&gt;r&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Map&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+    &lt;span class='n'&gt;r&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='nb'&gt;Map&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
     &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;arguments&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
         &lt;span class='n'&gt;r&lt;/span&gt; &lt;span class='n'&gt;doMessage&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;arg&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
     &lt;span class='o'&gt;)&lt;/span&gt;
     &lt;span class='n'&gt;r&lt;/span&gt;
 &lt;span class='o'&gt;)&lt;/span&gt;
 
-&lt;span class='n'&gt;Map&lt;/span&gt; &lt;span class='n'&gt;printAsAttributes&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+&lt;span class='nb'&gt;Map&lt;/span&gt; &lt;span class='n'&gt;printAsAttributes&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;k&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;v&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
         &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='n'&gt;k&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;=\&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='n'&gt;v&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
     &lt;span class='o'&gt;)&lt;/span&gt;
@@ -1441,11 +1358,9 @@ structure&lt;/div&gt;
     &lt;span class='n'&gt;writeln&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;makeIndent&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;..&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;lt;/&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;call&lt;/span&gt; &lt;span class='n'&gt;message&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;span class='o'&gt;)&lt;/span&gt;
 
-&lt;span class='n'&gt;s&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;File&lt;/span&gt; &lt;span class='n'&gt;with&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;builderSyntax.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;openForReading&lt;/span&gt; &lt;span class='n'&gt;contents&lt;/span&gt;
+&lt;span class='n'&gt;s&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='nb'&gt;File&lt;/span&gt; &lt;span class='n'&gt;with&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;builderSyntax.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;openForReading&lt;/span&gt; &lt;span class='n'&gt;contents&lt;/span&gt;
 &lt;span class='k'&gt;doString&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;s&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -1464,9 +1379,7 @@ structure&lt;/div&gt;
   &lt;span class='nt'&gt;&amp;lt;book&lt;/span&gt; &lt;span class='na'&gt;author=&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Tate&amp;quot;&lt;/span&gt;&lt;span class='nt'&gt;&amp;gt;&lt;/span&gt;
   &lt;span class='nt'&gt;&amp;lt;/book&amp;gt;&lt;/span&gt;
 &lt;span class='nt'&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/div&gt;
@@ -1513,8 +1426,7 @@ structure&lt;/div&gt;
 &lt;p&gt;The answer was only two short lines of code:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;Number&lt;/span&gt; &lt;span class='n'&gt;origDiv&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Number&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;span class='n'&gt;Number&lt;/span&gt; &lt;span class='o'&gt;/&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;denom&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;denom&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;origDiv&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;denom&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The tricky part at first was figuring out how to save a reference to the original division method, but in retrospect it was blindingly obvious. It&amp;#8217;s the same things I&amp;#8217;ve been doing all along with Io: taking things out of slots and putting things in slots!&lt;/p&gt;
 
 &lt;p&gt;I would also like to highlight Question #3 to show off how clean writing in a functional style is in Io. The question was:&lt;/p&gt;
@@ -1525,8 +1437,7 @@ structure&lt;/div&gt;
 
 &lt;p&gt;No loops needed here - Io has &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt;, and they mix &lt;strong&gt;well&lt;/strong&gt; with Io&amp;#8217;s syntax:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;addUp2DArray&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt; &lt;span class='n'&gt;reduce&lt;/span&gt;&lt;span class='o'&gt;(+))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id='full_solutions'&gt;Full solutions&lt;/h2&gt;
 
 &lt;p&gt;That&amp;#8217;s it for the highlights, but as I mentioned earlier, all of the exercises today were pretty interesting. Here is a nicely formatted version of my solutions to the exercises from Day 2 of Io. The home of the following code is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io'&gt;on github&lt;/a&gt; with the other exercises. The exercises this week are really worth taking a look at, I encourage you to follow along closely through the rest with me.&lt;/p&gt;
@@ -1564,9 +1475,7 @@ structure&lt;/div&gt;
 &lt;span class='s'&gt;&amp;quot;Fib 8&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
 &lt;span class='n'&gt;fib_recur&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;8&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
 &lt;span class='n'&gt;fib_loop&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;8&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -1581,9 +1490,7 @@ Fib 4
 Fib 8
 21
 21
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; How would you change / to return 0 if the denominator is zero?&lt;/div&gt;
@@ -1597,9 +1504,7 @@ Fib 8
 
 &lt;span class='mf'&gt;4&lt;/span&gt; &lt;span class='o'&gt;/&lt;/span&gt; &lt;span class='mf'&gt;2&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
 &lt;span class='mf'&gt;4&lt;/span&gt; &lt;span class='o'&gt;/&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -1607,9 +1512,7 @@ Fib 8
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;2
 0
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;3.&lt;/b&gt; Write a program to add up all of the numbers in a two-dimensional
@@ -1618,11 +1521,9 @@ array.&lt;/div&gt;
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;addUp2DArray&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt; &lt;span class='n'&gt;reduce&lt;/span&gt;&lt;span class='o'&gt;(+))&lt;/span&gt;
 
-&lt;span class='n'&gt;addUp2DArray&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
-&lt;span class='n'&gt;addUp2DArray&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt; &lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;span class='n'&gt;addUp2DArray&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='n'&gt;addUp2DArray&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt; &lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -1630,19 +1531,17 @@ array.&lt;/div&gt;
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;14
 17
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;4.&lt;/b&gt; Add a slot called myAverage to a list that computes the average of all the numbers in a list. What happens if there are no numbers in a list? (&lt;b&gt;Bonus:&lt;/b&gt; Raise an Io exception if any item in the list is not a number.)&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='c1'&gt;# Easy way:&lt;/span&gt;
-&lt;span class='n'&gt;List&lt;/span&gt; &lt;span class='n'&gt;myAverage&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;average&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='nb'&gt;List&lt;/span&gt; &lt;span class='n'&gt;myAverage&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;average&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 
 &lt;span class='c1'&gt;# Probably the way he meant (plus bonus):&lt;/span&gt;
-&lt;span class='n'&gt;List&lt;/span&gt; &lt;span class='n'&gt;myAverage2&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+&lt;span class='nb'&gt;List&lt;/span&gt; &lt;span class='n'&gt;myAverage2&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
     &lt;span class='n'&gt;containsNonDigit&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;select&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='n'&gt;asNumber&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='n'&gt;isNan&lt;/span&gt;&lt;span class='o'&gt;())&lt;/span&gt; &lt;span class='n'&gt;size&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;&lt;/span&gt; &lt;span class='mf'&gt;0&lt;/span&gt;
     &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;containsNonDigit&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;Exception&lt;/span&gt; &lt;span class='n'&gt;raise&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;An item in the list is not a number&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
 
@@ -1651,31 +1550,27 @@ array.&lt;/div&gt;
 &lt;span class='o'&gt;)&lt;/span&gt;
 
 &lt;span class='s'&gt;&amp;quot;Averaging the numbers in a list&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
-&lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;myAverage2&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
+&lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;myAverage2&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
 &lt;span class='c1'&gt;#list(1,2,3,4,&amp;quot;a&amp;quot;) myAverage2 println&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;2.5
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;5.&lt;/b&gt; Write a prototype for a two-dimensional list. The dim(x,y) method should allocate a list of y lists that are x elements long, set(x, y, value) should set a value, and get(x, y) should return that value.&lt;/div&gt;
 
 
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;List&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='nb'&gt;List&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
 &lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transposed&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='no'&gt;false&lt;/span&gt;
 
 &lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;dim&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;x&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
     &lt;span class='n'&gt;y&lt;/span&gt; &lt;span class='n'&gt;repeat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-        &lt;span class='n'&gt;inner&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt;
+        &lt;span class='n'&gt;inner&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt;
         &lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='n'&gt;repeat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;inner&lt;/span&gt; &lt;span class='n'&gt;push&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='no'&gt;nil&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;append&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;inner&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
     &lt;span class='o'&gt;)&lt;/span&gt;
@@ -1718,9 +1613,7 @@ array.&lt;/div&gt;
 
 &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
 &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -1735,16 +1628,14 @@ list&lt;span class='o'&gt;(&lt;/span&gt;list&lt;span class='o'&gt;(&lt;/span&gt;
 
 asdfad
 nil
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;6. Bonus:&lt;/b&gt; Write a transpose method so that (new_matrix get(y, x)) == matrix get(x,y) on the original list&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
-    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
@@ -1775,9 +1666,7 @@ nil
 &lt;span class='s'&gt;&amp;quot;4, 2: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;4&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
 &lt;span class='s'&gt;&amp;quot;5, 3: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
 &lt;span class='s'&gt;&amp;quot;3, 5: &amp;quot;&lt;/span&gt; &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt; &lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;3&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;&lt;span class='mf'&gt;5&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -1796,21 +1685,19 @@ transpose again!
 4, 2: nil
 5, 3: nil
 3, 5: NEW
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;7.&lt;/b&gt; Write the matrix to a file, and read a matrix from a file.&lt;/div&gt;
 
 
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;File&lt;/span&gt; &lt;span class='n'&gt;with&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;matrix.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='nb'&gt;File&lt;/span&gt; &lt;span class='n'&gt;with&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;matrix.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;remove&lt;/span&gt;
 &lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;openForUpdating&lt;/span&gt;
 &lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;write&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;firstMatrix&lt;/span&gt; &lt;span class='n'&gt;join&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;, &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
 &lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;close&lt;/span&gt;
 
-&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;File&lt;/span&gt; &lt;span class='n'&gt;with&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;matrix.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nb'&gt;File&lt;/span&gt; &lt;span class='n'&gt;with&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;matrix.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;openForReading&lt;/span&gt;
 &lt;span class='n'&gt;lines&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;readLines&lt;/span&gt;
 &lt;span class='n'&gt;file&lt;/span&gt; &lt;span class='n'&gt;close&lt;/span&gt;
@@ -1818,9 +1705,7 @@ transpose again!
 &lt;span class='n'&gt;matrixFromFile&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;lines&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;split&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;, &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;span class='n'&gt;matrixFromFile&lt;/span&gt; &lt;span class='n'&gt;type&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
 &lt;span class='n'&gt;matrixFromFile&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -1829,9 +1714,7 @@ transpose again!
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;Sequence
 List
 list&lt;span class='o'&gt;(&lt;/span&gt;list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, asdfad, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, NEW&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;)&lt;/span&gt;, list&lt;span class='o'&gt;(&lt;/span&gt;nil, nil, nil, nil, nil, nil&lt;span class='o'&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;8.&lt;/b&gt; Write a program that gives you ten tries to guess a random number from 1-100. If you would like, give a hint of &quot;hotter&quot; or &quot;colder&quot; after the first guess.&lt;/div&gt;
@@ -1853,9 +1736,7 @@ list&lt;span class='o'&gt;(&lt;/span&gt;list&lt;span class='o'&gt;(&lt;/span&gt;
 &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;guess&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='n'&gt;randomNumber&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
     &lt;span class='s'&gt;&amp;quot;Congrats, you did it!&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
     &lt;span class='s'&gt;&amp;quot;Too bad, maybe next time&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -1873,9 +1754,7 @@ Guess a number between 1 and 100: &lt;span class='o'&gt;(&lt;/span&gt;guess 5 of
 Too low
 Guess a number between 1 and 100: &lt;span class='o'&gt;(&lt;/span&gt;guess 6 of 10&lt;span class='o'&gt;)&lt;/span&gt;: 43
 Congrats, you did it!
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/div&gt;
@@ -1893,7 +1772,7 @@ Congrats, you did it!
 
 &lt;p&gt;By cheating! I &lt;strong&gt;don&amp;#8217;t&lt;/strong&gt; transpose the matrix, I modify the element accessor methods so that they interpret the &lt;code&gt;x&lt;/code&gt; parameter as &lt;code&gt;y&lt;/code&gt;, and vice versa. To my dismay, I later found that &lt;a href='http://en.wikipedia.org/wiki/Transpose#Implementation_of_matrix_transposition_on_computers'&gt;this isn&amp;#8217;t a new approach&lt;/a&gt; to solving this problem.&lt;/p&gt;
 
-&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a id='footnote-1-link' href='#footnote-1' class='super'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
+&lt;p&gt;However, my implementation in Io still has something going for it. Because of Io&amp;#8217;s extreme malleability, I can write my &lt;code&gt;transpose&lt;/code&gt; method such that calling it permanently swaps the argument order in the &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt; methods of that individual matrix object. In most other languages &lt;a class='super' href='#footnote-1' id='footnote-1-link'&gt;[1]&lt;/a&gt; , writing this kind of fake transpose would require keeping track of state with if statements to check if a given matrix is currently &amp;#8216;transposed&amp;#8217; or not. This is, conceptually, nonsense: transposing is something you &lt;em&gt;do to&lt;/em&gt; matrices, not a &lt;em&gt;property&lt;/em&gt; of them.&lt;/p&gt;
 
 &lt;p&gt;Io lets you write this fake transpose in a way that is fun, short, and elegant.&lt;/p&gt;
 
@@ -1906,20 +1785,19 @@ Congrats, you did it!
 &lt;/blockquote&gt;
 
 &lt;p&gt;Before we get started, this is what the final solution looks like. Try and become a little familiar with this before we move on (it will all be explained in detail below, don&amp;#8217;t worry).&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='lineno'&gt; 1&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
-&lt;span class='lineno'&gt; 2&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-&lt;span class='lineno'&gt; 3&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
-&lt;span class='lineno'&gt; 4&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
-&lt;span class='lineno'&gt; 5&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
-&lt;span class='lineno'&gt; 6&lt;/span&gt;     &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt; 7&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt; 8&lt;/span&gt; 
-&lt;span class='lineno'&gt; 9&lt;/span&gt; &lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-&lt;span class='lineno'&gt;10&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt;11&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;set&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt;12&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;set&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;List2D is a simple matrix prototype from the previous exercise. It is the thing that is being transposed.&lt;/p&gt;
 
 &lt;p&gt;The &lt;code&gt;transpose&lt;/code&gt; method itself is simple enough: most of the heavy lifting is done in a helper method I created, &lt;code&gt;flipFirstTwoArgs&lt;/code&gt;. From its name and the name of its argument, we can tell this method is saying: &amp;#8220;give me the name of a slot that holds a method and I will flip the first two arguments of that method&amp;#8221;.&lt;/p&gt;
@@ -1934,82 +1812,73 @@ Congrats, you did it!
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; 
         &lt;span class='c1'&gt;#list of argument names goes here &lt;/span&gt;
     &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;For a concrete example, if I just wanted to change the argument names for my &amp;#8220;get&amp;#8221; method from get(x, y) to get(y, x) I could hardcode in some values and call it like this:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-        &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
     &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;But that wouldn&amp;#8217;t quite be fancy enough. I&amp;#8217;d rather write a method that would let me swap the first two arguments of &lt;strong&gt;any&lt;/strong&gt; method. So, going back to the snippet above, that&amp;#8217;s what the next two lines do:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Lines 3-4:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If I wanted to keep the arguments in the same order I would have put the &lt;code&gt;0&lt;/code&gt; in the first line, then the &lt;code&gt;1&lt;/code&gt; in the second line. Make sense so far?&lt;/p&gt;
 
 &lt;p&gt;I could have left it here, but then what would happen if I told it to change a method that looked like &lt;code&gt;doSomething(x, y, z)&lt;/code&gt;? It would take the argument at position &lt;code&gt;1&lt;/code&gt;, then the argument at position &lt;code&gt;0&lt;/code&gt;. The &lt;code&gt;z&lt;/code&gt; would get discarded and that method wouldn&amp;#8217;t be very useful anymore. Hence the next line:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Line 5:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;rest&lt;/code&gt; is Io&amp;#8217;s version of &lt;code&gt;cdr&lt;/code&gt; or &lt;code&gt;tail&lt;/code&gt;. It is a method that returns everything except for the first element of a list. So if you call &lt;code&gt;rest&lt;/code&gt; on the result of &lt;code&gt;rest&lt;/code&gt; you get a list that has all its elements except for the first two.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;#8217;s recap. If I call this method we&amp;#8217;re defining with my fictitious &lt;code&gt;doSomething(x, y, z)&lt;/code&gt; method as the argument, these previous lines would resolve into:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;doSomething&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;doSomething&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
         &lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; 
         &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; 
-        &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
     &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That&amp;#8217;s not quite right, &lt;code&gt;setArgumentNames&lt;/code&gt; is expecting a simple flat list, none of this nested list stuff. So let&amp;#8217;s flatten the list of argument names before giving it to &lt;code&gt;setArgumentNames&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Line 6:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If we apply it to the &lt;code&gt;doSomething&lt;/code&gt; example, the code now looks like this:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;doSomething&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;doSomething&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
         &lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; 
         &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; 
-        &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
     &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Which would end up resolving into:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;doSomething&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-        &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; 
+        &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; 
     &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;There, much better. And that explains the last line!&lt;/p&gt;
 
 &lt;h2 id='wrapup'&gt;Wrap-up&lt;/h2&gt;
 
 &lt;p&gt;Now, putting back together all the lines I&amp;#8217;ve explained, here is the full solution again:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='lineno'&gt; 1&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
-&lt;span class='lineno'&gt; 2&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-&lt;span class='lineno'&gt; 3&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
-&lt;span class='lineno'&gt; 4&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
-&lt;span class='lineno'&gt; 5&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
-&lt;span class='lineno'&gt; 6&lt;/span&gt;     &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt; 7&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt; 8&lt;/span&gt; 
-&lt;span class='lineno'&gt; 9&lt;/span&gt; &lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-&lt;span class='lineno'&gt;10&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt;11&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;set&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt;12&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;set&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If I&amp;#8217;ve done my job right, it should make a lot more sense this time.&lt;/p&gt;
 
 &lt;p&gt;You can find the rest of the code (including the List2D prototype) on github - a good place to start is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io#L72'&gt;line 72 of day2.io&lt;/a&gt;. To read more I&amp;#8217;ve written about solving these exercises, check my &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page for Seven Languages in Seven Weeks&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a id='footnote-1' href='#footnote-1-link'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
+&lt;h3&gt;Footnotes&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;There are exceptions of course. I'm sure any lisp would be great at this, as well as Ruby, Groovy, and other languages with powerful metaprogramming capabilities. &lt;a href='#footnote-1-link' id='footnote-1'&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content>
  </entry>
  
  <entry>
@@ -2078,9 +1947,7 @@ false?&lt;/div&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;   
 &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;  
 &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='no'&gt;nil&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -2089,9 +1956,7 @@ false?&lt;/div&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;&lt;span class='nb'&gt;true&lt;/span&gt;
 &lt;span class='nb'&gt;true&lt;/span&gt;
 &lt;span class='nb'&gt;false&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;3.&lt;/b&gt; How can you tell what slots a prototype supports?&lt;/div&gt;
@@ -2099,21 +1964,17 @@ false?&lt;/div&gt;
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='c1'&gt;# &amp;lt;prototype&amp;gt; slotNames&lt;/span&gt;
 
-&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='n'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
+&lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='nb'&gt;Object&lt;/span&gt; &lt;span class='k'&gt;clone&lt;/span&gt;
 &lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;sixPool&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Zergling rush!&amp;quot;&lt;/span&gt;
 &lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;slotNames&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;list&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;type&lt;/span&gt;, sixPool&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;4.&lt;/b&gt; What is the difference between = (equals), := (colon equals), and ::= (colon colon equals)? When would you use each one?&lt;/div&gt;
@@ -2165,9 +2026,7 @@ false?&lt;/div&gt;
 &lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;specifyMacro&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;macroItUp&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;span class='n'&gt;Zerg&lt;/span&gt; &lt;span class='n'&gt;specifyMacro&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;macroHarder&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;span class='s'&gt;&amp;quot;Done!&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -2180,9 +2039,7 @@ Let&lt;span class='err'&gt;&amp;#39;&lt;/span&gt;s try that again
 Injecting larvae now!
 Spreading creep now!
 Done!
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/div&gt;
@@ -2231,8 +2088,7 @@ Done!
     &lt;span class='k'&gt;end&lt;/span&gt;
   &lt;span class='k'&gt;end&lt;/span&gt;
 &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The implementation is fairly short: they create a basic XML class in only 53 well-commented lines. If you&amp;#8217;re interested, the code examples are available for inspection from &lt;a href='http://www.davidflanagan.com/rpl/'&gt;David Flanagan&amp;#8217;s website&lt;/a&gt;. For convenience, here is a link &lt;a href='/RPL_XML.txt'&gt;directly to this snippet of code&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;Mixins&lt;/h3&gt;
 &lt;p&gt;Mixins are a way for a class to include code from a module inside itself. Imagine a class including a module with a &lt;code&gt;Meow()&lt;/code&gt; method. This would let you call &lt;code&gt;Meow()&lt;/code&gt; on any instance of that class. Combined with open classes and the ability to add or change methods at runtime, this makes it easy to package and use code that changes code.&lt;/p&gt;
@@ -2256,8 +2112,7 @@ Done!
     &lt;span class='n'&gt;content_index&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='vi'&gt;@header_row&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;index&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;name&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;to_s&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
     &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='vi'&gt;@content_row&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='n'&gt;content_index&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
 &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id='full_solution'&gt;Full solution&lt;/h2&gt;
 
 &lt;p&gt;Here is a nicely formatted version of my solution to the exercise from Day 3 of Ruby. The home of the following code is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day3.rb'&gt;on github&lt;/a&gt; with the other exercises.&lt;/p&gt;
@@ -2327,9 +2182,7 @@ Done!
 
 &lt;span class='n'&gt;csv&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;RubyCsv&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;
 &lt;span class='n'&gt;csv&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt; &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;one&lt;/span&gt;&lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output (given the sample file in my github repo)&lt;/div&gt; 
@@ -2347,9 +2200,7 @@ emperor palpatine
 darth sidious
 bail organa
 vader
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/div&gt;
@@ -2379,8 +2230,7 @@ vader
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='no'&gt;File&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;open&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;tmp.txt&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;r&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;line&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;
     &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='n'&gt;line&lt;/span&gt;
 &lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;No need to worry about forgetting to &lt;code&gt;.close()&lt;/code&gt; the file later on.&lt;/p&gt;
 
 &lt;h2 id='full_solutions'&gt;Full solutions&lt;/h2&gt;
@@ -2401,24 +2251,20 @@ vader
 &lt;span class='no'&gt;File&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;open&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;tmp.txt&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;r&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;line&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;
     &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='n'&gt;line&lt;/span&gt;
 &lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;a spoonful is great but I&lt;span class='err'&gt;&amp;#39;&lt;/span&gt;d rather have a bowl
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; How would you translate a hash to an array? Can you translate arrays to hashes?&lt;/div&gt;
 
 
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='n'&gt;scores&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='n'&gt;gary&lt;/span&gt;&lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='mi'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;nick&lt;/span&gt;&lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='mi'&gt;11&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;ted&lt;/span&gt;&lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='mi'&gt;8&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;the_dude&lt;/span&gt;&lt;span class='p'&gt;:&lt;/span&gt;&lt;span class='mi'&gt;9&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='n'&gt;scores&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='ss'&gt;gary&lt;/span&gt;&lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='mi'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='ss'&gt;nick&lt;/span&gt;&lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='mi'&gt;11&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='ss'&gt;ted&lt;/span&gt;&lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='mi'&gt;8&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;the_dude&lt;/span&gt;&lt;span class='p'&gt;:&lt;/span&gt;&lt;span class='mi'&gt;9&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
 &lt;span class='nb'&gt;print&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;hash: &amp;quot;&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='n'&gt;scores&lt;/span&gt;
 &lt;span class='nb'&gt;print&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;array1: &amp;quot;&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='n'&gt;scores&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;to_a&lt;/span&gt;
 &lt;span class='nb'&gt;print&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;array2: &amp;quot;&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='n'&gt;scores&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;to_a&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;flatten&lt;/span&gt;
@@ -2430,9 +2276,7 @@ vader
 &lt;span class='nb'&gt;print&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;array2 to hash again 1: &amp;quot;&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='no'&gt;Hash&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='n'&gt;scores_array2&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
 &lt;span class='nb'&gt;print&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;array2 to hash again 2: &amp;quot;&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='no'&gt;Hash&lt;/span&gt;&lt;span class='o'&gt;[*&lt;/span&gt;&lt;span class='n'&gt;scores_array2&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
 &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Yup.&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -2446,9 +2290,7 @@ array1 to &lt;span class='nb'&gt;hash &lt;/span&gt;again 2: &lt;span class='o'&g
 array2 to &lt;span class='nb'&gt;hash &lt;/span&gt;again 1: &lt;span class='o'&gt;{}&lt;/span&gt;
 array2 to &lt;span class='nb'&gt;hash &lt;/span&gt;again 2: &lt;span class='o'&gt;{&lt;/span&gt;:gary&lt;span class='o'&gt;=&lt;/span&gt;&amp;gt;5, :nick&lt;span class='o'&gt;=&lt;/span&gt;&amp;gt;11, :ted&lt;span class='o'&gt;=&lt;/span&gt;&amp;gt;8, :the_dude&lt;span class='o'&gt;=&lt;/span&gt;&amp;gt;9&lt;span class='o'&gt;}&lt;/span&gt;
 Yup.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;3.&lt;/b&gt; Can you iterate through a hash?&lt;/div&gt;
@@ -2456,9 +2298,7 @@ Yup.
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='n'&gt;scores&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;key&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt; &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;key:&amp;#39;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;key&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;#39;, value:&amp;#39;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;#39;&amp;quot;&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
 &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Yup.&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -2469,9 +2309,7 @@ key:&lt;span class='s1'&gt;&amp;#39;nick&amp;#39;&lt;/span&gt;, value:&lt;span c
 key:&lt;span class='s1'&gt;&amp;#39;ted&amp;#39;&lt;/span&gt;, value:&lt;span class='s1'&gt;&amp;#39;8&amp;#39;&lt;/span&gt;
 key:&lt;span class='s1'&gt;&amp;#39;the_dude&amp;#39;&lt;/span&gt;, value:&lt;span class='s1'&gt;&amp;#39;9&amp;#39;&lt;/span&gt;
 Yup.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;4.&lt;/b&gt; You can use Ruby arrays as stacks. What other common data structures to arrays support?&lt;/div&gt;
@@ -2503,9 +2341,7 @@ Yup.
 &lt;span class='n'&gt;matrix&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;[[&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='mi'&gt;2&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='mi'&gt;3&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='mi'&gt;4&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='mi'&gt;5&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='mi'&gt;6&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='mi'&gt;7&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='mi'&gt;8&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='mi'&gt;9&lt;/span&gt;&lt;span class='o'&gt;]]&lt;/span&gt;
 &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='n'&gt;matrix&lt;/span&gt;
 &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='n'&gt;matrix&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;transpose&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -2530,9 +2366,7 @@ removed: c
 &lt;span class='o'&gt;(&lt;/span&gt;rudimentary&lt;span class='o'&gt;)&lt;/span&gt; matrix:
 &lt;span class='o'&gt;[[&lt;/span&gt;1, 2, 3&lt;span class='o'&gt;]&lt;/span&gt;, &lt;span class='o'&gt;[&lt;/span&gt;4, 5, 6&lt;span class='o'&gt;]&lt;/span&gt;, &lt;span class='o'&gt;[&lt;/span&gt;7, 8, 9&lt;span class='o'&gt;]]&lt;/span&gt;
 &lt;span class='o'&gt;[[&lt;/span&gt;1, 4, 7&lt;span class='o'&gt;]&lt;/span&gt;, &lt;span class='o'&gt;[&lt;/span&gt;2, 5, 8&lt;span class='o'&gt;]&lt;/span&gt;, &lt;span class='o'&gt;[&lt;/span&gt;3, 6, 9&lt;span class='o'&gt;]]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 
@@ -2548,9 +2382,7 @@ removed: c
 &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;and&amp;quot;&lt;/span&gt;
 
 &lt;span class='n'&gt;sixteen_numbers&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each_slice&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;4&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;slice&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt; &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='n'&gt;slice&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -2565,9 +2397,7 @@ and
 &lt;span class='o'&gt;[&lt;/span&gt;5, 6, 7, 8&lt;span class='o'&gt;]&lt;/span&gt;
 &lt;span class='o'&gt;[&lt;/span&gt;9, 10, 11, 12&lt;span class='o'&gt;]&lt;/span&gt;
 &lt;span class='o'&gt;[&lt;/span&gt;13, 14, 15, 16&lt;span class='o'&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 
@@ -2613,9 +2443,7 @@ and
 
 &lt;span class='n'&gt;tree_test&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;visit_all&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;node&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt; &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='n'&gt;node&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;node_name&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
 &lt;span class='n'&gt;tree_test2&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;visit_all&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;node&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt; &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='n'&gt;node&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;node_name&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -2627,9 +2455,7 @@ and
 &lt;span class='s2'&gt;&amp;quot;Ruby&amp;quot;&lt;/span&gt;
 &lt;span class='s2'&gt;&amp;quot;Reia&amp;quot;&lt;/span&gt;
 &lt;span class='s2'&gt;&amp;quot;MacRuby&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 
@@ -2644,9 +2470,7 @@ and
 &lt;span class='k'&gt;end&lt;/span&gt;
 
 &lt;span class='n'&gt;rbgrep&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;guitar&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;wikipedia_page.txt&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output&lt;/div&gt;
@@ -2658,9 +2482,7 @@ and
 &lt;span class='s1'&gt;55: orchestral backing and a consistent vocal and guitar layering throughout.[9]&lt;/span&gt;
 &lt;span class='s1'&gt;87: Blind Guardian&amp;#39;&lt;/span&gt;s music features the staccato guitars and double bass drumming
 90: the guitar and vocal tracks, creates the impression of a vast army of musicians
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/div&gt;
@@ -2690,18 +2512,14 @@ string&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;BAM&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;gsub&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;M&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;TMAN&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output:&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;BATMAN
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Do:&lt;/h3&gt;
@@ -2710,18 +2528,14 @@ string&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Hello World&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output:&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;Hello World
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; For the string &quot;Hello, Ruby,&quot; find the index of the word &quot;Ruby.&quot;&lt;/div&gt;
@@ -2731,9 +2545,7 @@ string&lt;/div&gt;
 &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Hello, Ruby,&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;index&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Ruby.&amp;quot;&lt;/span&gt;
 &lt;span class='c1'&gt;# realistically:&lt;/span&gt;
 &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Hello, Ruby&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;index&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Ruby&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output:&lt;/div&gt;
@@ -2741,36 +2553,28 @@ string&lt;/div&gt;
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;nil
 7
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;3.&lt;/b&gt; Print your name ten times&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Nick &amp;quot;&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt; &lt;span class='mi'&gt;10&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output:&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;Nick Nick Nick Nick Nick Nick Nick Nick Nick Nick 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;4.&lt;/b&gt; Print the string &quot;This is sentence number 1,&quot; where the number 1 changes from 1 to 10&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;.&lt;/span&gt;&lt;span class='mi'&gt;10&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt; &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;This is sentence number &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output:&lt;/div&gt;
@@ -2786,9 +2590,7 @@ This is sentence number 7
 This is sentence number 8
 This is sentence number 9
 This is sentence number 10
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='question'&gt;&lt;b&gt;Bonus:&lt;/b&gt; Write a program that picks a random number. Let a player guess the number, telling the player whether the guess is too low or too high.&lt;/div&gt;
@@ -2805,9 +2607,7 @@ This is sentence number 10
 &lt;span class='k'&gt;end&lt;/span&gt;
 
 &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Got it! It was &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;random_number&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;div class='tiny_title'&gt;Output:&lt;/div&gt;
@@ -2829,9 +2629,7 @@ Pick a number between 1 and 1000: 133
 Too high!
 Pick a number between 1 and 1000: 129
 Got it! It was 129
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/div&gt;
@@ -3308,16 +3106,13 @@ Got it! It was 129
 &lt;p&gt;In case you need it, here&amp;#8217;s a quick runthrough of what you need to get this working:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;sudo aptitude install sshfs
 sshfs user@host: localmountpoint
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It defaults to your home directory as the point to mount, but if you want to you can specify a location after &amp;#8216;host:&amp;#8217; like so:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;sshfs user@host:/home/user/data/ localmountpoint
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;When you&amp;#8217;re done, you can unmount it with this command:&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;fusermount -u localmountpoint
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If it a location that you use frequently like me, you could put an alias in your .bash_aliases file so mounting is a single &amp;#8216;mount_server&amp;#8217; command, and unmounting is &amp;#8216;unmount_server&amp;#8217;. Now when I want to upload something it&amp;#8217;s as painless as using cp or mv!&lt;/p&gt;</content>
  </entry>
  

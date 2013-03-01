@@ -95,16 +95,14 @@
 
 <span class='nf'>small</span><span class='p'>(</span><span class='s-Atom'>mouse</span><span class='p'>).</span>
 <span class='nf'>small</span><span class='p'>(</span><span class='s-Atom'>ball</span><span class='p'>).</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>A rule is a statement that relates facts and rules together. You can almost (but not quite) think of them as functions. Here are some rules:</p>
 <div class='highlight'><pre><code class='prolog'><span class='nf'>time_to_play</span> <span class='o'>:-</span> <span class='s-Atom'>daytime</span><span class='p'>,</span> <span class='s-Atom'>clear_skies</span><span class='p'>.</span>
 
 <span class='nf'>suitable_for_playing_with</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>round</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>),</span> <span class='nf'>small</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>).</span>
 
 <span class='nf'>does_nick_want_to_play_with</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>)</span> <span class='p'>:-</span> <span class='s-Atom'>time_to_play</span><span class='p'>,</span> <span class='nf'>suitable_for_playing_with</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>).</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>If you collect all of the preceding statements and put them in a <code>hello.pl</code> file then you have a valid Prolog program. To actually get some useful output from it, we can load this program into the prolog interpreter, and query this database we&#8217;ve built up like so:</p>
 <div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>&#39;hello.pl&#39;</span><span class='p'>].</span>
 <span class='c1'>% hello.pl compiled 0.00 sec, 3,352 bytes</span>
@@ -144,8 +142,7 @@
 
 <span class='s-Atom'>?-</span> <span class='nf'>does_nick_want_to_play_with</span><span class='p'>(</span><span class='nv'>What</span><span class='p'>).</span>
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>ball</span><span class='p'>.</span>
-</code></pre>
-</div>
+</code></pre></div>
 <h2 id='highlights_from_exercises'>Highlights from exercises</h2>
 
 <p>The exercises in Day 1 aren&#8217;t terribly interesting, so instead I&#8217;ll show you an example from an earlier part of the book that threw me into confusion for a while. The goal of the following snippet of Prolog is to assign map colours such that no state borders on another state with the same colour.</p>
@@ -164,15 +161,13 @@
     <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>),</span>
     <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>),</span>
     <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>).</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>This program aims to colour these <strong>five</strong> states with <strong>three</strong> colours (such that no states of the same colour share borders). When we query this we get:</p>
 <div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>coloring</span><span class='p'>(</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Mississippi</span><span class='p'>,</span> <span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>).</span>
 <span class='nv'>Alabama</span> <span class='o'>=</span> <span class='s-Atom'>blue</span><span class='p'>,</span>
 <span class='nv'>Mississippi</span> <span class='o'>=</span> <span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Georgia</span> <span class='o'>=</span> <span class='s-Atom'>red</span><span class='p'>,</span>
 <span class='nv'>Tennessee</span> <span class='o'>=</span> <span class='nv'>Florida</span><span class='p'>,</span> <span class='nv'>Florida</span> <span class='o'>=</span> <span class='s-Atom'>green</span> <span class='p'>.</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p><img alt='Coloured map of states showing Mississippi and Georgia = red, Tennessee and Florida = green, and Alabama = blue.' src='/img/projects/seven-languages/state-colouring.png' /></p>
 
 <p>The program appears to be just the problem definition restated, and yet somehow Prolog can produce a correct answer!</p>
@@ -199,15 +194,13 @@ green</code>, and see if it can still make the other statements true.</p>
     <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>),</span>
     <span class='nf'>different</span><span class='p'>(</span><span class='nv'>C</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>),</span>
     <span class='nf'>different</span><span class='p'>(</span><span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>).</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>In which case you would receive an answer like:</p>
 <div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>solve_for</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>).</span>
 <span class='nv'>A</span> <span class='o'>=</span> <span class='m'>3</span><span class='p'>,</span>
 <span class='nv'>B</span> <span class='o'>=</span> <span class='nv'>C</span><span class='p'>,</span> <span class='nv'>C</span> <span class='o'>=</span> <span class='m'>1</span><span class='p'>,</span>
 <span class='nv'>D</span> <span class='o'>=</span> <span class='nv'>E</span><span class='p'>,</span> <span class='nv'>E</span> <span class='o'>=</span> <span class='m'>2</span> <span class='p'>.</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>Easy peasy, right?</p>
 
 <p><strong>UPDATE:</strong> Thanks for the great comments, both below on my <a href='#disqus_thread'>blog comments</a> and also <a href='http://www.reddit.com/r/programming/comments/pd9z1/seven_languages_day_1_of_prolog/'>on reddit</a>. There are a few in particular that helped me learn more that I would like to highlight and save for posterity.</p>
@@ -220,9 +213,7 @@ green</code>, and see if it can still make the other statements true.</p>
 
 <div class='highlight'><pre><code class='prolog'><span class='nf'>color</span><span class='p'>(</span><span class='s-Atom'>red</span><span class='p'>).</span> <span class='nf'>color</span><span class='p'>(</span><span class='s-Atom'>green</span><span class='p'>).</span> <span class='nf'>color</span><span class='p'>(</span><span class='s-Atom'>blue</span><span class='p'>).</span>
 <span class='nf'>different</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>color</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>),</span> <span class='nf'>color</span><span class='p'>(</span><span class='nv'>Y</span><span class='p'>),</span> <span class='nv'>X</span> <span class='s-Atom'>\=</span> <span class='nv'>Y</span><span class='p'>.</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 </blockquote>
 <p>Michael Leuschel showed how <a href='#dsq-comment-431117487'>this solution could take advantage</a> of <a href='http://www.swi-prolog.org/man/clpfd.html'>CLP(FD)</a> (a module that can <strong>drastically</strong> improve performance when dealing with larger data sets) and was also kind enough to <a href='#dsq-comment-432664414'>explain labeling to me</a>:</p>
@@ -233,9 +224,7 @@ green</code>, and see if it can still make the other statements true.</p>
 
 <div class='highlight'><pre><code class='prolog'><span class='p'>:-</span> <span class='nf'>use_module</span><span class='p'>(</span><span class='nf'>library</span><span class='p'>(</span><span class='s-Atom'>clpfd</span><span class='p'>)).</span>
 <span class='nf'>different</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span><span class='nv'>Y</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nv'>X</span> <span class='s-Atom'>in</span> <span class='m'>1</span><span class='p'>..</span><span class='m'>3</span><span class='p'>,</span> <span class='nv'>Y</span> <span class='s-Atom'>in</span> <span class='m'>1</span><span class='p'>..</span><span class='m'>3</span><span class='p'>,</span> <span class='nv'>X</span> <span class='s-Atom'>#\=</span><span class='nv'>Y</span><span class='p'>.</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <p>You would then need to add a call to <code>labeling</code> after setting up the constraints:</p>
@@ -245,9 +234,7 @@ green</code>, and see if it can still make the other statements true.</p>
 <span class='nf'>different</span><span class='p'>(</span><span class='nv'>B</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>),</span> <span class='nf'>different</span><span class='p'>(</span><span class='nv'>B</span><span class='p'>,</span> <span class='nv'>A</span><span class='p'>),</span> <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>),</span> <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>),</span>
 <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>),</span> <span class='nf'>different</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>),</span>
 <span class='nf'>different</span><span class='p'>(</span><span class='nv'>C</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>),</span> <span class='nf'>different</span><span class='p'>(</span><span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>)</span> <span class='p'>,</span><span class='nf'>labeling</span><span class='p'>([],[</span><span class='nv'>A</span><span class='p'>,</span> <span class='nv'>B</span><span class='p'>,</span> <span class='nv'>C</span><span class='p'>,</span> <span class='nv'>D</span><span class='p'>,</span> <span class='nv'>E</span><span class='p'>]).</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <p>This should be more efficient than the original, as you first set up the constraints and only *then* start enumerating candidate solutions.
@@ -278,8 +265,7 @@ green</code>, and see if it can still make the other statements true.</p>
 
 <span class='c1'>% I want to have a table `suitable_for_playing_with`</span>
 <span class='c1'>% such that each value in it must be in tables `round` and `small`</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>gecko <a href='http://www.reddit.com/r/programming/comments/pd9z1/seven_languages_day_1_of_prolog/c3ojly3?context=1'>introduced me to Datalog</a> and made me realize that knowing Prolog well can be useful and pay off even when developing systems in other languages.</p>
 
 <blockquote>
@@ -335,9 +321,7 @@ green</code>, and see if it can still make the other statements true.</p>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;Rapid Development&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Steve McConnell&#39;</span><span class='p'>).</span>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;The Pragmatic Programmer&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Andy Hunt &amp; Dave Thomas&#39;</span><span class='p'>).</span>
 <span class='nf'>book</span><span class='p'>(</span><span class='s-Atom'>&#39;Seven Languages In Seven Weeks&#39;</span><span class='p'>,</span> <span class='s-Atom'>&#39;Bruce Tate&#39;</span><span class='p'>).</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='question'>2. Find all books in your knowledge base written by one author.</div>
@@ -352,9 +336,7 @@ green</code>, and see if it can still make the other statements true.</p>
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;The Skystone&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
 
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;The Singing Sword&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='question'>3. Make a knowledge base representing musicians and instruments. Also represent musicians and their genre of music.</div>
@@ -370,9 +352,7 @@ green</code>, and see if it can still make the other statements true.</p>
 <span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Andre Olbrich&#39;</span><span class='p'>,</span> <span class='s-Atom'>metal</span><span class='p'>).</span>
 <span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Duke Ellington&#39;</span><span class='p'>,</span> <span class='s-Atom'>jazz</span><span class='p'>).</span>
 <span class='nf'>musician_genre</span><span class='p'>(</span><span class='s-Atom'>&#39;Jimi Hendrix&#39;</span><span class='p'>,</span> <span class='s-Atom'>rock</span><span class='p'>).</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='question'>4. Find all musicians who play the guitar.</div>
@@ -383,9 +363,7 @@ green</code>, and see if it can still make the other statements true.</p>
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Andre Olbrich&#39;</span> <span class='s-Atom'>?</span> <span class='p'>;</span>
 
 <span class='nv'>What</span> <span class='o'>=</span> <span class='s-Atom'>&#39;Jimi Hendrix&#39;</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 </div>
