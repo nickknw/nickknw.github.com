@@ -139,11 +139,21 @@
 
 
 <h2>Details</h2>
-<p><p>This was a project made by myself and a partner for one of our programming courses.</p><p>It is a two-part project:</p><ul>
+<p><p>This was a project made by myself and a partner for one of our programming courses.</p>
+
+<p>It is a two-part project:</p>
+
+<ul>
 <li>a server run from the command line that pretends to be a robot with sensors similar to to what you would find on a Lego Mindstorms robot.</li>
 
 <li>a GUI application that, given the ip address, will connect to the server, then receive and display sensor information from it as well as enabling the user to give the server commands.</li>
-</ul><p>It shows off some neat things, like the sensor displays in the UI, and how each of the sensors runs in its own thread.</p><p>But, it is also an old project and it has some rough spots:</p><ul>
+</ul>
+
+<p>It shows off some neat things, like the sensor displays in the UI, and how each of the sensors runs in its own thread.</p>
+
+<p>But, it is also an old project and it has some rough spots:</p>
+
+<ul>
 <li>If you disconnect with the client, after 4 seconds the server will pause everything and wait for a new communication, up to a maximum of 15 seconds. These settings are changeable in the util.Constants class.</li>
 
 <li>Some problem areas are when a client disconnects and tries to reconnect too soon, or if the client tries to connect with no server running.</li>

@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
         <meta name="description" content="">
 
-        <title>Using core.match with function arguments - Nick Knowlson</title>
+        <title>Counting Powers of Two - A Neat Pattern - Nick Knowlson</title>
 
         <link rel="stylesheet" type="text/css" href="/css/site.css" >
         <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
@@ -69,44 +69,51 @@
         <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
             <div id="content-padding">
                 <a href="/blog/archive/">&laquo; Back to posts</a>
-<h1 style="margin:0px;;">Using core.match with function arguments</h1>
-<div class="faded" style="font-size:14px; margin-bottom:5px;">17 Feb 2013</div>
+<h1 style="margin:0px;;">Counting Powers of Two - A Neat Pattern</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">05 Mar 2013</div>
 <div id="post">
-<p>Recently I started learning Clojure (partly in preparation for its upcoming section in <a href='http://nickknowlson.com/projects/seven-languages-in-seven-weeks/'>my tour through seven languages</a>) and I ran into a problem when trying to pattern match on arguments. You can&#8217;t just pass them straight to <code>match</code> and expect to follow most current online examples. The types aren&#8217;t quite right! You&#8217;ll always get back the <code>:else</code> clause or some other odd behaviour.</p>
+<p>A little while ago I was going for a walk and searching for something to occupy my mind for a while. Something that would take my mind away from other problems and give it a simple, solvable, repetitive activity to do for a while. I hit upon counting up by powers of two.</p>
 
-<p>Function arguments in Clojure are of type <code>ArraySeq</code> (<a href='http://stackoverflow.com/questions/8205209/why-argument-list-as-arrayseq'>and for good reason</a>), but using core.match with Seqs requires a different (slightly more verbose) syntax. The simplest way to make things work as you might expect is to convert the arguments into a Vector first.</p>
+<p>Why? I&#8217;m a programmer, and powers of two are important and prevalent numbers in this field. By this point 128, 256 and 512 seem like nice round numbers to me, and I wouldn&#8217;t mind feeling the same way about 65,536 and 131,072. Also, counting powers of two has the virtue of getting hard before getting boring.</p>
 
-<h2 id='solution'>Solution</h2>
+<p>As I counted I noticed a neat pattern starting at the higher numbers. I thought it was pretty cool and maybe even a bit easier than doubling the numbers in the standard fashion (once you&#8217;re out of memorized territory anyway).</p>
 
-<p>Use <a href='http://clojuredocs.org/clojure_core/clojure.core/vec'>vec</a> to convert the function arguments into a vector before passing them to <code>match</code>:</p>
-<div class='highlight'><pre><code class='clojure'><span class='p'>(</span><span class='nf'>use</span> <span class='o'>&#39;</span><span class='p'>[</span><span class='nv'>clojure</span><span class='o'>.</span><span class='nv'>core</span><span class='o'>.</span><span class='nv'>match</span> <span class='nv'>:only</span> <span class='p'>(</span><span class='nf'>match</span><span class='p'>)])</span>
+<p>From what I&#8217;ve seen of this pattern it only works at and above 1024 (2<sup>10</sup>) so that&#8217;s what I&#8217;ll focus on.</p>
 
-<span class='p'>(</span><span class='k'>defn </span><span class='nv'>-main</span> <span class='p'>[</span><span class='nv'>&amp;</span> <span class='nv'>args</span><span class='p'>]</span>
-    <span class='p'>(</span><span class='nb'>println </span><span class='p'>(</span><span class='nf'>match</span> <span class='p'>(</span><span class='nf'>vec</span> <span class='nv'>args</span><span class='p'>)</span>
-        <span class='p'>[</span><span class='s'>&quot;echo&quot;</span> <span class='nv'>word</span><span class='p'>]</span> <span class='nv'>word</span>
-        <span class='nv'>:else</span> <span class='s'>&quot;Invalid command&quot;</span><span class='p'>)))</span>
-</code></pre>
-</div>
-<h2 id='alternate_solution'>Alternate Solution</h2>
+<h2 id='the_pattern'>The Pattern</h2>
 
-<p>If spending time and processing power just to spare some syntax is unappealing to you, then I&#8217;d recommend using core.match&#8217;s <a href='https://github.com/clojure/core.match/wiki/Overview'>Seq Matching</a> capabilities directly:</p>
-<div class='highlight'><pre><code class='clojure'><span class='p'>(</span><span class='nf'>use</span> <span class='o'>&#39;</span><span class='p'>[</span><span class='nv'>clojure</span><span class='o'>.</span><span class='nv'>core</span><span class='o'>.</span><span class='nv'>match</span> <span class='nv'>:only</span> <span class='p'>(</span><span class='nf'>match</span><span class='p'>)])</span>
+<p>Take the number 1024 and split it into two parts, 1000 and 24. Keep on doing this:</p>
 
-<span class='p'>(</span><span class='k'>defn </span><span class='nv'>-main</span> <span class='p'>[</span><span class='nv'>&amp;</span> <span class='nv'>args</span><span class='p'>]</span>
-    <span class='p'>(</span><span class='nb'>println </span><span class='p'>(</span><span class='nf'>match</span> <span class='p'>[</span><span class='nv'>args</span><span class='p'>]</span>
-        <span class='p'>[([</span><span class='s'>&quot;echo&quot;</span> <span class='nv'>word</span><span class='p'>]</span> <span class='nv'>:seq</span><span class='p'>)]</span> <span class='nv'>word</span>
-        <span class='nv'>:else</span> <span class='s'>&quot;Invalid command&quot;</span><span class='p'>)))</span>
-</code></pre>
-</div>
-<p>Note the differences:</p>
+<pre><code>1000 and 24
+2000 and 48
+4000 and 96
+8000 and 192</code></pre>
 
-<ol>
-<li><code>(match [args]</code> - The arguments are <em>wrapped</em> in a vector instead of being <em>converted</em> to one</li>
+<p>There&#8217;s an interesting relationship between the thousands digit and the rest, do you see it yet?</p>
 
-<li><code>[([&quot;echo&quot; word] :seq)] word</code> - Any pattern <code>x</code> is enclosed like so: <code>[(x :seq)]</code></li>
-</ol>
+<p>What if I represent it like this:</p>
 
-<p>Hope this has helped!</p>
+<pre><code>1000 + (25 - 1)
+2000 + (50 - 2)
+4000 + (100 - 4)
+8000 + (200 - 8)</code></pre>
+
+<p>You can just keep on going, doubling both numbers and subtracting the thousands digit from the other number. But what does this look like if you generalize it one step more&#8230;?</p>
+
+<h2 id='the_formula'>The Formula</h2>
+
+<p>Where <code>x</code> represents the thousands digits and is equal to 1 or greater (multiple digits work fine but substituting 0 in doesn&#8217;t make any sense):</p>
+
+<pre><code>(x * 1000) + ((25 * x) - x)</code></pre>
+
+<p>An interesting benefit is that now you can answer the question &#8220;Okay, <code>64kB</code>&#8230; 64 thousand and <em>how many</em> bytes?&#8221;</p>
+
+<p>Well using our formula it is <code>(25 * 64) - 64</code> bytes, but that&#8217;s easier to do with rounder numbers so let&#8217;s multiply <code>25</code> by <code>4</code> and divide <code>64</code> by <code>4</code> to get <code>100 * 16</code>. Way easier, that&#8217;s <code>1,600</code>. Now the subtraction: <code>1,600 - 64 =
+1,536</code>. The answer is 64 thousand and <code>1,536</code> bytes, or <code>65,536</code> bytes. For those like me who were wondering, that&#8217;s 2<sup>16</sup>!</p>
+
+<h2 id='in_closing'>In Closing</h2>
+
+<p>I feel like this formula is only partway to somewhere - sure it&#8217;s a neat pattern but it is a bit awkward. I&#8217;d love to hear about any more cool patterns or neat mathematical tricks, if you know any and would like to share!</p>
 </div>
 
 
@@ -131,7 +138,7 @@
     <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
 
     <!-- Facebook -->
-    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2013/02/17/using-core-match-with-function-arguments/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2013/03/05/counting-powers-of-two/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
 
 </div>
 </div>
@@ -141,8 +148,8 @@
 <script type="text/javascript">
     var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
 
-    var disqus_identifier = '/blog/2013/02/17/using-core-match-with-function-arguments';
-    var disqus_url = 'http://nickknowlson.com//blog/2013/02/17/using-core-match-with-function-arguments/';
+    var disqus_identifier = '/blog/2013/03/05/counting-powers-of-two';
+    var disqus_url = 'http://nickknowlson.com//blog/2013/03/05/counting-powers-of-two/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -127,7 +127,8 @@
 <span class='nf'>blocks</span><span class='p'>([</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>,</span><span class='nv'>C</span><span class='p'>|</span><span class='nv'>Bs1</span><span class='p'>],</span> <span class='p'>[</span><span class='nv'>D</span><span class='p'>,</span><span class='nv'>E</span><span class='p'>,</span><span class='nv'>F</span><span class='p'>|</span><span class='nv'>Bs2</span><span class='p'>],</span> <span class='p'>[</span><span class='nv'>G</span><span class='p'>,</span><span class='nv'>H</span><span class='p'>,</span><span class='nv'>I</span><span class='p'>|</span><span class='nv'>Bs3</span><span class='p'>])</span> <span class='p'>:-</span>
         <span class='nf'>all_distinct</span><span class='p'>([</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>B</span><span class='p'>,</span><span class='nv'>C</span><span class='p'>,</span><span class='nv'>D</span><span class='p'>,</span><span class='nv'>E</span><span class='p'>,</span><span class='nv'>F</span><span class='p'>,</span><span class='nv'>G</span><span class='p'>,</span><span class='nv'>H</span><span class='p'>,</span><span class='nv'>I</span><span class='p'>]),</span>
         <span class='nf'>blocks</span><span class='p'>(</span><span class='nv'>Bs1</span><span class='p'>,</span> <span class='nv'>Bs2</span><span class='p'>,</span> <span class='nv'>Bs3</span><span class='p'>).</span>
-</code></pre></div><h3>Scala + JaCoP</h3>
+</code></pre>
+</div><h3>Scala + JaCoP</h3>
 <p>This Scala solution is taken from <a href='http://www.hakank.org/constraint_programming_blog/2011/08/a_first_look_at_scalajacop_scala_wrapper_for_jacop.html'>Hakan Kjellerstrand&#8217;s scalaJaCoP page</a>. Here is a direct link to <a href='http://www.hakank.org/jacop/Sudoku.scala'>the file itself</a>.</p>
 <div class='highlight'><pre><code class='scala'><span class='k'>import</span> <span class='nn'>scalaJaCoP._</span>
 
@@ -148,7 +149,7 @@
   <span class='k'>for</span><span class='o'>(</span><span class='n'>i</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>n</span><span class='o'>)</span> <span class='o'>{</span>
     <span class='k'>for</span><span class='o'>(</span><span class='n'>j</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>n</span><span class='o'>)</span> <span class='o'>{</span>
       <span class='k'>if</span> <span class='o'>(</span><span class='n'>problem</span><span class='o'>(</span><span class='n'>i</span><span class='o'>)(</span><span class='n'>j</span><span class='o'>)</span> <span class='o'>&gt;</span> <span class='mi'>0</span><span class='o'>)</span> <span class='o'>{</span>
-        <span class='n'>x</span><span class='o'>(</span><span class='n'>i</span><span class='o'>)(</span><span class='n'>j</span><span class='o'>)</span> <span class='o'>#</span><span class='k'>=</span> <span class='n'>problem</span><span class='o'>(</span><span class='n'>i</span><span class='o'>)(</span><span class='n'>j</span><span class='o'>)</span>
+        <span class='n'>x</span><span class='o'>(</span><span class='n'>i</span><span class='o'>)(</span><span class='n'>j</span><span class='o'>)</span> <span class='err'>#</span><span class='k'>=</span> <span class='n'>problem</span><span class='o'>(</span><span class='n'>i</span><span class='o'>)(</span><span class='n'>j</span><span class='o'>)</span>
       <span class='o'>}</span>
     <span class='o'>}</span>
   <span class='o'>}</span>
@@ -172,7 +173,8 @@
 
   <span class='k'>def</span> <span class='n'>printIt</span><span class='o'>()</span> <span class='o'>{</span> <span class='o'>...</span> <span class='o'>}</span> <span class='c1'>// omitted</span>
 <span class='o'>}</span> 
-</code></pre></div>
+</code></pre>
+</div>
 <p>For brevity I&#8217;m omitting how the Prolog solution is queried and how the Scala solution is printed. I want to keep the focus on the interesting parts of these programs. For the full source code, check the links above or the <a href='https://github.com/nickknw/constraint-programming-benchmarks'>benchmark source code</a> on github.</p>
 <h3>Scoring</h3><h4>Size</h4>
 <p>The Prolog program is just over half as long at <strong>13</strong> lines instead of <strong>25</strong> for Scala (not counting comments or whitespace). Although this is definitely a win for Prolog, the Scala version is still far shorter than any Sudoku solvers that don&#8217;t take advantage of constraint programming.</p>
@@ -221,7 +223,9 @@ Aha, 'format' and 'writef' are very nice too.
 
 <span class='nf'>minInList</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>XS</span><span class='p'>],</span> <span class='nv'>M</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>minInList</span><span class='p'>(</span><span class='nv'>XS</span><span class='p'>,</span> <span class='nv'>M1</span><span class='p'>),</span> <span class='nf'>min</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>M1</span><span class='p'>,</span> <span class='nv'>M</span><span class='p'>),</span> <span class='nf'>format</span><span class='p'>(</span><span class='s-Atom'>&#39;~a, &#39;</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>).</span>
 <span class='nf'>minInList</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='nv'>X</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>format</span><span class='p'>(</span><span class='s-Atom'>&#39;~a, &#39;</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>).</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='question'><b>2.</b> Find a way to use the print predicates to print only successful solutions. How do they work?</div>
@@ -246,7 +250,9 @@ correct answers. I'll take an example from the book.
     <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>),</span>
     <span class='nf'>different</span><span class='p'>(</span><span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>),</span>
     <span class='nf'>format</span><span class='p'>(</span><span class='s-Atom'>&#39;~a, ~a, ~a, ~a, ~a&#39;</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>Alabama</span><span class='p'>,</span> <span class='nv'>Mississippi</span><span class='p'>,</span> <span class='nv'>Georgia</span><span class='p'>,</span> <span class='nv'>Tennessee</span><span class='p'>,</span> <span class='nv'>Florida</span><span class='p'>]).</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='code_explanation'>
@@ -310,7 +316,9 @@ I looked at <a href='http://stackoverflow.com/questions/1768274/prolog-learning-
 
 <span class='c1'>% can test with:</span>
 <span class='c1'>% ?- problem(1, Board), sudoku(Board).</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='question'><b>2.</b> Make the Sudoku solver print prettier
@@ -341,7 +349,9 @@ solutions.</div>
     <span class='nf'>format</span><span class='p'>(</span><span class='s-Atom'>&#39;│ ~d ~d ~d │ ~d ~d ~d │ ~d ~d ~d │~n&#39;</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>Col1</span><span class='p'>,</span> <span class='nv'>Col2</span><span class='p'>,</span> <span class='nv'>Col3</span><span class='p'>,</span> <span class='nv'>Col4</span><span class='p'>,</span> <span class='nv'>Col5</span><span class='p'>,</span> <span class='nv'>Col6</span><span class='p'>,</span> <span class='nv'>Col7</span><span class='p'>,</span> <span class='nv'>Col8</span><span class='p'>,</span> <span class='nv'>Col9</span><span class='p'>]),</span> 
     <span class='nf'>succ</span><span class='p'>(</span><span class='nv'>N</span><span class='p'>,</span> <span class='nv'>N1</span><span class='p'>),</span>
     <span class='nf'>prettier_print</span><span class='p'>(</span><span class='nv'>N1</span><span class='p'>,</span> <span class='nv'>Puzzle</span><span class='p'>).</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='tiny_title'>Output</div>
@@ -363,7 +373,9 @@ solutions.</div>
 │ 4 7 2 │ 3 1 9 │ 5 6 8 │
 │ 8 6 3 │ 7 4 5 │ 2 1 9 │
 └───────┴───────┴───────┘
-</code></pre></div>
+</code></pre>
+</div>
+
 
 </div>
 

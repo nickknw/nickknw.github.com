@@ -107,7 +107,8 @@
 <p>The answer was only two short lines of code:</p>
 <div class='highlight'><pre><code class='io'><span class='n'>Number</span> <span class='n'>origDiv</span> <span class='o'>:=</span> <span class='n'>Number</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='s'>&quot;/&quot;</span><span class='o'>)</span>
 <span class='n'>Number</span> <span class='o'>/</span> <span class='o'>=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>denom</span><span class='o'>,</span> <span class='k'>if</span><span class='o'>(</span><span class='n'>denom</span> <span class='o'>==</span> <span class='mf'>0</span><span class='o'>,</span> <span class='mf'>0</span><span class='o'>,</span> <span class='n'>self</span> <span class='n'>origDiv</span><span class='o'>(</span><span class='n'>denom</span><span class='o'>)))</span>
-</code></pre></div>
+</code></pre>
+</div>
 <p>The tricky part at first was figuring out how to save a reference to the original division method, but in retrospect it was blindingly obvious. It&#8217;s the same things I&#8217;ve been doing all along with Io: taking things out of slots and putting things in slots!</p>
 
 <p>I would also like to highlight Question #3 to show off how clean writing in a functional style is in Io. The question was:</p>
@@ -118,7 +119,8 @@
 
 <p>No loops needed here - Io has <code>map</code>, <code>filter</code>, <code>reduce</code>, and they mix <strong>well</strong> with Io&#8217;s syntax:</p>
 <div class='highlight'><pre><code class='io'><span class='n'>addUp2DArray</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>array</span><span class='o'>,</span> <span class='n'>array</span> <span class='n'>flatten</span> <span class='n'>reduce</span><span class='o'>(+))</span>
-</code></pre></div>
+</code></pre>
+</div>
 <h2 id='full_solutions'>Full solutions</h2>
 
 <p>That&#8217;s it for the highlights, but as I mentioned earlier, all of the exercises today were pretty interesting. Here is a nicely formatted version of my solutions to the exercises from Day 2 of Io. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day2.io'>on github</a> with the other exercises. The exercises this week are really worth taking a look at, I encourage you to follow along closely through the rest with me.</p>
@@ -156,7 +158,9 @@
 <span class='s'>&quot;Fib 8&quot;</span> <span class='n'>println</span>
 <span class='n'>fib_recur</span><span class='o'>(</span><span class='mf'>8</span><span class='o'>)</span> <span class='n'>println</span>
 <span class='n'>fib_loop</span><span class='o'>(</span><span class='mf'>8</span><span class='o'>)</span> <span class='n'>println</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='tiny_title'>Output</div>
@@ -171,7 +175,9 @@ Fib 4
 Fib 8
 21
 21
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='question'><b>2.</b> How would you change / to return 0 if the denominator is zero?</div>
@@ -185,7 +191,9 @@ Fib 8
 
 <span class='mf'>4</span> <span class='o'>/</span> <span class='mf'>2</span> <span class='n'>println</span>
 <span class='mf'>4</span> <span class='o'>/</span> <span class='mf'>0</span> <span class='n'>println</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='tiny_title'>Output</div>
@@ -193,7 +201,9 @@ Fib 8
 
 <div class='highlight'><pre><code class='bash'>2
 0
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='question'><b>3.</b> Write a program to add up all of the numbers in a two-dimensional
@@ -202,9 +212,11 @@ array.</div>
 
 <div class='highlight'><pre><code class='io'><span class='n'>addUp2DArray</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>array</span><span class='o'>,</span> <span class='n'>array</span> <span class='n'>flatten</span> <span class='n'>reduce</span><span class='o'>(+))</span>
 
-<span class='n'>addUp2DArray</span><span class='o'>(</span><span class='nb'>list</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>,</span><span class='mf'>5</span><span class='o'>))</span> <span class='n'>println</span>
-<span class='n'>addUp2DArray</span><span class='o'>(</span><span class='nb'>list</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span> <span class='nb'>list</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>1</span><span class='o'>),</span> <span class='mf'>4</span><span class='o'>,</span><span class='mf'>5</span><span class='o'>))</span> <span class='n'>println</span>
-</code></pre></div>
+<span class='n'>addUp2DArray</span><span class='o'>(</span><span class='n'>list</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>,</span><span class='mf'>5</span><span class='o'>))</span> <span class='n'>println</span>
+<span class='n'>addUp2DArray</span><span class='o'>(</span><span class='n'>list</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span> <span class='n'>list</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>1</span><span class='o'>),</span> <span class='mf'>4</span><span class='o'>,</span><span class='mf'>5</span><span class='o'>))</span> <span class='n'>println</span>
+</code></pre>
+</div>
+
 
 
 <div class='tiny_title'>Output</div>
@@ -212,17 +224,19 @@ array.</div>
 
 <div class='highlight'><pre><code class='bash'>14
 17
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='question'><b>4.</b> Add a slot called myAverage to a list that computes the average of all the numbers in a list. What happens if there are no numbers in a list? (<b>Bonus:</b> Raise an Io exception if any item in the list is not a number.)</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='c1'># Easy way:</span>
-<span class='nb'>List</span> <span class='n'>myAverage</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>self</span> <span class='n'>average</span><span class='o'>)</span>
+<span class='n'>List</span> <span class='n'>myAverage</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>self</span> <span class='n'>average</span><span class='o'>)</span>
 
 <span class='c1'># Probably the way he meant (plus bonus):</span>
-<span class='nb'>List</span> <span class='n'>myAverage2</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+<span class='n'>List</span> <span class='n'>myAverage2</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
     <span class='n'>containsNonDigit</span> <span class='o'>:=</span> <span class='n'>select</span><span class='o'>(</span><span class='n'>x</span><span class='o'>,</span> <span class='n'>x</span> <span class='n'>asNumber</span><span class='o'>()</span> <span class='n'>isNan</span><span class='o'>())</span> <span class='n'>size</span> <span class='o'>&gt;</span> <span class='mf'>0</span>
     <span class='k'>if</span><span class='o'>(</span><span class='n'>containsNonDigit</span><span class='o'>,</span> <span class='n'>Exception</span> <span class='n'>raise</span><span class='o'>(</span><span class='s'>&quot;An item in the list is not a number&quot;</span><span class='o'>))</span>
 
@@ -231,27 +245,31 @@ array.</div>
 <span class='o'>)</span>
 
 <span class='s'>&quot;Averaging the numbers in a list&quot;</span> <span class='n'>println</span>
-<span class='nb'>list</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>)</span> <span class='n'>myAverage2</span> <span class='n'>println</span>
+<span class='n'>list</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>)</span> <span class='n'>myAverage2</span> <span class='n'>println</span>
 <span class='c1'>#list(1,2,3,4,&quot;a&quot;) myAverage2 println</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>2.5
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='question'><b>5.</b> Write a prototype for a two-dimensional list. The dim(x,y) method should allocate a list of y lists that are x elements long, set(x, y, value) should set a value, and get(x, y) should return that value.</div>
 
 
-<div class='highlight'><pre><code class='io'><span class='n'>List2D</span> <span class='o'>:=</span> <span class='nb'>List</span> <span class='k'>clone</span>
+<div class='highlight'><pre><code class='io'><span class='n'>List2D</span> <span class='o'>:=</span> <span class='n'>List</span> <span class='k'>clone</span>
 <span class='n'>List2D</span> <span class='n'>transposed</span> <span class='o'>:=</span> <span class='no'>false</span>
 
 <span class='n'>List2D</span> <span class='n'>dim</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>x</span><span class='o'>,</span> <span class='n'>y</span><span class='o'>,</span>
     <span class='n'>y</span> <span class='n'>repeat</span><span class='o'>(</span>
-        <span class='n'>inner</span> <span class='o'>:=</span> <span class='nb'>list</span><span class='o'>()</span>
+        <span class='n'>inner</span> <span class='o'>:=</span> <span class='n'>list</span><span class='o'>()</span>
         <span class='n'>x</span> <span class='n'>repeat</span><span class='o'>(</span><span class='n'>inner</span> <span class='n'>push</span><span class='o'>(</span><span class='no'>nil</span><span class='o'>))</span>
         <span class='n'>self</span> <span class='n'>append</span><span class='o'>(</span><span class='n'>inner</span><span class='o'>)</span>
     <span class='o'>)</span>
@@ -294,7 +312,9 @@ array.</div>
 
 <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>2</span><span class='o'>,</span><span class='mf'>4</span><span class='o'>)</span> <span class='n'>println</span>
 <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span><span class='mf'>2</span><span class='o'>)</span> <span class='n'>println</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='tiny_title'>Output</div>
@@ -309,14 +329,16 @@ list<span class='o'>(</span>list<span class='o'>(</span>nil, nil, nil, nil, nil,
 
 asdfad
 nil
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='question'><b>6. Bonus:</b> Write a transpose method so that (new_matrix get(y, x)) == matrix get(x,y) on the original list</div>
 
 
 <div class='highlight'><pre><code class='io'><span class='n'>flipFirstTwoArgs</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>,</span>
-    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='nb'>list</span><span class='o'>(</span>
+    <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>setArgumentNames</span><span class='o'>(</span> <span class='n'>list</span><span class='o'>(</span>
         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>),</span>
         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>),</span>
         <span class='n'>self</span> <span class='n'>getSlot</span><span class='o'>(</span><span class='n'>slotName</span><span class='o'>)</span> <span class='n'>argumentNames</span> <span class='n'>rest</span> <span class='n'>rest</span>
@@ -347,7 +369,9 @@ nil
 <span class='s'>&quot;4, 2: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>4</span><span class='o'>,</span><span class='mf'>2</span><span class='o'>)</span> <span class='n'>println</span>
 <span class='s'>&quot;5, 3: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>5</span><span class='o'>,</span><span class='mf'>3</span><span class='o'>)</span> <span class='n'>println</span>
 <span class='s'>&quot;3, 5: &quot;</span> <span class='n'>print</span><span class='o'>;</span> <span class='n'>firstMatrix</span> <span class='n'>get</span><span class='o'>(</span><span class='mf'>3</span><span class='o'>,</span><span class='mf'>5</span><span class='o'>)</span> <span class='n'>println</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='tiny_title'>Output</div>
@@ -366,19 +390,21 @@ transpose again!
 4, 2: nil
 5, 3: nil
 3, 5: NEW
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='question'><b>7.</b> Write the matrix to a file, and read a matrix from a file.</div>
 
 
-<div class='highlight'><pre><code class='io'><span class='n'>file</span> <span class='o'>:=</span> <span class='nb'>File</span> <span class='n'>with</span><span class='o'>(</span><span class='s'>&quot;matrix.txt&quot;</span><span class='o'>)</span>
+<div class='highlight'><pre><code class='io'><span class='n'>file</span> <span class='o'>:=</span> <span class='n'>File</span> <span class='n'>with</span><span class='o'>(</span><span class='s'>&quot;matrix.txt&quot;</span><span class='o'>)</span>
 <span class='n'>file</span> <span class='n'>remove</span>
 <span class='n'>file</span> <span class='n'>openForUpdating</span>
 <span class='n'>file</span> <span class='n'>write</span><span class='o'>(</span><span class='n'>firstMatrix</span> <span class='n'>join</span><span class='o'>(</span><span class='s'>&quot;, &quot;</span><span class='o'>))</span>
 <span class='n'>file</span> <span class='n'>close</span>
 
-<span class='n'>file</span> <span class='o'>=</span> <span class='nb'>File</span> <span class='n'>with</span><span class='o'>(</span><span class='s'>&quot;matrix.txt&quot;</span><span class='o'>)</span>
+<span class='n'>file</span> <span class='o'>=</span> <span class='n'>File</span> <span class='n'>with</span><span class='o'>(</span><span class='s'>&quot;matrix.txt&quot;</span><span class='o'>)</span>
 <span class='n'>file</span> <span class='n'>openForReading</span>
 <span class='n'>lines</span> <span class='o'>:=</span> <span class='n'>file</span> <span class='n'>readLines</span>
 <span class='n'>file</span> <span class='n'>close</span>
@@ -386,7 +412,9 @@ transpose again!
 <span class='n'>matrixFromFile</span> <span class='o'>:=</span> <span class='n'>lines</span> <span class='n'>at</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>)</span> <span class='n'>split</span><span class='o'>(</span><span class='s'>&quot;, &quot;</span><span class='o'>)</span>
 <span class='n'>matrixFromFile</span> <span class='n'>type</span> <span class='n'>println</span>
 <span class='n'>matrixFromFile</span> <span class='n'>println</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='tiny_title'>Output</div>
@@ -395,7 +423,9 @@ transpose again!
 <div class='highlight'><pre><code class='bash'>Sequence
 List
 list<span class='o'>(</span>list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, asdfad, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, NEW<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>)</span>, list<span class='o'>(</span>nil, nil, nil, nil, nil, nil<span class='o'>))</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='question'><b>8.</b> Write a program that gives you ten tries to guess a random number from 1-100. If you would like, give a hint of "hotter" or "colder" after the first guess.</div>
@@ -417,7 +447,9 @@ list<span class='o'>(</span>list<span class='o'>(</span>nil, nil, nil, nil, nil,
 <span class='k'>if</span><span class='o'>(</span><span class='n'>guess</span> <span class='o'>==</span> <span class='n'>randomNumber</span><span class='o'>,</span>
     <span class='s'>&quot;Congrats, you did it!&quot;</span> <span class='n'>println</span><span class='o'>,</span>
     <span class='s'>&quot;Too bad, maybe next time&quot;</span> <span class='n'>println</span><span class='o'>)</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 <div class='tiny_title'>Output</div>
@@ -435,7 +467,9 @@ Guess a number between 1 and 100: <span class='o'>(</span>guess 5 of 10<span cla
 Too low
 Guess a number between 1 and 100: <span class='o'>(</span>guess 6 of 10<span class='o'>)</span>: 43
 Congrats, you did it!
-</code></pre></div>
+</code></pre>
+</div>
+
 
 
 </div>

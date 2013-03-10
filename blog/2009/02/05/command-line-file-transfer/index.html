@@ -83,13 +83,16 @@
 <p>In case you need it, here&#8217;s a quick runthrough of what you need to get this working:</p>
 <div class='highlight'><pre><code class='bash'>sudo aptitude install sshfs
 sshfs user@host: localmountpoint
-</code></pre></div>
+</code></pre>
+</div>
 <p>It defaults to your home directory as the point to mount, but if you want to you can specify a location after &#8216;host:&#8217; like so:</p>
 <div class='highlight'><pre><code class='bash'>sshfs user@host:/home/user/data/ localmountpoint
-</code></pre></div>
+</code></pre>
+</div>
 <p>When you&#8217;re done, you can unmount it with this command:</p>
 <div class='highlight'><pre><code class='bash'>fusermount -u localmountpoint
-</code></pre></div>
+</code></pre>
+</div>
 <p>If it a location that you use frequently like me, you could put an alias in your .bash_aliases file so mounting is a single &#8216;mount_server&#8217; command, and unmounting is &#8216;unmount_server&#8217;. Now when I want to upload something it&#8217;s as painless as using cp or mv!</p>
 </div>
 
