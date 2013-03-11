@@ -1,0 +1,30 @@
+
+reddit uses fb OG info
+
+
+twitter:
+
+twitter:card 	The card type, which will be one of "summary", "photo", or "player".
+twitter:url 	Canonical URL of the card content.
+twitter:title 	The title of your content as it should appear in the card.
+twitter:description 	A description of the content in a maximum of 200 characters.
+twitter:image 	A URL to the image representing the content.
+twitter:site    @username
+
+facebook:
+
+An Open Graph tag looks like this:
+
+<meta property="og:tag name" content="tag value"/> 
+
+If you use Open Graph tags, the following six are required:
+
+    og:title - The title of the entity.
+    og:type - The type of entity. You must select a type from the list of Open Graph types.
+    og:image - The URL to an image that represents the entity. Images must be at least 50 pixels by 50 pixels (though minimum 200px by 200px is preferred). Square images work best, but you are allowed to use images up to three times as wide as they are tall.
+    og:url - The canonical, permanent URL of the page representing the entity. When you use Open Graph tags, the Like button posts a link to the og:url instead of the URL in the Like button code.
+    og:site_name - A human-readable name for your site, e.g., "IMDb".
+    fb:admins or fb:app_id - A comma-separated list of either the Facebook IDs of page administrators or a Facebook Platform application ID. At a minimum, include only your own Facebook ID
+
+    type should be blog, website, or article
+Use article for any URL that represents transient content - such as a news article, blog post, photo, video, etc. Do not use website for this purpose. website and blog are designed to represent an entire site, an og:type tag with types website or blog should usually only appear on the root of a domain.
