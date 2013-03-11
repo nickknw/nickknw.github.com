@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-03-10T17:21:20-07:00</updated>
+ <updated>2013-03-10T17:42:53-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -13,9 +13,9 @@
  
  <entry>
    <title>Counting Powers of Two - A Neat Pattern</title>
-   <link href="http://nickknowlson.com/blog/2013/03/05/counting-powers-of-two/"/>
-   <updated>2013-03-05T00:00:00-08:00</updated>
-   <id>http://nickknowlson.com/blog/2013/03/05/counting-powers-of-two</id>
+   <link href="http://nickknowlson.com/blog/2013/03/10/counting-powers-of-two/"/>
+   <updated>2013-03-10T00:00:00-08:00</updated>
+   <id>http://nickknowlson.com/blog/2013/03/10/counting-powers-of-two</id>
    <content type="html">&lt;p&gt;A little while ago I was going for a walk and searching for something to occupy my mind for a while. Something that would take my mind away from other problems and give it a simple, solvable, repetitive activity to do for a while. I hit upon counting up by powers of two.&lt;/p&gt;
 
 &lt;p&gt;Why? I&amp;#8217;m a programmer, and powers of two are important and prevalent numbers in this field. By this point 128, 256 and 512 seem like nice round numbers to me, and I wouldn&amp;#8217;t mind feeling the same way about 65,536 and 131,072. Also, counting powers of two has the virtue of getting hard before getting boring.&lt;/p&gt;
