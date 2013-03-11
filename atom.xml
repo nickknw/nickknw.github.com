@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-03-10T17:42:53-07:00</updated>
+ <updated>2013-03-10T18:19:45-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -46,7 +46,7 @@
 
 &lt;h2 id='the_formula'&gt;The Formula&lt;/h2&gt;
 
-&lt;p&gt;Where &lt;code&gt;x&lt;/code&gt; represents the thousands digits and is equal to 1 or greater (multiple digits work fine but substituting 0 in doesn&amp;#8217;t make any sense):&lt;/p&gt;
+&lt;p&gt;Where &lt;code&gt;x&lt;/code&gt; represents the thousands digits and is equal to 1 or greater (multiple digits work fine but substituting 0 in doesn&amp;#8217;t end up making any sense):&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;(x * 1000) + ((25 * x) - x)&lt;/code&gt;&lt;/pre&gt;
 
