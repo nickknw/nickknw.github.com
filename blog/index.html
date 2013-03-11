@@ -78,9 +78,9 @@
   <html><body>
 <p>A little while ago I was going for a walk and searching for something to occupy my mind for a while. Something that would take my mind away from other problems and give it a simple, solvable, repetitive activity to do for a while. I hit upon counting up by powers of two.</p>
 
-<p>Why? I&rsquo;m a programmer, and powers of two are important and prevalent numbers in this field. By this point 128, 256 and 512 seem like nice round numbers to me, and I wouldn&rsquo;t mind feeling the same way about 65,536 and 131,072. Also, counting powers of two has the virtue of getting hard before getting boring.</p>
+<p>Why? I’m a programmer, and powers of two are important and prevalent numbers in this field. By this point 128, 256 and 512 seem like nice round numbers to me, and I wouldn’t mind feeling the same way about 65,536 and 131,072. Also, counting powers of two has the virtue of getting hard before getting boring.</p>
 
-<p>As I counted I noticed a neat pattern starting at the higher numbers. I thought it was pretty cool and maybe even a ...</p>
+<p>As I counted I noticed a neat pattern starting at the higher numbers. I thought it was pretty cool and maybe e...</p>
 </body></html>
   </div>
 
@@ -96,13 +96,13 @@
   </a></h1>
   <div class="faded" style="font-size:14px; margin-bottom:5px;">17 Feb 2013</div>
   <html><body>
-<p>Recently I started learning Clojure (partly in preparation for its upcoming section in <a href="http://nickknowlson.com/projects/seven-languages-in-seven-weeks/">my tour through seven languages</a>) and I ran into a problem when trying to pattern match on arguments. You can&rsquo;t just pass them straight to <code>match</code> and expect to follow most current online examples. The types aren&rsquo;t quite right! You&rsquo;ll always get back the <code>:else</code> clause or some other odd behaviour.</p>
+<p>Recently I started learning Clojure (partly in preparation for its upcoming section in <a href="http://nickknowlson.com/projects/seven-languages-in-seven-weeks/">my tour through seven languages</a>) and I ran into a problem when trying to pattern match on arguments. You can’t just pass them straight to <code>match</code> and expect to follow most current online examples. The types aren’t quite right! You’ll always get back the <code>:else</code> clause or some other odd behaviour.</p>
 
 <p>Function arguments in Clojure are of type <code>ArraySeq</code> (<a href="http://stackoverflow.com/questions/8205209/why-argument-list-as-arrayseq">and for good reason</a>), but using core.match with Seqs requires a different (slightly more verbose) syntax. The simplest way to make things work as you might expect is to convert the arguments into a Vector first.</p>
 
 <h2 id="solution">Solution</h2>
 
-<p>Use <a href="http://clojuredocs.org/clojure_core/clojure.core/vec">vec</a> to convert the function arguments into a ve...</p>
+<p>Use <a href="http://clojuredocs.org/clojure_core/clojure.core/vec">vec</a> to convert the function arguments int...</p>
 </body></html>
   </div>
 
@@ -118,15 +118,15 @@
   </a></h1>
   <div class="faded" style="font-size:14px; margin-bottom:5px;">26 Aug 2012</div>
   <html><body>
-<p>All right, that&rsquo;s it - for better or for worse, I&rsquo;m out of time. There were several major features in my game that I didn&rsquo;t finish, but the end result is actually playable, so I consider it a wild success!</p>
+<p>All right, that’s it - for better or for worse, I’m out of time. There were several major features in my game that I didn’t finish, but the end result is actually playable, so I consider it a wild success!</p>
 
-<p>For a description of the game and screenshots, take a look at the project page here: <a href="http://nickknowlson.com/projects/conways-revenge/">Conway&rsquo;s Revenge</a>. Also, here is my official <a href="http://www.ludumdare.com/compo/ludum-dare-24/?action=preview&amp;uid=15084">Ludum Dare entry page</a>.</p>
+<p>For a description of the game and screenshots, take a look at the project page here: <a href="http://nickknowlson.com/projects/conways-revenge/">Conway’s Revenge</a>. Also, here is my official <a href="http://www.ludumdare.com/compo/ludum-dare-24/?action=preview&amp;uid=15084">Ludum Dare entry page</a>.</p>
 
 <h2 id="what_was_missing">What was missing</h2>
 
 <h3 id="soundtrack">Soundtrack</h3>
 
-<p>I originally had big plans for a procedurally gener...</p>
+<p>I originally had big plans for a procedural...</p>
 </body></html>
   </div>
 
@@ -142,17 +142,17 @@
   </a></h1>
   <div class="faded" style="font-size:14px; margin-bottom:5px;">25 Aug 2012</div>
   <html><body>
-<p>Well, a little past halfway in my case, since I&rsquo;m going to a Barcraft tomorrow!</p>
+<p>Well, a little past halfway in my case, since I’m going to a Barcraft tomorrow!</p>
 
 <p><a href="http://imgur.com/a/RLnJk#0">Here is an imgur album of what the game looks like right now</a></p>
 
 <p><strong>What is it?</strong></p>
 
-<p>My game is essentially a multiplayer Conway&rsquo;s Game of Life (it&rsquo;s loosely related to the theme, anyway). I&rsquo;ve decided to call it &ldquo;Conway&rsquo;s Revenge&rdquo;!</p>
+<p>My game is essentially a multiplayer Conway’s Game of Life (it’s loosely related to the theme, anyway). I’ve decided to call it “Conway’s Revenge”!</p>
 
-<p>It doesn&rsquo;t follow the original rules for the Game of Life: I&rsquo;ve made changes to the live/die algorithm to account for multiple players and to prevent spending too long in a deadlock scenario, while making sure it&rsquo;s not too hard to get your cells to grow and expand.</p>
+<p>It doesn’t follow the original rules for the Game of Life: I’ve made changes to the live/die algorithm to account for multiple players and to prevent spending too long in a deadlock scenario, while making sure it’s not too hard to get your cells to grow and expand.</p>
 
-<p>Current status is: I&rsquo;m more or less happy with the liv...</p>
+<p>Current status is: I’m more or l...</p>
 </body></html>
   </div>
 
@@ -167,7 +167,14 @@
   Seven Languages: Week 3 (Prolog) - Day 3
   </a></h1>
   <div class="faded" style="font-size:14px; margin-bottom:5px;">06 Aug 2012</div>
-  Liquid error: stack level too deep
+  <html><body>
+<p>Day 3 tackled some bigger examples: solving sudoku and the eight queens problem. In today’s post however, I’m going to go a bit off the rails and talk a bit about how logic programming can be beneficial in more practical ways.</p>
+<div class="interjection"><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href="http://pragprog.com/book/btlang/seven-languages-in-seven-weeks">Seven Languages In Seven Weeks</a>. The article previous to this one is <a href="/blog/2012/07/17/seven-languages-week-3-day-2/">Week 3 (Prolog) - Day 2</a>. For an overview see the <a href="/projects/seven-languages-in-seven-weeks/">project page</a>.)
+</p></div>
+<h3>Datalog</h3>
+<p>Datalog is a subset of Prolog oriented towards querying that was designed to be embeddable in other languages. Many languages have datalog engines, such as <a href="http://iris-reasoner.org/">Java</a>, <a href="https://sites.google.com/site/pydatalog/">Python</a>, <a href="http://code.google.com/p/clojure-contrib/wiki/DatalogOverview">Clojure</a> and <a href="http://docs.racket-lang.org/datalog/">Racket</a>. It has become more well-known recently for be...</p>
+</body></html>
   </div>
 
   <div style="margin-top:20px; font-size:14px;">

@@ -139,8 +139,7 @@
 <span class='p'>[</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>,</span> <span class='nv'>Z</span><span class='p'>]</span>           <span class='c1'>% list with three and only three elements - regular syntax</span>
 <span class='p'>[</span><span class='nv'>X</span><span class='p'>|[</span><span class='nv'>Y</span><span class='p'>|[</span><span class='nv'>Z</span><span class='p'>]]]</span>         <span class='c1'>% same - using cons syntax</span>
 <span class='p'>[</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>|[</span><span class='nv'>Z</span><span class='p'>]]</span>          <span class='c1'>% same - using simplified cons syntax</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>But it doesn&#8217;t make sense to use cons syntax to do what regular list syntax already expresses better. Here are some more interesting examples that make use of the strengths of cons syntax:</p>
 <div class='highlight'><pre><code class='prolog'><span class='p'>[</span><span class='nv'>X</span><span class='p'>|[</span><span class='nv'>Y</span><span class='p'>|</span><span class='nv'>Ys</span><span class='p'>]]</span>        <span class='c1'>% list with at least two elements (X and Y), bind the rest of the list to Ys</span>
 <span class='p'>[</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>|</span><span class='nv'>Ys</span><span class='p'>]</span>         <span class='c1'>% same - using simplified cons syntax</span>
@@ -150,8 +149,7 @@
 
 <span class='p'>[</span><span class='nv'>X</span><span class='p'>|[</span><span class='nv'>Y</span><span class='p'>|[</span><span class='nv'>Z</span><span class='p'>|</span><span class='k'>_</span><span class='p'>]]]</span>     <span class='c1'>% list with at least three elements, discard the tail</span>
 <span class='p'>[</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>Y</span><span class='p'>,</span> <span class='nv'>Z</span><span class='p'>|</span><span class='k'>_</span><span class='p'>]</span>       <span class='c1'>% same - using simplified cons syntax</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>To cement these, here are some concrete examples of pattern matching with lists:</p>
 <div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Xs</span><span class='p'>].</span>           <span class='c1'>% X = a, Xs = [b, c, d].</span>
 <span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>X</span><span class='p'>|</span><span class='k'>_</span><span class='p'>].</span>            <span class='c1'>% X = a.</span>
@@ -167,8 +165,7 @@
 <span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='k'>_</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>|</span><span class='nv'>Y</span><span class='p'>].</span>         <span class='c1'>% X = b, Y = [c, d].</span>
 <span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>W</span><span class='p'>,</span> <span class='k'>_</span><span class='p'>|</span><span class='nv'>Y</span><span class='p'>].</span>         <span class='c1'>% W = a, Y = [c, d].</span>
 <span class='s-Atom'>?-</span> <span class='p'>[</span><span class='s-Atom'>a</span><span class='p'>,</span> <span class='s-Atom'>b</span><span class='p'>,</span> <span class='s-Atom'>c</span><span class='p'>,</span> <span class='s-Atom'>d</span><span class='p'>]</span> <span class='o'>=</span> <span class='p'>[</span><span class='nv'>W</span><span class='p'>,</span> <span class='nv'>X</span><span class='p'>|</span><span class='k'>_</span><span class='p'>].</span>         <span class='c1'>% W = a, X = b.</span>
-</code></pre>
-</div><h3>Unification</h3>
+</code></pre></div><h3>Unification</h3>
 <p><strong>UPDATE:</strong> Turns out I had a massive misunderstanding about what unification was. I had conflated it with a number of other concepts that combined together form Prolog&#8217;s execution model. I&#8217;ve removed what I wrote about unification and may some day do a follow-up article on Prolog&#8217;s execution model.</p>
 <h3>The logic programming difference</h3>
 <p>So what does having that fancy execution model really mean? To demonstrate the difference it can make I am going to show you the same function written in three different languages and three different styles. I&#8217;ve picked the <code>append</code> function (append one list to another list) which is a great example, even though it&#8217;s been explained many times before. In the comments on my <a href='/blog/2012/02/05/seven-languages-week-3-day-1/'>last post</a> actually, <a href='http://www.storytotell.org/'>Daniel Lyons</a> gave a <a href='/blog/2012/02/05/seven-languages-week-3-day-1/#comment-446662856'>nice demonstration</a> of <code>append</code> in Prolog, and it is an example <a href='http://www.java.net/external?url=http://blog.rapidred.com'>Bruce Tate</a> spends a couple pages on as well.</p>
@@ -182,48 +179,40 @@
 
     <span class='k'>return</span> <span class='nx'>result</span><span class='p'>;</span>
 <span class='p'>}</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>The most straightforward implementation of append. Callers would use it like so:</p>
 <div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>list</span> <span class='o'>=</span> <span class='nx'>append</span><span class='p'>([</span><span class='mi'>1</span><span class='p'>,</span> <span class='mi'>2</span><span class='p'>,</span> <span class='mi'>3</span><span class='p'>],</span> <span class='p'>[</span><span class='mi'>4</span><span class='p'>,</span> <span class='mi'>5</span><span class='p'>,</span> <span class='mi'>6</span><span class='p'>]);</span>
 <span class='c1'>// list is [1, 2, 3, 4, 5, 6]</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>Nothing fancy here! This essentially duplicates the existing <code>concat</code> method in javascript.</p>
 <h4>Functional (Haskell)</h4><div class='highlight'><pre><code class='haskell'><span class='nf'>append</span> <span class='ow'>::</span> <span class='p'>[</span><span class='n'>a</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='p'>[</span><span class='n'>a</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='p'>[</span><span class='n'>a</span><span class='p'>]</span>
 <span class='nf'>append</span> <span class='kt'>[]</span> <span class='n'>ys</span> <span class='ow'>=</span> <span class='n'>ys</span>
 <span class='nf'>append</span> <span class='p'>(</span><span class='n'>x</span><span class='kt'>:</span><span class='n'>xs</span><span class='p'>)</span> <span class='n'>ys</span> <span class='ow'>=</span> <span class='n'>x</span> <span class='kt'>:</span> <span class='n'>append</span> <span class='n'>xs</span> <span class='n'>ys</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>A basic recursive implementation of append. Once again, it is straightforward to use:</p>
 <div class='highlight'><pre><code class='haskell'><span class='nf'>list</span> <span class='ow'>=</span> <span class='n'>append</span> <span class='p'>[</span><span class='mi'>1</span><span class='p'>,</span> <span class='mi'>2</span><span class='p'>,</span> <span class='mi'>3</span><span class='p'>]</span> <span class='p'>[</span><span class='mi'>4</span><span class='p'>,</span> <span class='mi'>5</span><span class='p'>,</span> <span class='mi'>6</span><span class='p'>]</span>
 <span class='c1'>-- list is [1, 2, 3, 4, 5, 6]</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>Now that we&#8217;re in Haskell, we can of course easily take advantage of partial application and write things like:</p>
 <div class='highlight'><pre><code class='haskell'><span class='nf'>appendList1</span> <span class='ow'>=</span> <span class='n'>append</span> <span class='p'>[</span><span class='mi'>1</span><span class='p'>,</span> <span class='mi'>2</span><span class='p'>,</span> <span class='mi'>3</span><span class='p'>]</span>
 <span class='nf'>list2</span> <span class='ow'>=</span> <span class='n'>appendList1</span> <span class='p'>[</span><span class='mi'>4</span><span class='p'>,</span> <span class='mi'>5</span><span class='p'>,</span> <span class='mi'>6</span><span class='p'>]</span>
 <span class='c1'>-- list2 is [1, 2, 3, 4, 5, 6]</span>
 <span class='nf'>list3</span> <span class='ow'>=</span> <span class='n'>appendList1</span> <span class='p'>[</span><span class='mi'>1</span><span class='p'>,</span> <span class='mi'>2</span><span class='p'>,</span> <span class='mi'>3</span><span class='p'>]</span>
 <span class='c1'>-- list3 is [1, 2, 3, 1, 2, 3]</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>But this function still just appends one list to another. It&#8217;s the same as the built in <code>++</code> function, and basically equivalent to the previous javascript example.</p>
 <h4>Logic-based (Prolog)</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>append</span><span class='p'>([],</span><span class='nv'>Ys</span><span class='p'>,</span><span class='nv'>Ys</span><span class='p'>).</span>
 <span class='nf'>append</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Xs</span><span class='p'>],</span><span class='nv'>Ys</span><span class='p'>,[</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Zs</span><span class='p'>])</span> <span class='p'>:-</span> <span class='nf'>append</span><span class='p'>(</span><span class='nv'>Xs</span><span class='p'>,</span><span class='nv'>Ys</span><span class='p'>,</span><span class='nv'>Zs</span><span class='p'>).</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>At first glance, this function is just like the previous two. Note how similar it is to the Haskell example in particular, since it too is just a simple recursive function. It can be used like so:</p>
 <div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>append</span><span class='p'>([</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>],</span> <span class='p'>[</span><span class='m'>4</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> <span class='m'>6</span><span class='p'>],</span> <span class='nv'>List</span><span class='p'>).</span>
 <span class='nv'>List</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>4</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> <span class='m'>6</span><span class='p'>].</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>With Prolog it is sometimes accurate to look at a rule as a function with the parameters being <code>(param1, param2, return value)</code>. If you look at the example above in this way it gives you an <em>accurate</em>, but <em>limited</em> picture of this rule. With unification, you could just as easily look at this rule as <code>(param1,
 return value, param2)</code>, like so:</p>
 <div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>append</span><span class='p'>([</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>],</span> <span class='nv'>List</span><span class='p'>,</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>4</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> <span class='m'>6</span><span class='p'>]).</span>
 <span class='nv'>List</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>4</span><span class='p'>,</span> <span class='m'>5</span><span class='p'>,</span> <span class='m'>6</span><span class='p'>].</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>Prolog solves for the missing parameter and correctly calculates the result! This is the major difference between traditional languages and a logic language. But <code>(param1, return value, param2)</code> is still not the best way to think about rules, as it breaks down when confronted with something like this:</p>
 <div class='highlight'><pre><code class='prolog'><span class='s-Atom'>?-</span> <span class='nf'>append</span><span class='p'>(</span><span class='nv'>List1</span><span class='p'>,</span> <span class='nv'>List2</span><span class='p'>,</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>]).</span>
 <span class='nv'>List1</span> <span class='o'>=</span> <span class='p'>[],</span>
@@ -235,8 +224,7 @@ return value, param2)</code>, like so:</p>
 <span class='nv'>List1</span> <span class='o'>=</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>],</span>
 <span class='nv'>List2</span> <span class='o'>=</span> <span class='p'>[]</span> <span class='p'>;</span>
 <span class='s-Atom'>false</span><span class='p'>.</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>Prolog just generated all the possible ways you could combine two lists to make <code>[1, 2, 3]</code>! All this functionality from that tiny definition of <code>append</code> up above!</p>
 
 <p>There&#8217;s one more interesting use for append - as a lie-detector:</p>
@@ -244,8 +232,7 @@ return value, param2)</code>, like so:</p>
 <span class='s-Atom'>false</span><span class='p'>.</span>
 <span class='s-Atom'>?-</span> <span class='nf'>append</span><span class='p'>([</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>],</span> <span class='p'>[</span><span class='m'>3</span><span class='p'>,</span> <span class='m'>4</span><span class='p'>],</span> <span class='p'>[</span><span class='m'>1</span><span class='p'>,</span> <span class='m'>2</span><span class='p'>,</span> <span class='m'>3</span><span class='p'>,</span> <span class='m'>4</span><span class='p'>]).</span>
 <span class='s-Atom'>true</span><span class='p'>.</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>All of this comes from the power of unification.</p>
 <h3>Recursion</h3>
 <p>When writing recursive rules in Prolog you really have to make sure to keep thinking in terms of &#8216;making this statement true&#8217; instead of your typical program execution. One thing that makes it more awkward is that you can&#8217;t use return values: every &#8216;result&#8217; has to be a another parameter. And so you end up with more intermediate variables that have little meaning, as the example below shows.</p>
@@ -256,15 +243,13 @@ return value, param2)</code>, like so:</p>
 <h4>Haskell</h4><div class='highlight'><pre><code class='haskell'><span class='nf'>combinations</span> <span class='ow'>::</span> <span class='p'>[</span><span class='n'>a</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='p'>[[</span><span class='n'>a</span><span class='p'>]]</span>
 <span class='nf'>combinations</span> <span class='p'>[</span><span class='n'>x</span><span class='p'>]</span> <span class='ow'>=</span> <span class='p'>[[</span><span class='n'>x</span><span class='p'>]]</span>
 <span class='nf'>combinations</span> <span class='p'>(</span><span class='n'>x</span><span class='kt'>:</span><span class='n'>xs</span><span class='p'>)</span> <span class='ow'>=</span> <span class='p'>[</span><span class='n'>x</span><span class='p'>]</span> <span class='kt'>:</span> <span class='p'>(</span><span class='n'>map</span> <span class='p'>(</span><span class='n'>x</span> <span class='kt'>:</span><span class='p'>)</span> <span class='p'>(</span><span class='n'>combinations</span> <span class='n'>xs</span><span class='p'>))</span> <span class='o'>++</span> <span class='n'>combinations</span> <span class='n'>xs</span>
-</code></pre>
-</div><h4>Prolog</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>combinations</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='p'>[[</span><span class='nv'>X</span><span class='p'>]]).</span>
+</code></pre></div><h4>Prolog</h4><div class='highlight'><pre><code class='prolog'><span class='nf'>combinations</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='p'>[[</span><span class='nv'>X</span><span class='p'>]]).</span>
 <span class='nf'>combinations</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>XS</span><span class='p'>],</span> <span class='nv'>Result</span><span class='p'>)</span> <span class='p'>:-</span> 
     <span class='nf'>combinations</span><span class='p'>(</span><span class='nv'>XS</span><span class='p'>,</span> <span class='nv'>Comb1</span><span class='p'>),</span> 
     <span class='nf'>maplist</span><span class='p'>(</span><span class='nf'>append</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>]),</span> <span class='nv'>Comb1</span><span class='p'>,</span> <span class='nv'>Comb2</span><span class='p'>),</span>
     <span class='nf'>append</span><span class='p'>([[</span><span class='nv'>X</span><span class='p'>]],</span> <span class='nv'>Comb1</span><span class='p'>,</span> <span class='nv'>Comb3</span><span class='p'>),</span> 
     <span class='nf'>append</span><span class='p'>(</span><span class='nv'>Comb2</span><span class='p'>,</span> <span class='nv'>Comb3</span><span class='p'>,</span> <span class='nv'>Result</span><span class='p'>).</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>I still prefer the Haskell version :)</p>
 
 <h2 id='full_solutions'>Full solutions</h2>
@@ -282,9 +267,7 @@ return value, param2)</code>, like so:</p>
 <div class='highlight'><pre><code class='prolog'><span class='nf'>fib</span><span class='p'>(</span><span class='m'>0</span><span class='p'>,</span><span class='m'>0</span><span class='p'>).</span>
 <span class='nf'>fib</span><span class='p'>(</span><span class='m'>1</span><span class='p'>,</span><span class='m'>1</span><span class='p'>).</span>
 <span class='nf'>fib</span><span class='p'>(</span><span class='nv'>N</span><span class='p'>,</span><span class='nv'>F</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>succ</span><span class='p'>(</span><span class='nv'>N1</span><span class='p'>,</span><span class='nv'>N</span><span class='p'>),</span> <span class='nf'>succ</span><span class='p'>(</span><span class='nv'>N2</span><span class='p'>,</span><span class='nv'>N1</span><span class='p'>),</span> <span class='nf'>fib</span><span class='p'>(</span><span class='nv'>N1</span><span class='p'>,</span><span class='nv'>F1</span><span class='p'>),</span> <span class='nf'>fib</span><span class='p'>(</span><span class='nv'>N2</span><span class='p'>,</span><span class='nv'>F2</span><span class='p'>),</span> <span class='nf'>plus</span><span class='p'>(</span><span class='nv'>F1</span><span class='p'>,</span><span class='nv'>F2</span><span class='p'>,</span><span class='nv'>F</span><span class='p'>).</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Explanation</div>
@@ -309,9 +292,7 @@ Pretty straightforward!
   <span class='nv'>X1</span> <span class='o'>is</span> <span class='nv'>X</span> <span class='o'>-</span> <span class='m'>1</span><span class='p'>,</span>
   <span class='nf'>factorial</span><span class='p'>(</span><span class='nv'>X1</span><span class='p'>,</span><span class='nv'>Z</span><span class='p'>),</span>
   <span class='nv'>Y</span> <span class='o'>is</span> <span class='nv'>Z</span> <span class='o'>*</span> <span class='nv'>X</span><span class='p'>,!.</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Explanation</div>
@@ -400,9 +381,7 @@ If you find you need more background information first, try the page where they
 <div class='highlight'><pre><code class='prolog'><span class='nf'>reverse</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,</span><span class='nv'>R</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>reverse</span><span class='p'>(</span><span class='nv'>A</span><span class='p'>,[],</span><span class='nv'>R</span><span class='p'>).</span>
 <span class='nf'>reverse</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Y</span><span class='p'>],</span><span class='nv'>Z</span><span class='p'>,</span><span class='nv'>W</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>reverse</span><span class='p'>(</span><span class='nv'>Y</span><span class='p'>,[</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>Z</span><span class='p'>],</span><span class='nv'>W</span><span class='p'>).</span>
 <span class='nf'>reverse</span><span class='p'>([],</span><span class='nv'>X</span><span class='p'>,</span><span class='nv'>X</span><span class='p'>).</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Notes</div>
@@ -424,9 +403,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 
 <div class='highlight'><pre><code class='prolog'><span class='nf'>reverseA</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>R</span><span class='p'>],</span> <span class='nv'>Result</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>reverse</span><span class='p'>(</span><span class='nv'>R</span><span class='p'>,</span> <span class='nv'>T</span><span class='p'>),</span> <span class='nf'>append</span><span class='p'>(</span><span class='nv'>T</span><span class='p'>,</span> <span class='p'>[</span><span class='nv'>X</span><span class='p'>],</span> <span class='nv'>Result</span><span class='p'>).</span>
 <span class='nf'>reverseA</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='nv'>X</span><span class='p'>).</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='question'><b>2.</b> Find the smallest element of a list</div>
@@ -438,9 +415,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 
 <span class='nf'>minInList</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>|</span><span class='nv'>XS</span><span class='p'>],</span> <span class='nv'>M</span><span class='p'>)</span> <span class='p'>:-</span> <span class='nf'>minInList</span><span class='p'>(</span><span class='nv'>XS</span><span class='p'>,</span> <span class='nv'>M1</span><span class='p'>),</span> <span class='nf'>min</span><span class='p'>(</span><span class='nv'>X</span><span class='p'>,</span> <span class='nv'>M1</span><span class='p'>,</span> <span class='nv'>M</span><span class='p'>).</span>
 <span class='nf'>minInList</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='nv'>X</span><span class='p'>).</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='question'><b>3.</b> Sort the elements of a list.</div>
@@ -456,9 +431,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
     <span class='nf'>takeout</span><span class='p'>(</span><span class='nv'>Min</span><span class='p'>,</span> <span class='nv'>List</span><span class='p'>,</span> <span class='nv'>Rest</span><span class='p'>),</span> 
     <span class='nf'>mySort</span><span class='p'>(</span><span class='nv'>Rest</span><span class='p'>,</span> <span class='nv'>Sorted</span><span class='p'>).</span>
 <span class='nf'>mySort</span><span class='p'>([</span><span class='nv'>X</span><span class='p'>],</span> <span class='p'>[</span><span class='nv'>X</span><span class='p'>]).</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 </div>

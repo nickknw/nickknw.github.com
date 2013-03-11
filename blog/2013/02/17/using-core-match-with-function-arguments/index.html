@@ -79,25 +79,23 @@
 <h2 id='solution'>Solution</h2>
 
 <p>Use <a href='http://clojuredocs.org/clojure_core/clojure.core/vec'>vec</a> to convert the function arguments into a vector before passing them to <code>match</code>:</p>
-<div class='highlight'><pre><code class='clojure'><span class='p'>(</span><span class='nf'>use</span> <span class='o'>&#39;</span><span class='p'>[</span><span class='nv'>clojure</span><span class='o'>.</span><span class='nv'>core</span><span class='o'>.</span><span class='nv'>match</span> <span class='nv'>:only</span> <span class='p'>(</span><span class='nf'>match</span><span class='p'>)])</span>
+<div class='highlight'><pre><code class='clojure'><span class='p'>(</span><span class='nf'>use</span> <span class='o'>&#39;</span><span class='p'>[</span><span class='nv'>clojure.core.match</span> <span class='ss'>:only</span> <span class='p'>(</span><span class='nf'>match</span><span class='p'>)])</span>
 
-<span class='p'>(</span><span class='k'>defn </span><span class='nv'>-main</span> <span class='p'>[</span><span class='nv'>&amp;</span> <span class='nv'>args</span><span class='p'>]</span>
+<span class='p'>(</span><span class='kd'>defn </span><span class='nv'>-main</span> <span class='p'>[</span><span class='o'>&amp;</span> <span class='nv'>args</span><span class='p'>]</span>
     <span class='p'>(</span><span class='nb'>println </span><span class='p'>(</span><span class='nf'>match</span> <span class='p'>(</span><span class='nf'>vec</span> <span class='nv'>args</span><span class='p'>)</span>
         <span class='p'>[</span><span class='s'>&quot;echo&quot;</span> <span class='nv'>word</span><span class='p'>]</span> <span class='nv'>word</span>
-        <span class='nv'>:else</span> <span class='s'>&quot;Invalid command&quot;</span><span class='p'>)))</span>
-</code></pre>
-</div>
+        <span class='ss'>:else</span> <span class='s'>&quot;Invalid command&quot;</span><span class='p'>)))</span>
+</code></pre></div>
 <h2 id='alternate_solution'>Alternate Solution</h2>
 
 <p>If spending time and processing power just to spare some syntax is unappealing to you, then I&#8217;d recommend using core.match&#8217;s <a href='https://github.com/clojure/core.match/wiki/Overview'>Seq Matching</a> capabilities directly:</p>
-<div class='highlight'><pre><code class='clojure'><span class='p'>(</span><span class='nf'>use</span> <span class='o'>&#39;</span><span class='p'>[</span><span class='nv'>clojure</span><span class='o'>.</span><span class='nv'>core</span><span class='o'>.</span><span class='nv'>match</span> <span class='nv'>:only</span> <span class='p'>(</span><span class='nf'>match</span><span class='p'>)])</span>
+<div class='highlight'><pre><code class='clojure'><span class='p'>(</span><span class='nf'>use</span> <span class='o'>&#39;</span><span class='p'>[</span><span class='nv'>clojure.core.match</span> <span class='ss'>:only</span> <span class='p'>(</span><span class='nf'>match</span><span class='p'>)])</span>
 
-<span class='p'>(</span><span class='k'>defn </span><span class='nv'>-main</span> <span class='p'>[</span><span class='nv'>&amp;</span> <span class='nv'>args</span><span class='p'>]</span>
+<span class='p'>(</span><span class='kd'>defn </span><span class='nv'>-main</span> <span class='p'>[</span><span class='o'>&amp;</span> <span class='nv'>args</span><span class='p'>]</span>
     <span class='p'>(</span><span class='nb'>println </span><span class='p'>(</span><span class='nf'>match</span> <span class='p'>[</span><span class='nv'>args</span><span class='p'>]</span>
-        <span class='p'>[([</span><span class='s'>&quot;echo&quot;</span> <span class='nv'>word</span><span class='p'>]</span> <span class='nv'>:seq</span><span class='p'>)]</span> <span class='nv'>word</span>
-        <span class='nv'>:else</span> <span class='s'>&quot;Invalid command&quot;</span><span class='p'>)))</span>
-</code></pre>
-</div>
+        <span class='p'>[([</span><span class='s'>&quot;echo&quot;</span> <span class='nv'>word</span><span class='p'>]</span> <span class='ss'>:seq</span><span class='p'>)]</span> <span class='nv'>word</span>
+        <span class='ss'>:else</span> <span class='s'>&quot;Invalid command&quot;</span><span class='p'>)))</span>
+</code></pre></div>
 <p>Note the differences:</p>
 
 <ol>

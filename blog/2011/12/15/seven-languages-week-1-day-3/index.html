@@ -109,8 +109,7 @@
     <span class='k'>end</span>
   <span class='k'>end</span>
 <span class='k'>end</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>The implementation is fairly short: they create a basic XML class in only 53 well-commented lines. If you&#8217;re interested, the code examples are available for inspection from <a href='http://www.davidflanagan.com/rpl/'>David Flanagan&#8217;s website</a>. For convenience, here is a link <a href='/RPL_XML.txt'>directly to this snippet of code</a>.</p>
 <h3>Mixins</h3>
 <p>Mixins are a way for a class to include code from a module inside itself. Imagine a class including a module with a <code>Meow()</code> method. This would let you call <code>Meow()</code> on any instance of that class. Combined with open classes and the ability to add or change methods at runtime, this makes it easy to package and use code that changes code.</p>
@@ -134,8 +133,7 @@
     <span class='n'>content_index</span> <span class='o'>=</span> <span class='vi'>@header_row</span><span class='o'>.</span><span class='n'>index</span><span class='p'>(</span><span class='nb'>name</span><span class='o'>.</span><span class='n'>to_s</span><span class='p'>)</span>
     <span class='k'>return</span> <span class='vi'>@content_row</span><span class='o'>[</span><span class='n'>content_index</span><span class='o'>]</span>
 <span class='k'>end</span>
-</code></pre>
-</div>
+</code></pre></div>
 <h2 id='full_solution'>Full solution</h2>
 
 <p>Here is a nicely formatted version of my solution to the exercise from Day 3 of Ruby. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-1-ruby/day3.rb'>on github</a> with the other exercises.</p>
@@ -205,9 +203,7 @@
 
 <span class='n'>csv</span> <span class='o'>=</span> <span class='no'>RubyCsv</span><span class='o'>.</span><span class='n'>new</span>
 <span class='n'>csv</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span><span class='o'>|</span><span class='n'>row</span><span class='o'>|</span> <span class='nb'>puts</span> <span class='n'>row</span><span class='o'>.</span><span class='n'>one</span><span class='p'>}</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output (given the sample file in my github repo)</div> 
@@ -225,9 +221,7 @@ emperor palpatine
 darth sidious
 bail organa
 vader
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 </div>

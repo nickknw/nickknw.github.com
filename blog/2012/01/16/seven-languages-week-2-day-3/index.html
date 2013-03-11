@@ -108,16 +108,15 @@
 <h3>Forward</h3>
 <p>This is a simple stripped down chunk from the XML DSL example from the book. It lets you make a rudimentary XML DSL. The following section of code will turn <code>Builder div</code> into <code>&lt;div&gt;&lt;/div&gt;</code>. The downside is, it will also turn <code>Builder
 span</code> into <code>&lt;div&gt;&lt;/div&gt;</code>!</p>
-<div class='highlight'><pre><code class='io'><span class='n'>Builder</span> <span class='o'>:=</span> <span class='n'>Object</span> <span class='k'>clone</span>
+<div class='highlight'><pre><code class='io'><span class='n'>Builder</span> <span class='o'>:=</span> <span class='nb'>Object</span> <span class='k'>clone</span>
 
 <span class='n'>Builder</span> <span class='n'>forward</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
     <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot;&lt;div&gt;&quot;</span><span class='o'>)</span>
     <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot;&lt;/div&gt;&quot;</span><span class='o'>)</span>
 <span class='o'>)</span>
-</code></pre>
-</div><h3>Reflection</h3>
+</code></pre></div><h3>Reflection</h3>
 <p>Reflection in Io was covered in Day 2 of the book, but it is an important part of this example. It provides the ability to access the <em>name of the message</em> that was sent with <code>call message name</code>. It also lets us start nesting calls by passing another function call as an argument. This example is complete enough that we can do <code>Builder ul(li(&quot;One&quot;), li(&quot;Two&quot;), li(&quot;Three&quot;))</code> and it will correctly print out <code>&lt;ul&gt;&lt;li&gt;One&lt;/li&gt;&lt;li&gt;Two&lt;/li&gt;&lt;li&gt;Three&lt;/li&gt;&lt;/ul&gt;</code>.</p>
-<div class='highlight'><pre><code class='io'><span class='n'>Builder</span> <span class='o'>:=</span> <span class='n'>Object</span> <span class='k'>clone</span>
+<div class='highlight'><pre><code class='io'><span class='n'>Builder</span> <span class='o'>:=</span> <span class='nb'>Object</span> <span class='k'>clone</span>
 
 <span class='n'>Builder</span> <span class='n'>forward</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
     <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot;&lt;&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>)</span>
@@ -126,8 +125,7 @@ span</code> into <code>&lt;div&gt;&lt;/div&gt;</code>!</p>
         <span class='n'>content</span> <span class='o'>:=</span> <span class='n'>self</span> <span class='n'>doMessage</span><span class='o'>(</span><span class='n'>arg</span><span class='o'>);</span>
         <span class='k'>if</span><span class='o'>(</span><span class='n'>content</span> <span class='n'>type</span> <span class='o'>==</span> <span class='s'>&quot;Sequence&quot;</span><span class='o'>,</span> <span class='n'>write</span><span class='o'>(</span><span class='n'>content</span><span class='o'>)))</span>
     <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot;&lt;/&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>))</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>Let&#8217;s go over that middle chunk that begins with <code>call message arguments</code>. Just as <code>call message name</code> will return the name, <code>call message arguments</code> returns a list of the arguments. We iterate over that list with <code>foreach</code>, and for each <code>arg</code> we do two things:</p>
 
 <ol>
@@ -143,16 +141,14 @@ span</code> into <code>&lt;div&gt;&lt;/div&gt;</code>!</p>
 <span class='n'>curlyBrackets</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
     <span class='n'>call</span> <span class='n'>message</span> <span class='n'>arguments</span>
 <span class='o'>)</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>So that&#8217;s all that is required to solve that! But that isn&#8217;t the typical way to redefine operators in Io. I&#8217;ll leave you with a final example that shows you how to tell Io &#8220;when I use the <code>:</code> operator, I really want you to call the <code>atPutNumber</code> method instead&#8221;.</p>
 <div class='highlight'><pre><code class='io'><span class='n'>OperatorTable</span> <span class='n'>addAssignOperator</span><span class='o'>(</span><span class='s'>&quot;:&quot;</span><span class='o'>,</span> <span class='s'>&quot;atPutNumber&quot;</span><span class='o'>)</span>
 
-<span class='n'>Map</span> <span class='n'>atPutNumber</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+<span class='nb'>Map</span> <span class='n'>atPutNumber</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
     <span class='c1'># your code goes here</span>
 <span class='o'>)</span>
-</code></pre>
-</div>
+</code></pre></div>
 <h2 id='full_solutions'>Full solutions</h2>
 
 <p>Here is a nicely formatted version of my solutions to the exercises from Day 3 of Io. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-2-io/day3.io'>on github</a> with the other exercises.</p>
@@ -161,7 +157,7 @@ span</code> into <code>&lt;div&gt;&lt;/div&gt;</code>!</p>
 <h3>Code Given</h3>
 
 
-<div class='highlight'><pre><code class='io'><span class='n'>Builder</span> <span class='o'>:=</span> <span class='n'>Object</span> <span class='k'>clone</span>
+<div class='highlight'><pre><code class='io'><span class='n'>Builder</span> <span class='o'>:=</span> <span class='nb'>Object</span> <span class='k'>clone</span>
 
 <span class='n'>Builder</span> <span class='n'>forward</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
     <span class='n'>writeln</span><span class='o'>(</span><span class='s'>&quot;&lt;&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>)</span>
@@ -171,9 +167,7 @@ span</code> into <code>&lt;div&gt;&lt;/div&gt;</code>!</p>
         <span class='k'>if</span><span class='o'>(</span><span class='n'>content</span> <span class='n'>type</span> <span class='o'>==</span> <span class='s'>&quot;Sequence&quot;</span><span class='o'>,</span> <span class='n'>writeln</span><span class='o'>(</span><span class='n'>content</span><span class='o'>)))</span>
     <span class='n'>writeln</span><span class='o'>(</span><span class='s'>&quot;&lt;/&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>)</span>
 <span class='o'>)</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <h3>Do: </h3>
@@ -207,9 +201,7 @@ structure</div>
     <span class='n'>li</span><span class='o'>(</span><span class='s'>&quot;Lua&quot;</span><span class='o'>),</span>
     <span class='n'>li</span><span class='o'>(</span><span class='s'>&quot;JavaScript&quot;</span><span class='o'>)</span>
 <span class='o'>)</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output</div>
@@ -226,9 +218,7 @@ structure</div>
     JavaScript
   <span class='nt'>&lt;/li&gt;</span>
 <span class='nt'>&lt;/ul&gt;</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='question'><b>2.</b> Create a list syntax that uses brackets</div>
@@ -242,19 +232,15 @@ structure</div>
 <span class='o'>{</span><span class='s'>&quot;a&quot;</span><span class='o'>,</span> <span class='s'>&quot;b&quot;</span><span class='o'>,</span> <span class='s'>&quot;c&quot;</span><span class='o'>,</span> <span class='s'>&quot;d&quot;</span><span class='o'>,</span> <span class='s'>&quot;e&quot;</span><span class='o'>}</span> <span class='n'>println</span>
 
 <span class='c1'># that was unexpectedly easy and elegant. I almost feel like I&#39;ve missed something</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output</div>
 
 
-<div class='highlight'><pre><code class='io'><span class='n'>list</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span> <span class='mf'>2</span><span class='o'>,</span> <span class='mf'>3</span><span class='o'>,</span> <span class='mf'>4</span><span class='o'>,</span> <span class='mf'>5</span><span class='o'>)</span>
-<span class='n'>list</span><span class='o'>(</span><span class='s'>&quot;a&quot;</span><span class='o'>,</span> <span class='s'>&quot;b&quot;</span><span class='o'>,</span> <span class='s'>&quot;c&quot;</span><span class='o'>,</span> <span class='s'>&quot;d&quot;</span><span class='o'>,</span> <span class='s'>&quot;e&quot;</span><span class='o'>)</span>
-</code></pre>
-</div>
-
+<div class='highlight'><pre><code class='io'><span class='nb'>list</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>,</span> <span class='mf'>2</span><span class='o'>,</span> <span class='mf'>3</span><span class='o'>,</span> <span class='mf'>4</span><span class='o'>,</span> <span class='mf'>5</span><span class='o'>)</span>
+<span class='nb'>list</span><span class='o'>(</span><span class='s'>&quot;a&quot;</span><span class='o'>,</span> <span class='s'>&quot;b&quot;</span><span class='o'>,</span> <span class='s'>&quot;c&quot;</span><span class='o'>,</span> <span class='s'>&quot;d&quot;</span><span class='o'>,</span> <span class='s'>&quot;e&quot;</span><span class='o'>)</span>
+</code></pre></div>
 
 
 
@@ -263,7 +249,7 @@ structure</div>
 
 <div class='highlight'><pre><code class='io'><span class='n'>OperatorTable</span> <span class='n'>addAssignOperator</span><span class='o'>(</span><span class='s'>&quot;:&quot;</span><span class='o'>,</span> <span class='s'>&quot;atPutNumber&quot;</span><span class='o'>)</span>
 
-<span class='n'>Map</span> <span class='n'>atPutNumber</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+<span class='nb'>Map</span> <span class='n'>atPutNumber</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
     <span class='n'>self</span> <span class='n'>atPut</span><span class='o'>(</span>
         <span class='n'>call</span> <span class='n'>evalArgAt</span><span class='o'>(</span><span class='mf'>0</span><span class='o'>)</span> <span class='n'>asMutable</span> <span class='n'>removePrefix</span><span class='o'>(</span><span class='s'>&quot;\&quot;&quot;</span><span class='o'>)</span> <span class='n'>removeSuffix</span><span class='o'>(</span><span class='s'>&quot;\&quot;&quot;</span><span class='o'>),</span>
         <span class='n'>call</span> <span class='n'>evalArgAt</span><span class='o'>(</span><span class='mf'>1</span><span class='o'>)</span>
@@ -271,14 +257,14 @@ structure</div>
 <span class='o'>)</span>
         
 <span class='n'>curlyBrackets</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
-    <span class='n'>r</span> <span class='o'>:=</span> <span class='n'>Map</span> <span class='k'>clone</span>
+    <span class='n'>r</span> <span class='o'>:=</span> <span class='nb'>Map</span> <span class='k'>clone</span>
     <span class='n'>call</span> <span class='n'>message</span> <span class='n'>arguments</span> <span class='n'>foreach</span><span class='o'>(</span><span class='n'>arg</span><span class='o'>,</span>
         <span class='n'>r</span> <span class='n'>doMessage</span><span class='o'>(</span><span class='n'>arg</span><span class='o'>)</span>
     <span class='o'>)</span>
     <span class='n'>r</span>
 <span class='o'>)</span>
 
-<span class='n'>Map</span> <span class='n'>printAsAttributes</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
+<span class='nb'>Map</span> <span class='n'>printAsAttributes</span> <span class='o'>:=</span> <span class='k'>method</span><span class='o'>(</span>
     <span class='n'>self</span> <span class='n'>foreach</span><span class='o'>(</span><span class='n'>k</span><span class='o'>,</span> <span class='n'>v</span><span class='o'>,</span>
         <span class='n'>write</span><span class='o'>(</span><span class='s'>&quot; &quot;</span> <span class='o'>..</span> <span class='n'>k</span> <span class='o'>..</span> <span class='s'>&quot;=\&quot;&quot;</span> <span class='o'>..</span> <span class='n'>v</span> <span class='o'>..</span> <span class='s'>&quot;\&quot;&quot;</span><span class='o'>)</span>
     <span class='o'>)</span>
@@ -306,11 +292,9 @@ structure</div>
     <span class='n'>writeln</span><span class='o'>(</span><span class='n'>makeIndent</span><span class='o'>()</span> <span class='o'>..</span> <span class='s'>&quot;&lt;/&quot;</span><span class='o'>,</span> <span class='n'>call</span> <span class='n'>message</span> <span class='n'>name</span><span class='o'>,</span> <span class='s'>&quot;&gt;&quot;</span><span class='o'>)</span>
 <span class='o'>)</span>
 
-<span class='n'>s</span> <span class='o'>:=</span> <span class='n'>File</span> <span class='n'>with</span><span class='o'>(</span><span class='s'>&quot;builderSyntax.txt&quot;</span><span class='o'>)</span> <span class='n'>openForReading</span> <span class='n'>contents</span>
+<span class='n'>s</span> <span class='o'>:=</span> <span class='nb'>File</span> <span class='n'>with</span><span class='o'>(</span><span class='s'>&quot;builderSyntax.txt&quot;</span><span class='o'>)</span> <span class='n'>openForReading</span> <span class='n'>contents</span>
 <span class='k'>doString</span><span class='o'>(</span><span class='n'>s</span><span class='o'>)</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output</div>
@@ -329,9 +313,7 @@ structure</div>
   <span class='nt'>&lt;book</span> <span class='na'>author=</span><span class='s'>&quot;Tate&quot;</span><span class='nt'>&gt;</span>
   <span class='nt'>&lt;/book&gt;</span>
 <span class='nt'>&lt;/ul&gt;</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 </div>

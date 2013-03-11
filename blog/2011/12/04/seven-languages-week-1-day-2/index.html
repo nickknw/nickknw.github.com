@@ -90,8 +90,7 @@
 <div class='highlight'><pre><code class='ruby'><span class='no'>File</span><span class='o'>.</span><span class='n'>open</span><span class='p'>(</span><span class='s2'>&quot;tmp.txt&quot;</span><span class='p'>,</span> <span class='s2'>&quot;r&quot;</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>line</span><span class='o'>|</span>
     <span class='nb'>puts</span> <span class='n'>line</span>
 <span class='p'>}</span>
-</code></pre>
-</div>
+</code></pre></div>
 <p>No need to worry about forgetting to <code>.close()</code> the file later on.</p>
 
 <h2 id='full_solutions'>Full solutions</h2>
@@ -112,24 +111,20 @@
 <span class='no'>File</span><span class='o'>.</span><span class='n'>open</span><span class='p'>(</span><span class='s2'>&quot;tmp.txt&quot;</span><span class='p'>,</span> <span class='s2'>&quot;r&quot;</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>line</span><span class='o'>|</span>
     <span class='nb'>puts</span> <span class='n'>line</span>
 <span class='p'>}</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output</div>
 
 
 <div class='highlight'><pre><code class='bash'>a spoonful is great but I<span class='err'>&#39;</span>d rather have a bowl
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='question'><b>2.</b> How would you translate a hash to an array? Can you translate arrays to hashes?</div>
 
 
-<div class='highlight'><pre><code class='ruby'><span class='n'>scores</span> <span class='o'>=</span> <span class='p'>{</span> <span class='n'>gary</span><span class='p'>:</span> <span class='mi'>5</span><span class='p'>,</span> <span class='n'>nick</span><span class='p'>:</span> <span class='mi'>11</span><span class='p'>,</span> <span class='n'>ted</span><span class='p'>:</span> <span class='mi'>8</span><span class='p'>,</span> <span class='n'>the_dude</span><span class='p'>:</span><span class='mi'>9</span> <span class='p'>}</span>
+<div class='highlight'><pre><code class='ruby'><span class='n'>scores</span> <span class='o'>=</span> <span class='p'>{</span> <span class='ss'>gary</span><span class='p'>:</span> <span class='mi'>5</span><span class='p'>,</span> <span class='ss'>nick</span><span class='p'>:</span> <span class='mi'>11</span><span class='p'>,</span> <span class='ss'>ted</span><span class='p'>:</span> <span class='mi'>8</span><span class='p'>,</span> <span class='n'>the_dude</span><span class='p'>:</span><span class='mi'>9</span> <span class='p'>}</span>
 <span class='nb'>print</span> <span class='s2'>&quot;hash: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='n'>scores</span>
 <span class='nb'>print</span> <span class='s2'>&quot;array1: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='n'>scores</span><span class='o'>.</span><span class='n'>to_a</span>
 <span class='nb'>print</span> <span class='s2'>&quot;array2: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='n'>scores</span><span class='o'>.</span><span class='n'>to_a</span><span class='o'>.</span><span class='n'>flatten</span>
@@ -141,9 +136,7 @@
 <span class='nb'>print</span> <span class='s2'>&quot;array2 to hash again 1: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='no'>Hash</span><span class='o'>[</span><span class='n'>scores_array2</span><span class='o'>]</span>
 <span class='nb'>print</span> <span class='s2'>&quot;array2 to hash again 2: &quot;</span><span class='p'>;</span> <span class='nb'>p</span> <span class='no'>Hash</span><span class='o'>[*</span><span class='n'>scores_array2</span><span class='o'>]</span>
 <span class='nb'>puts</span> <span class='s2'>&quot;Yup.&quot;</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output</div>
@@ -157,9 +150,7 @@ array1 to <span class='nb'>hash </span>again 2: <span class='o'>{</span>:gary<sp
 array2 to <span class='nb'>hash </span>again 1: <span class='o'>{}</span>
 array2 to <span class='nb'>hash </span>again 2: <span class='o'>{</span>:gary<span class='o'>=</span>&gt;5, :nick<span class='o'>=</span>&gt;11, :ted<span class='o'>=</span>&gt;8, :the_dude<span class='o'>=</span>&gt;9<span class='o'>}</span>
 Yup.
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='question'><b>3.</b> Can you iterate through a hash?</div>
@@ -167,9 +158,7 @@ Yup.
 
 <div class='highlight'><pre><code class='ruby'><span class='n'>scores</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>key</span><span class='p'>,</span> <span class='n'>value</span><span class='o'>|</span> <span class='nb'>puts</span> <span class='s2'>&quot;key:&#39;</span><span class='si'>#{</span><span class='n'>key</span><span class='si'>}</span><span class='s2'>&#39;, value:&#39;</span><span class='si'>#{</span><span class='n'>value</span><span class='si'>}</span><span class='s2'>&#39;&quot;</span> <span class='p'>}</span>
 <span class='nb'>puts</span> <span class='s2'>&quot;Yup.&quot;</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output</div>
@@ -180,9 +169,7 @@ key:<span class='s1'>&#39;nick&#39;</span>, value:<span class='s1'>&#39;11&#39;<
 key:<span class='s1'>&#39;ted&#39;</span>, value:<span class='s1'>&#39;8&#39;</span>
 key:<span class='s1'>&#39;the_dude&#39;</span>, value:<span class='s1'>&#39;9&#39;</span>
 Yup.
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='question'><b>4.</b> You can use Ruby arrays as stacks. What other common data structures to arrays support?</div>
@@ -214,9 +201,7 @@ Yup.
 <span class='n'>matrix</span> <span class='o'>=</span> <span class='o'>[[</span><span class='mi'>1</span><span class='p'>,</span><span class='mi'>2</span><span class='p'>,</span><span class='mi'>3</span><span class='o'>]</span><span class='p'>,</span><span class='o'>[</span><span class='mi'>4</span><span class='p'>,</span><span class='mi'>5</span><span class='p'>,</span><span class='mi'>6</span><span class='o'>]</span><span class='p'>,</span><span class='o'>[</span><span class='mi'>7</span><span class='p'>,</span><span class='mi'>8</span><span class='p'>,</span><span class='mi'>9</span><span class='o'>]]</span>
 <span class='nb'>p</span> <span class='n'>matrix</span>
 <span class='nb'>p</span> <span class='n'>matrix</span><span class='o'>.</span><span class='n'>transpose</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output</div>
@@ -241,9 +226,7 @@ removed: c
 <span class='o'>(</span>rudimentary<span class='o'>)</span> matrix:
 <span class='o'>[[</span>1, 2, 3<span class='o'>]</span>, <span class='o'>[</span>4, 5, 6<span class='o'>]</span>, <span class='o'>[</span>7, 8, 9<span class='o'>]]</span>
 <span class='o'>[[</span>1, 4, 7<span class='o'>]</span>, <span class='o'>[</span>2, 5, 8<span class='o'>]</span>, <span class='o'>[</span>3, 6, 9<span class='o'>]]</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 
@@ -259,9 +242,7 @@ removed: c
 <span class='nb'>puts</span> <span class='s2'>&quot;and&quot;</span>
 
 <span class='n'>sixteen_numbers</span><span class='o'>.</span><span class='n'>each_slice</span><span class='p'>(</span><span class='mi'>4</span><span class='p'>)</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>slice</span><span class='o'>|</span> <span class='nb'>p</span> <span class='n'>slice</span> <span class='p'>}</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output</div>
@@ -276,9 +257,7 @@ and
 <span class='o'>[</span>5, 6, 7, 8<span class='o'>]</span>
 <span class='o'>[</span>9, 10, 11, 12<span class='o'>]</span>
 <span class='o'>[</span>13, 14, 15, 16<span class='o'>]</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 
@@ -324,9 +303,7 @@ and
 
 <span class='n'>tree_test</span><span class='o'>.</span><span class='n'>visit_all</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>node</span><span class='o'>|</span> <span class='nb'>p</span> <span class='n'>node</span><span class='o'>.</span><span class='n'>node_name</span> <span class='p'>}</span>
 <span class='n'>tree_test2</span><span class='o'>.</span><span class='n'>visit_all</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>node</span><span class='o'>|</span> <span class='nb'>p</span> <span class='n'>node</span><span class='o'>.</span><span class='n'>node_name</span> <span class='p'>}</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output</div>
@@ -338,9 +315,7 @@ and
 <span class='s2'>&quot;Ruby&quot;</span>
 <span class='s2'>&quot;Reia&quot;</span>
 <span class='s2'>&quot;MacRuby&quot;</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 
@@ -355,9 +330,7 @@ and
 <span class='k'>end</span>
 
 <span class='n'>rbgrep</span><span class='p'>(</span><span class='s2'>&quot;guitar&quot;</span><span class='p'>,</span> <span class='s2'>&quot;wikipedia_page.txt&quot;</span><span class='p'>)</span>
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 <div class='tiny_title'>Output</div>
@@ -369,9 +342,7 @@ and
 <span class='s1'>55: orchestral backing and a consistent vocal and guitar layering throughout.[9]</span>
 <span class='s1'>87: Blind Guardian&#39;</span>s music features the staccato guitars and double bass drumming
 90: the guitar and vocal tracks, creates the impression of a vast army of musicians
-</code></pre>
-</div>
-
+</code></pre></div>
 
 
 </div>
