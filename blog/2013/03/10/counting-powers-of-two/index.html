@@ -104,7 +104,7 @@
 4000 and 96
 8000 and 192</code></pre>
 
-<p>There&#8217;s an interesting relationship between the thousands digit and the rest, do you see it yet?</p>
+<p>There&#8217;s an interesting relationship between the thousands digit and the rest (well, there&#8217;s a few), do you see any yet?</p>
 
 <p>What if I represent it like this:</p>
 
@@ -113,22 +113,33 @@
 4000 + (100 - 4)
 8000 + (200 - 8)</code></pre>
 
-<p>You can just keep on going, doubling both numbers and subtracting the thousands digit from the other number. But what does this look like if you generalize it one step more&#8230;?</p>
+<p>You can just keep on going, doubling both numbers and subtracting the thousands digit from the other number. It is a pretty quick mental operation to double 200 and subtract 16. This isn&#8217;t the only way to express this relationship though:</p>
 
-<h2 id='the_formula'>The Formula</h2>
+<pre><code>1000 + (24 * 1)
+2000 + (24 * 2)
+4000 + (24 * 4)
+8000 + (24 * 8)</code></pre>
+
+<p>It&#8217;s a simpler expression of the relationship but lacks the calculation shortcut the first one has. So what does these look like if you generalize them one step more&#8230;?</p>
+
+<h2 id='the_formulas'>The Formulas</h2>
 
 <p>Where <code>x</code> represents the thousands digits and is equal to 1 or greater (multiple digits work fine but substituting 0 in doesn&#8217;t end up making any sense):</p>
 
 <pre><code>(x * 1000) + ((25 * x) - x)</code></pre>
 
+<p>This can be simplified to:</p>
+
+<pre><code>(x * 1000) + (24 * x)</code></pre>
+
 <p>An interesting benefit is that now you can answer the question &#8220;Okay, <code>64kB</code>&#8230; 64 thousand and <em>how many</em> bytes?&#8221;</p>
 
-<p>Well using our formula it is <code>(25 * 64) - 64</code> bytes, but that&#8217;s easier to do with rounder numbers so let&#8217;s multiply <code>25</code> by <code>4</code> and divide <code>64</code> by <code>4</code> to get <code>100 * 16</code>. Way easier, that&#8217;s <code>1,600</code>. Now the subtraction: <code>1,600 - 64 =
-1,536</code>. The answer is 64 thousand and <code>1,536</code> bytes, or <code>65,536</code> bytes. For those like me who were wondering, that&#8217;s 2<sup>16</sup>!</p>
+<p>Well using the first formula it is <code>(25 * 64) - 64</code> bytes, but that&#8217;s easier to do with rounder numbers. The number you&#8217;re multiplying 25 by will always be easily divisible by 4 <sup><strong>note 1</strong></sup> and 100 is easier to multiply by than 25, so let&#8217;s multiply 25 by 4 and divide 64 by 4 to get <code>100 * 16</code>. It&#8217;s easy to instantly see that&#8217;s <code>1,600</code>. Now the subtraction: <code>1,600 - 64 = 1,536</code>. The answer is 64 thousand and <code>1,536</code> bytes, or <code>65,536</code> bytes. For those like me who were wondering, that&#8217;s 2<sup>16</sup>!</p>
 
 <h2 id='in_closing'>In Closing</h2>
 
 <p>I feel like this formula is only partway to somewhere - sure it&#8217;s a neat pattern but it is a bit awkward. I&#8217;d love to hear about any more cool patterns or neat mathematical tricks, if you know any and would like to share!</p>
+<p><strong>note 1</strong> - Unless it's smaller than 4 in which case it doesn't matter, don't get too pedantic on me :)</p>
 </div>
 
 
