@@ -1,0 +1,560 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="I have to admit Day 1 of Scala was a bit of a relief. Forcing myself to think through the perspective of Prolog was">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:url" content="http://nickknowlson.com/blog/2013/03/28/seven-languages-week-4-day-1/">
+        <meta name="twitter:title" content="Seven Languages: Week 4 (Scala) - Day 1">
+        <meta name="twitter:description" content="I have to admit Day 1 of Scala was a bit of a relief. Forcing myself to think through the perspective of Prolog was">
+        <meta name="twitter:image" content="http://nickknowlson.com/img/logos/logox50.png">
+        <meta name="twitter:site" content="@nickknw">
+
+        <meta property="og:title" content="Seven Languages: Week 4 (Scala) - Day 1" >
+        <meta property="og:type" content="article" >
+        <meta property="og:image" content="http://nickknowlson.com/img/logos/logox200.png" >
+        <meta property="og:url" content="http://nickknowlson.com/blog/2013/03/28/seven-languages-week-4-day-1/">
+        <meta property="og:site_name" content="Nick Knowlson dot com">
+        <meta property="og:description" content="I have to admit Day 1 of Scala was a bit of a relief. Forcing myself to think through the perspective of Prolog was">
+        <meta property="fb:app_id" content="https://www.facebook.com/nick.knowlson">
+
+        <title>Seven Languages: Week 4 (Scala) - Day 1 - Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/site.css" >
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="/favicon.ico" >
+        <link href="http://feeds.feedburner.com/NickKnowlson" type="application/atom+xml" rel="alternate" title="Blog ATOM Feed" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        if (typeof jQuery == 'undefined')
+        {
+            document.write(decodeURIComponent("%3Cscript src='/js/jquery-1.6.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+        }
+        </script>
+        
+
+        
+        <script type="text/javascript">
+        // TODO: convert to css hover sometime
+        $(document).ready(function () {
+            $("#rss-nav-icon img").hover(function () {
+                $(this).attr("src","/img/rss-icon-lit.png");
+            }, function() {
+                $(this).attr("src","/img/rss-icon-dim.png");
+            });
+            $("#twitter-nav-icon img").hover(function () {
+                $(this).attr("src","/img/twitter-icon-lit.png");
+            }, function() {
+                $(this).attr("src","/img/twitter-icon-dim.png");
+            });
+        });
+        </script>
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+
+          if (document.location.hostname !== "localhost") {
+              _gaq.push(['_setAccount', 'UA-24781362-1']);
+              _gaq.push(['_trackPageview']);
+
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+          }
+        </script>
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logos/logo6.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class=" nav-link" href="/">Home</a></li>
+                <li><a class=" nav-link" href="/about/">About</a></li>
+                <li><a class=" nav-link" href="/projects/">Projects</a></li>
+                <li><a class="selected nav-link" href="/blog/">Blog</a></li>
+                <li><a class=" nav-link" href="/contact/">Contact</a></li>
+                <li><a id="rss-nav-icon" href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/rss-icon-dim.png" /></a></li>
+                <li><a id="twitter-nav-icon" href="http://twitter.com/#!/nickknw"><img src="/img/twitter-icon-dim.png" /></a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div id="content-padding">
+                <a href="/blog/archive/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Seven Languages: Week 4 (Scala) - Day 1</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">28 Mar 2013</div>
+<div id="post">
+<p>I have to admit Day 1 of Scala was a bit of a relief. Forcing myself to think through the perspective of Prolog was enlightening but still a bit of a struggle. It&#8217;s nice to come back to paradigms I&#8217;m familiar with again. Scala is a hybrid language, with great support for both object-oriented and functional programming, both of which I&#8217;m fairly comfortable with.</p>
+
+<p>That&#8217;s not to say everything went smoothly however - danger lies in overfamiliarity. At first I was writing Java in Scala, then when I tried to fix it I realized I was now trying to write Haskell in Scala. Neither approach felt very good.</p>
+
+<p>The beauty of Scala (in my eyes) is its flexibility and practicality. It pushes you towards immutability and is capable of very succinct functional code, but it also has that mutable imperative escape hatch, and a good set of tools for working with problems that suit code like that. It will let you write in the style that is most appropriate for the problem you are trying to solve.</p>
+
+<p>The collection libraries in 2.8+ also deserve special mention: a lot of work has been put into them and it shows!</p>
+<div class='interjection'><p>
+(This article is part of a series of posts I am doing about my journey through the exercises of the book <a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages In Seven Weeks</a>. The article previous to this one is <a href='/blog/2012/08/06/seven-languages-week-3-day-3/'>Week 3 (Prolog) - Day 3</a>. For an overview see the <a href='/projects/seven-languages-in-seven-weeks/'>project page</a>.)
+</p></div>
+<h2 id='topics_covered'>Topics Covered</h2>
+<h3>Syntax</h3>
+<p>In Day 1 we went over the basics of Scala syntax and some object-oriented features. Scala is loosely based around traditional C-style curly brace syntax with some helpful differences. The first is that you don&#8217;t need semicolons at the end of the line, woohoo! Also, in <a href='http://docs.scala-lang.org/style/method-invocation.html#suffix_notation'>certain situations</a> you can use whitespace instead of a <code>.</code> for method calls, Haskell-style.</p>
+
+<p>In order to declare a variable, you must make a choice right away whether you want it to be immutable or not. Declarations using <code>val</code> are immutable, declarations using <code>var</code> are mutable. There are mutable and immutable versions of most of the collections in the standard library as well, but the default is immutable (you need to be explicit if you want mutable versions). As someone who is a fan of Haskell and made generous use of <code>final</code> in Java, I really appreciate making it so easy to use immutability in Scala.</p>
+
+<p>Another couple of differences have to do with type information. Type information is now attached to variables with a colon and is optional in many cases (when it can be inferred from context).</p>
+<div class='highlight'><pre><code class='scala'><span class='k'>val</span> <span class='n'>i</span><span class='k'>:</span> <span class='kt'>Int</span> <span class='o'>=</span> <span class='mi'>1</span>  <span class='c1'>// explicit type info</span>
+<span class='k'>val</span> <span class='n'>i</span> <span class='k'>=</span> <span class='mi'>1</span>       <span class='c1'>// using type inference</span>
+</code></pre></div>
+<p>Scala also has <a href='http://www.matthicks.com/2009/10/loops-in-scala.html'>several helpful looping constructs</a>, <a href='http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Range'>ranges</a>, and <a href='http://codemonkeyism.com/tuples-scala-goodness/'>tuples</a>, but I don&#8217;t want to focus on them right now. Moving on!</p>
+<h3>Object-Oriented Features</h3><h4>Classes and Companion Objects</h4>
+<p>Like any good object-oriented language Scala has classes, where you can put your state and instance methods. Static methods (class methods if you prefer) are treated a bit differently - they must all reside in a static Companion Object. This is unusual but I&#8217;ve found the separation kind of nice so far. Here&#8217;s a stripped-down version of my TicTacToeBoard class from the exercise:</p>
+
+<p>(Heads up: this example depends on a few classes (Player, X, O, Blank) that are defined below under &#8216;Case Classes&#8217;)</p>
+<div class='highlight'><pre><code class='scala'><span class='k'>class</span> <span class='nc'>TicTacToeBoard</span><span class='o'>(</span><span class='n'>board</span> <span class='k'>:</span> <span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]])</span> <span class='o'>{</span>
+
+    <span class='k'>val</span> <span class='n'>rowCount</span> <span class='k'>=</span> <span class='n'>board</span><span class='o'>.</span><span class='n'>length</span>
+    <span class='k'>val</span> <span class='n'>columnCount</span> <span class='k'>=</span> <span class='k'>if</span> <span class='o'>(</span><span class='n'>board</span><span class='o'>.</span><span class='n'>isEmpty</span><span class='o'>)</span> <span class='mi'>0</span> <span class='k'>else</span> <span class='n'>board</span><span class='o'>(</span><span class='mi'>0</span><span class='o'>).</span><span class='n'>length</span>
+
+    <span class='k'>def</span> <span class='n'>validMove</span><span class='o'>(</span><span class='n'>row</span> <span class='k'>:</span> <span class='kt'>Int</span><span class='o'>,</span> <span class='n'>col</span> <span class='k'>:</span> <span class='kt'>Int</span><span class='o'>)</span> <span class='k'>:</span> <span class='kt'>Boolean</span> <span class='o'>=</span> <span class='o'>{</span>
+        <span class='k'>return</span> <span class='n'>row</span> <span class='o'>&lt;</span> <span class='n'>rowCount</span> <span class='o'>&amp;&amp;</span> <span class='n'>row</span> <span class='o'>&gt;=</span> <span class='mi'>0</span> <span class='o'>&amp;&amp;</span> <span class='n'>col</span> <span class='o'>&lt;</span> <span class='n'>columnCount</span> <span class='o'>&amp;&amp;</span> <span class='n'>col</span> <span class='o'>&gt;=</span> <span class='mi'>0</span> <span class='o'>&amp;&amp;</span> <span class='n'>board</span><span class='o'>(</span><span class='n'>row</span><span class='o'>)(</span><span class='n'>col</span><span class='o'>)</span> <span class='o'>==</span> <span class='nc'>Blank</span>
+    <span class='o'>}</span>
+<span class='o'>}</span>
+
+<span class='k'>object</span> <span class='nc'>TicTacToeBoard</span> <span class='o'>{</span>
+    <span class='k'>def</span> <span class='n'>getPlayersFromString</span><span class='o'>(</span><span class='n'>row</span> <span class='k'>:</span> <span class='kt'>String</span><span class='o'>)</span> <span class='k'>:</span> <span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]</span> <span class='k'>=</span> <span class='o'>{</span>
+        <span class='n'>row</span><span class='o'>.</span><span class='n'>map</span><span class='o'>(</span><span class='n'>char</span> <span class='k'>=&gt;</span> <span class='o'>{</span> 
+            <span class='k'>if</span><span class='o'>(</span><span class='n'>char</span> <span class='o'>==</span> <span class='-Symbol'>&#39;X</span><span class='err'>&#39;</span><span class='o'>)</span> <span class='n'>X</span> <span class='k'>:</span> <span class='kt'>Player</span> 
+            <span class='k'>else</span> <span class='k'>if</span><span class='o'>(</span><span class='n'>char</span> <span class='o'>==</span> <span class='-Symbol'>&#39;O</span><span class='err'>&#39;</span><span class='o'>)</span> <span class='n'>O</span> <span class='k'>:</span> <span class='kt'>Player</span> 
+            <span class='k'>else</span> <span class='nc'>Blank</span> <span class='k'>:</span> <span class='kt'>Player</span> <span class='o'>}</span> 
+        <span class='o'>).</span><span class='n'>toArray</span>
+    <span class='o'>}</span>
+<span class='o'>}</span>
+</code></pre></div>
+<p>You could use this class like so:</p>
+<div class='highlight'><pre><code class='scala'><span class='k'>val</span> <span class='n'>board</span> <span class='k'>=</span> <span class='k'>new</span> <span class='nc'>TicTacToeBoard</span><span class='o'>(</span><span class='nc'>Array</span><span class='o'>(</span>
+    <span class='s'>&quot;XOX&quot;</span><span class='o'>,</span>
+    <span class='s'>&quot;OO &quot;</span><span class='o'>,</span>
+    <span class='s'>&quot;XXO&quot;</span><span class='o'>).</span><span class='n'>map</span><span class='o'>(</span><span class='n'>row</span> <span class='k'>=&gt;</span> <span class='nc'>TicTacToeBoard</span><span class='o'>.</span><span class='n'>getPlayersFromString</span><span class='o'>(</span><span class='n'>row</span><span class='o'>)))</span>
+
+<span class='n'>println</span><span class='o'>(</span><span class='n'>board</span><span class='o'>.</span><span class='n'>validMove</span><span class='o'>(</span><span class='mi'>0</span><span class='o'>,</span> <span class='mi'>0</span><span class='o'>))</span> <span class='c1'>// false</span>
+<span class='n'>println</span><span class='o'>(</span><span class='n'>board</span><span class='o'>.</span><span class='n'>validMove</span><span class='o'>(</span><span class='mi'>1</span><span class='o'>,</span> <span class='mi'>2</span><span class='o'>))</span> <span class='c1'>// true</span>
+</code></pre></div><h4>Case Classes</h4>
+<p><a href='http://www.scala-lang.org/node/107'>Case Classes</a> are a great addition to Scala, they&#8217;re really convenient. They are basically a shortcut to define simple data holding classes with a few <a href='http://stackoverflow.com/questions/2312881/what-is-the-difference-between-scalas-case-class-and-class'>extra features</a>. The big one is that you can use case classes with pattern matching. If you&#8217;re coming from Haskell, you&#8217;ll be interested to know that they let you imitate algebraic datatypes smoothly and easily!</p>
+
+<p>Here I&#8217;m using case classes (although technically they are case objects) to represent the ownership of squares on my tic tac toe board. With this code the example above is now functional and runnable.</p>
+<div class='highlight'><pre><code class='scala'><span class='k'>sealed</span> <span class='k'>abstract</span> <span class='k'>class</span> <span class='nc'>Player</span>
+<span class='k'>case</span> <span class='k'>object</span> <span class='nc'>X</span> <span class='k'>extends</span> <span class='nc'>Player</span>
+<span class='k'>case</span> <span class='k'>object</span> <span class='nc'>O</span> <span class='k'>extends</span> <span class='nc'>Player</span>
+<span class='k'>case</span> <span class='k'>object</span> <span class='nc'>Blank</span> <span class='k'>extends</span> <span class='nc'>Player</span> <span class='o'>{</span>
+    <span class='k'>override</span> <span class='k'>def</span> <span class='n'>toString</span> <span class='k'>=</span> <span class='s'>&quot; &quot;</span>
+<span class='o'>}</span>
+</code></pre></div>
+<p>This segment of code gives me pretty much what you&#8217;d expect: three classes that share an abstract parent Player class. Since X, O, and Blank are defined using <code>object</code> this results in three singleton objects <code>X</code>, <code>O</code>, and <code>Blank</code>. I also get sensible default toString implementations for X and O, and I can pattern match against the classes (which I do in <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-4-scala/day1.scala#L112'>TicTacToeBoard.determineWinner</a>).</p>
+
+<p>Instead of interfaces Scala has <a href='http://www.scala-lang.org/node/126'>traits</a> which are great but will be talked about next post, where I will be able to show you an example from the exercise.</p>
+
+<h2 id='highlights_from_exercises'>Highlights From Exercises</h2>
+
+<p>The exercise this week was quite fun, although I did go a bit overboard with it. The aim was to create a 3x3 Tic Tac Toe game, but I thought it would be more fun to do arbitrarily large boards. I checked the rules for <a href='http://en.wikipedia.org/wiki/M,n,k-game'>m,n,k games</a> and put a few limits in so that depending on the board size you choose you&#8217;re playing <a href='http://en.wikipedia.org/wiki/Tic_Tac_Toe'>Tic Tac Toe</a>, <a href='http://en.wikipedia.org/wiki/Gomoku'>Gomoku</a>, <a href='http://en.wikipedia.org/wiki/Connect6'>Connect6</a>, or some custom variation in between.</p>
+
+<p>Unfortunately, because of this feature creep one of my favourite bits of code from this exercise is now obsolete! I had written a really simple three in a row checking function using pattern matching, and I was (still am!) quite happy with it.</p>
+
+<p>It only works if you know at compile-time how many in a row you&#8217;re checking for, so it sadly had to be replaced for me to expand to arbitrarily sized games. But here it is:</p>
+<div class='highlight'><pre><code class='scala'><span class='k'>def</span> <span class='n'>threeInARow</span><span class='o'>(</span><span class='n'>list</span> <span class='k'>:</span> <span class='kt'>List</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>])</span> <span class='k'>:</span> <span class='kt'>Option</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]</span> <span class='k'>=</span> <span class='n'>list</span> <span class='k'>match</span> <span class='o'>{</span>
+    <span class='k'>case</span> <span class='nc'>Nil</span> <span class='k'>=&gt;</span> <span class='nc'>None</span>
+    <span class='k'>case</span> <span class='n'>x</span> <span class='o'>::</span> <span class='n'>y</span> <span class='o'>::</span> <span class='n'>z</span> <span class='o'>::</span> <span class='k'>_</span> <span class='k'>if</span> <span class='n'>x</span> <span class='o'>==</span> <span class='n'>y</span> <span class='o'>&amp;&amp;</span> <span class='n'>y</span> <span class='o'>==</span> <span class='n'>z</span> <span class='o'>&amp;&amp;</span> <span class='n'>z</span> <span class='o'>!=</span> <span class='nc'>Blank</span> <span class='k'>=&gt;</span> <span class='nc'>Some</span><span class='o'>(</span><span class='n'>z</span><span class='o'>)</span>
+    <span class='k'>case</span> <span class='k'>_</span> <span class='o'>::</span> <span class='n'>tail</span> <span class='k'>=&gt;</span> <span class='n'>threeInARow</span><span class='o'>(</span><span class='n'>tail</span><span class='o'>)</span>
+<span class='o'>}</span>
+</code></pre></div>
+<p>The code behind <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-4-scala/day1.scala#L112'>determineWinner</a> is also pretty cool looking, although I don&#8217;t know enough about Scala style yet to know whether it&#8217;s good or not! Anyway, I define a local function called <code>checkForWinner</code> and the rest of the method becomes really readable:</p>
+<div class='highlight'><pre><code class='scala'><span class='n'>rows</span> <span class='n'>foreach</span> <span class='n'>checkForWinner</span>
+<span class='n'>columns</span> <span class='n'>foreach</span> <span class='n'>checkForWinner</span>
+<span class='n'>diagonalsLTR</span> <span class='n'>foreach</span> <span class='n'>checkForWinner</span>
+<span class='n'>diagonalsRTL</span> <span class='n'>foreach</span> <span class='n'>checkForWinner</span>
+
+<span class='k'>if</span><span class='o'>(</span><span class='n'>board</span><span class='o'>.</span><span class='n'>map</span><span class='o'>(</span><span class='n'>row</span> <span class='k'>=&gt;</span> <span class='n'>row</span><span class='o'>.</span><span class='n'>contains</span><span class='o'>(</span><span class='nc'>Blank</span><span class='o'>)).</span><span class='n'>contains</span><span class='o'>(</span><span class='kc'>true</span><span class='o'>))</span> <span class='o'>{</span>
+    <span class='k'>return</span> <span class='nc'>GameResult</span><span class='o'>.</span><span class='nc'>NoResult</span>
+<span class='o'>}</span>
+
+<span class='k'>return</span> <span class='nc'>GameResult</span><span class='o'>.</span><span class='nc'>Tie</span>
+</code></pre></div>
+<p>I actually went overboard in another way on this exercise - I spent a lot of time making it solid and usable. I mean, it&#8217;s just command-line Tic Tac Toe, but hopefully it&#8217;s the best damn command-line Tic Tac Toes it could be.</p>
+
+<p>Anyway, I decided it may as well have a permanent home and I gave it its own project page: <a href='/projects/arbitrarily-sized-tic-tac-toe/'>Arbitrarily-Sized Tic Tac Toe</a>!</p>
+
+<p>Here&#8217;s a peek at the regular size:</p>
+<div class='symmetrical_line_height'>
+<pre><code>
+Player X's turn.
+Enter square: (e.g. A0): a2
+
+     A   B   C   
+   ┌───┬───┬───┐
+0  │ X │ X │ O │
+   │───│───│───│
+1  │   │ O │   │
+   │───│───│───│
+2  │ X │   │   │
+   └───┴───┴───┘
+</code></pre>
+</div>
+<p>If you want to see how it handles bigger boards, go ahead and <a href='/projects/arbitrarily-sized-tic-tac-toe/'>try it out</a>!</p>
+
+<h2 id='full_solutions'>Full solutions</h2>
+
+<p>Here is a nicely formatted version of my solutions to the exercises from Day 1 of Scala. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-4-scala/day1.scala'>on github</a> with the other exercises.</p>
+<div id='formatted_solutions'>
+
+<h3>Find:</h3>
+
+<h4>1. The Scala API</h4>
+
+<p><a href='http://www.scala-lang.org/api/current/index.html'>http://www.scala-lang.org/api/current/index.html</a></p>
+
+<h4>2. A comparison of Java and Scala</h4>
+
+<ul>
+   <li>Quite a nice article, well-written, good detail level</li>
+   <ul><li><li><a href='http://www.ibm.com/developerworks/java/library/j-scala01228/index.html'>http://www.ibm.com/developerworks/java/library/j-scala01228/index.html</a></li></li></ul>
+
+   <li>Overiew/summary level comparison of Java, Scala, Groovy, Clojure</li>
+   <ul><li><li><a href='http://stackoverflow.com/questions/1314732/scala-vs-groovy-vs-clojure'>http://stackoverflow.com/questions/1314732/scala-vs-groovy-vs-clojure</a></li></li></ul>
+
+   <li>This is funny and kind of revealing, even if the question leads to a bit of a biased picture.</li>
+   <ul><li><li><a href='http://stackoverflow.com/questions/2952732/samples-of-scala-and-java-code-where-scala-code-looks-simpler-has-fewer-lines'>http://stackoverflow.com/questions/2952732/samples-of-scala-and-java-code-where-scala-code-looks-simpler-has-fewer-lines</a></li></li></ul>
+
+   <li>More low-level comparison</li>
+   <ul><li><li><a href='http://blogs.sun.com/sundararajan/entry/scala_for_java_programmers'>http://blogs.sun.com/sundararajan/entry/scala_for_java_programmers</a></li></li></ul>
+
+   <li>Some more</li>
+   <ul><li><li><a href='http://www.artima.com/scalazine/articles/scalable-language.html'>http://www.artima.com/scalazine/articles/scalable-language.html</a></li></li>
+   <li><li><a href='http://www.ibm.com/developerworks/java/library/j-scala01228/index.html'>http://www.ibm.com/developerworks/java/library/j-scala01228/index.html</a></li></li></ul>
+</ul>
+
+<h4>3. A discussion of val versus var</h4>
+
+<p><a href='http://stackoverflow.com/questions/1791408/what-is-the-difference-between-a-var-and-val-definition-in-scala'>http://stackoverflow.com/questions/1791408/what-is-the-difference-between-a-var-and-val-definition-in-scala</a></p>
+
+<h3>Do:</h3>
+
+<h4><b>1.</b> Write a game that will take a tic-tac-toe board with X, O, and blank characters and detect the winner or whether there is a tie or no winner yet.  Use classes where appropriate.</h4>
+
+
+<div class='highlight'><pre><code class='scala'><span class='c1'>// Run this file with &#39;scala -Dfile.encoding=UTF-8 day1.scala&#39;</span>
+
+<span class='k'>sealed</span> <span class='k'>abstract</span> <span class='k'>class</span> <span class='nc'>Player</span>
+<span class='k'>case</span> <span class='k'>object</span> <span class='nc'>X</span> <span class='k'>extends</span> <span class='nc'>Player</span>
+<span class='k'>case</span> <span class='k'>object</span> <span class='nc'>O</span> <span class='k'>extends</span> <span class='nc'>Player</span>
+<span class='k'>case</span> <span class='k'>object</span> <span class='nc'>Blank</span> <span class='k'>extends</span> <span class='nc'>Player</span> <span class='o'>{</span>
+    <span class='k'>override</span> <span class='k'>def</span> <span class='n'>toString</span> <span class='k'>=</span> <span class='s'>&quot; &quot;</span>
+<span class='o'>}</span>
+
+<span class='k'>object</span> <span class='nc'>GameResult</span> <span class='k'>extends</span> <span class='nc'>Enumeration</span> <span class='o'>{</span>
+    <span class='k'>type</span> <span class='kt'>GameResult</span> <span class='o'>=</span> <span class='nc'>Value</span>
+    <span class='k'>val</span> <span class='n'>X</span><span class='o'>,</span> <span class='n'>O</span><span class='o'>,</span> <span class='nc'>Tie</span><span class='o'>,</span> <span class='nc'>NoResult</span> <span class='k'>=</span> <span class='nc'>Value</span>
+
+    <span class='k'>def</span> <span class='n'>displayGameResult</span><span class='o'>(</span><span class='n'>gameResult</span><span class='k'>:</span> <span class='kt'>GameResult</span><span class='o'>)</span> <span class='k'>:</span> <span class='kt'>String</span> <span class='o'>=</span> <span class='o'>{</span>
+        <span class='k'>val</span> <span class='n'>winnerText</span> <span class='k'>=</span> <span class='s'>&quot;Player %s won!&quot;</span>
+
+        <span class='n'>gameResult</span> <span class='k'>match</span> <span class='o'>{</span>
+            <span class='k'>case</span> <span class='nc'>GameResult</span><span class='o'>.</span><span class='nc'>NoResult</span> <span class='k'>=&gt;</span> <span class='s'>&quot;No winner yet!&quot;</span>
+            <span class='k'>case</span> <span class='nc'>GameResult</span><span class='o'>.</span><span class='nc'>Tie</span> <span class='k'>=&gt;</span> <span class='s'>&quot;It&#39;s a tie!&quot;</span>
+            <span class='k'>case</span> <span class='n'>player</span> <span class='k'>=&gt;</span> <span class='n'>winnerText</span><span class='o'>.</span><span class='n'>format</span><span class='o'>(</span><span class='n'>player</span><span class='o'>)</span>
+        <span class='o'>}</span>
+    <span class='o'>}</span>
+<span class='o'>}</span>
+
+<span class='k'>class</span> <span class='nc'>TicTacToeBoard</span><span class='o'>(</span><span class='n'>board</span> <span class='k'>:</span> <span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]])</span> <span class='o'>{</span>
+
+    <span class='k'>def</span> <span class='k'>this</span><span class='o'>(</span><span class='n'>stringBoard</span><span class='k'>:</span> <span class='kt'>Array</span><span class='o'>[</span><span class='kt'>String</span><span class='o'>])</span> <span class='k'>=</span> <span class='k'>this</span><span class='o'>(</span><span class='n'>stringBoard</span><span class='o'>.</span><span class='n'>map</span><span class='o'>(</span><span class='n'>row</span> <span class='k'>=&gt;</span> <span class='nc'>TicTacToeBoard</span><span class='o'>.</span><span class='n'>getPlayersFromString</span><span class='o'>(</span><span class='n'>row</span><span class='o'>)))</span>
+    <span class='k'>def</span> <span class='k'>this</span><span class='o'>(</span><span class='n'>rows</span><span class='k'>:</span> <span class='kt'>Int</span><span class='o'>,</span> <span class='n'>cols</span><span class='k'>:</span> <span class='kt'>Int</span><span class='o'>)</span> <span class='k'>=</span> <span class='k'>this</span><span class='o'>(</span><span class='nc'>Array</span><span class='o'>.</span><span class='n'>fill</span><span class='o'>(</span><span class='n'>rows</span><span class='o'>,</span> <span class='n'>cols</span><span class='o'>)(</span><span class='nc'>Blank</span><span class='o'>)</span> <span class='k'>:</span> <span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]])</span>
+    <span class='k'>def</span> <span class='k'>this</span><span class='o'>(</span><span class='n'>size</span><span class='k'>:</span> <span class='kt'>Int</span><span class='o'>)</span> <span class='k'>=</span> <span class='k'>this</span><span class='o'>(</span><span class='n'>size</span><span class='o'>,</span> <span class='n'>size</span><span class='o'>)</span>
+
+    <span class='k'>val</span> <span class='n'>rowCount</span> <span class='k'>=</span> <span class='n'>board</span><span class='o'>.</span><span class='n'>length</span>
+    <span class='k'>val</span> <span class='n'>columnCount</span> <span class='k'>=</span> <span class='k'>if</span> <span class='o'>(</span><span class='n'>board</span><span class='o'>.</span><span class='n'>isEmpty</span><span class='o'>)</span> <span class='mi'>0</span> <span class='k'>else</span> <span class='n'>board</span><span class='o'>(</span><span class='mi'>0</span><span class='o'>).</span><span class='n'>length</span>
+    <span class='k'>val</span> <span class='n'>columnNameMapping</span> <span class='k'>=</span> <span class='o'>(</span><span class='mi'>0</span> <span class='n'>until</span> <span class='mi'>5</span><span class='o'>*</span><span class='n'>columnCount</span><span class='o'>).</span><span class='n'>map</span><span class='o'>(</span><span class='n'>n</span> <span class='k'>=&gt;</span> <span class='o'>(</span><span class='nc'>TicTacToeBoard</span><span class='o'>.</span><span class='n'>numToAlpha</span><span class='o'>(</span><span class='n'>n</span><span class='o'>),</span> <span class='n'>n</span><span class='o'>)).</span><span class='n'>toMap</span>
+
+    <span class='k'>val</span> <span class='n'>numInARowNeeded</span> <span class='k'>:</span> <span class='kt'>Int</span> <span class='o'>=</span> <span class='o'>{</span>
+        <span class='c1'>// numbers chosen rather arbitrarily by me. I looked at this: http://en.wikipedia.org/wiki/M,n,k-game</span>
+        <span class='c1'>// and tried to pick numbers that more or less made sense</span>
+        <span class='k'>if</span><span class='o'>(</span><span class='n'>rowCount</span> <span class='o'>&lt;=</span> <span class='mi'>3</span><span class='o'>||</span> <span class='n'>columnCount</span> <span class='o'>&lt;=</span> <span class='mi'>3</span><span class='o'>)</span>
+        <span class='o'>{</span>
+            <span class='c1'>// tic tac toe or bizarre tiny variants</span>
+            <span class='n'>scala</span><span class='o'>.</span><span class='n'>math</span><span class='o'>.</span><span class='n'>min</span><span class='o'>(</span><span class='n'>rowCount</span><span class='o'>,</span> <span class='n'>columnCount</span><span class='o'>)</span>
+        <span class='o'>}</span> <span class='k'>else</span> <span class='k'>if</span><span class='o'>(</span><span class='n'>rowCount</span> <span class='o'>&lt;=</span> <span class='mi'>5</span><span class='o'>)</span> <span class='o'>{</span>
+            <span class='c1'>// connect 4, sort of</span>
+            <span class='mi'>4</span>
+        <span class='o'>}</span> <span class='k'>else</span> <span class='k'>if</span><span class='o'>(</span><span class='n'>rowCount</span> <span class='o'>&lt;=</span> <span class='mi'>14</span><span class='o'>)</span> <span class='o'>{</span>
+            <span class='c1'>// gomoku</span>
+            <span class='mi'>5</span>
+        <span class='o'>}</span> <span class='k'>else</span> <span class='o'>{</span>
+            <span class='c1'>// connect6. Seems like a good place to leave it</span>
+            <span class='mi'>6</span>
+        <span class='o'>}</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>rows</span><span class='k'>:</span> <span class='kt'>Seq</span><span class='o'>[</span><span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]]</span> <span class='k'>=</span> <span class='o'>{</span>
+        <span class='k'>for</span><span class='o'>(</span><span class='n'>r</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>rowCount</span><span class='o'>)</span> 
+            <span class='k'>yield</span> <span class='n'>board</span><span class='o'>(</span><span class='n'>r</span><span class='o'>)</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>columns</span><span class='k'>:</span> <span class='kt'>Seq</span><span class='o'>[</span><span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]]</span> <span class='k'>=</span> <span class='o'>{</span>
+        <span class='k'>for</span><span class='o'>(</span><span class='n'>c</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>columnCount</span><span class='o'>)</span> <span class='k'>yield</span> <span class='o'>(</span>
+            <span class='k'>for</span><span class='o'>(</span><span class='n'>r</span> <span class='k'>&lt;-</span> <span class='o'>(</span><span class='mi'>0</span> <span class='n'>until</span> <span class='n'>rowCount</span><span class='o'>))</span> 
+                <span class='k'>yield</span> <span class='n'>board</span><span class='o'>(</span><span class='n'>r</span><span class='o'>)(</span><span class='n'>c</span><span class='o'>)).</span><span class='n'>toArray</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>diagonalsLTR</span><span class='k'>:</span> <span class='kt'>Seq</span><span class='o'>[</span><span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]]</span> <span class='k'>=</span> <span class='o'>{</span>
+        <span class='k'>for</span><span class='o'>(</span><span class='n'>offset</span> <span class='k'>&lt;-</span> <span class='o'>(</span><span class='mi'>1</span><span class='o'>-</span><span class='n'>columnCount</span><span class='o'>)</span> <span class='n'>until</span> <span class='n'>columnCount</span><span class='o'>)</span> <span class='k'>yield</span> <span class='o'>(</span>
+            <span class='k'>for</span><span class='o'>(</span><span class='n'>row</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>rowCount</span> <span class='k'>if</span> <span class='n'>offset</span> <span class='o'>+</span> <span class='n'>row</span> <span class='o'>&lt;</span> <span class='n'>columnCount</span> <span class='o'>&amp;&amp;</span> <span class='n'>offset</span> <span class='o'>+</span> <span class='n'>row</span> <span class='o'>&gt;</span> <span class='o'>-</span><span class='mi'>1</span><span class='o'>)</span>
+                <span class='k'>yield</span><span class='o'>(</span><span class='n'>board</span><span class='o'>(</span><span class='n'>row</span><span class='o'>)(</span><span class='n'>row</span><span class='o'>+</span><span class='n'>offset</span><span class='o'>))).</span><span class='n'>toArray</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>diagonalsRTL</span><span class='k'>:</span> <span class='kt'>Seq</span><span class='o'>[</span><span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]]</span>  <span class='k'>=</span> <span class='o'>{</span>
+        <span class='k'>for</span><span class='o'>(</span><span class='n'>offset</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>rowCount</span> <span class='o'>+</span> <span class='n'>rowCount</span> <span class='o'>-</span> <span class='mi'>1</span><span class='o'>)</span> <span class='k'>yield</span> <span class='o'>(</span>
+            <span class='k'>for</span><span class='o'>(</span><span class='n'>col</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>columnCount</span> <span class='k'>if</span> <span class='n'>offset</span> <span class='o'>-</span> <span class='n'>col</span> <span class='o'>&lt;</span> <span class='n'>rowCount</span> <span class='o'>&amp;&amp;</span> <span class='n'>offset</span> <span class='o'>-</span> <span class='n'>col</span> <span class='o'>&gt;</span> <span class='o'>-</span><span class='mi'>1</span><span class='o'>)</span>
+                <span class='k'>yield</span><span class='o'>(</span><span class='n'>board</span><span class='o'>(</span><span class='n'>offset</span> <span class='o'>-</span> <span class='n'>col</span><span class='o'>)(</span><span class='n'>col</span><span class='o'>))).</span><span class='n'>toArray</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>determineWinner</span> <span class='k'>:</span> <span class='kt'>GameResult.Value</span> <span class='o'>=</span> <span class='o'>{</span>
+        <span class='k'>val</span> <span class='n'>winnerText</span> <span class='k'>=</span> <span class='s'>&quot;Player %s won!&quot;</span>
+        <span class='k'>val</span> <span class='n'>checkForWinner</span> <span class='k'>=</span> <span class='o'>{</span> <span class='n'>array</span> <span class='k'>:</span> <span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]</span> <span class='k'>=&gt;</span>
+            <span class='nc'>TicTacToeBoard</span><span class='o'>.</span><span class='n'>nInARow</span><span class='o'>(</span><span class='n'>numInARowNeeded</span><span class='o'>,</span> <span class='n'>array</span><span class='o'>)</span> <span class='k'>match</span> <span class='o'>{</span>
+                <span class='k'>case</span> <span class='nc'>Some</span><span class='o'>(</span><span class='n'>player</span><span class='o'>)</span> <span class='k'>=&gt;</span> <span class='k'>return</span> <span class='n'>player</span> <span class='k'>match</span> <span class='o'>{</span> <span class='c1'>// non-local return!</span>
+                    <span class='k'>case</span> <span class='n'>X</span> <span class='k'>=&gt;</span> <span class='nc'>GameResult</span><span class='o'>.</span><span class='n'>X</span>
+                    <span class='k'>case</span> <span class='n'>O</span> <span class='k'>=&gt;</span> <span class='nc'>GameResult</span><span class='o'>.</span><span class='n'>O</span>
+                    <span class='k'>case</span> <span class='n'>other</span> <span class='k'>=&gt;</span> <span class='k'>throw</span> <span class='k'>new</span> <span class='nc'>Exception</span><span class='o'>(</span><span class='s'>&quot;Error, &#39;&quot;</span> <span class='o'>+</span> <span class='n'>other</span> <span class='o'>+</span> <span class='s'>&quot;&#39; is not a player.&quot;</span><span class='o'>)</span>
+                <span class='o'>}</span>
+                <span class='k'>case</span> <span class='nc'>None</span> <span class='k'>=&gt;</span> <span class='c1'>// do nothing</span>
+            <span class='o'>}</span>
+        <span class='o'>}</span>
+
+        <span class='n'>rows</span> <span class='n'>foreach</span> <span class='n'>checkForWinner</span>
+        <span class='n'>columns</span> <span class='n'>foreach</span> <span class='n'>checkForWinner</span>
+        <span class='n'>diagonalsLTR</span> <span class='n'>foreach</span> <span class='n'>checkForWinner</span>
+        <span class='n'>diagonalsRTL</span> <span class='n'>foreach</span> <span class='n'>checkForWinner</span>
+
+        <span class='k'>if</span><span class='o'>(</span><span class='n'>board</span><span class='o'>.</span><span class='n'>map</span><span class='o'>(</span><span class='n'>row</span> <span class='k'>=&gt;</span> <span class='n'>row</span><span class='o'>.</span><span class='n'>contains</span><span class='o'>(</span><span class='nc'>Blank</span><span class='o'>)).</span><span class='n'>contains</span><span class='o'>(</span><span class='kc'>true</span><span class='o'>))</span> <span class='o'>{</span>
+            <span class='k'>return</span> <span class='nc'>GameResult</span><span class='o'>.</span><span class='nc'>NoResult</span>
+        <span class='o'>}</span>
+
+        <span class='k'>return</span> <span class='nc'>GameResult</span><span class='o'>.</span><span class='nc'>Tie</span>
+    <span class='o'>}</span>
+
+    <span class='k'>override</span> <span class='k'>def</span> <span class='n'>toString</span> <span class='k'>:</span> <span class='kt'>String</span> <span class='o'>=</span> <span class='o'>{</span>
+        <span class='k'>var</span> <span class='n'>boardRepresentation</span> <span class='k'>=</span> <span class='s'>&quot;&quot;</span>
+
+        <span class='k'>def</span> <span class='n'>p</span> <span class='k'>=</span> <span class='o'>{</span> <span class='n'>str</span> <span class='k'>:</span> <span class='kt'>String</span> <span class='o'>=&gt;</span> <span class='n'>boardRepresentation</span> <span class='k'>=</span> <span class='n'>boardRepresentation</span><span class='o'>.</span><span class='n'>concat</span><span class='o'>(</span><span class='n'>str</span> <span class='o'>+</span> <span class='s'>&quot;\n&quot;</span><span class='o'>)</span> <span class='o'>}</span>
+
+        <span class='k'>val</span> <span class='n'>topLine</span> <span class='k'>=</span> <span class='o'>(</span><span class='mi'>1</span> <span class='n'>until</span> <span class='n'>columnCount</span><span class='o'>).</span><span class='n'>foldLeft</span><span class='o'>(</span><span class='s'>&quot;   ┌&quot;</span><span class='o'>)((</span><span class='n'>acc</span><span class='o'>,</span> <span class='n'>c</span><span class='o'>)</span> <span class='k'>=&gt;</span> <span class='n'>acc</span><span class='o'>.</span><span class='n'>concat</span><span class='o'>(</span><span class='s'>&quot;───┬&quot;</span><span class='o'>)).</span><span class='n'>concat</span><span class='o'>(</span><span class='s'>&quot;───┐&quot;</span><span class='o'>)</span>
+        <span class='k'>val</span> <span class='n'>middleLine</span> <span class='k'>=</span> <span class='o'>(</span><span class='mi'>0</span> <span class='n'>until</span> <span class='n'>columnCount</span><span class='o'>).</span><span class='n'>foldLeft</span><span class='o'>(</span><span class='s'>&quot;   │&quot;</span><span class='o'>)((</span><span class='n'>acc</span><span class='o'>,</span> <span class='n'>c</span><span class='o'>)</span> <span class='k'>=&gt;</span> <span class='n'>acc</span><span class='o'>.</span><span class='n'>concat</span><span class='o'>(</span><span class='s'>&quot;───│&quot;</span><span class='o'>))</span>
+        <span class='k'>val</span> <span class='n'>bottomLine</span> <span class='k'>=</span> <span class='o'>(</span><span class='mi'>1</span> <span class='n'>until</span> <span class='n'>columnCount</span><span class='o'>).</span><span class='n'>foldLeft</span><span class='o'>(</span><span class='s'>&quot;   └&quot;</span><span class='o'>)((</span><span class='n'>acc</span><span class='o'>,</span> <span class='n'>c</span><span class='o'>)</span> <span class='k'>=&gt;</span> <span class='n'>acc</span><span class='o'>.</span><span class='n'>concat</span><span class='o'>(</span><span class='s'>&quot;───┴&quot;</span><span class='o'>)).</span><span class='n'>concat</span><span class='o'>(</span><span class='s'>&quot;───┘&quot;</span><span class='o'>)</span>
+
+        <span class='n'>p</span><span class='o'>(</span><span class='s'>&quot;&quot;</span><span class='o'>)</span>
+        <span class='n'>p</span><span class='o'>((</span><span class='mi'>0</span> <span class='n'>until</span> <span class='n'>columnCount</span><span class='o'>).</span><span class='n'>foldLeft</span><span class='o'>(</span><span class='s'>&quot;     &quot;</span><span class='o'>)((</span><span class='n'>acc</span><span class='o'>,</span> <span class='n'>n</span><span class='o'>)</span> <span class='k'>=&gt;</span> <span class='n'>acc</span><span class='o'>.</span><span class='n'>concat</span><span class='o'>(</span><span class='s'>&quot;%-4s&quot;</span><span class='o'>.</span><span class='n'>format</span><span class='o'>(</span><span class='nc'>TicTacToeBoard</span><span class='o'>.</span><span class='n'>numToAlpha</span><span class='o'>(</span><span class='n'>n</span><span class='o'>)))))</span>
+        <span class='n'>p</span><span class='o'>(</span><span class='n'>topLine</span><span class='o'>)</span>
+        <span class='k'>for</span><span class='o'>(</span><span class='n'>r</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>rowCount</span><span class='o'>)</span> <span class='o'>{</span>
+            <span class='k'>var</span> <span class='n'>rowString</span> <span class='k'>=</span> <span class='s'>&quot;%-3d&quot;</span><span class='o'>.</span><span class='n'>format</span><span class='o'>(</span><span class='n'>r</span><span class='o'>).</span><span class='n'>concat</span><span class='o'>(</span><span class='s'>&quot;│&quot;</span><span class='o'>)</span>
+            <span class='k'>for</span><span class='o'>(</span><span class='n'>c</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>columnCount</span><span class='o'>)</span> <span class='o'>{</span>
+                <span class='n'>rowString</span> <span class='k'>=</span> <span class='n'>rowString</span><span class='o'>.</span><span class='n'>concat</span><span class='o'>(</span><span class='s'>&quot; %s │&quot;</span><span class='o'>.</span><span class='n'>format</span><span class='o'>(</span><span class='n'>board</span><span class='o'>(</span><span class='n'>r</span><span class='o'>)(</span><span class='n'>c</span><span class='o'>)))</span>
+            <span class='o'>}</span>
+            <span class='n'>p</span><span class='o'>(</span><span class='n'>rowString</span><span class='o'>)</span>
+            <span class='k'>if</span><span class='o'>(</span><span class='n'>r</span> <span class='o'>&lt;</span> <span class='n'>rowCount</span><span class='o'>-</span><span class='mi'>1</span><span class='o'>)</span> <span class='o'>{</span>
+                <span class='n'>p</span><span class='o'>(</span><span class='n'>middleLine</span><span class='o'>)</span>
+            <span class='o'>}</span>
+        <span class='o'>}</span>
+        <span class='n'>p</span><span class='o'>(</span><span class='n'>bottomLine</span><span class='o'>)</span>
+        <span class='n'>p</span><span class='o'>(</span><span class='s'>&quot;&quot;</span><span class='o'>)</span>
+
+        <span class='k'>return</span> <span class='n'>boardRepresentation</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>validMove</span><span class='o'>(</span><span class='n'>row</span> <span class='k'>:</span> <span class='kt'>Int</span><span class='o'>,</span> <span class='n'>col</span> <span class='k'>:</span> <span class='kt'>Int</span><span class='o'>)</span> <span class='k'>:</span> <span class='kt'>Boolean</span> <span class='o'>=</span> <span class='o'>{</span>
+        <span class='k'>return</span> <span class='n'>row</span> <span class='o'>&lt;</span> <span class='n'>rowCount</span> <span class='o'>&amp;&amp;</span> <span class='n'>row</span> <span class='o'>&gt;=</span> <span class='mi'>0</span> <span class='o'>&amp;&amp;</span> <span class='n'>col</span> <span class='o'>&lt;</span> <span class='n'>columnCount</span> <span class='o'>&amp;&amp;</span> <span class='n'>col</span> <span class='o'>&gt;=</span> <span class='mi'>0</span> <span class='o'>&amp;&amp;</span> <span class='n'>board</span><span class='o'>(</span><span class='n'>row</span><span class='o'>)(</span><span class='n'>col</span><span class='o'>)</span> <span class='o'>==</span> <span class='nc'>Blank</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>update</span><span class='o'>(</span><span class='n'>row</span> <span class='k'>:</span> <span class='kt'>Int</span><span class='o'>,</span> <span class='n'>col</span> <span class='k'>:</span> <span class='kt'>Int</span><span class='o'>,</span> <span class='n'>player</span> <span class='k'>:</span> <span class='kt'>Player</span><span class='o'>)</span> <span class='k'>=</span> <span class='o'>{</span>
+        <span class='n'>board</span><span class='o'>(</span><span class='n'>row</span><span class='o'>)(</span><span class='n'>col</span><span class='o'>)</span> <span class='k'>=</span> <span class='n'>player</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>columnNumber</span><span class='o'>(</span><span class='n'>columnName</span> <span class='k'>:</span> <span class='kt'>String</span><span class='o'>)</span> <span class='k'>:</span> <span class='kt'>Int</span> <span class='o'>=</span> <span class='o'>{</span>
+        <span class='k'>return</span> <span class='n'>columnNameMapping</span><span class='o'>(</span><span class='n'>columnName</span><span class='o'>)</span>
+    <span class='o'>}</span>
+<span class='o'>}</span>
+
+<span class='k'>object</span> <span class='nc'>TicTacToeBoard</span> <span class='o'>{</span>
+
+    <span class='k'>def</span> <span class='n'>numToAlpha</span><span class='o'>(</span><span class='n'>number</span> <span class='k'>:</span> <span class='kt'>Int</span><span class='o'>)</span> <span class='k'>:</span> <span class='kt'>String</span> <span class='o'>=</span> <span class='o'>{</span>
+        <span class='k'>var</span> <span class='n'>dividend</span> <span class='k'>=</span> <span class='n'>number</span> <span class='o'>+</span> <span class='mi'>1</span> <span class='c1'>// internally, treat 1 as A - just makes it easier</span>
+        <span class='k'>var</span> <span class='n'>letters</span> <span class='k'>=</span> <span class='s'>&quot;&quot;</span>
+        <span class='k'>var</span> <span class='n'>modulo</span> <span class='k'>=</span> <span class='mi'>0</span>
+
+        <span class='k'>while</span><span class='o'>(</span><span class='n'>dividend</span> <span class='o'>&gt;</span> <span class='mi'>0</span><span class='o'>)</span> <span class='o'>{</span>
+            <span class='n'>modulo</span> <span class='k'>=</span> <span class='o'>(</span><span class='n'>dividend</span> <span class='o'>-</span> <span class='mi'>1</span><span class='o'>)</span> <span class='o'>%</span> <span class='mi'>26</span>
+            <span class='n'>letters</span> <span class='k'>=</span> <span class='o'>(</span><span class='mi'>65</span> <span class='o'>+</span> <span class='n'>modulo</span><span class='o'>).</span><span class='n'>toChar</span> <span class='o'>+</span> <span class='n'>letters</span>
+            <span class='n'>dividend</span> <span class='k'>=</span> <span class='o'>(</span><span class='n'>dividend</span> <span class='o'>-</span> <span class='n'>modulo</span><span class='o'>)</span> <span class='o'>/</span> <span class='mi'>26</span>
+        <span class='o'>}</span>
+
+        <span class='k'>return</span> <span class='n'>letters</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>getPlayersFromString</span><span class='o'>(</span><span class='n'>row</span> <span class='k'>:</span> <span class='kt'>String</span><span class='o'>)</span> <span class='k'>:</span> <span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]</span> <span class='k'>=</span> <span class='o'>{</span>
+        <span class='n'>row</span><span class='o'>.</span><span class='n'>map</span><span class='o'>(</span><span class='n'>char</span> <span class='k'>=&gt;</span> <span class='o'>{</span> <span class='k'>if</span><span class='o'>(</span><span class='n'>char</span> <span class='o'>==</span> <span class='-Symbol'>&#39;X</span><span class='err'>&#39;</span><span class='o'>)</span> <span class='n'>X</span> <span class='k'>:</span> <span class='kt'>Player</span> <span class='kt'>else</span> <span class='kt'>if</span><span class='o'>(</span><span class='kt'>char</span> <span class='o'>==</span> <span class='-Symbol'>&#39;O</span><span class='err'>&#39;</span><span class='o'>)</span> <span class='n'>O</span> <span class='k'>:</span> <span class='kt'>Player</span> <span class='kt'>else</span> <span class='kt'>Blank</span> <span class='kt'>:</span> <span class='kt'>Player</span> <span class='o'>}</span> <span class='o'>).</span><span class='n'>toArray</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>threeInARow</span><span class='o'>(</span><span class='n'>list</span> <span class='k'>:</span> <span class='kt'>List</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>])</span> <span class='k'>:</span> <span class='kt'>Option</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]</span> <span class='k'>=</span> <span class='n'>list</span> <span class='k'>match</span> <span class='o'>{</span>
+        <span class='k'>case</span> <span class='nc'>Nil</span> <span class='k'>=&gt;</span> <span class='nc'>None</span>
+        <span class='k'>case</span> <span class='n'>x</span> <span class='o'>::</span> <span class='n'>y</span> <span class='o'>::</span> <span class='n'>z</span> <span class='o'>::</span> <span class='n'>tail</span> <span class='k'>if</span> <span class='n'>x</span> <span class='o'>==</span> <span class='n'>y</span> <span class='o'>&amp;&amp;</span> <span class='n'>y</span> <span class='o'>==</span> <span class='n'>z</span> <span class='o'>&amp;&amp;</span> <span class='n'>z</span> <span class='o'>!=</span> <span class='nc'>Blank</span> <span class='k'>=&gt;</span> <span class='nc'>Some</span><span class='o'>(</span><span class='n'>z</span><span class='o'>)</span>
+        <span class='k'>case</span> <span class='k'>_</span> <span class='o'>::</span> <span class='n'>tail</span> <span class='k'>=&gt;</span> <span class='n'>threeInARow</span><span class='o'>(</span><span class='n'>tail</span><span class='o'>)</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>nInARow</span><span class='o'>(</span><span class='n'>n</span> <span class='k'>:</span> <span class='kt'>Int</span><span class='o'>,</span> <span class='n'>array</span> <span class='k'>:</span> <span class='kt'>Array</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>])</span> <span class='k'>:</span> <span class='kt'>Option</span><span class='o'>[</span><span class='kt'>Player</span><span class='o'>]</span> <span class='k'>=</span> <span class='o'>{</span>
+        <span class='k'>for</span><span class='o'>(</span><span class='n'>i</span> <span class='k'>&lt;-</span> <span class='mi'>0</span> <span class='n'>until</span> <span class='n'>array</span><span class='o'>.</span><span class='n'>length</span> <span class='o'>-</span> <span class='o'>(</span><span class='n'>n</span><span class='o'>-</span><span class='mi'>1</span><span class='o'>))</span> <span class='o'>{</span>
+            <span class='k'>var</span> <span class='n'>allTrue</span> <span class='k'>=</span> <span class='kc'>true</span><span class='o'>;</span>
+            <span class='k'>for</span><span class='o'>(</span><span class='n'>j</span> <span class='k'>&lt;-</span> <span class='n'>i</span><span class='o'>+</span><span class='mi'>1</span> <span class='n'>until</span> <span class='n'>i</span><span class='o'>+</span><span class='n'>n</span><span class='o'>)</span> <span class='o'>{</span>
+                <span class='n'>allTrue</span> <span class='o'>&amp;=</span> <span class='n'>array</span><span class='o'>(</span><span class='n'>j</span><span class='o'>-</span><span class='mi'>1</span><span class='o'>)</span> <span class='o'>==</span> <span class='n'>array</span><span class='o'>(</span><span class='n'>j</span><span class='o'>)</span>
+            <span class='o'>}</span>
+            <span class='k'>if</span><span class='o'>(</span><span class='n'>allTrue</span> <span class='o'>&amp;&amp;</span> <span class='n'>array</span><span class='o'>(</span><span class='n'>i</span><span class='o'>)</span> <span class='o'>!=</span> <span class='nc'>Blank</span><span class='o'>)</span> <span class='o'>{</span>
+                <span class='k'>return</span> <span class='nc'>Some</span><span class='o'>(</span><span class='n'>array</span><span class='o'>(</span><span class='n'>i</span><span class='o'>))</span>
+            <span class='o'>}</span>
+        <span class='o'>}</span>
+
+        <span class='k'>return</span> <span class='nc'>None</span>
+    <span class='o'>}</span>
+
+<span class='o'>}</span>
+
+<span class='c1'>// 2. Bonus Problem: Let two players play tic-tac-toe.</span>
+
+<span class='k'>object</span> <span class='nc'>Game</span> <span class='o'>{</span>
+    <span class='k'>val</span> <span class='nc'>Position</span> <span class='k'>=</span> <span class='s'>&quot;&quot;&quot;([A-Za-z]+)\s*(\d+)&quot;&quot;&quot;</span><span class='o'>.</span><span class='n'>r</span>
+
+    <span class='k'>def</span> <span class='n'>main</span><span class='o'>(</span><span class='n'>args</span><span class='k'>:</span><span class='kt'>Array</span><span class='o'>[</span><span class='kt'>String</span><span class='o'>])</span> <span class='o'>{</span>
+        <span class='k'>val</span> <span class='n'>size</span> <span class='k'>=</span> <span class='n'>readBoardSize</span>
+        <span class='k'>var</span> <span class='n'>board</span> <span class='k'>=</span> <span class='k'>new</span> <span class='nc'>TicTacToeBoard</span><span class='o'>(</span><span class='n'>size</span><span class='o'>)</span>
+        <span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;\n&quot;</span> <span class='o'>+</span> <span class='n'>board</span><span class='o'>.</span><span class='n'>numInARowNeeded</span> <span class='o'>+</span> <span class='s'>&quot; in a row to win (&quot;</span> <span class='o'>+</span> <span class='n'>size</span> <span class='o'>+</span> <span class='s'>&quot;x&quot;</span> <span class='o'>+</span> <span class='n'>size</span> <span class='o'>+</span> <span class='s'>&quot; board)&quot;</span><span class='o'>)</span>
+
+        <span class='k'>var</span> <span class='n'>player</span> <span class='k'>:</span> <span class='kt'>Player</span> <span class='o'>=</span> <span class='n'>X</span>
+        <span class='k'>while</span><span class='o'>(</span><span class='n'>board</span><span class='o'>.</span><span class='n'>determineWinner</span> <span class='o'>==</span> <span class='nc'>GameResult</span><span class='o'>.</span><span class='nc'>NoResult</span><span class='o'>)</span> <span class='o'>{</span>
+            <span class='n'>println</span><span class='o'>(</span><span class='n'>board</span><span class='o'>)</span>
+            <span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;Player %s&#39;s turn.&quot;</span><span class='o'>.</span><span class='n'>format</span><span class='o'>(</span><span class='n'>player</span><span class='o'>))</span>
+
+            <span class='k'>val</span> <span class='o'>(</span><span class='n'>row</span><span class='o'>,</span> <span class='n'>col</span><span class='o'>)</span> <span class='k'>=</span> <span class='n'>readNextMove</span><span class='o'>(</span><span class='n'>board</span><span class='o'>)</span>
+            <span class='n'>board</span><span class='o'>.</span><span class='n'>update</span><span class='o'>(</span><span class='n'>row</span><span class='o'>,</span> <span class='n'>col</span><span class='o'>,</span> <span class='n'>player</span><span class='o'>)</span>
+
+            <span class='n'>player</span> <span class='k'>=</span> <span class='k'>if</span><span class='o'>(</span><span class='n'>player</span> <span class='o'>==</span> <span class='n'>X</span><span class='o'>)</span> <span class='n'>O</span> <span class='k'>else</span> <span class='n'>X</span>
+        <span class='o'>}</span>
+
+        <span class='n'>println</span><span class='o'>(</span><span class='n'>board</span><span class='o'>)</span>
+        <span class='n'>println</span><span class='o'>(</span><span class='nc'>GameResult</span><span class='o'>.</span><span class='n'>displayGameResult</span><span class='o'>(</span><span class='n'>board</span><span class='o'>.</span><span class='n'>determineWinner</span><span class='o'>))</span>
+        <span class='n'>println</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>readBoardSize</span><span class='k'>:</span> <span class='kt'>Int</span> <span class='o'>=</span> <span class='o'>{</span>
+        <span class='k'>var</span> <span class='n'>size</span> <span class='k'>=</span> <span class='o'>-</span><span class='mi'>1</span>
+
+        <span class='k'>while</span><span class='o'>(</span><span class='n'>size</span> <span class='o'>&lt;</span> <span class='mi'>1</span><span class='o'>)</span> <span class='o'>{</span>
+            <span class='k'>try</span> <span class='o'>{</span>
+                <span class='n'>print</span><span class='o'>(</span><span class='s'>&quot;Enter board size: &quot;</span><span class='o'>)</span>
+                <span class='n'>size</span> <span class='k'>=</span> <span class='nc'>Console</span><span class='o'>.</span><span class='n'>readInt</span>
+            <span class='o'>}</span> <span class='k'>catch</span> <span class='o'>{</span>
+                <span class='k'>case</span> <span class='n'>e</span> <span class='k'>=&gt;</span> <span class='o'>{</span> <span class='n'>size</span> <span class='k'>=</span> <span class='o'>-</span><span class='mi'>1</span> <span class='o'>}</span>
+            <span class='o'>}</span>
+            <span class='k'>if</span> <span class='o'>(</span><span class='n'>size</span> <span class='o'>&lt;</span> <span class='mi'>1</span><span class='o'>)</span> <span class='o'>{</span>
+                <span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;Invalid board size. Please enter a number greater than 0.&quot;</span><span class='o'>)</span>
+            <span class='o'>}</span>
+        <span class='o'>}</span>
+
+        <span class='k'>return</span> <span class='n'>size</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>readNextMove</span><span class='o'>(</span><span class='n'>board</span><span class='k'>:</span> <span class='kt'>TicTacToeBoard</span><span class='o'>)</span><span class='k'>:</span> <span class='o'>(</span><span class='kt'>Int</span><span class='o'>,</span> <span class='kt'>Int</span><span class='o'>)</span> <span class='k'>=</span> <span class='o'>{</span>
+        <span class='k'>var</span> <span class='n'>validMove</span> <span class='k'>=</span> <span class='kc'>false</span>
+        <span class='k'>var</span> <span class='n'>col</span> <span class='k'>=</span> <span class='o'>-</span><span class='mi'>1</span>
+        <span class='k'>var</span> <span class='n'>row</span> <span class='k'>=</span> <span class='o'>-</span><span class='mi'>1</span>
+        <span class='k'>while</span><span class='o'>(!</span><span class='n'>validMove</span><span class='o'>)</span> <span class='o'>{</span>
+            <span class='k'>var</span> <span class='n'>input</span> <span class='k'>=</span> <span class='s'>&quot;&quot;</span>
+            <span class='k'>try</span> <span class='o'>{</span>
+                <span class='n'>print</span><span class='o'>(</span><span class='s'>&quot;Enter square: (e.g. A0): &quot;</span><span class='o'>)</span>
+                <span class='n'>input</span> <span class='k'>=</span> <span class='nc'>Console</span><span class='o'>.</span><span class='n'>readLine</span>
+                <span class='k'>val</span> <span class='nc'>Position</span><span class='o'>(</span><span class='n'>columnName</span><span class='o'>,</span> <span class='n'>rowNumber</span><span class='o'>)</span> <span class='k'>=</span> <span class='n'>input</span>
+                <span class='n'>row</span> <span class='k'>=</span> <span class='n'>rowNumber</span><span class='o'>.</span><span class='n'>toInt</span>
+                <span class='n'>col</span> <span class='k'>=</span> <span class='n'>board</span><span class='o'>.</span><span class='n'>columnNumber</span><span class='o'>(</span><span class='n'>columnName</span><span class='o'>.</span><span class='n'>toUpperCase</span><span class='o'>)</span>
+            <span class='o'>}</span> <span class='k'>catch</span> <span class='o'>{</span>
+                <span class='k'>case</span> <span class='n'>e</span> <span class='k'>=&gt;</span> <span class='o'>{</span> <span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;Error reading input: Could not understand \&quot;&quot;</span> <span class='o'>+</span> <span class='n'>input</span> <span class='o'>+</span> <span class='s'>&quot;\&quot;&quot;</span><span class='o'>)</span> <span class='o'>}</span>
+            <span class='o'>}</span>
+
+            <span class='n'>validMove</span> <span class='k'>=</span> <span class='n'>board</span><span class='o'>.</span><span class='n'>validMove</span><span class='o'>(</span><span class='n'>row</span><span class='o'>,</span> <span class='n'>col</span><span class='o'>)</span>
+            <span class='k'>if</span><span class='o'>(!</span><span class='n'>validMove</span><span class='o'>)</span> <span class='o'>{</span>
+                <span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;Can&#39;t move there, try again!\n&quot;</span><span class='o'>)</span>
+            <span class='o'>}</span>
+        <span class='o'>}</span>
+
+        <span class='k'>return</span> <span class='o'>(</span><span class='n'>row</span><span class='o'>,</span> <span class='n'>col</span><span class='o'>)</span>
+    <span class='o'>}</span>
+
+<span class='o'>}</span>
+
+<span class='nc'>Game</span><span class='o'>.</span><span class='n'>main</span><span class='o'>(</span><span class='kc'>null</span><span class='o'>)</span>
+</code></pre></div>
+
+</div>
+<p>Phew! That was a long one, eh? Once again, you can see more about the project by going to the <a href='/projects/arbitrarily-sized-tic-tac-toe/'>Tic Tac Toe project page</a> and you can learn more about this series of posts by going to the <a href='/projects/seven-languages-in-seven-weeks/'>Seven Languages project page</a>.</p>
+
+<p>Next in this series: Day 2 of Scala (coming soon).</p>
+</div>
+
+
+<div id="socialbuttons">
+<div>
+    <div id="rss_button"><a href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/feed-icon-28x28.png">&nbsp;</a></div>
+    <!-- G+ -->
+    <div id="google_plus_button"><g:plusone></g:plusone>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script></div>
+
+    <!-- Twitter -->
+    <div id="twitter_button"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="nickknw">Tweet</a>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+
+    <!-- Reddit -->
+    <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
+
+    <!-- Facebook -->
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2013/03/28/seven-languages-week-4-day-1/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+
+</div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
+
+    var disqus_identifier = '/blog/2013/03/28/seven-languages-week-4-day-1';
+    var disqus_url = 'http://nickknowlson.com//blog/2013/03/28/seven-languages-week-4-day-1/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+        </div>
+        <div id="footer">&copy; Copyright 2013 Nick Knowlson</div>
+        <div style="display: none;">Content by Nick Knowlson: <a href="https://plus.google.com/104462106474002996122?rel=author" rel="me">Google+</a></div>
+        <!--hacky way of reducing image loading lag when hovering over rss and twitter icons for now --><span style="display: none;"><img src="/img/rss-icon-lit.png" /><img src="/img/twitter-icon-lit.png" /></span>
+    </body>
+</html>

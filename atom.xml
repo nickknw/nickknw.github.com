@@ -4,12 +4,436 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-03-19T12:10:31-07:00</updated>
+ <updated>2013-03-29T09:11:37-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Seven Languages: Week 4 (Scala) - Day 1</title>
+   <link href="http://nickknowlson.com/blog/2013/03/28/seven-languages-week-4-day-1/"/>
+   <updated>2013-03-28T00:00:00-07:00</updated>
+   <id>http://nickknowlson.com/blog/2013/03/28/seven-languages-week-4-day-1</id>
+   <content type="html">&lt;p&gt;I have to admit Day 1 of Scala was a bit of a relief. Forcing myself to think through the perspective of Prolog was enlightening but still a bit of a struggle. It&amp;#8217;s nice to come back to paradigms I&amp;#8217;m familiar with again. Scala is a hybrid language, with great support for both object-oriented and functional programming, both of which I&amp;#8217;m fairly comfortable with.&lt;/p&gt;
+
+&lt;p&gt;That&amp;#8217;s not to say everything went smoothly however - danger lies in overfamiliarity. At first I was writing Java in Scala, then when I tried to fix it I realized I was now trying to write Haskell in Scala. Neither approach felt very good.&lt;/p&gt;
+
+&lt;p&gt;The beauty of Scala (in my eyes) is its flexibility and practicality. It pushes you towards immutability and is capable of very succinct functional code, but it also has that mutable imperative escape hatch, and a good set of tools for working with problems that suit code like that. It will let you write in the style that is most appropriate for the problem you are trying to solve.&lt;/p&gt;
+
+&lt;p&gt;The collection libraries in 2.8+ also deserve special mention: a lot of work has been put into them and it shows!&lt;/p&gt;
+&lt;div class='interjection'&gt;&lt;p&gt;
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/08/06/seven-languages-week-3-day-3/'&gt;Week 3 (Prolog) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+&lt;/p&gt;&lt;/div&gt;
+&lt;h2 id='topics_covered'&gt;Topics Covered&lt;/h2&gt;
+&lt;h3&gt;Syntax&lt;/h3&gt;
+&lt;p&gt;In Day 1 we went over the basics of Scala syntax and some object-oriented features. Scala is loosely based around traditional C-style curly brace syntax with some helpful differences. The first is that you don&amp;#8217;t need semicolons at the end of the line, woohoo! Also, in &lt;a href='http://docs.scala-lang.org/style/method-invocation.html#suffix_notation'&gt;certain situations&lt;/a&gt; you can use whitespace instead of a &lt;code&gt;.&lt;/code&gt; for method calls, Haskell-style.&lt;/p&gt;
+
+&lt;p&gt;In order to declare a variable, you must make a choice right away whether you want it to be immutable or not. Declarations using &lt;code&gt;val&lt;/code&gt; are immutable, declarations using &lt;code&gt;var&lt;/code&gt; are mutable. There are mutable and immutable versions of most of the collections in the standard library as well, but the default is immutable (you need to be explicit if you want mutable versions). As someone who is a fan of Haskell and made generous use of &lt;code&gt;final&lt;/code&gt; in Java, I really appreciate making it so easy to use immutability in Scala.&lt;/p&gt;
+
+&lt;p&gt;Another couple of differences have to do with type information. Type information is now attached to variables with a colon and is optional in many cases (when it can be inferred from context).&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;  &lt;span class='c1'&gt;// explicit type info&lt;/span&gt;
+&lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;       &lt;span class='c1'&gt;// using type inference&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Scala also has &lt;a href='http://www.matthicks.com/2009/10/loops-in-scala.html'&gt;several helpful looping constructs&lt;/a&gt;, &lt;a href='http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Range'&gt;ranges&lt;/a&gt;, and &lt;a href='http://codemonkeyism.com/tuples-scala-goodness/'&gt;tuples&lt;/a&gt;, but I don&amp;#8217;t want to focus on them right now. Moving on!&lt;/p&gt;
+&lt;h3&gt;Object-Oriented Features&lt;/h3&gt;&lt;h4&gt;Classes and Companion Objects&lt;/h4&gt;
+&lt;p&gt;Like any good object-oriented language Scala has classes, where you can put your state and instance methods. Static methods (class methods if you prefer) are treated a bit differently - they must all reside in a static Companion Object. This is unusual but I&amp;#8217;ve found the separation kind of nice so far. Here&amp;#8217;s a stripped-down version of my TicTacToeBoard class from the exercise:&lt;/p&gt;
+
+&lt;p&gt;(Heads up: this example depends on a few classes (Player, X, O, Blank) that are defined below under &amp;#8216;Case Classes&amp;#8217;)&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]])&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+
+    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt;
+    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;isEmpty&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;validMove&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Boolean&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;col&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='nc'&gt;Blank&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;getPlayersFromString&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;map&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;char&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; 
+            &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;char&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='-Symbol'&gt;&amp;#39;X&lt;/span&gt;&lt;span class='err'&gt;&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;X&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Player&lt;/span&gt; 
+            &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;char&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='-Symbol'&gt;&amp;#39;O&lt;/span&gt;&lt;span class='err'&gt;&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;O&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Player&lt;/span&gt; 
+            &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='nc'&gt;Blank&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Player&lt;/span&gt; &lt;span class='o'&gt;}&lt;/span&gt; 
+        &lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;toArray&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You could use this class like so:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;new&lt;/span&gt; &lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nc'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='s'&gt;&amp;quot;XOX&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='s'&gt;&amp;quot;OO &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='s'&gt;&amp;quot;XXO&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;map&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;getPlayersFromString&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
+
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;validMove&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='c1'&gt;// false&lt;/span&gt;
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;validMove&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;2&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='c1'&gt;// true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4&gt;Case Classes&lt;/h4&gt;
+&lt;p&gt;&lt;a href='http://www.scala-lang.org/node/107'&gt;Case Classes&lt;/a&gt; are a great addition to Scala, they&amp;#8217;re really convenient. They are basically a shortcut to define simple data holding classes with a few &lt;a href='http://stackoverflow.com/questions/2312881/what-is-the-difference-between-scalas-case-class-and-class'&gt;extra features&lt;/a&gt;. The big one is that you can use case classes with pattern matching. If you&amp;#8217;re coming from Haskell, you&amp;#8217;ll be interested to know that they let you imitate algebraic datatypes smoothly and easily!&lt;/p&gt;
+
+&lt;p&gt;Here I&amp;#8217;m using case classes (although technically they are case objects) to represent the ownership of squares on my tic tac toe board. With this code the example above is now functional and runnable.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;sealed&lt;/span&gt; &lt;span class='k'&gt;abstract&lt;/span&gt; &lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Player&lt;/span&gt;
+&lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;X&lt;/span&gt; &lt;span class='k'&gt;extends&lt;/span&gt; &lt;span class='nc'&gt;Player&lt;/span&gt;
+&lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;O&lt;/span&gt; &lt;span class='k'&gt;extends&lt;/span&gt; &lt;span class='nc'&gt;Player&lt;/span&gt;
+&lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;Blank&lt;/span&gt; &lt;span class='k'&gt;extends&lt;/span&gt; &lt;span class='nc'&gt;Player&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='k'&gt;override&lt;/span&gt; &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;toString&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot; &amp;quot;&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This segment of code gives me pretty much what you&amp;#8217;d expect: three classes that share an abstract parent Player class. Since X, O, and Blank are defined using &lt;code&gt;object&lt;/code&gt; this results in three singleton objects &lt;code&gt;X&lt;/code&gt;, &lt;code&gt;O&lt;/code&gt;, and &lt;code&gt;Blank&lt;/code&gt;. I also get sensible default toString implementations for X and O, and I can pattern match against the classes (which I do in &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-4-scala/day1.scala#L112'&gt;TicTacToeBoard.determineWinner&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Instead of interfaces Scala has &lt;a href='http://www.scala-lang.org/node/126'&gt;traits&lt;/a&gt; which are great but will be talked about next post, where I will be able to show you an example from the exercise.&lt;/p&gt;
+
+&lt;h2 id='highlights_from_exercises'&gt;Highlights From Exercises&lt;/h2&gt;
+
+&lt;p&gt;The exercise this week was quite fun, although I did go a bit overboard with it. The aim was to create a 3x3 Tic Tac Toe game, but I thought it would be more fun to do arbitrarily large boards. I checked the rules for &lt;a href='http://en.wikipedia.org/wiki/M,n,k-game'&gt;m,n,k games&lt;/a&gt; and put a few limits in so that depending on the board size you choose you&amp;#8217;re playing &lt;a href='http://en.wikipedia.org/wiki/Tic_Tac_Toe'&gt;Tic Tac Toe&lt;/a&gt;, &lt;a href='http://en.wikipedia.org/wiki/Gomoku'&gt;Gomoku&lt;/a&gt;, &lt;a href='http://en.wikipedia.org/wiki/Connect6'&gt;Connect6&lt;/a&gt;, or some custom variation in between.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, because of this feature creep one of my favourite bits of code from this exercise is now obsolete! I had written a really simple three in a row checking function using pattern matching, and I was (still am!) quite happy with it.&lt;/p&gt;
+
+&lt;p&gt;It only works if you know at compile-time how many in a row you&amp;#8217;re checking for, so it sadly had to be replaced for me to expand to arbitrarily sized games. But here it is:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;threeInARow&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;list&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;List&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;])&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Option&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt; &lt;span class='k'&gt;match&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='nc'&gt;Nil&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='nc'&gt;None&lt;/span&gt;
+    &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='o'&gt;::&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt; &lt;span class='o'&gt;::&lt;/span&gt; &lt;span class='n'&gt;z&lt;/span&gt; &lt;span class='o'&gt;::&lt;/span&gt; &lt;span class='k'&gt;_&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='n'&gt;z&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;z&lt;/span&gt; &lt;span class='o'&gt;!=&lt;/span&gt; &lt;span class='nc'&gt;Blank&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='nc'&gt;Some&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;z&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='k'&gt;_&lt;/span&gt; &lt;span class='o'&gt;::&lt;/span&gt; &lt;span class='n'&gt;tail&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;threeInARow&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;tail&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The code behind &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-4-scala/day1.scala#L112'&gt;determineWinner&lt;/a&gt; is also pretty cool looking, although I don&amp;#8217;t know enough about Scala style yet to know whether it&amp;#8217;s good or not! Anyway, I define a local function called &lt;code&gt;checkForWinner&lt;/code&gt; and the rest of the method becomes really readable:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='n'&gt;rows&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt; &lt;span class='n'&gt;checkForWinner&lt;/span&gt;
+&lt;span class='n'&gt;columns&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt; &lt;span class='n'&gt;checkForWinner&lt;/span&gt;
+&lt;span class='n'&gt;diagonalsLTR&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt; &lt;span class='n'&gt;checkForWinner&lt;/span&gt;
+&lt;span class='n'&gt;diagonalsRTL&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt; &lt;span class='n'&gt;checkForWinner&lt;/span&gt;
+
+&lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;map&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;contains&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nc'&gt;Blank&lt;/span&gt;&lt;span class='o'&gt;)).&lt;/span&gt;&lt;span class='n'&gt;contains&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='kc'&gt;true&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='nc'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nc'&gt;NoResult&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='nc'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nc'&gt;Tie&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I actually went overboard in another way on this exercise - I spent a lot of time making it solid and usable. I mean, it&amp;#8217;s just command-line Tic Tac Toe, but hopefully it&amp;#8217;s the best damn command-line Tic Tac Toes it could be.&lt;/p&gt;
+
+&lt;p&gt;Anyway, I decided it may as well have a permanent home and I gave it its own project page: &lt;a href='/projects/arbitrarily-sized-tic-tac-toe/'&gt;Arbitrarily-Sized Tic Tac Toe&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;Here&amp;#8217;s a peek at the regular size:&lt;/p&gt;
+&lt;div class='symmetrical_line_height'&gt;
+&lt;pre&gt;&lt;code&gt;
+Player X's turn.
+Enter square: (e.g. A0): a2
+
+     A   B   C   
+   ┌───┬───┬───┐
+0  │ X │ X │ O │
+   │───│───│───│
+1  │   │ O │   │
+   │───│───│───│
+2  │ X │   │   │
+   └───┴───┴───┘
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;If you want to see how it handles bigger boards, go ahead and &lt;a href='/projects/arbitrarily-sized-tic-tac-toe/'&gt;try it out&lt;/a&gt;!&lt;/p&gt;
+
+&lt;h2 id='full_solutions'&gt;Full solutions&lt;/h2&gt;
+
+&lt;p&gt;Here is a nicely formatted version of my solutions to the exercises from Day 1 of Scala. The home of the following code is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-4-scala/day1.scala'&gt;on github&lt;/a&gt; with the other exercises.&lt;/p&gt;
+&lt;div id='formatted_solutions'&gt;
+
+&lt;h3&gt;Find:&lt;/h3&gt;
+
+&lt;h4&gt;1. The Scala API&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href='http://www.scala-lang.org/api/current/index.html'&gt;http://www.scala-lang.org/api/current/index.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4&gt;2. A comparison of Java and Scala&lt;/h4&gt;
+
+&lt;ul&gt;
+   &lt;li&gt;Quite a nice article, well-written, good detail level&lt;/li&gt;
+   &lt;ul&gt;&lt;li&gt;&lt;li&gt;&lt;a href='http://www.ibm.com/developerworks/java/library/j-scala01228/index.html'&gt;http://www.ibm.com/developerworks/java/library/j-scala01228/index.html&lt;/a&gt;&lt;/li&gt;&lt;/li&gt;&lt;/ul&gt;
+
+   &lt;li&gt;Overiew/summary level comparison of Java, Scala, Groovy, Clojure&lt;/li&gt;
+   &lt;ul&gt;&lt;li&gt;&lt;li&gt;&lt;a href='http://stackoverflow.com/questions/1314732/scala-vs-groovy-vs-clojure'&gt;http://stackoverflow.com/questions/1314732/scala-vs-groovy-vs-clojure&lt;/a&gt;&lt;/li&gt;&lt;/li&gt;&lt;/ul&gt;
+
+   &lt;li&gt;This is funny and kind of revealing, even if the question leads to a bit of a biased picture.&lt;/li&gt;
+   &lt;ul&gt;&lt;li&gt;&lt;li&gt;&lt;a href='http://stackoverflow.com/questions/2952732/samples-of-scala-and-java-code-where-scala-code-looks-simpler-has-fewer-lines'&gt;http://stackoverflow.com/questions/2952732/samples-of-scala-and-java-code-where-scala-code-looks-simpler-has-fewer-lines&lt;/a&gt;&lt;/li&gt;&lt;/li&gt;&lt;/ul&gt;
+
+   &lt;li&gt;More low-level comparison&lt;/li&gt;
+   &lt;ul&gt;&lt;li&gt;&lt;li&gt;&lt;a href='http://blogs.sun.com/sundararajan/entry/scala_for_java_programmers'&gt;http://blogs.sun.com/sundararajan/entry/scala_for_java_programmers&lt;/a&gt;&lt;/li&gt;&lt;/li&gt;&lt;/ul&gt;
+
+   &lt;li&gt;Some more&lt;/li&gt;
+   &lt;ul&gt;&lt;li&gt;&lt;li&gt;&lt;a href='http://www.artima.com/scalazine/articles/scalable-language.html'&gt;http://www.artima.com/scalazine/articles/scalable-language.html&lt;/a&gt;&lt;/li&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;li&gt;&lt;a href='http://www.ibm.com/developerworks/java/library/j-scala01228/index.html'&gt;http://www.ibm.com/developerworks/java/library/j-scala01228/index.html&lt;/a&gt;&lt;/li&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;3. A discussion of val versus var&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href='http://stackoverflow.com/questions/1791408/what-is-the-difference-between-a-var-and-val-definition-in-scala'&gt;http://stackoverflow.com/questions/1791408/what-is-the-difference-between-a-var-and-val-definition-in-scala&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;Do:&lt;/h3&gt;
+
+&lt;h4&gt;&lt;b&gt;1.&lt;/b&gt; Write a game that will take a tic-tac-toe board with X, O, and blank characters and detect the winner or whether there is a tie or no winner yet.  Use classes where appropriate.&lt;/h4&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='c1'&gt;// Run this file with &amp;#39;scala -Dfile.encoding=UTF-8 day1.scala&amp;#39;&lt;/span&gt;
+
+&lt;span class='k'&gt;sealed&lt;/span&gt; &lt;span class='k'&gt;abstract&lt;/span&gt; &lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Player&lt;/span&gt;
+&lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;X&lt;/span&gt; &lt;span class='k'&gt;extends&lt;/span&gt; &lt;span class='nc'&gt;Player&lt;/span&gt;
+&lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;O&lt;/span&gt; &lt;span class='k'&gt;extends&lt;/span&gt; &lt;span class='nc'&gt;Player&lt;/span&gt;
+&lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;Blank&lt;/span&gt; &lt;span class='k'&gt;extends&lt;/span&gt; &lt;span class='nc'&gt;Player&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='k'&gt;override&lt;/span&gt; &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;toString&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot; &amp;quot;&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;GameResult&lt;/span&gt; &lt;span class='k'&gt;extends&lt;/span&gt; &lt;span class='nc'&gt;Enumeration&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='k'&gt;type&lt;/span&gt; &lt;span class='kt'&gt;GameResult&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;Value&lt;/span&gt;
+    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;X&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;O&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='nc'&gt;Tie&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='nc'&gt;NoResult&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;Value&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;displayGameResult&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;gameResult&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;winnerText&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Player %s won!&amp;quot;&lt;/span&gt;
+
+        &lt;span class='n'&gt;gameResult&lt;/span&gt; &lt;span class='k'&gt;match&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='nc'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nc'&gt;NoResult&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;No winner yet!&amp;quot;&lt;/span&gt;
+            &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='nc'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nc'&gt;Tie&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;It&amp;#39;s a tie!&amp;quot;&lt;/span&gt;
+            &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='n'&gt;player&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;winnerText&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;format&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;player&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]])&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='k'&gt;this&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;stringBoard&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;])&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;this&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;stringBoard&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;map&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;getPlayersFromString&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='k'&gt;this&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rows&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;cols&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;this&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nc'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;fill&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rows&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;cols&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='nc'&gt;Blank&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]])&lt;/span&gt;
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='k'&gt;this&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;size&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;this&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;size&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;size&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt;
+    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;isEmpty&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt;
+    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;columnNameMapping&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='mi'&gt;5&lt;/span&gt;&lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;columnCount&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;map&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;n&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;numToAlpha&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt; &lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)).&lt;/span&gt;&lt;span class='n'&gt;toMap&lt;/span&gt;
+
+    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;numInARowNeeded&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='c1'&gt;// numbers chosen rather arbitrarily by me. I looked at this: http://en.wikipedia.org/wiki/M,n,k-game&lt;/span&gt;
+        &lt;span class='c1'&gt;// and tried to pick numbers that more or less made sense&lt;/span&gt;
+        &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;=&lt;/span&gt; &lt;span class='mi'&gt;3&lt;/span&gt;&lt;span class='o'&gt;||&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;=&lt;/span&gt; &lt;span class='mi'&gt;3&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='c1'&gt;// tic tac toe or bizarre tiny variants&lt;/span&gt;
+            &lt;span class='n'&gt;scala&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;math&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;min&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rowCount&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;=&lt;/span&gt; &lt;span class='mi'&gt;5&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='c1'&gt;// connect 4, sort of&lt;/span&gt;
+            &lt;span class='mi'&gt;4&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;=&lt;/span&gt; &lt;span class='mi'&gt;14&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='c1'&gt;// gomoku&lt;/span&gt;
+            &lt;span class='mi'&gt;5&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='c1'&gt;// connect6. Seems like a good place to leave it&lt;/span&gt;
+            &lt;span class='mi'&gt;6&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;rows&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Seq&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]]&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; 
+            &lt;span class='k'&gt;yield&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;columns&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Seq&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]]&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;c&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;yield&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;
+            &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; 
+                &lt;span class='k'&gt;yield&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;c&lt;/span&gt;&lt;span class='o'&gt;)).&lt;/span&gt;&lt;span class='n'&gt;toArray&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;diagonalsLTR&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Seq&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]]&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;offset&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='n'&gt;columnCount&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;yield&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;
+            &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='n'&gt;offset&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;offset&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+                &lt;span class='k'&gt;yield&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;+&lt;/span&gt;&lt;span class='n'&gt;offset&lt;/span&gt;&lt;span class='o'&gt;))).&lt;/span&gt;&lt;span class='n'&gt;toArray&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;diagonalsRTL&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Seq&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]]&lt;/span&gt;  &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;offset&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;yield&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;
+            &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='n'&gt;offset&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;offset&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+                &lt;span class='k'&gt;yield&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;offset&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;col&lt;/span&gt;&lt;span class='o'&gt;))).&lt;/span&gt;&lt;span class='n'&gt;toArray&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;determineWinner&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;GameResult.Value&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;winnerText&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Player %s won!&amp;quot;&lt;/span&gt;
+        &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;checkForWinner&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt;
+            &lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;nInARow&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;numInARowNeeded&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;match&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='nc'&gt;Some&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;player&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;player&lt;/span&gt; &lt;span class='k'&gt;match&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='c1'&gt;// non-local return!&lt;/span&gt;
+                    &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='n'&gt;X&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='nc'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;X&lt;/span&gt;
+                    &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='n'&gt;O&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='nc'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;O&lt;/span&gt;
+                    &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='n'&gt;other&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='k'&gt;throw&lt;/span&gt; &lt;span class='k'&gt;new&lt;/span&gt; &lt;span class='nc'&gt;Exception&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Error, &amp;#39;&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;other&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;#39; is not a player.&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+                &lt;span class='o'&gt;}&lt;/span&gt;
+                &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='nc'&gt;None&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='c1'&gt;// do nothing&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt;
+
+        &lt;span class='n'&gt;rows&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt; &lt;span class='n'&gt;checkForWinner&lt;/span&gt;
+        &lt;span class='n'&gt;columns&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt; &lt;span class='n'&gt;checkForWinner&lt;/span&gt;
+        &lt;span class='n'&gt;diagonalsLTR&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt; &lt;span class='n'&gt;checkForWinner&lt;/span&gt;
+        &lt;span class='n'&gt;diagonalsRTL&lt;/span&gt; &lt;span class='n'&gt;foreach&lt;/span&gt; &lt;span class='n'&gt;checkForWinner&lt;/span&gt;
+
+        &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;map&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;contains&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nc'&gt;Blank&lt;/span&gt;&lt;span class='o'&gt;)).&lt;/span&gt;&lt;span class='n'&gt;contains&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='kc'&gt;true&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='nc'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nc'&gt;NoResult&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt;
+
+        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='nc'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nc'&gt;Tie&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;override&lt;/span&gt; &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;toString&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;boardRepresentation&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+        &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;p&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='n'&gt;str&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='o'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;boardRepresentation&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;boardRepresentation&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;concat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;str&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;\n&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;}&lt;/span&gt;
+
+        &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;topLine&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;foldLeft&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;   ┌&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)((&lt;/span&gt;&lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;c&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;concat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;───┬&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)).&lt;/span&gt;&lt;span class='n'&gt;concat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;───┐&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;middleLine&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;foldLeft&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;   │&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)((&lt;/span&gt;&lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;c&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;concat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;───│&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+        &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;bottomLine&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;foldLeft&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;   └&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)((&lt;/span&gt;&lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;c&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;concat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;───┴&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)).&lt;/span&gt;&lt;span class='n'&gt;concat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;───┘&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+        &lt;span class='n'&gt;p&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='n'&gt;p&lt;/span&gt;&lt;span class='o'&gt;((&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;foldLeft&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;     &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)((&lt;/span&gt;&lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;concat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;%-4s&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;format&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;numToAlpha&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)))))&lt;/span&gt;
+        &lt;span class='n'&gt;p&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;topLine&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;rowString&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;%-3d&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;format&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;concat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;│&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;c&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='n'&gt;rowString&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;rowString&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;concat&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot; %s │&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;format&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;c&lt;/span&gt;&lt;span class='o'&gt;)))&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt;
+            &lt;span class='n'&gt;p&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rowString&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt;&lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='n'&gt;p&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;middleLine&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt;
+        &lt;span class='n'&gt;p&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;bottomLine&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='n'&gt;p&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;boardRepresentation&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;validMove&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Boolean&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='n'&gt;rowCount&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='n'&gt;columnCount&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;col&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='nc'&gt;Blank&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;update&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;player&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;)(&lt;/span&gt;&lt;span class='n'&gt;col&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;player&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;columnNumber&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;columnName&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;columnNameMapping&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;columnName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;numToAlpha&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;number&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;dividend&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;number&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt; &lt;span class='c1'&gt;// internally, treat 1 as A - just makes it easier&lt;/span&gt;
+        &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;letters&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;modulo&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;
+
+        &lt;span class='k'&gt;while&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;dividend&lt;/span&gt; &lt;span class='o'&gt;&amp;gt;&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='n'&gt;modulo&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;dividend&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;%&lt;/span&gt; &lt;span class='mi'&gt;26&lt;/span&gt;
+            &lt;span class='n'&gt;letters&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;65&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;modulo&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;toChar&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;letters&lt;/span&gt;
+            &lt;span class='n'&gt;dividend&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;dividend&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='n'&gt;modulo&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;/&lt;/span&gt; &lt;span class='mi'&gt;26&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt;
+
+        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;letters&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;getPlayersFromString&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;map&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;char&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;char&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='-Symbol'&gt;&amp;#39;X&lt;/span&gt;&lt;span class='err'&gt;&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;X&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Player&lt;/span&gt; &lt;span class='kt'&gt;else&lt;/span&gt; &lt;span class='kt'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='kt'&gt;char&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='-Symbol'&gt;&amp;#39;O&lt;/span&gt;&lt;span class='err'&gt;&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;O&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Player&lt;/span&gt; &lt;span class='kt'&gt;else&lt;/span&gt; &lt;span class='kt'&gt;Blank&lt;/span&gt; &lt;span class='kt'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Player&lt;/span&gt; &lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;toArray&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;threeInARow&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;list&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;List&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;])&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Option&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;list&lt;/span&gt; &lt;span class='k'&gt;match&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='nc'&gt;Nil&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='nc'&gt;None&lt;/span&gt;
+        &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='o'&gt;::&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt; &lt;span class='o'&gt;::&lt;/span&gt; &lt;span class='n'&gt;z&lt;/span&gt; &lt;span class='o'&gt;::&lt;/span&gt; &lt;span class='n'&gt;tail&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='n'&gt;x&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;y&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='n'&gt;z&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;z&lt;/span&gt; &lt;span class='o'&gt;!=&lt;/span&gt; &lt;span class='nc'&gt;Blank&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='nc'&gt;Some&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;z&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='k'&gt;_&lt;/span&gt; &lt;span class='o'&gt;::&lt;/span&gt; &lt;span class='n'&gt;tail&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;threeInARow&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;tail&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;nInARow&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;n&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;])&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Option&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;Player&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;allTrue&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='kc'&gt;true&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt;
+            &lt;span class='k'&gt;for&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;+&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt; &lt;span class='n'&gt;until&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;+&lt;/span&gt;&lt;span class='n'&gt;n&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='n'&gt;allTrue&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;=&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;j&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt;
+            &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;allTrue&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;!=&lt;/span&gt; &lt;span class='nc'&gt;Blank&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='nc'&gt;Some&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt;
+
+        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='nc'&gt;None&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='c1'&gt;// 2. Bonus Problem: Let two players play tic-tac-toe.&lt;/span&gt;
+
+&lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;Game&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='nc'&gt;Position&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;quot;&amp;quot;([A-Za-z]+)\s*(\d+)&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;main&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;args&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt;&lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;])&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;size&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;readBoardSize&lt;/span&gt;
+        &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;new&lt;/span&gt; &lt;span class='nc'&gt;TicTacToeBoard&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;size&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;\n&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;numInARowNeeded&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='s'&gt;&amp;quot; in a row to win (&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;size&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;x&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;size&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='s'&gt;&amp;quot; board)&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+        &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;player&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Player&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;X&lt;/span&gt;
+        &lt;span class='k'&gt;while&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;determineWinner&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='nc'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='nc'&gt;NoResult&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Player %s&amp;#39;s turn.&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;format&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;player&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+
+            &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;readNextMove&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;update&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;player&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+            &lt;span class='n'&gt;player&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;player&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='n'&gt;X&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;O&lt;/span&gt; &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='n'&gt;X&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt;
+
+        &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+        &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='nc'&gt;GameResult&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;displayGameResult&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;determineWinner&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+        &lt;span class='n'&gt;println&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;readBoardSize&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;size&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;
+
+        &lt;span class='k'&gt;while&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;size&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='k'&gt;try&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Enter board size: &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+                &lt;span class='n'&gt;size&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;Console&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;readInt&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='k'&gt;catch&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='n'&gt;e&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='n'&gt;size&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt; &lt;span class='o'&gt;}&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt;
+            &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;size&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Invalid board size. Please enter a number greater than 0.&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt;
+
+        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;size&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;readNextMove&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;TicTacToeBoard&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;validMove&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='kc'&gt;false&lt;/span&gt;
+        &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;
+        &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;
+        &lt;span class='k'&gt;while&lt;/span&gt;&lt;span class='o'&gt;(!&lt;/span&gt;&lt;span class='n'&gt;validMove&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;input&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+            &lt;span class='k'&gt;try&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='n'&gt;print&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Enter square: (e.g. A0): &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+                &lt;span class='n'&gt;input&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;Console&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;readLine&lt;/span&gt;
+                &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='nc'&gt;Position&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;columnName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;rowNumber&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;input&lt;/span&gt;
+                &lt;span class='n'&gt;row&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;rowNumber&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;toInt&lt;/span&gt;
+                &lt;span class='n'&gt;col&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;columnNumber&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;columnName&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;toUpperCase&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='k'&gt;catch&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='n'&gt;e&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Error reading input: Could not understand \&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;input&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;}&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt;
+
+            &lt;span class='n'&gt;validMove&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;board&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;validMove&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(!&lt;/span&gt;&lt;span class='n'&gt;validMove&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+                &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Can&amp;#39;t move there, try again!\n&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+            &lt;span class='o'&gt;}&lt;/span&gt;
+        &lt;span class='o'&gt;}&lt;/span&gt;
+
+        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;col&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='nc'&gt;Game&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;main&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='kc'&gt;null&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Phew! That was a long one, eh? Once again, you can see more about the project by going to the &lt;a href='/projects/arbitrarily-sized-tic-tac-toe/'&gt;Tic Tac Toe project page&lt;/a&gt; and you can learn more about this series of posts by going to the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Next in this series: Day 2 of Scala (coming soon).&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Counting Powers of Two - A Neat Pattern</title>
@@ -516,7 +940,7 @@ by its position in the list and the column by the value in the list.
 like to move on to Scala at this point&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;p&gt;Next in this series: Day 1 of Scala (coming soon)&lt;/p&gt;</content>
+&lt;p&gt;Next in this series: &lt;a href='http://localhost:4000/blog/2013/03/28/seven-languages-week-4-day-1/'&gt;Day 1 of Scala&lt;/a&gt;.&lt;/p&gt;</content>
  </entry>
  
  <entry>

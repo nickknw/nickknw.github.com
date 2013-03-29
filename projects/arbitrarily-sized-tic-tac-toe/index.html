@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:url" content="http://nickknowlson.com/projects/arbitrarily-sized-tic-tac-toe/">
+        <meta name="twitter:title" content="Arbitrarily-Sized Tic Tac Toe">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:image" content="http://nickknowlson.com/img/logos/logox50.png">
+        <meta name="twitter:site" content="@nickknw">
+
+        <meta property="og:title" content="Arbitrarily-Sized Tic Tac Toe" >
+        <meta property="og:type" content="article" >
+        <meta property="og:image" content="http://nickknowlson.com/img/logos/logox200.png" >
+        <meta property="og:url" content="http://nickknowlson.com/projects/arbitrarily-sized-tic-tac-toe/">
+        <meta property="og:site_name" content="Nick Knowlson dot com">
+        <meta property="og:description" content="">
+        <meta property="fb:app_id" content="https://www.facebook.com/nick.knowlson">
+
+        <title>Arbitrarily-Sized Tic Tac Toe - Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/site.css" >
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="/favicon.ico" >
+        <link href="http://feeds.feedburner.com/NickKnowlson" type="application/atom+xml" rel="alternate" title="Blog ATOM Feed" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        if (typeof jQuery == 'undefined')
+        {
+            document.write(decodeURIComponent("%3Cscript src='/js/jquery-1.6.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+        }
+        </script>
+        
+
+        
+        <link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" >
+        <script src="/js/jquery.lightbox-0.5.pack.js"></script>
+        <script type="text/javascript">
+            $(function() { 
+                $('#gallery a').lightBox({
+                    fixedNavigation:true,
+                    imageLoading: '/img/lightbox-ico-loading.gif',
+                    imageBlank: '/img/lightbox-blank.gif',
+                    imageBtnClose: '/img/lightbox-btn-close.gif',
+                    imageBtnPrev: '/img/lightbox-btn-prev.gif',
+                    imageBtnNext: '/img/lightbox-btn-next.gif'
+                });
+            });
+        </script>
+        
+        <script type="text/javascript">
+        // TODO: convert to css hover sometime
+        $(document).ready(function () {
+            $("#rss-nav-icon img").hover(function () {
+                $(this).attr("src","/img/rss-icon-lit.png");
+            }, function() {
+                $(this).attr("src","/img/rss-icon-dim.png");
+            });
+            $("#twitter-nav-icon img").hover(function () {
+                $(this).attr("src","/img/twitter-icon-lit.png");
+            }, function() {
+                $(this).attr("src","/img/twitter-icon-dim.png");
+            });
+        });
+        </script>
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+
+          if (document.location.hostname !== "localhost") {
+              _gaq.push(['_setAccount', 'UA-24781362-1']);
+              _gaq.push(['_trackPageview']);
+
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+          }
+        </script>
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logos/logo6.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class=" nav-link" href="/">Home</a></li>
+                <li><a class=" nav-link" href="/about/">About</a></li>
+                <li><a class="selected nav-link" href="/projects/">Projects</a></li>
+                <li><a class=" nav-link" href="/blog/">Blog</a></li>
+                <li><a class=" nav-link" href="/contact/">Contact</a></li>
+                <li><a id="rss-nav-icon" href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/rss-icon-dim.png" /></a></li>
+                <li><a id="twitter-nav-icon" href="http://twitter.com/#!/nickknw"><img src="/img/twitter-icon-dim.png" /></a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div id="content-padding">
+                <p> <a href="/projects/">&laquo; Back to projects</a></p>
+
+<img class="project_thumbnail" style="float: right;" src="/img/projects/arbitrarily-sized-tic-tac-toe/thumb.png">
+<h1 style="">Arbitrarily-Sized Tic Tac Toe</h1>
+<div><strong>Languages: </strong>Scala</div>
+<div><strong>Summary: </strong>An exercise-turned-project, this is a command-line version of Tic Tac Toe that allows arbitrarily sized square boards. At size 15 it becomes Gomoku and at size 19 it becomes Connect6.</div>
+
+<div style="margin-bottom:.75em;"><strong>Source code: </strong><a href="http://github.com/nickknw/arbitrarily-sized-tic-tac-toe">github</a> <span style="font-size:.85em">[<a href="http://github.com/nickknw/arbitrarily-sized-tic-tac-toe/tarball/master">.tar.gz</a> / <a href="http://github.com/nickknw/arbitrarily-sized-tic-tac-toe/zipball/master">.zip</a>]</span></div>
+
+
+
+<div id="gallery">
+    <div style="font-size:.85em;color:#888;font-style:italic;">3 Screenshots</div>
+    <ul>
+        
+        <li>
+            <a href="/img/projects/arbitrarily-sized-tic-tac-toe/typical-turn.png" title="Here is what a typical turn looks like.">
+                <img src="/img/projects/arbitrarily-sized-tic-tac-toe/typical-turn.png" width="144" height="144" alt="Here is what a typical turn looks like." />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/arbitrarily-sized-tic-tac-toe/19-by-19.png" title="A blank 19x19 board.">
+                <img src="/img/projects/arbitrarily-sized-tic-tac-toe/19-by-19-thumb.png" width="144" height="144" alt="A blank 19x19 board." />
+            </a>
+        </li>
+        
+        <li>
+            <a href="/img/projects/arbitrarily-sized-tic-tac-toe/column-numbering.png" title="Column numbering continues Excel-style after 26 letters.">
+                <img src="/img/projects/arbitrarily-sized-tic-tac-toe/column-numbering-thumb.png" width="144" height="144" alt="Column numbering continues Excel-style after 26 letters." />
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<h2>Details</h2>
+<p><p>This is a command-line version of Tic Tac Toe that can be played at any (square) size you want. For a command-line game it has a friendly interface: both axes are labeled and the columns are letters instead of numbers. And just like Excel, once you get past 26 letters it starts using two (AA, AB, AC, etc).</p><p>Originally this started out as an exercise I did as part of my <a href='/projects/seven-languages-in-seven-weeks/'>Seven Languages In Seven Weeks</a> project to help me learn Scala. I ended up putting enough time into making it solid and usable that I decided it deserved its own project page.</p><p>Anyway, here&#8217;s what it looks like:</p><div class='symmetrical_line_height'><pre><code>
+Player X's turn.
+Enter square: (e.g. A0): a2
+
+     A   B   C   
+   ┌───┬───┬───┐
+0  │ X │ X │ O │
+   │───│───│───│
+1  │   │ O │   │
+   │───│───│───│
+2  │ X │   │   │
+   └───┴───┴───┘
+</code></pre></div><p>What, you want bigger? Okay!</p><div class='symmetrical_line_height'><pre><code>
+Enter board size: 27
+
+6 in a row to win (27x27 board)
+
+     A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z   AA  
+   ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+0  │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+1  │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+2  │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+3  │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+4  │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+5  │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+6  │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+7  │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+8  │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+9  │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+10 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+11 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+12 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+13 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+14 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+15 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+16 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+17 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+18 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+19 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+20 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+21 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+22 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+23 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+24 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+25 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   │───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│───│
+26 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │
+   └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
+
+
+Player X's turn.
+Enter square: (e.g. A0): 
+</code></pre></div><p>Want to see how big it can get? Go <a href='http://github.com/nickknw/seven-languages-in-seven-weeks/tarball/master'>download it now</a> and try it out! I haven&#8217;t enforced any kind of sensible limit, so you can fill your terminal with characters or get OutOfMemory errors to your heart&#8217;s content.</p></p>
+
+
+<div id="socialbuttons">
+<div>
+    <div id="rss_button"><a href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/feed-icon-28x28.png">&nbsp;</a></div>
+    <!-- G+ -->
+    <div id="google_plus_button"><g:plusone></g:plusone>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script></div>
+
+    <!-- Twitter -->
+    <div id="twitter_button"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="nickknw">Tweet</a>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+
+    <!-- Reddit -->
+    <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
+
+    <!-- Facebook -->
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/projects/arbitrarily-sized-tic-tac-toe/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+
+</div>
+</div>
+
+
+
+
+            </div>
+        </div>
+        <div id="footer">&copy; Copyright 2013 Nick Knowlson</div>
+        <div style="display: none;">Content by Nick Knowlson: <a href="https://plus.google.com/104462106474002996122?rel=author" rel="me">Google+</a></div>
+        <!--hacky way of reducing image loading lag when hovering over rss and twitter icons for now --><span style="display: none;"><img src="/img/rss-icon-lit.png" /><img src="/img/twitter-icon-lit.png" /></span>
+    </body>
+</html>
