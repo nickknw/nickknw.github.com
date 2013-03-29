@@ -4,12 +4,35 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-03-29T09:11:37-07:00</updated>
+ <updated>2013-03-29T11:03:47-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Seven Languages: Week 4 (Scala) - Day 2</title>
+   <link href="http://nickknowlson.com/blog/2013/03/29/seven-languages-week-4-day-2/"/>
+   <updated>2013-03-29T00:00:00-07:00</updated>
+   <id>http://nickknowlson.com/blog/2013/03/29/seven-languages-week-4-day-2</id>
+   <content type="html">&lt;div class='interjection'&gt;&lt;p&gt;
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2013/03/28/seven-languages-week-3-day-3/'&gt;Week 3 (Prolog) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
+&lt;/p&gt;&lt;/div&gt;
+&lt;h2 id='topics_covered'&gt;Topics Covered&lt;/h2&gt;
+
+&lt;p&gt;lots of stuff I already know about and think is cool, I&amp;#8217;ll have to be careful to still present that as cool and not give it short shrift just because I already know about it!&lt;/p&gt;
+
+&lt;p&gt;functional programming var vs val &amp;#8211; already covered collections &amp;#8211; partly focus on these lists sets maps Any and Nothing &amp;#8211; maybe explain these, at very least link to one and Null and null and Nil higher order functions &amp;#8211; it&amp;#8217;s great that they exist but what can I say about them? foreach count map filter foldLeft&lt;/p&gt;
+
+&lt;p&gt;maybe rave about how convenient the collections are? sortBy was nice to have&lt;/p&gt;
+
+&lt;h2 id='highlights_from_exercises'&gt;Highlights From Exercises&lt;/h2&gt;
+
+&lt;p&gt;Exercises were a lot simpler than the Tic Tac Toe from last time. I didn&amp;#8217;t write anything super cool to showcase here &amp;#8230;look at the code again and try to find SOMETHING multivalue assignment from tuples and maps (and other things?)&lt;/p&gt;
+
+&lt;h2 id='full_solutions'&gt;Full Solutions&lt;/h2&gt;</content>
+ </entry>
  
  <entry>
    <title>Seven Languages: Week 4 (Scala) - Day 1</title>
@@ -24,7 +47,7 @@
 
 &lt;p&gt;The collection libraries in 2.8+ also deserve special mention: a lot of work has been put into them and it shows!&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/08/06/seven-languages-week-3-day-3/'&gt;Week 3 (Prolog) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/08/06/seven-languages-week-3-day-3/'&gt;Week 3 (Prolog) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;h2 id='topics_covered'&gt;Topics Covered&lt;/h2&gt;
 &lt;h3&gt;Syntax&lt;/h3&gt;
@@ -638,7 +661,7 @@ Enter square: (e.g. A0): a2
    <id>http://nickknowlson.com/blog/2012/08/06/seven-languages-week-3-day-3</id>
    <content type="html">&lt;p&gt;Day 3 tackled some bigger examples: solving sudoku and the eight queens problem. In today&amp;#8217;s post however, I&amp;#8217;m going to go a bit off the rails and talk a bit about how logic programming can be beneficial in more practical ways.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/07/17/seven-languages-week-3-day-2/'&gt;Week 3 (Prolog) - Day 2&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/07/17/seven-languages-week-3-day-2/'&gt;Week 3 (Prolog) - Day 2&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;&lt;h3&gt;Datalog&lt;/h3&gt;
 &lt;p&gt;Datalog is a subset of Prolog oriented towards querying that was designed to be embeddable in other languages. Many languages have datalog engines, such as &lt;a href='http://iris-reasoner.org/'&gt;Java&lt;/a&gt;, &lt;a href='https://sites.google.com/site/pydatalog/'&gt;Python&lt;/a&gt;, &lt;a href='http://code.google.com/p/clojure-contrib/wiki/DatalogOverview'&gt;Clojure&lt;/a&gt; and &lt;a href='http://docs.racket-lang.org/datalog/'&gt;Racket&lt;/a&gt;. It has become more well-known recently for being the query language of choice for &lt;a href='http://www.datomic.com/'&gt;Datomic&lt;/a&gt;, a promising new distributed database. &lt;a href='http://blog.fogus.me/'&gt;Michael Fogus&lt;/a&gt; is even giving a talk at this upcoming &lt;a href='https://thestrangeloop.com/'&gt;Strange Loop&lt;/a&gt; about &lt;a href='https://thestrangeloop.com/sessions/the-reemergence-of-datalog'&gt;&amp;#8220;The Reemergence of Datalog&amp;#8221;&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;Constraint Programming&lt;/h3&gt;
@@ -988,7 +1011,7 @@ like to move on to Scala at this point&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;Recursion&lt;/strong&gt; used to be on this list, but most of the issues I had turned out to really be a lack of knowledge on my part. It &lt;em&gt;was&lt;/em&gt; difficult for me to acquire that knowledge though, so I am going to document the parts that gave me the most trouble here in hopes I can save some future programmer a bit of time.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/02/05/seven-languages-week-3-day-1/'&gt;Week 3 (Prolog) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/02/05/seven-languages-week-3-day-1/'&gt;Week 3 (Prolog) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
 
@@ -1327,7 +1350,7 @@ This is the way I was attempting to do it first as well. It is (probably) less e
 
 &lt;p&gt;Despite all this, during the course of Week 3 I have been convinced that logic programming can be extremely powerful. If you know how to define a problem in terms that Prolog understands, then you can write a program that solves a problem without having the slightest idea of how to actually solve it (a good example is Sudoku, which shows up in Day 3). Logic languages are the closest I have seen to the unattainable ideal of &amp;#8216;writing a program that will look at the problem and write a program to solve it for you&amp;#8217;.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/01/16/seven-languages-week-2-day-3/'&gt;Week 2 (Io) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/01/16/seven-languages-week-2-day-3/'&gt;Week 2 (Io) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
 
@@ -1630,7 +1653,7 @@ green&lt;/code&gt;, and see if it can still make the other statements true.&lt;/
 
 &lt;p&gt;Io&amp;#8217;s minimalism also whetted my appetite for learning a lisp. Clojure is coming up in a few chapters, and I am looking forward to it. Scheme is also on my horizon (if a bit farther out), but that&amp;#8217;s a subject for another post.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/01/11/seven-languages-week-2-day-2/'&gt;Week 2 (Io) - Day 2&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2012/01/11/seven-languages-week-2-day-2/'&gt;Week 2 (Io) - Day 2&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
 
@@ -1877,7 +1900,7 @@ structure&lt;/div&gt;
    <id>http://nickknowlson.com/blog/2012/01/11/seven-languages-week-2-day-2</id>
    <content type="html">&lt;p&gt;Day 2 of Io was the most difficult (as well as the most fun) day yet. It took me quite a while to finish all the exercises to my satisfaction, and it also had the most interesting exercises so far. One in particular (transposing a matrix) was &lt;a href='/blog/2011/12/30/transposing-a-matrix-in-io/'&gt;my favorite.&lt;/a&gt;.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/18/seven-languages-week-2-day-1/'&gt;Week 2 (Io) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/18/seven-languages-week-2-day-1/'&gt;Week 2 (Io) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
 
@@ -2372,7 +2395,7 @@ Congrats, you did it!
    <id>http://nickknowlson.com/blog/2011/12/18/seven-languages-week-2-day-1</id>
    <content type="html">&lt;p&gt;Day 1 of Io is the first of many chapters that will give me that &amp;#8216;new at programming&amp;#8217; feeling again, where I fumble just trying to build a valid expression that does what I want it to. I actually like that feeling; it means I am learning something new and a web of structures is forming in my mind. I like it &lt;em&gt;almost&lt;/em&gt; as much as finally making that first deep connection from a group of new concepts to some of your existing ones, and starting to grasp the parallels. Fortunately for me, that is what this book is all about!&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/15/seven-languages-week-1-day-3/'&gt;Week 1 (Ruby) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/15/seven-languages-week-1-day-3/'&gt;Week 1 (Ruby) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;h2 id='how_io_feels'&gt;How Io feels&lt;/h2&gt;
 
@@ -2537,7 +2560,7 @@ Done!
    <id>http://nickknowlson.com/blog/2011/12/15/seven-languages-week-1-day-3</id>
    <content type="html">&lt;p&gt;Day 3 is about metaprogramming: writing code that writes code. Now we are really getting into the meat of Ruby, exploring some of the things that things that set it apart from other languages. Ruby has a powerful and varied toolset to make metaprogramming easy and natural. It gives you full control to tweak and patch built in classes, and even makes it convenient. These tools(SYN) can combine with its flexible syntax to let you create readable internal DSLs especially easily.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/04/seven-languages-week-1-day-2/'&gt;Week 1 (Ruby) - Day 2&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/12/04/seven-languages-week-1-day-2/'&gt;Week 1 (Ruby) - Day 2&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
 
@@ -2698,7 +2721,7 @@ vader
    <id>http://nickknowlson.com/blog/2011/12/04/seven-languages-week-1-day-2</id>
    <content type="html">&lt;p&gt;Day 2 of Ruby covers collections, code blocks, classes and modules. I&amp;#8217;m familiar enough with these already in Ruby so in this case it will be hard to provide a &amp;#8216;learning the language&amp;#8217; perspective. Instead I will try to highlight a few of the parts of Ruby in this chapter that I particularly like.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/11/27/seven-languages-week-1-day-1/'&gt;Week 1 (Ruby) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2011/11/27/seven-languages-week-1-day-1/'&gt;Week 1 (Ruby) - Day 1&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;h2 id='topics_covered'&gt;Topics covered&lt;/h2&gt;
 
@@ -2980,7 +3003,7 @@ and
    <id>http://nickknowlson.com/blog/2011/11/27/seven-languages-week-1-day-1</id>
    <content type="html">&lt;p&gt;Out of the seven languages in this book, Ruby is the one I was most familiar with previously. It made for an easy start, and gave me a bit of momentum before I started to tackle languages like Prolog. I&amp;#8217;m appreciative of that, because Prolog sure was a struggle for a while.&lt;/p&gt;
 &lt;div class='interjection'&gt;&lt;p&gt;
-(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. This article is the first one in the series. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;project page&lt;/a&gt;.)
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. This article is the first one in the series. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
 &lt;/p&gt;&lt;/div&gt;
 &lt;p&gt;Day 1 of Week 1 was pretty basic - a bit of string manipulation and looping. Ruby makes things like this very short and pretty.&lt;/p&gt;
 
