@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-03-29T11:03:47-07:00</updated>
+ <updated>2013-03-29T11:18:47-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -31,7 +31,110 @@
 
 &lt;p&gt;Exercises were a lot simpler than the Tic Tac Toe from last time. I didn&amp;#8217;t write anything super cool to showcase here &amp;#8230;look at the code again and try to find SOMETHING multivalue assignment from tuples and maps (and other things?)&lt;/p&gt;
 
-&lt;h2 id='full_solutions'&gt;Full Solutions&lt;/h2&gt;</content>
+&lt;h2 id='full_solutions'&gt;Full Solutions&lt;/h2&gt;
+
+&lt;p&gt;Here is a nicely formatted version of my solutions to the exercises from Day 2 of Ruby. The home of the following code is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-4-scala/day2.scala'&gt;on github&lt;/a&gt; with the other exercises.&lt;/p&gt;
+&lt;div id='formatted_solutions'&gt;
+
+&lt;h3&gt;Find:&lt;/h3&gt;
+
+&lt;div class='question'&gt;&lt;b&gt;1.&lt;/b&gt; A discussion on how to use Scala files&lt;/div&gt;
+
+I'm not entirely clear what this question is looking for. Maybe something
+like this?
+  http://www.scala-lang.org/node/166
+
+// 2. What makes a closure different from a code block
+//
+//    I'm not sure I've got my terminology straight here, but I will give it a go.
+//    In Scala, a code block is a piece of syntax that creates closures.
+//
+// Do:
+//
+// 1. Use foldLeft to compute the total size of a list of strings.
+//
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;\n1.&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;stringList&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;List&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;here&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;is&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;list&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;of&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;strings&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;totalStringSize&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;stringList&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;foldLeft&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)((&lt;/span&gt;&lt;span class='n'&gt;total&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;string&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;total&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;string&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;totalStringSize2&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='o'&gt;/:&lt;/span&gt; &lt;span class='n'&gt;stringList&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{(&lt;/span&gt;&lt;span class='n'&gt;total&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;string&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;total&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;string&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt; &lt;span class='o'&gt;}&lt;/span&gt;
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;totalStringSize&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;totalStringSize2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+// 2. Write a Censor trait with a method that will replace the curse words Shoot
+//    and Darn with Pucky and Beans alternatives. Use a map to store the curse
+//    words and their alternatives.
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;import&lt;/span&gt; &lt;span class='nn'&gt;scala.collection.mutable.HashMap&lt;/span&gt;
+
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;\n2.&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='k'&gt;trait&lt;/span&gt; &lt;span class='nc'&gt;Censor&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+
+    &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;curseWords&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;Map&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='s'&gt;&amp;quot;(?i)Shoot&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Pucky&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+        &lt;span class='s'&gt;&amp;quot;(?i)Darn&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Beans&amp;quot;&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;setCurseWords&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;newCurseWords&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Map&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;, &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;])&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='n'&gt;curseWords&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;newCurseWords&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;censorThyselfVillain&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;suspectPhrase&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+       &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;suspectPhrase&lt;/span&gt;
+
+       &lt;span class='k'&gt;for&lt;/span&gt; &lt;span class='o'&gt;((&lt;/span&gt;&lt;span class='n'&gt;key&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='n'&gt;curseWords&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;replaceAll&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;key&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+       &lt;span class='o'&gt;}&lt;/span&gt;
+
+       &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;PolitenessEnforcer&lt;/span&gt; &lt;span class='k'&gt;extends&lt;/span&gt; &lt;span class='nc'&gt;Censor&lt;/span&gt;
+
+&lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;enforcer&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;new&lt;/span&gt; &lt;span class='nc'&gt;PolitenessEnforcer&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt;
+
+&lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;rudePhrase&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Shoot, my darn head is stuck in the dumb freaking door. Holy gosh Batman!&amp;quot;&lt;/span&gt;
+
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Spoken frankly: &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rudePhrase&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;The enforcer menaces with spikes of brass: &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;enforcer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;censorThyselfVillain&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rudePhrase&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+// 3. Load the curse words and alternatives from a file.
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;import&lt;/span&gt; &lt;span class='nn'&gt;scala.io.Source._&lt;/span&gt;
+
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;\n3.&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;cursesFromFile&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;Map&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;empty&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;, &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+
+&lt;span class='n'&gt;fromFile&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;curseWords.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;getLines&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;foreach&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='n'&gt;line&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt;
+    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;curseWordPair&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;line&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;split&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='sc'&gt;&amp;#39;|&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;curseWordPair&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mi'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='n'&gt;cursesFromFile&lt;/span&gt; &lt;span class='o'&gt;+=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;(?i)&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;curseWordPair&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;trim&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;curseWordPair&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;trim&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;stricterEnforcer&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;new&lt;/span&gt; &lt;span class='nc'&gt;PolitenessEnforcer&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt;
+&lt;span class='n'&gt;stricterEnforcer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;setCurseWords&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;cursesFromFile&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;The enforcer menaces with spikes of onyx: &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;stricterEnforcer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;censorThyselfVillain&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rudePhrase&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/div&gt;</content>
  </entry>
  
  <entry>

@@ -103,6 +103,109 @@
 <p>Exercises were a lot simpler than the Tic Tac Toe from last time. I didn&#8217;t write anything super cool to showcase here &#8230;look at the code again and try to find SOMETHING multivalue assignment from tuples and maps (and other things?)</p>
 
 <h2 id='full_solutions'>Full Solutions</h2>
+
+<p>Here is a nicely formatted version of my solutions to the exercises from Day 2 of Ruby. The home of the following code is <a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-4-scala/day2.scala'>on github</a> with the other exercises.</p>
+<div id='formatted_solutions'>
+
+<h3>Find:</h3>
+
+<div class='question'><b>1.</b> A discussion on how to use Scala files</div>
+
+I'm not entirely clear what this question is looking for. Maybe something
+like this?
+  http://www.scala-lang.org/node/166
+
+// 2. What makes a closure different from a code block
+//
+//    I'm not sure I've got my terminology straight here, but I will give it a go.
+//    In Scala, a code block is a piece of syntax that creates closures.
+//
+// Do:
+//
+// 1. Use foldLeft to compute the total size of a list of strings.
+//
+
+
+<div class='highlight'><pre><code class='scala'><span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;\n1.&quot;</span><span class='o'>)</span>
+
+<span class='k'>var</span> <span class='n'>stringList</span> <span class='k'>=</span> <span class='nc'>List</span><span class='o'>(</span><span class='s'>&quot;here&quot;</span><span class='o'>,</span> <span class='s'>&quot;is&quot;</span><span class='o'>,</span> <span class='s'>&quot;a&quot;</span><span class='o'>,</span> <span class='s'>&quot;list&quot;</span><span class='o'>,</span> <span class='s'>&quot;of&quot;</span><span class='o'>,</span> <span class='s'>&quot;strings&quot;</span><span class='o'>)</span>
+<span class='k'>var</span> <span class='n'>totalStringSize</span> <span class='k'>=</span> <span class='n'>stringList</span><span class='o'>.</span><span class='n'>foldLeft</span><span class='o'>(</span><span class='mi'>0</span><span class='o'>)((</span><span class='n'>total</span><span class='o'>,</span> <span class='n'>string</span><span class='o'>)</span> <span class='k'>=&gt;</span> <span class='n'>total</span> <span class='o'>+</span> <span class='n'>string</span><span class='o'>.</span><span class='n'>length</span><span class='o'>)</span>
+<span class='k'>var</span> <span class='n'>totalStringSize2</span> <span class='k'>=</span> <span class='o'>(</span><span class='mi'>0</span> <span class='o'>/:</span> <span class='n'>stringList</span><span class='o'>)</span> <span class='o'>{(</span><span class='n'>total</span><span class='o'>,</span> <span class='n'>string</span><span class='o'>)</span> <span class='k'>=&gt;</span> <span class='n'>total</span> <span class='o'>+</span> <span class='n'>string</span><span class='o'>.</span><span class='n'>length</span> <span class='o'>}</span>
+<span class='n'>println</span><span class='o'>(</span><span class='n'>totalStringSize</span><span class='o'>)</span>
+<span class='n'>println</span><span class='o'>(</span><span class='n'>totalStringSize2</span><span class='o'>)</span>
+</code></pre></div>
+
+
+// 2. Write a Censor trait with a method that will replace the curse words Shoot
+//    and Darn with Pucky and Beans alternatives. Use a map to store the curse
+//    words and their alternatives.
+
+
+<div class='highlight'><pre><code class='scala'><span class='k'>import</span> <span class='nn'>scala.collection.mutable.HashMap</span>
+
+<span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;\n2.&quot;</span><span class='o'>)</span>
+
+<span class='k'>trait</span> <span class='nc'>Censor</span> <span class='o'>{</span>
+
+    <span class='k'>var</span> <span class='n'>curseWords</span> <span class='k'>=</span> <span class='nc'>Map</span><span class='o'>(</span>
+        <span class='s'>&quot;(?i)Shoot&quot;</span> <span class='o'>-&gt;</span> <span class='s'>&quot;Pucky&quot;</span><span class='o'>,</span>
+        <span class='s'>&quot;(?i)Darn&quot;</span> <span class='o'>-&gt;</span> <span class='s'>&quot;Beans&quot;</span>
+    <span class='o'>)</span>
+
+    <span class='k'>def</span> <span class='n'>setCurseWords</span><span class='o'>(</span><span class='n'>newCurseWords</span> <span class='k'>:</span> <span class='kt'>Map</span><span class='o'>[</span><span class='kt'>String</span>, <span class='kt'>String</span><span class='o'>])</span> <span class='k'>=</span> <span class='o'>{</span>
+        <span class='n'>curseWords</span> <span class='k'>=</span> <span class='n'>newCurseWords</span>
+    <span class='o'>}</span>
+
+    <span class='k'>def</span> <span class='n'>censorThyselfVillain</span> <span class='o'>(</span><span class='n'>suspectPhrase</span> <span class='k'>:</span> <span class='kt'>String</span><span class='o'>)</span> <span class='k'>:</span> <span class='kt'>String</span> <span class='o'>=</span> <span class='o'>{</span>
+       <span class='k'>var</span> <span class='n'>wholesomePhrase</span> <span class='k'>=</span> <span class='n'>suspectPhrase</span>
+
+       <span class='k'>for</span> <span class='o'>((</span><span class='n'>key</span><span class='o'>,</span> <span class='n'>value</span><span class='o'>)</span> <span class='k'>&lt;-</span> <span class='n'>curseWords</span><span class='o'>)</span> <span class='o'>{</span>
+            <span class='n'>wholesomePhrase</span> <span class='k'>=</span> <span class='n'>wholesomePhrase</span><span class='o'>.</span><span class='n'>replaceAll</span><span class='o'>(</span><span class='n'>key</span><span class='o'>,</span> <span class='n'>value</span><span class='o'>)</span>
+       <span class='o'>}</span>
+
+       <span class='k'>return</span> <span class='n'>wholesomePhrase</span>
+    <span class='o'>}</span>
+<span class='o'>}</span>
+
+<span class='k'>class</span> <span class='nc'>PolitenessEnforcer</span> <span class='k'>extends</span> <span class='nc'>Censor</span>
+
+<span class='k'>var</span> <span class='n'>enforcer</span> <span class='k'>=</span> <span class='k'>new</span> <span class='nc'>PolitenessEnforcer</span><span class='o'>()</span>
+
+<span class='k'>val</span> <span class='n'>rudePhrase</span> <span class='k'>=</span> <span class='s'>&quot;Shoot, my darn head is stuck in the dumb freaking door. Holy gosh Batman!&quot;</span>
+
+<span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;Spoken frankly: &quot;</span><span class='o'>)</span>
+<span class='n'>println</span><span class='o'>(</span><span class='n'>rudePhrase</span><span class='o'>)</span>
+
+<span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;The enforcer menaces with spikes of brass: &quot;</span><span class='o'>)</span>
+<span class='n'>println</span><span class='o'>(</span><span class='n'>enforcer</span><span class='o'>.</span><span class='n'>censorThyselfVillain</span><span class='o'>(</span><span class='n'>rudePhrase</span><span class='o'>))</span>
+</code></pre></div>
+
+
+// 3. Load the curse words and alternatives from a file.
+
+
+<div class='highlight'><pre><code class='scala'><span class='k'>import</span> <span class='nn'>scala.io.Source._</span>
+
+<span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;\n3.&quot;</span><span class='o'>)</span>
+
+<span class='k'>var</span> <span class='n'>cursesFromFile</span> <span class='k'>=</span> <span class='nc'>Map</span><span class='o'>.</span><span class='n'>empty</span><span class='o'>[</span><span class='kt'>String</span>, <span class='kt'>String</span><span class='o'>]</span>
+
+<span class='n'>fromFile</span><span class='o'>(</span><span class='s'>&quot;curseWords.txt&quot;</span><span class='o'>).</span><span class='n'>getLines</span><span class='o'>.</span><span class='n'>foreach</span> <span class='o'>{</span> <span class='n'>line</span> <span class='k'>=&gt;</span>
+    <span class='k'>val</span> <span class='n'>curseWordPair</span> <span class='k'>=</span> <span class='n'>line</span><span class='o'>.</span><span class='n'>split</span><span class='o'>(</span><span class='sc'>&#39;|&#39;</span><span class='o'>)</span>
+    <span class='k'>if</span><span class='o'>(</span><span class='n'>curseWordPair</span><span class='o'>.</span><span class='n'>length</span> <span class='o'>==</span> <span class='mi'>2</span><span class='o'>)</span> <span class='o'>{</span>
+        <span class='n'>cursesFromFile</span> <span class='o'>+=</span> <span class='o'>(</span><span class='s'>&quot;(?i)&quot;</span> <span class='o'>+</span> <span class='n'>curseWordPair</span><span class='o'>(</span><span class='mi'>0</span><span class='o'>).</span><span class='n'>trim</span><span class='o'>)</span> <span class='o'>-&gt;</span> <span class='n'>curseWordPair</span><span class='o'>(</span><span class='mi'>1</span><span class='o'>).</span><span class='n'>trim</span>
+    <span class='o'>}</span>
+<span class='o'>}</span>
+
+<span class='k'>val</span> <span class='n'>stricterEnforcer</span> <span class='k'>=</span> <span class='k'>new</span> <span class='nc'>PolitenessEnforcer</span><span class='o'>()</span>
+<span class='n'>stricterEnforcer</span><span class='o'>.</span><span class='n'>setCurseWords</span><span class='o'>(</span><span class='n'>cursesFromFile</span><span class='o'>)</span>
+
+<span class='n'>println</span><span class='o'>(</span><span class='s'>&quot;The enforcer menaces with spikes of onyx: &quot;</span><span class='o'>)</span>
+<span class='n'>println</span><span class='o'>(</span><span class='n'>stricterEnforcer</span><span class='o'>.</span><span class='n'>censorThyselfVillain</span><span class='o'>(</span><span class='n'>rudePhrase</span><span class='o'>))</span>
+</code></pre></div>
+
+
+</div>
 </div>
 
 
