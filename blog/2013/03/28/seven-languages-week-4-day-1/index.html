@@ -209,11 +209,11 @@ Enter square: (e.g. A0): a2
 
 <h3>Find:</h3>
 
-<h4>1. The Scala API</h4>
+<div class='question'><b>1.</b> The Scala API</div>
 
 <p><a href='http://www.scala-lang.org/api/current/index.html'>http://www.scala-lang.org/api/current/index.html</a></p>
 
-<h4>2. A comparison of Java and Scala</h4>
+<div class='question'><b>2.</b> A comparison of Java and Scala</div>
 
 <ul>
    <li>Quite a nice article, well-written, good detail level</li>
@@ -233,13 +233,13 @@ Enter square: (e.g. A0): a2
    <li><li><a href='http://www.ibm.com/developerworks/java/library/j-scala01228/index.html'>http://www.ibm.com/developerworks/java/library/j-scala01228/index.html</a></li></li></ul>
 </ul>
 
-<h4>3. A discussion of val versus var</h4>
+<div class='question'><b>3.</b> A discussion of val versus var</div>
 
 <p><a href='http://stackoverflow.com/questions/1791408/what-is-the-difference-between-a-var-and-val-definition-in-scala'>http://stackoverflow.com/questions/1791408/what-is-the-difference-between-a-var-and-val-definition-in-scala</a></p>
 
 <h3>Do:</h3>
 
-<h4><b>1.</b> Write a game that will take a tic-tac-toe board with X, O, and blank characters and detect the winner or whether there is a tie or no winner yet.  Use classes where appropriate.</h4>
+<div class='question'><b>1.</b> Write a game that will take a tic-tac-toe board with X, O, and blank characters and detect the winner or whether there is a tie or no winner yet.  Use classes where appropriate.</div>
 
 
 <div class='highlight'><pre><code class='scala'><span class='c1'>// Run this file with &#39;scala -Dfile.encoding=UTF-8 day1.scala&#39;</span>
@@ -425,10 +425,13 @@ Enter square: (e.g. A0): a2
     <span class='o'>}</span>
 
 <span class='o'>}</span>
+</code></pre></div>
 
-<span class='c1'>// 2. Bonus Problem: Let two players play tic-tac-toe.</span>
 
-<span class='k'>object</span> <span class='nc'>Game</span> <span class='o'>{</span>
+<div class='question'><b>2.</b> Bonus Problem: Let two players play tic-tac-toe.</div>
+
+
+<div class='highlight'><pre><code class='scala'><span class='k'>object</span> <span class='nc'>Game</span> <span class='o'>{</span>
     <span class='k'>val</span> <span class='nc'>Position</span> <span class='k'>=</span> <span class='s'>&quot;&quot;&quot;([A-Za-z]+)\s*(\d+)&quot;&quot;&quot;</span><span class='o'>.</span><span class='n'>r</span>
 
     <span class='k'>def</span> <span class='n'>main</span><span class='o'>(</span><span class='n'>args</span><span class='k'>:</span><span class='kt'>Array</span><span class='o'>[</span><span class='kt'>String</span><span class='o'>])</span> <span class='o'>{</span>

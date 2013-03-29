@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-03-29T11:23:26-07:00</updated>
+ <updated>2013-03-29T11:34:11-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -138,11 +138,11 @@ Enter square: (e.g. A0): a2
 
 &lt;h3&gt;Find:&lt;/h3&gt;
 
-&lt;h4&gt;1. The Scala API&lt;/h4&gt;
+&lt;div class='question'&gt;&lt;b&gt;1.&lt;/b&gt; The Scala API&lt;/div&gt;
 
 &lt;p&gt;&lt;a href='http://www.scala-lang.org/api/current/index.html'&gt;http://www.scala-lang.org/api/current/index.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;h4&gt;2. A comparison of Java and Scala&lt;/h4&gt;
+&lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; A comparison of Java and Scala&lt;/div&gt;
 
 &lt;ul&gt;
    &lt;li&gt;Quite a nice article, well-written, good detail level&lt;/li&gt;
@@ -162,13 +162,13 @@ Enter square: (e.g. A0): a2
    &lt;li&gt;&lt;li&gt;&lt;a href='http://www.ibm.com/developerworks/java/library/j-scala01228/index.html'&gt;http://www.ibm.com/developerworks/java/library/j-scala01228/index.html&lt;/a&gt;&lt;/li&gt;&lt;/li&gt;&lt;/ul&gt;
 &lt;/ul&gt;
 
-&lt;h4&gt;3. A discussion of val versus var&lt;/h4&gt;
+&lt;div class='question'&gt;&lt;b&gt;3.&lt;/b&gt; A discussion of val versus var&lt;/div&gt;
 
 &lt;p&gt;&lt;a href='http://stackoverflow.com/questions/1791408/what-is-the-difference-between-a-var-and-val-definition-in-scala'&gt;http://stackoverflow.com/questions/1791408/what-is-the-difference-between-a-var-and-val-definition-in-scala&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3&gt;Do:&lt;/h3&gt;
 
-&lt;h4&gt;&lt;b&gt;1.&lt;/b&gt; Write a game that will take a tic-tac-toe board with X, O, and blank characters and detect the winner or whether there is a tie or no winner yet.  Use classes where appropriate.&lt;/h4&gt;
+&lt;div class='question'&gt;&lt;b&gt;1.&lt;/b&gt; Write a game that will take a tic-tac-toe board with X, O, and blank characters and detect the winner or whether there is a tie or no winner yet.  Use classes where appropriate.&lt;/div&gt;
 
 
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='c1'&gt;// Run this file with &amp;#39;scala -Dfile.encoding=UTF-8 day1.scala&amp;#39;&lt;/span&gt;
@@ -354,10 +354,13 @@ Enter square: (e.g. A0): a2
     &lt;span class='o'&gt;}&lt;/span&gt;
 
 &lt;span class='o'&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;span class='c1'&gt;// 2. Bonus Problem: Let two players play tic-tac-toe.&lt;/span&gt;
 
-&lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;Game&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+&lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; Bonus Problem: Let two players play tic-tac-toe.&lt;/div&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;object&lt;/span&gt; &lt;span class='nc'&gt;Game&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
     &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='nc'&gt;Position&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;&amp;quot;&amp;quot;([A-Za-z]+)\s*(\d+)&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;r&lt;/span&gt;
 
     &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;main&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;args&lt;/span&gt;&lt;span class='k'&gt;:&lt;/span&gt;&lt;span class='kt'&gt;Array&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;])&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
