@@ -4,12 +4,36 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-03-31T12:47:10-07:00</updated>
+ <updated>2013-03-31T14:17:29-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Representing Emptiness In Scala (with Null, null, Nothing, Nil, None, and Unit)</title>
+   <link href="http://nickknowlson.com/blog/2013/03/31/representing-empty-in-scala/"/>
+   <updated>2013-03-31T00:00:00-07:00</updated>
+   <id>http://nickknowlson.com/blog/2013/03/31/representing-empty-in-scala</id>
+   <content type="html">&lt;p&gt;There are a &lt;a href='http://lousycoder.com/index.php?/archives/92-Scala-So-many-ways-to-say-nothing.html'&gt;couple&lt;/a&gt; of &lt;a href='http://oldfashionedsoftware.com/2008/08/20/a-post-about-nothing/'&gt;explanations&lt;/a&gt; of these terms out there already, but my needs weren&amp;#8217;t quite satisfied by them. Detail is great, but I wanted concise high level descriptions that explain what the primary purpose for each construct is and emphasize the ones you&amp;#8217;re most likely to see in practice. This explanation is intended to &lt;em&gt;complement&lt;/em&gt; ones with more detail, not replace them.&lt;/p&gt;
+&lt;h4&gt;null&lt;/h4&gt;
+&lt;p&gt;Scala&amp;#8217;s &lt;code&gt;null&lt;/code&gt; is the same as in Java. Any reference type can be &lt;code&gt;null&lt;/code&gt;, like Strings, Objects, or your own classes. Also just like Java, value types like Ints can&amp;#8217;t be &lt;code&gt;null&lt;/code&gt;. &lt;strong&gt;Odds are you'll see this
+one.&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;Null&lt;/h4&gt;
+&lt;p&gt;&lt;a href='http://www.scala-lang.org/api/current/index.html#scala.Null'&gt;Null&lt;/a&gt; is a trait whose only instance is &lt;code&gt;null&lt;/code&gt;. It is a subtype of all reference types, but not of value types. It purpose in existing is to make it so reference types can be assigned &lt;code&gt;null&lt;/code&gt; and value types can&amp;#8217;t. &lt;strong&gt;Don't worry about this one.&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;Nothing&lt;/h4&gt;
+&lt;p&gt;&lt;a href='http://www.scala-lang.org/api/current/index.html#scala.Nothing'&gt;Nothing&lt;/a&gt; is a trait that is guaranteed to have &lt;em&gt;zero&lt;/em&gt; instances. It is a subtype of all other types. It has two main reasons for existing: to provide a return type for methods that &lt;strong&gt;never&lt;/strong&gt; return normally (i.e. a method that always throws an exception). The other reason is to provide a type for Nil (explained below). &lt;strong&gt;Don't worry about this
+one.&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;Nil&lt;/h4&gt;
+&lt;p&gt;&lt;a href='http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Nil$'&gt;Nil&lt;/a&gt; is just an empty list, exactly like the result of &lt;code&gt;List()&lt;/code&gt;. It is of type &lt;code&gt;List[Nothing]&lt;/code&gt;. And since we know there are no instances of Nothing, we now have a list that is statically verifiable as empty. Nice to have. &lt;strong&gt;Odds are you'll see this one.&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;None&lt;/h4&gt;
+&lt;p&gt;&lt;a href='http://www.scala-lang.org/api/current/index.html#scala.None$'&gt;None&lt;/a&gt; is the counterpart to &lt;a href='http://www.scala-lang.org/api/current/index.html#scala.Some'&gt;Some&lt;/a&gt;, used when you&amp;#8217;re using Scala&amp;#8217;s &lt;a href='http://www.scala-lang.org/api/current/index.html#scala.Option'&gt;Option&lt;/a&gt; class to help avoid &lt;code&gt;null&lt;/code&gt; references. If you&amp;#8217;re not familiar with the idea of Option or Maybe, here&amp;#8217;s an &lt;a href='http://blog.danielwellman.com/2008/03/using-scalas-op.html'&gt;introduction to Option&lt;/a&gt;. &lt;strong&gt;Odds are you'll see this one.&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;Unit&lt;/h4&gt;
+&lt;p&gt;&lt;a href='http://www.scala-lang.org/api/current/index.html#scala.Unit'&gt;Unit&lt;/a&gt; in Scala is the equivalent of &lt;code&gt;void&lt;/code&gt; in Java. It&amp;#8217;s used in a function&amp;#8217;s signature when that function doesn&amp;#8217;t return a value. &lt;strong&gt;Odds are you'll see this one.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Hope this has helped!&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Seven Languages: Week 4 (Scala) - Day 1</title>

@@ -86,6 +86,27 @@
                 <div style="text-align:center;"><b>Latest Posts</b> | <a href="/blog/archive/">Archive</a></div>
 
   <div>
+  <h1 style="margin:0px"><a href="/blog/2013/03/31/representing-empty-in-scala/">
+  Representing Emptiness In Scala (with Null, null, Nothing, Nil, None, and Unit)
+  </a></h1>
+  <div class="faded" style="font-size:14px; margin-bottom:5px;">31 Mar 2013</div>
+  <html><body>
+<p>There are a <a href="http://lousycoder.com/index.php?/archives/92-Scala-So-many-ways-to-say-nothing.html">couple</a> of <a href="http://oldfashionedsoftware.com/2008/08/20/a-post-about-nothing/">explanations</a> of these terms out there already, but my needs weren’t quite satisfied by them. Detail is great, but I wanted concise high level descriptions that explain what the primary purpose for each construct is and emphasize the ones you’re most likely to see in practice. This explanation is intended to <em>complement</em> ones with more detail, not replace them.</p>
+<h4>null</h4>
+<p>Scala’s <code>null</code> is the same as in Java. Any reference type can be <code>null</code>, like Strings, Objects, or your own classes. Also just like Java, value types like Ints can’t be <code>null</code>. <strong>Odds are you'll see this
+one.</strong></p>
+<h4>Null</h4>
+<p><a href="http://www.scala-lang.org/api/current/index.html#scala.Null">Null</a> is a trait whose only instance is <code>null</code>. It is a subtype of all reference types, but not of value types. It purpose ...</p>
+</body></html> (<a href="/blog/2013/03/31/representing-empty-in-scala/">Read More</a>)
+  </div>
+
+  <div style="margin-top:20px; font-size:14px;">
+    <a href="/blog/2013/03/31/representing-empty-in-scala/#disqus_thread" data-disqus-identifier="/blog/2013/03/31/representing-empty-in-scala">Comments</a>
+  </div>
+
+    <hr class="fancyrule" />
+
+  <div>
   <h1 style="margin:0px"><a href="/blog/2013/03/28/seven-languages-week-4-day-1/">
   Seven Languages: Week 4 (Scala) - Day 1
   </a></h1>
@@ -167,32 +188,6 @@
 
   <div style="margin-top:20px; font-size:14px;">
     <a href="/blog/2012/08/26/ludum-dare-24-finished/#disqus_thread" data-disqus-identifier="/blog/2012/08/26/ludum-dare-24-finished">Comments</a>
-  </div>
-
-    <hr class="fancyrule" />
-
-  <div>
-  <h1 style="margin:0px"><a href="/blog/2012/08/25/ludum-dare-24-halfway/">
-  Ludum Dare &#35;24 - Halfway!
-  </a></h1>
-  <div class="faded" style="font-size:14px; margin-bottom:5px;">25 Aug 2012</div>
-  <html><body>
-<p>Well, a little past halfway in my case, since I’m going to a Barcraft tomorrow!</p>
-
-<p><a href="http://imgur.com/a/RLnJk#0">Here is an imgur album of what the game looks like right now</a></p>
-
-<p><strong>What is it?</strong></p>
-
-<p>My game is essentially a multiplayer Conway’s Game of Life (it’s loosely related to the theme, anyway). I’ve decided to call it “Conway’s Revenge”!</p>
-
-<p>It doesn’t follow the original rules for the Game of Life: I’ve made changes to the live/die algorithm to account for multiple players and to prevent spending too long in a deadlock scenario, while making sure it’s not too hard to get your cells to grow and expand.</p>
-
-<p>Current status is: I’m more or l...</p>
-</body></html> (<a href="/blog/2012/08/25/ludum-dare-24-halfway/">Read More</a>)
-  </div>
-
-  <div style="margin-top:20px; font-size:14px;">
-    <a href="/blog/2012/08/25/ludum-dare-24-halfway/#disqus_thread" data-disqus-identifier="/blog/2012/08/25/ludum-dare-24-halfway">Comments</a>
   </div>
 
     <hr class="fancyrule" />

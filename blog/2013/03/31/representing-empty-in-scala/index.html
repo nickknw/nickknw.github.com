@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:url" content="http://nickknowlson.com/blog/2013/03/31/representing-empty-in-scala/">
+        <meta name="twitter:title" content="Representing Emptiness In Scala (with Null, null, Nothing, Nil, None, and Unit)">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:image" content="http://nickknowlson.com/img/logos/logox50.png">
+        <meta name="twitter:site" content="@nickknw">
+
+        <meta property="og:title" content="Representing Emptiness In Scala (with Null, null, Nothing, Nil, None, and Unit)" >
+        <meta property="og:type" content="article" >
+        <meta property="og:image" content="http://nickknowlson.com/img/logos/logox200.png" >
+        <meta property="og:url" content="http://nickknowlson.com/blog/2013/03/31/representing-empty-in-scala/">
+        <meta property="og:site_name" content="Nick Knowlson dot com">
+        <meta property="og:description" content="">
+        <meta property="fb:app_id" content="https://www.facebook.com/nick.knowlson">
+
+        <title>Representing Emptiness In Scala (with Null, null, Nothing, Nil, None, and Unit) - Nick Knowlson</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/site.css" >
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css" >
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="/favicon.ico" >
+        <link href="http://feeds.feedburner.com/NickKnowlson" type="application/atom+xml" rel="alternate" title="Blog ATOM Feed" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        if (typeof jQuery == 'undefined')
+        {
+            document.write(decodeURIComponent("%3Cscript src='/js/jquery-1.6.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+        }
+        </script>
+        
+
+        
+        <script type="text/javascript">
+        // TODO: convert to css hover sometime
+        $(document).ready(function () {
+            $("#rss-nav-icon img").hover(function () {
+                $(this).attr("src","/img/rss-icon-lit.png");
+            }, function() {
+                $(this).attr("src","/img/rss-icon-dim.png");
+            });
+            $("#twitter-nav-icon img").hover(function () {
+                $(this).attr("src","/img/twitter-icon-lit.png");
+            }, function() {
+                $(this).attr("src","/img/twitter-icon-dim.png");
+            });
+        });
+        </script>
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+
+          if (document.location.hostname !== "localhost") {
+              _gaq.push(['_setAccount', 'UA-24781362-1']);
+              _gaq.push(['_trackPageview']);
+
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+          }
+        </script>
+    </head>
+    <body>
+	<div id="header" class="grid grid-16">
+            <a href="/"><img src="/img/logos/logo6.png" alt="logo" /></a>
+            <ul id="nav">
+                <li><a class=" nav-link" href="/">Home</a></li>
+                <li><a class=" nav-link" href="/about/">About</a></li>
+                <li><a class=" nav-link" href="/projects/">Projects</a></li>
+                <li><a class="selected nav-link" href="/blog/">Blog</a></li>
+                <li><a class=" nav-link" href="/contact/">Contact</a></li>
+                <li><a id="rss-nav-icon" href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/rss-icon-dim.png" /></a></li>
+                <li><a id="twitter-nav-icon" href="http://twitter.com/#!/nickknw"><img src="/img/twitter-icon-dim.png" /></a></li>
+            </ul>
+	</div>
+
+        <div id="content" class="grid grid-16" style="background-color:white; clear:both;">
+            <div id="content-padding">
+                <a href="/blog/archive/">&laquo; Back to posts</a>
+<h1 style="margin:0px;;">Representing Emptiness In Scala (with Null, null, Nothing, Nil, None, and Unit)</h1>
+<div class="faded" style="font-size:14px; margin-bottom:5px;">31 Mar 2013</div>
+<div id="post">
+<p>There are a <a href='http://lousycoder.com/index.php?/archives/92-Scala-So-many-ways-to-say-nothing.html'>couple</a> of <a href='http://oldfashionedsoftware.com/2008/08/20/a-post-about-nothing/'>explanations</a> of these terms out there already, but my needs weren&#8217;t quite satisfied by them. Detail is great, but I wanted concise high level descriptions that explain what the primary purpose for each construct is and emphasize the ones you&#8217;re most likely to see in practice. This explanation is intended to <em>complement</em> ones with more detail, not replace them.</p>
+<h4>null</h4>
+<p>Scala&#8217;s <code>null</code> is the same as in Java. Any reference type can be <code>null</code>, like Strings, Objects, or your own classes. Also just like Java, value types like Ints can&#8217;t be <code>null</code>. <strong>Odds are you'll see this
+one.</strong></p>
+<h4>Null</h4>
+<p><a href='http://www.scala-lang.org/api/current/index.html#scala.Null'>Null</a> is a trait whose only instance is <code>null</code>. It is a subtype of all reference types, but not of value types. It purpose in existing is to make it so reference types can be assigned <code>null</code> and value types can&#8217;t. <strong>Don't worry about this one.</strong></p>
+<h4>Nothing</h4>
+<p><a href='http://www.scala-lang.org/api/current/index.html#scala.Nothing'>Nothing</a> is a trait that is guaranteed to have <em>zero</em> instances. It is a subtype of all other types. It has two main reasons for existing: to provide a return type for methods that <strong>never</strong> return normally (i.e. a method that always throws an exception). The other reason is to provide a type for Nil (explained below). <strong>Don't worry about this
+one.</strong></p>
+<h4>Nil</h4>
+<p><a href='http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Nil$'>Nil</a> is just an empty list, exactly like the result of <code>List()</code>. It is of type <code>List[Nothing]</code>. And since we know there are no instances of Nothing, we now have a list that is statically verifiable as empty. Nice to have. <strong>Odds are you'll see this one.</strong></p>
+<h4>None</h4>
+<p><a href='http://www.scala-lang.org/api/current/index.html#scala.None$'>None</a> is the counterpart to <a href='http://www.scala-lang.org/api/current/index.html#scala.Some'>Some</a>, used when you&#8217;re using Scala&#8217;s <a href='http://www.scala-lang.org/api/current/index.html#scala.Option'>Option</a> class to help avoid <code>null</code> references. If you&#8217;re not familiar with the idea of Option or Maybe, here&#8217;s an <a href='http://blog.danielwellman.com/2008/03/using-scalas-op.html'>introduction to Option</a>. <strong>Odds are you'll see this one.</strong></p>
+<h4>Unit</h4>
+<p><a href='http://www.scala-lang.org/api/current/index.html#scala.Unit'>Unit</a> in Scala is the equivalent of <code>void</code> in Java. It&#8217;s used in a function&#8217;s signature when that function doesn&#8217;t return a value. <strong>Odds are you'll see this one.</strong></p>
+
+<p>Hope this has helped!</p>
+</div>
+
+
+<div id="socialbuttons">
+<div>
+    <div id="rss_button"><a href="http://feeds.feedburner.com/NickKnowlson"><img src="/img/feed-icon-28x28.png">&nbsp;</a></div>
+    <!-- G+ -->
+    <div id="google_plus_button"><g:plusone></g:plusone>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script></div>
+
+    <!-- Twitter -->
+    <div id="twitter_button"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="nickknw">Tweet</a>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+
+    <!-- Reddit -->
+    <div id="reddit_button"><script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div>
+
+    <!-- Facebook -->
+    <div id="facebook_button"><div id="fb-root"></div> <script src="http://connect.facebook.net/en_US/all.js#appId=122515937846861&amp;xfbml=1"></script><fb:like href="http://nickknowlson.com/blog/2013/03/31/representing-empty-in-scala/" send="false" layout="button_count" width="320" show_faces="true" action="like" font=""></fb:like></div>
+
+</div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'nickknowlson'; // required: replace example with your forum shortname
+
+    var disqus_identifier = '/blog/2013/03/31/representing-empty-in-scala';
+    var disqus_url = 'http://nickknowlson.com//blog/2013/03/31/representing-empty-in-scala/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+        </div>
+        <div id="footer">&copy; Copyright 2013 Nick Knowlson</div>
+        <div style="display: none;">Content by Nick Knowlson: <a href="https://plus.google.com/104462106474002996122?rel=author" rel="me">Google+</a></div>
+        <!--hacky way of reducing image loading lag when hovering over rss and twitter icons for now --><span style="display: none;"><img src="/img/rss-icon-lit.png" /><img src="/img/twitter-icon-lit.png" /></span>
+    </body>
+</html>
