@@ -4,12 +4,185 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-04-09T13:21:09-07:00</updated>
+ <updated>2013-04-10T08:34:43-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
  </author>
 
+ 
+ <entry>
+   <title>Seven Languages: Week 4 (Scala) - Day 2</title>
+   <link href="http://nickknowlson.com/blog/2013/04/10/seven-languages-week-4-day-2/"/>
+   <updated>2013-04-10T00:00:00-07:00</updated>
+   <id>http://nickknowlson.com/blog/2013/04/10/seven-languages-week-4-day-2</id>
+   <content type="html">&lt;p&gt;Day 2 of Scala focused on its functional programming prowess. Since this is the first time functional programming has been introduced in this book only the basics were talked about this chapter, and I&amp;#8217;m already pretty familiar with those so this was an easy chapter for me.&lt;/p&gt;
+
+&lt;p&gt;The exercises were a lot shorter than the previous day&amp;#8217;s, although &lt;a href='/projects/arbitrarily-sized-tic-tac-toe/'&gt;me going overboard&lt;/a&gt; last time probably had something to do with that! Today the main exercise was a small task that makes sure you know how to use Traits, Maps, and read files.&lt;/p&gt;
+
+&lt;p&gt;My familiarity with the topics in this chapter and the shorter exercises both mean this will be a shorter post than last time.&lt;/p&gt;
+&lt;div class='interjection'&gt;&lt;p&gt;
+(This article is part of a series of posts I am doing about my journey through the exercises of the book &lt;a href='http://pragprog.com/book/btlang/seven-languages-in-seven-weeks'&gt;Seven Languages In Seven Weeks&lt;/a&gt;. The article previous to this one is &lt;a href='/blog/2013/03/28/seven-languages-week-3-day-3/'&gt;Week 3 (Prolog) - Day 3&lt;/a&gt;. For an overview see the &lt;a href='/projects/seven-languages-in-seven-weeks/'&gt;Seven Languages project page&lt;/a&gt;.)
+&lt;/p&gt;&lt;/div&gt;
+&lt;h2 id='topics_covered'&gt;Topics Covered&lt;/h2&gt;
+
+&lt;p&gt;Topics in Day 2 included functional programming, immutability, higher order functions, collections, and the representation of empty values (Null, null, Nothing, Nil, None and Unit).&lt;/p&gt;
+&lt;h3&gt;Functional Programming&lt;/h3&gt;
+&lt;p&gt;Scala has thorough support for functional programming. It has closures, convenient syntax for anonymous functions, &lt;a href='http://www.scala-lang.org/node/135'&gt;currying&lt;/a&gt;, a focus on immutability, pattern-matching, &lt;a href='http://gleichmann.wordpress.com/2011/01/30/functional-scala-algebraic-datatypes-enumerated-types/'&gt;algebraic data types&lt;/a&gt;, &lt;a href='http://www.sidewayscoding.com/2011/01/introduction-to-type-classes-in-scala.html'&gt;type classes&lt;/a&gt;, and it has &lt;a href='http://www.scala-lang.org/api/current/index.html#scala.collection.Iterable'&gt;many higher-order functions&lt;/a&gt; defined for its collections.&lt;/p&gt;
+
+&lt;p&gt;A somewhat lengthy but very interesting read on this topic is &lt;a href='https://www.bionicspirit.com/blog/2012/11/02/scala-functional-programming-type-classes.html'&gt;On Scala, Functional Programming and Type-Classes&lt;/a&gt; by Alexandru Nedelcu.&lt;/p&gt;
+&lt;h3&gt;Collections&lt;/h3&gt;
+&lt;p&gt;Scala has great collections. Scala doesn&amp;#8217;t do anything revolutionary with collections. These statements are both true and it&amp;#8217;s not a bad thing! If anything it&amp;#8217;s a reflection of the growing number of great collections libraries in modern languages. What it does mean is that it is harder for me to point to one or two features and say &amp;#8220;Here, you see? That is why this is so good.&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;Scala&amp;#8217;s collections have obviously had a lot of effort and attention to detail put into them. You&amp;#8217;ve got good default implementations of the basics (sequences, sets, maps) and many implementations of each kind that have different performance characteristics, all of which are nicely documented. There are lots of useful helper functions defined at appropriate levels in the well-organized class hierarchy. Functional programmers will be happy to know that any String is also an IndexedSeq!&lt;/p&gt;
+
+&lt;p&gt;Here&amp;#8217;s what the abstract part of the collections class hierarchy looks like:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='Scala collections class hierarchy' src='/img/scala-collections.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;A ton of general useful collection methods are defined high up on &lt;a href='http://www.scala-lang.org/api/current/index.html#scala.collection.Traversable'&gt;Traversable&lt;/a&gt; and &lt;a href='http://www.scala-lang.org/api/current/index.html#scala.collection.Iterable'&gt;Iterable&lt;/a&gt; so that all can use them. It makes using them very consistent and convenient.&lt;/p&gt;
+
+&lt;p&gt;One of these that is worth pointing out is &lt;code&gt;par&lt;/code&gt;, which lets you turn sequential operations on collections into parallel ones with a single word. There are a growing number of languages that have this capability now: Haskell, C#, F#, Scala, and soon Java 8 (I have undoubtedly missed a few, please let me know if another comes to mind).&lt;/p&gt;
+&lt;h3&gt;Null, null, Nothing, Nil, None and Unit in Scala&lt;/h3&gt;
+&lt;p&gt;This book tried to explain this, but the explanation only served to confuse me further. I read a few other explanations online and between them pieced together the higher-level information I wanted to know.&lt;/p&gt;
+
+&lt;p&gt;This resulted in me making a reference post that gives a Cliff&amp;#8217;s Notes version of &lt;a href='/blog/2013/03/31/representing-empty-in-scala/'&gt;emptiness in Scala&lt;/a&gt;. Null and Nothing basically only exist as support for the other values, and Unit isn&amp;#8217;t as easy to confuse with the others. That leaves null, Nil and None which all have similar names and represent &amp;#8220;empty&amp;#8221; in some way. Fortunately, all three of these concepts are fairly distinct and even have direct analogues in other languages.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;null&lt;/strong&gt; - Exactly the same as &lt;code&gt;null&lt;/code&gt; in other languages.&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;Nil&lt;/strong&gt; - Empty list. &lt;code&gt;[]&lt;/code&gt; in other languages, same as &lt;code&gt;List()&lt;/code&gt; in Scala.&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; - The empty case of Option, also called &lt;code&gt;Nothing&lt;/code&gt; in Haskell.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you want more information, see my &lt;a href='/blog/2013/03/31/representing-empty-in-scala/'&gt;full post about this&lt;/a&gt;, there are links to more detailed information in there as well.&lt;/p&gt;
+
+&lt;h2 id='highlights_from_exercises'&gt;Highlights From Exercises&lt;/h2&gt;
+
+&lt;p&gt;The exercises this week were a lot simpler than my &lt;a href='/projects/arbitrarily-sized-tic-tac-toe/'&gt;jumped up Tic Tac Toe&lt;/a&gt; from last time. On one hand, it was nice because it took less time to finish. On the other&amp;#8230; I have less to write about now!&lt;/p&gt;
+
+&lt;p&gt;So let&amp;#8217;s evaluate this method I wrote and see if we can make it better:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;censorThyselfVillain&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;suspectPhrase&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+   &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;suspectPhrase&lt;/span&gt;
+
+   &lt;span class='k'&gt;for&lt;/span&gt; &lt;span class='o'&gt;((&lt;/span&gt;&lt;span class='n'&gt;key&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='n'&gt;curseWords&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;replaceAll&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;key&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+   &lt;span class='o'&gt;}&lt;/span&gt;
+
+   &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Its purpose is to replace &amp;#8216;offensive&amp;#8217; words with a chosen set of &amp;#8216;less offensive&amp;#8217; ones. As far as imperative solutions go I&amp;#8217;d say it is pretty easy to read - it&amp;#8217;s straightforward and not unnecessarily wordy.&lt;/p&gt;
+
+&lt;p&gt;But Scala is a hybrid language - it&amp;#8217;s capable of functional programming too, not just OO or imperative. Does that help in this particular case? Let&amp;#8217;s see:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;censorThyselfVillain2&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;suspectPhrase&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+    &lt;span class='n'&gt;curseWords&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;foldLeft&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;suspectPhrase&lt;/span&gt;&lt;span class='o'&gt;)((&lt;/span&gt;&lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;pair&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;replaceAll&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;pair&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;_1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;pair&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;_2&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This function can be reduced to a simple fold. As easy to understand as the previous example was, this one (provided you&amp;#8217;re already familiar with fold) is even nicer. It is good to have options.&lt;/p&gt;
+
+&lt;h2 id='full_solutions'&gt;Full Solutions&lt;/h2&gt;
+
+&lt;p&gt;Here is a nicely formatted version of my solutions to the exercises from Day 2 of Scala. The home of the following code is &lt;a href='https://github.com/nickknw/seven-languages-in-seven-weeks/blob/master/week-4-scala/day2.scala'&gt;on github&lt;/a&gt; with the other exercises.&lt;/p&gt;
+&lt;div id='formatted_solutions'&gt;
+
+&lt;h3&gt;Find:&lt;/h3&gt;
+
+&lt;div class='question'&gt;&lt;b&gt;1.&lt;/b&gt; A discussion on how to use Scala files&lt;/div&gt;
+
+&lt;p&gt; I'm not entirely clear what this question is looking for. Maybe something
+&lt;a href='http://www.scala-lang.org/node/166'&gt;like this&lt;/a&gt;?&lt;/p&gt;
+
+&lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; What makes a closure different from a code block&lt;/div&gt;
+
+&lt;p&gt;I'm not sure I've got my terminology straight here, but I will give it a go.
+In Scala, a code block is a piece of syntax that creates closures.&lt;/p&gt;
+
+&lt;h3&gt;Do:&lt;/h3&gt;
+
+&lt;div class='question'&gt;&lt;b&gt;1.&lt;/b&gt; Use foldLeft to compute the total size of a list of strings.&lt;/div&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;stringList&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;List&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;here&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;is&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;list&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;of&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;strings&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;totalStringSize&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;stringList&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;foldLeft&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;)((&lt;/span&gt;&lt;span class='n'&gt;total&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;string&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;total&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;string&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;totalStringSize2&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='o'&gt;/:&lt;/span&gt; &lt;span class='n'&gt;stringList&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{(&lt;/span&gt;&lt;span class='n'&gt;total&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;string&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;total&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;string&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt; &lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;totalStringSize&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;totalStringSize2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class='question'&gt;&lt;b&gt;2.&lt;/b&gt; Write a Censor trait with a method that will replace the curse words Shoot and Darn with Pucky and Beans alternatives. Use a map to store the curse words and their alternatives.&lt;/div&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;import&lt;/span&gt; &lt;span class='nn'&gt;scala.collection.mutable.HashMap&lt;/span&gt;
+
+&lt;span class='k'&gt;trait&lt;/span&gt; &lt;span class='nc'&gt;Censor&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+
+    &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;curseWords&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;Map&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='s'&gt;&amp;quot;(?i)Shoot&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Pucky&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+        &lt;span class='s'&gt;&amp;quot;(?i)Darn&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Beans&amp;quot;&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;setCurseWords&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;newCurseWords&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;Map&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;, &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;])&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='n'&gt;curseWords&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;newCurseWords&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;censorThyselfVillain&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;suspectPhrase&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+       &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;suspectPhrase&lt;/span&gt;
+
+       &lt;span class='k'&gt;for&lt;/span&gt; &lt;span class='o'&gt;((&lt;/span&gt;&lt;span class='n'&gt;key&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='n'&gt;curseWords&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+            &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;replaceAll&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;key&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;value&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+       &lt;span class='o'&gt;}&lt;/span&gt;
+
+       &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;wholesomePhrase&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+
+    &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='n'&gt;censorThyselfVillain2&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;suspectPhrase&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;:&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='n'&gt;curseWords&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;foldLeft&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;suspectPhrase&lt;/span&gt;&lt;span class='o'&gt;)((&lt;/span&gt;&lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;pair&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;acc&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;replaceAll&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;pair&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;_1&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt; &lt;span class='n'&gt;pair&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;_2&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;PolitenessEnforcer&lt;/span&gt; &lt;span class='k'&gt;extends&lt;/span&gt; &lt;span class='nc'&gt;Censor&lt;/span&gt;
+
+&lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;enforcer&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;new&lt;/span&gt; &lt;span class='nc'&gt;PolitenessEnforcer&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt;
+
+&lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;rudePhrase&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Shoot, my darn head is stuck in the dumb freaking door. Holy gosh Batman!&amp;quot;&lt;/span&gt;
+
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;Spoken frankly: &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rudePhrase&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;The enforcer menaces with spikes of brass: &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;enforcer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;censorThyselfVillain&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rudePhrase&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class='question'&gt;&lt;b&gt;3.&lt;/b&gt; Load the curse words and alternatives from a file.&lt;/div&gt;
+
+
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='scala'&gt;&lt;span class='k'&gt;import&lt;/span&gt; &lt;span class='nn'&gt;scala.io.Source._&lt;/span&gt;
+
+&lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='n'&gt;cursesFromFile&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='nc'&gt;Map&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;empty&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;, &lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+
+&lt;span class='n'&gt;fromFile&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;curseWords.txt&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;getLines&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;foreach&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt; &lt;span class='n'&gt;line&lt;/span&gt; &lt;span class='k'&gt;=&amp;gt;&lt;/span&gt;
+    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;curseWordPair&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='n'&gt;line&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;split&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='sc'&gt;&amp;#39;|&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;curseWordPair&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;length&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mi'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
+        &lt;span class='n'&gt;cursesFromFile&lt;/span&gt; &lt;span class='o'&gt;+=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;(?i)&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;+&lt;/span&gt; &lt;span class='n'&gt;curseWordPair&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;trim&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;curseWordPair&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='o'&gt;).&lt;/span&gt;&lt;span class='n'&gt;trim&lt;/span&gt;
+    &lt;span class='o'&gt;}&lt;/span&gt;
+&lt;span class='o'&gt;}&lt;/span&gt;
+
+&lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;stricterEnforcer&lt;/span&gt; &lt;span class='k'&gt;=&lt;/span&gt; &lt;span class='k'&gt;new&lt;/span&gt; &lt;span class='nc'&gt;PolitenessEnforcer&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt;
+&lt;span class='n'&gt;stricterEnforcer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;setCurseWords&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;cursesFromFile&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;The enforcer menaces with spikes of onyx: &amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;stricterEnforcer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;censorThyselfVillain&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;rudePhrase&lt;/span&gt;&lt;span class='o'&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/div&gt;
+&lt;p&gt;Next in this series: Day 3 of Scala (coming soon).&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Representing Emptiness In Scala (with Null, null, Nothing, Nil, None, and Unit)</title>
