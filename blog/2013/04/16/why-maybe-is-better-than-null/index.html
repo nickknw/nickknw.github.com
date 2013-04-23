@@ -223,7 +223,7 @@ fault of null.</a> </h4>
 <h4><a class='header_link' href='#unsafe-methods' id='unsafe-methods'>Safety ISN'T guaranteed because of the existence of unsafe extraction methods.</a> </h4>
 <p>Often implementations of Maybe will include more than just safe extraction methods. Haskell&#8217;s <code>fromJust</code> and Scala&#8217;s <code>get</code> are both retrieval functions that throw runtime errors if the value wrapped in Maybe doesn&#8217;t exist. Just like how <code>null</code> usually works.</p>
 
-<p>So it <strong>is</strong> possible to shoot yourself in the foot if you want to. The difference is: you have to <strong>explicitly ask</strong> for this behaviour, it cannot sneak in by accident.</p>
+<p>So it <strong>is</strong> possible to shoot yourself in the foot if you want to. The difference is you have to <strong>explicitly ask</strong> for this behaviour, it cannot sneak in by accident.</p>
 
 <p>Whenever I claim Maybe can move null reference exceptions to compile-time, it comes with the assumption that you&#8217;re using the built-in safe extraction methods and that you&#8217;re not <em>requesting</em> run-time exceptions.</p>
 </div>
