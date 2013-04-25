@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-04-24T21:43:13-07:00</updated>
+ <updated>2013-04-24T22:03:34-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -110,9 +110,13 @@ solve it, might very well be a third mistake.&lt;/p&gt;
 &lt;h4&gt;&lt;a class='header_link' href='#hiding' id='hiding'&gt;NPEs are the proper
 response to a missing value you forgot to consider. You should be notified when
 something goes wrong, not hide it with Maybe.&lt;/a&gt; &lt;/h4&gt;
-&lt;p&gt;I&amp;#8217;ve got good news for you - we fundamentally agree in our approach to how errors should be handled! You have probably seen some bad examples of Maybe usage, since proper usage would lead to these errors being caught &lt;em&gt;even earlier&lt;/em&gt; than a NullPointerException would have.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;ve got good news for you - we fundamentally agree in our approach to how errors should be handled! You might have seen some bad examples of Maybe usage, since properl usage would lead to these errors being caught &lt;em&gt;even earlier&lt;/em&gt; than a NullPointerException would have.&lt;/p&gt;
 
-&lt;p&gt;Buggy code is instead caught at compile-time and your program ends up not &lt;em&gt;having&lt;/em&gt; to throw an exception and terminate gracefully because &lt;em&gt;the bug has already been fixed!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;You can still choose to do the equivalent of &lt;code&gt;if (null) return;&lt;/code&gt; and some examples &lt;em&gt;will do that&lt;/em&gt;, because it makes sense to do in some contexts. What matters is that Maybe forces you to think about it at the time of &lt;em&gt;writing&lt;/em&gt; the code, and to be &lt;em&gt;explicit&lt;/em&gt; about it.&lt;/p&gt;
+
+&lt;p&gt;Instead of you being notified when things go wrong, Maybe forces you to &lt;strong&gt;think things through&lt;/strong&gt; in the first place and make an explicit choice about what to do (at least as far as possibly empty values are concerned).&lt;/p&gt;
+
+&lt;p&gt;And finally, for those of you who really love exceptions, implementations of Maybe usually provide an unsafe retrieval method, so you can replicate the behaviour of null (run-time exceptions and all) &lt;em&gt;if&lt;/em&gt; that is what you &lt;em&gt;choose&lt;/em&gt; to do.&lt;/p&gt;
 &lt;h4&gt;&lt;a class='header_link' href='#real-problem' id='real-problem'&gt;The real
 problem is people not properly reasoning about their functions, that isn't the
 fault of null.&lt;/a&gt; &lt;/h4&gt;
