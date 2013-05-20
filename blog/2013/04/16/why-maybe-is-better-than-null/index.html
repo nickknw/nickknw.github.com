@@ -89,15 +89,13 @@
 <h1 style="margin:0px;;">The Definitive Reference To Why Maybe Is Better Than Null</h1>
 <div class="faded" style="font-size:14px; margin-bottom:5px;">16 Apr 2013</div>
 <div id="post">
-<p>This article is divided into two parts: explanation and FAQ. The explanation explains why there are a lot of people who think the idea behind Maybe is way more useful than <code>null</code>. The FAQ is mostly a list of my responses to common arguments I&#8217;ve seen about the shortcomings of Maybe.</p>
+<p>This article is divided into two parts: <a href='#explanation'>Explanation</a> and <a href='#faq'>FAQ</a>. The explanation shows the reasons why a bunch of people think Maybe is way more useful than <code>null</code>. The FAQ is a list of my responses to common arguments I&#8217;ve seen about the shortcomings of Maybe.</p>
 
-<p>I&#8217;m going to try to not go overboard with details here - my aim with this explanation is to make it accessible to as many programmers as possible, not to be as thorough as possible.</p>
-
-<h2 id='explanation'>Explanation</h2>
-<h3>Motivation</h3>
+<p>I&#8217;m going to try to not go overboard with details here - my aim is to make it accessible to as many programmers as possible, not to be as thorough as possible.</p>
+<h2 id='explanation'>Explanation</h2><h3>Motivation</h3>
 <p>Tony Hoare, the inventor of <code>null</code>, <a href='http://qconlondon.com/london-2009/presentation/Null+References:+The+Billion+Dollar+Mistake'>has gone on record calling it his &#8216;billion-dollar mistake&#8217;</a>. So what should replace it?</p>
 
-<p>Maybe, at its core, is a construct that allows programmers to <strong>move null checks into the type system</strong>, so they can be enforced at <em>compile-time</em>. Instead of forgetting to deal with a null check and finding out with an exception at run-time, you forget to deal with a null check and <em>find out at compile-time,</em> before anyone else even sees it! And that&#8217;s <strong>not just some null checks</strong>, that&#8217;s <strong>all of them, guaranteed!</strong></p>
+<p>Maybe, at its core, is a construct that allows programmers to <strong>move null checks into the type system</strong>, so they can be enforced at <em>compile-time</em>. Instead of forgetting to deal with a null check and finding out with an exception at run-time, you forget to deal with a null check and <em>find out with an error at compile-time,</em> before anyone else even sees it! And that&#8217;s <strong>not just some null checks</strong>, that&#8217;s <strong>all of them, guaranteed!</strong></p>
 <h3>Details</h3>
 <p>There are two components to an environment free of null pointer exceptions:</p>
 
@@ -111,11 +109,11 @@
 
 <p>In object-oriented terms, think of <code>Maybe</code> as a generic interface that has exactly two implementing classes: <code>Just</code> and <code>Nothing</code>. The <code>Just</code> class wraps a value of some other type and the <code>Nothing</code> class doesn&#8217;t. There are a variety of ways to extract the value safely, but I&#8217;m going to omit these for now, as they&#8217;re not the point. When you receive an object of type <code>Maybe&lt;String&gt;</code> (for example) you now have the type system helping you out, telling you &#8220;there <em>might</em> be a String here but it <em>might</em> be empty&#8221;. You <strong>can&#8217;t</strong> perform operations on the String until you&#8217;ve safely extracted it and <em>made a choice</em> about what to do in the case that its empty.</p>
 
-<p>By itself (without point <strong>#1</strong>) this is nice but not fantastic. The benefit really kicks in when you also have non-nullable types. It simplifies the 80% of the cases that don&#8217;t involve <code>null</code> and gives significance and meaning to the times when you do deal with objects wrapped in <code>Maybe&lt;T&gt;</code>. It lets you say both &#8220;I know that this value will <em>literally never</em> be null&#8221; and &#8220;It is immediately obvious to me that I need to handle the case of an empty value here&#8221;.</p>
+<p>By itself (without point <strong>#1</strong>) this is nice but not fantastic. The benefit really kicks in when you also have non-nullable types. It simplifies the 80% of the cases that don&#8217;t involve <code>null</code> and gives significance and meaning to the times when you do deal with objects wrapped in <code>Maybe&lt;T&gt;</code>. It lets you say both <strong>&#8220;I know that this value will <em>literally never</em> be null&#8221;</strong> and <strong>&#8220;It is immediately obvious to me that I need to handle the case of an empty value here&#8221;</strong>.</p>
 <h3>Conclusion</h3>
 <p>It&#8217;s not that dealing with any given instance of null is particularly hard, it&#8217;s that it is <a href='http://james-iry.blogspot.ca/2013/03/king-null-stubborn.html'>so easy to miss one</a>. Removing this concern and encoding the information in the type system means programmers have less things to keep track of and simplifies control flow across the entire program. Like with memory management: when you don&#8217;t have to keep track of it manually it is just plain easier to write code. More importantly, it is easier to write <strong>more robust</strong> code. For all programmers, not just the experienced or talented.</p>
 
-<p>And that is something I am firmly in favour of. A product is rarely built by a single person. Improvements to other people&#8217;s code benefit all of us.</p>
+<p>And that is something I am firmly in favour of. A product is never the result of a single person&#8217;s code - everything has dependencies. Improvements to the code of others benefits all of us.</p>
 <h3>Addendum</h3>
 <p>There are two more points I&#8217;d like to address about Maybe that are separate from actually explaining why it is useful.</p>
 
@@ -124,17 +122,15 @@
 <ul>
 <li>ML, Scala, F#, Rust: Option</li>
 
-<li>C#: Nullable</li>
-
 <li>Fantom, Kotlin: ? appended to type</li>
+
+<li>C#: Nullable or ? appended to type</li>
 </ul>
 
-<p><strong>Second</strong>, not all environments with Maybe have non-nullable types. This makes Maybe less valuable in those environments (since you lose the <strong>very</strong> useful &#8220;I know this value will never contain <code>null</code>&#8221; guarantee&#8221;) and ends up confusing people who are skeptical of Maybe&#8217;s benefits.</p>
+<p><strong>Second</strong>, not all languages with Maybe have non-nullable types. This makes Maybe less valuable in those environments (since you lose the <strong>very</strong> useful &#8220;I know this value will never contain <code>null</code>&#8221; guarantee&#8221;) and ends up confusing people who are skeptical of Maybe&#8217;s benefits.</p>
 
-<p>To help clarify this: I agree that in a language where you don&#8217;t have the guarantee provided by non-nullable types, Maybe <em>just isn&#8217;t as useful</em>. But it is not use_less_ either and depending on the environment may still provide some benefit.</p>
-
+<p>To help clarify this: I agree that in a language where you don&#8217;t have the guarantee provided by non-nullable types, Maybe <em>just isn&#8217;t as useful</em>. But it is not use<i>less</i> either and depending on the environment may still provide some benefit.</p>
 <h2 id='faq'>FAQ</h2>
-
 <p>Posts like these are tricky. To explain something understandably and (relatively) concisely I can&#8217;t qualify every statement and address all the holes inline. Here is where I&#8217;ll address the bits I skipped as well as some common sentiments I&#8217;ve previously seen on this topic.</p>
 
 <p>I have made each headline a link as well so each question/answer combo can be linked to individually.</p>
@@ -152,17 +148,21 @@
 
 <li><a href='#same-thing'>So you&#8217;re still testing against null, except that it&#8217;s called Nothing.</a></li>
 
-<li><a href='#safe-invoke'>I think the safe-invoke operator in Groovy etc. is better than Maybe.</a></li>
+<li><a href='#safe-navigation'>I think the safe navigation operator in Groovy etc. is better than Maybe.</a></li>
 
-<li><a href='#fantom-kotlin'>What About Fantom &#38; Kotlin?</a></li>
+<li><a href='#fantom-kotlin'>What about Fantom &#38; Kotlin?</a></li>
 
 <li><a href='#option-scala'>But Option in Scala DOESN&#8217;T save you from null!</a></li>
 
 <li><a href='#unsafe-methods'>Safety ISN&#8217;T guaranteed because of the existence of unsafe extraction methods.</a></li>
+
+<li><a href='#overhead'>Using Maybe is not worth the overhead.</a></li>
+
+<li><a href='#examples'>Enough vague, high-level information. Show me some examples!</a></li>
 </ol>
 <h4><a class='header_link' href='#maybe-shortcomings' id='maybe-shortcomings'>Maybe isn't the be-all
 end-all.</a> </h4>
-<p>I definitely agree. For one thing, I haven&#8217;t even mentioned <a href='http://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Data-Either.html'>Either</a>! This article is for people who aren&#8217;t convinced of the benefits of Maybe yet. In order to get my point across effectively I want to avoid overwhelming the reader with information, so I restricted the topics brought up here.</p>
+<p>I definitely agree. For one thing, I haven&#8217;t even mentioned <a href='http://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Data-Either.html'>Either</a>! This article is for people who aren&#8217;t even convinced of the benefits of Maybe yet. In order to get my point across effectively I want to avoid overwhelming the reader with information, so I restricted the topics brought up here.</p>
 
 <p>If you want a higher level perspective on this issue, take a look at <a href='http://lambda-the-ultimate.org/node/3186#comment-46637'>dmbarbour&#8217;s view:</a></p>
 <blockquote>
@@ -177,13 +177,13 @@ solve it, might very well be a third mistake.</p>
 </blockquote>
 <p>Beautifully stated! This is a much more general (and elegant) way to look at it. It&#8217;s a somewhat harder sentiment to communicate effectively to a lot of people though.</p>
 <h4><a class='header_link' href='#ide-plugin' id='ide-plugin'>My IDE plugin already does this.</a> </h4>
-<p>Yes, there are some IDEs and plugins that provide limited null reference analysis. The key though, is that it <strong>is</strong> limited. As far as I know none of them provide the same system-wide elimination of <code>null</code> that encoding it in the type-system can guarantee.</p>
+<p>Yes, there are some IDEs and plugins that provide limited null reference analysis. The key though, is that it <strong>is</strong> limited. As far as I know (and I&#8217;ve looked) none of them provide the same system-wide elimination of <code>null</code> that encoding it in the type-system can guarantee.</p>
 
 <p>And so, you still don&#8217;t get the same reassurances of &#8220;I know this value will <em>literally never</em> be null&#8221; and &#8220;It is immediately obvious that I have to handle the case of an empty value here&#8221;.</p>
 <h4><a class='header_link' href='#hiding' id='hiding'>NPEs are the proper
 response to a missing value you forgot to consider. You should be notified when
 something goes wrong, not hide it with Maybe.</a> </h4>
-<p>I&#8217;ve got good news for you - we fundamentally agree in our approach to how errors should be handled! You might have seen some bad examples of Maybe usage, since properl usage would lead to these errors being caught <em>even earlier</em> than a NullPointerException would have.</p>
+<p>I&#8217;ve got good news for you - we fundamentally agree in our approach to how errors should be handled! You might have seen some bad examples of Maybe usage, since proper usage would lead to these errors being caught <em>even earlier</em> than a NullPointerException would have.</p>
 
 <p>You can still choose to do the equivalent of <code>if (null) return;</code> and some examples <em>will do that</em>, because it makes sense to do in some contexts. What matters is that Maybe forces you to think about it at the time of <em>writing</em> the code, and to be <em>explicit</em> about it.</p>
 
@@ -201,17 +201,19 @@ fault of null.</a> </h4>
 <h4><a class='header_link' href='#default-value' id='default-value'>Null is meaningful! What if a value cannot have any meaningful default value?</a> </h4>
 <p>Then either wait until it has a meaningful value to put in it or wrap it in Maybe and give it a value of Nothing. That&#8217;s what Maybe is for - To provide a type-checkable alternative to <code>null</code>!</p>
 <h4><a class='header_link' href='#same-thing' id='same-thing'>So you're still testing against null, except that it's called Nothing. What have we gained?</a> </h4>
-<p>We have gained earlier detection of an entire class of errors! Now if there is a missed check for an empty value you will find out at compile-time rather than run-time. The user doesn&#8217;t see the error, it is fixed before it gets outside the developer&#8217;s computer.</p>
-<h4><a class='header_link' href='#safe-invoke' id='safe-invoke'>I think the safe-invoke operator in Groovy/Kotlin/Fantom/CoffeeScript is better than Maybe.</a> </h4>
+<p>We have gained earlier detection of an entire class of errors! Now if there is a missed check for an empty value you will find out at compile-time rather than run-time. Using Maybe forces you to be <em>explicit</em> about possibly-empty values and <em>deal with</em> the case where they are empty.</p>
+
+<p>The user doesn&#8217;t see <strong>any</strong> null reference exceptions, they are all fixed before they even get outside the developer&#8217;s computer.</p>
+<h4><a class='header_link' href='#safe navigation' id='safe navigation'>I think the safe navigation operator in Groovy/Kotlin/Fantom/CoffeeScript is better than Maybe.</a> </h4>
 <p>I&#8217;m going to talk about Kotlin and Fantom separately in the next section because they&#8217;re special.</p>
 
-<p>In Groovy/CoffeeScript, the safe invoke operator (<code>?.</code>) lets you safely call a method or access a field on an object that may be <code>null</code>. If the object IS <code>null</code> then the method/field just returns <code>null</code> as well, instead of an exception being thrown.</p>
+<p>In Groovy/CoffeeScript, the safe navigation operator (<code>?.</code>) lets you safely call a method or access a field on an object that may be <code>null</code>. If the object IS <code>null</code> then the method/field just returns <code>null</code> as well, instead of an exception being thrown.</p>
 
-<p>I agree that the safe-invoke operator is certainly convenient but it is solving a different problem. If you compare it directly to Maybe, it&#8217;s only solving the &#8216;retrieve value from possibly empty object&#8217; part of Maybe. This is a nice thing to have, but isn&#8217;t nearly as interesting as moving a whole class of run-time exceptions to compile-time.</p>
+<p>I agree that the safe navigation operator is certainly convenient but it is solving a different problem. If you compare it directly to Maybe, it&#8217;s only solving the &#8216;retrieve value from possibly empty object&#8217; part of Maybe. This is a nice thing to have, but isn&#8217;t nearly as interesting as moving a whole class of run-time exceptions to compile-time.</p>
 
-<p>Which is fine, <a href='http://james-iry.blogspot.ca/2009/07/groovy-does-not-have-optional-static.html'>Groovy isn&#8217;t really about statically enforcing things</a> and neither is CoffeeScript. Just don&#8217;t misrepresent this feature as being anything more than <strong>a convenient syntax for null checks</strong>.</p>
-<h4><a class='header_link' href='#fantom-kotlin' id='fantom-kotlin'>What About Fantom &amp; Kotlin?</a> </h4>
-<p>Fantom and Kotlin are different because they are both languages that have non-nullable reference types and have built Maybe in as a language feature. In both languages (<a href='http://fantom.org/doc/docLang/TypeSystem.html#nullableTypes'>Fantom</a>, <a href='http://confluence.jetbrains.com/display/Kotlin/Null-safety'>Kotlin</a>), you can distinguish a reference that may hold <code>null</code> by appending a ? to its type (i.e. <code>String?</code>). The compiler can then keep track of it as if it were a <code>Maybe&lt;String&gt;</code> and is able to prevent you from unsafely accessing its contents. They provide safe-invoke and elvis operators to extract the value like Groovy does.</p>
+<p>Which is fine, it doesn&#8217;t have to be as good as Maybe to still be useful. Just don&#8217;t misrepresent it as being anything more than <strong>a convenient syntax for null checks</strong>.</p>
+<h4><a class='header_link' href='#fantom-kotlin' id='fantom-kotlin'>What about Fantom &amp; Kotlin?</a> </h4>
+<p>Fantom and Kotlin are different because they are both languages that have non-nullable reference types and have built Maybe in as a language feature. In both languages (<a href='http://fantom.org/doc/docLang/TypeSystem.html#nullableTypes'>Fantom</a>, <a href='http://confluence.jetbrains.com/display/Kotlin/Null-safety'>Kotlin</a>), you can distinguish a reference that may hold <code>null</code> by appending a ? to its type (i.e. <code>String?</code>). The compiler can then keep track of it as if it were a <code>Maybe&lt;String&gt;</code> and is able to prevent you from unsafely accessing its contents. They provide safe navigation and elvis operators to extract the value like Groovy does.</p>
 
 <p>This is probably where opinions will start to differ among people who think Maybe is a good idea.</p>
 
@@ -230,6 +232,163 @@ fault of null.</a> </h4>
 <p>So it <strong>is</strong> possible to shoot yourself in the foot if you want to. The difference is you have to <strong>explicitly ask</strong> for this behaviour, it cannot sneak in by accident.</p>
 
 <p>Whenever I claim Maybe can move null reference exceptions to compile-time, it comes with the assumption that you&#8217;re using the built-in safe extraction methods and that you&#8217;re not <em>requesting</em> run-time exceptions.</p>
+<h4><a class='header_link' href='#overhead' id='overhead'>Using Maybe is not worth the overhead.</a> </h4>
+<p>This is a hard question to answer without getting specific. If this was said about a specific language or kind of application and the person saying it has done their due diligence or has some working code to back it up, then I can&#8217;t address that here.</p>
+
+<p>If it is a less qualified statement however, I have some counterpoints that I can share.</p>
+
+<p><strong>1. Bugs are expensive, even more so the later on they are caught.</strong></p>
+
+<p>It takes developer time to find and fix bugs - the more bugs the more time it takes. For each bug, overhead is introduced in the form of finding, tracking, fixing, and testing it. Worse, bugs that make it all the way to production impact your users and can have even more expensive consequences like data corruption. For some applications small amounts of bug-related downtime could cost thousands (or millions!) of dollars.</p>
+
+<p>This is the whole reason why we have test suites, type systems, static analysis tools, code reviews, even exceptions! We want to catch bugs earlier.</p>
+
+<p>Maybe lets you catch one of the most common bugs, null reference exceptions, at compile-time instead of run-time. So if you say &#8216;it is not worth the overhead&#8217;, think about what null reference exceptions are costing you first, and make sure you really <strong>do</strong> know how much it is worth.</p>
+
+<p><strong>Unless&#8230;</strong> you are one of those lucky few who says that null reference exceptions really are just not an issue for you. Maybe your other bug prevention measures combined are good enough and when you tracked your faults you found you don&#8217;t end up dealing with null reference exceptions very much. For you guys, keep in mind that <a href='https://twitter.com/ID_AA_Carmack/status/324998304045879296'>you are probably not in the majority</a>.</p>
+
+<p><strong>2. There might not be as much syntactic overhead as you think. In many cases it actually reduces overhead.</strong></p>
+
+<p>Languages that provide Maybe usually provide many convenient ways to extract values which are actually often shorter than the null checks you would otherwise be writing. On top of that, code that <em>doesn&#8217;t deal</em> with possibly-empty values <em>doesn&#8217;t need</em> to use Maybe (or check for null!) at all.</p>
+
+<p>Check out the <a href='#examples'>examples section</a> below and see for yourself what code that uses Maybe looks like.</p>
+
+<p>For those of you that are talking about having to mark too many properties as optional and having to deal with Maybe everywhere, think about it like this: You would have had to deal with the same amount of possibly-empty values either way, the only difference is that now you have the compiler helping you out. If your code is meant to be robust it will need null checks anyway. For the cost of adding a little wrapper around your types you can replace those easy-to-forget null checks with their equivalent compiler-checked Maybe extraction methods.</p>
+
+<p>You also get perfect safety and ease of mind when dealing with values that cannot logically be empty.</p>
+<h4><a class='header_link' href='#examples' id='examples'>Enough vague,
+high-level information. Show me some examples!</a> </h4>
+<p>I intentionally avoided showing examples in the explanation section to avoid taking attention away from the main points. For a topic like this one, as soon as you show some code it is like sticking a bikeshedding magnet right in the middle of your article. But since this post is aiming to be a definitive reference, it could use at least a few examples.</p>
+
+<p>Another measure I am going to be taking to avoid stirring up unnecessary arguments is <em>comparing like with like</em>. I will show a scenario where null checks are used to deal with an empty value in a certain way, then I will show what that example would look like in a language with good support for Maybe.</p>
+
+<p>The languages I picked are:</p>
+
+<ul>
+<li><strong>Java:</strong> to represent the traditional ways of handling nulls that most people are hopefully familiar with.</li>
+
+<li><strong>Kotlin:</strong> to represent languages with non-nullable references and support for Maybe baked into the language.</li>
+
+<li><strong>Haskell:</strong> to represent languages with non-nullable references and support for Maybe as a library.</li>
+</ul>
+
+<p>The scenarios follow:</p>
+
+<p><strong>Dealing with it explicitly</strong></p>
+<p class='code-header'>Java:</p><div class='highlight'><pre><code class='java'><span class='kd'>public</span> <span class='kd'>static</span> <span class='kt'>void</span> <span class='nf'>retrieveInfoExplicit</span><span class='o'>()</span> <span class='o'>{</span>
+    <span class='n'>String</span> <span class='n'>information</span> <span class='o'>=</span> <span class='k'>new</span> <span class='n'>Random</span><span class='o'>().</span><span class='na'>nextInt</span><span class='o'>(</span><span class='mi'>2</span><span class='o'>)</span> <span class='o'>==</span> <span class='mi'>0</span> <span class='o'>?</span> <span class='s'>&quot;a,b,c&quot;</span> <span class='o'>:</span> <span class='kc'>null</span><span class='o'>;</span>
+
+    <span class='k'>if</span> <span class='o'>(</span><span class='n'>information</span> <span class='o'>==</span> <span class='kc'>null</span><span class='o'>)</span> <span class='o'>{</span>
+        <span class='n'>System</span><span class='o'>.</span><span class='na'>out</span><span class='o'>.</span><span class='na'>println</span><span class='o'>(</span><span class='s'>&quot;No information received.&quot;</span><span class='o'>);</span>
+    <span class='o'>}</span> <span class='k'>else</span> <span class='o'>{</span>
+        <span class='n'>System</span><span class='o'>.</span><span class='na'>out</span><span class='o'>.</span><span class='na'>println</span><span class='o'>(</span><span class='n'>Arrays</span><span class='o'>.</span><span class='na'>toString</span><span class='o'>(</span><span class='n'>parseInfo</span><span class='o'>(</span><span class='n'>information</span><span class='o'>)));</span>
+    <span class='o'>}</span>
+<span class='o'>}</span>
+</code></pre></div><p class='code-header'>Kotlin:</p><div class='highlight'><pre><code class='kotlin'><span class='k'>fun</span> <span class='nf'>retrieveInfoExplicit</span><span class='p'>()</span> <span class='p'>:</span> <span class='n'>Unit</span> <span class='p'>{</span>
+    <span class='k'>val</span> <span class='n'>information</span> <span class='p'>=</span> <span class='k'>if</span> <span class='p'>(</span><span class='n'>Random</span><span class='p'>().</span><span class='n'>nextInt</span><span class='p'>(</span><span class='m'>2</span><span class='p'>)</span> <span class='p'>==</span> <span class='m'>0</span><span class='p'>)</span> <span class='s'>&quot;a,b,c&quot;</span> <span class='k'>else</span> <span class='k'>null</span>
+
+    <span class='k'>if</span> <span class='p'>(</span><span class='n'>information</span> <span class='p'>==</span> <span class='k'>null</span><span class='p'>)</span>
+        <span class='n'>println</span><span class='p'>(</span><span class='s'>&quot;No information received.&quot;</span><span class='p'>)</span>
+    <span class='k'>else</span>
+        <span class='nf'>safeParseInfo</span><span class='p'>(</span><span class='n'>information</span><span class='p'>)</span> <span class='n'>forEach</span> <span class='p'>{</span> <span class='n'>println</span><span class='p'>(</span><span class='n'>it</span><span class='p'>)</span> <span class='p'>}</span>
+<span class='p'>}</span>
+</code></pre></div><p class='code-header'>Haskell:</p><div class='highlight'><pre><code class='haskell'><span class='nf'>retrieveInfoExplicit</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+<span class='nf'>retrieveInfoExplicit</span> <span class='ow'>=</span> <span class='kr'>do</span>
+    <span class='n'>num</span> <span class='ow'>&lt;-</span> <span class='n'>randomRIO</span> <span class='p'>(</span><span class='mi'>0</span><span class='p'>,</span> <span class='mi'>1</span><span class='p'>)</span>
+    <span class='kr'>let</span> <span class='n'>information</span> <span class='ow'>=</span> <span class='kr'>if</span> <span class='p'>(</span><span class='n'>num</span> <span class='ow'>::</span> <span class='kt'>Int</span><span class='p'>)</span> <span class='o'>==</span> <span class='mi'>0</span> <span class='kr'>then</span> <span class='p'>(</span><span class='kt'>Just</span> <span class='s'>&quot;a,b,c&quot;</span><span class='p'>)</span> <span class='kr'>else</span> <span class='kt'>Nothing</span>
+    <span class='kr'>case</span> <span class='n'>information</span> <span class='kr'>of</span>
+        <span class='kt'>Nothing</span> <span class='ow'>-&gt;</span> <span class='n'>putStrLn</span> <span class='s'>&quot;No information retrieved.&quot;</span>
+        <span class='kt'>Just</span> <span class='n'>i</span> <span class='ow'>-&gt;</span> <span class='n'>putStrLn</span> <span class='o'>$</span> <span class='n'>show</span> <span class='o'>$</span> <span class='n'>safeParseInfo</span> <span class='n'>i</span>
+</code></pre></div>
+<p><strong>Dealing with it implicitly</strong></p>
+<p class='code-header'>Java:</p><div class='highlight'><pre><code class='java'><span class='kd'>public</span> <span class='kt'>void</span> <span class='nf'>retrieveInfo</span><span class='o'>()</span> <span class='o'>{</span>
+    <span class='n'>String</span> <span class='n'>information</span> <span class='o'>=</span> <span class='n'>Random</span><span class='o'>().</span><span class='na'>nextInt</span><span class='o'>(</span><span class='mi'>2</span><span class='o'>)</span> <span class='o'>==</span> <span class='mi'>0</span> <span class='o'>?</span> <span class='s'>&quot;a,b,c&quot;</span> <span class='o'>:</span> <span class='kc'>null</span>
+    <span class='n'>parseInfo</span><span class='o'>(</span><span class='n'>information</span><span class='o'>);</span>
+<span class='o'>}</span>
+</code></pre></div><p class='code-header'>Kotlin:</p><div class='highlight'><pre><code class='kotlin'><span class='k'>fun</span> <span class='nf'>retrieveInfo</span><span class='p'>()</span> <span class='p'>:</span> <span class='n'>Unit</span> <span class='p'>{</span>
+    <span class='k'>val</span> <span class='n'>information</span> <span class='p'>=</span> <span class='k'>if</span> <span class='p'>(</span><span class='n'>Random</span><span class='p'>().</span><span class='n'>nextInt</span><span class='p'>(</span><span class='m'>2</span><span class='p'>)</span> <span class='p'>==</span> <span class='m'>0</span><span class='p'>)</span> <span class='s'>&quot;a,b,c&quot;</span> <span class='k'>else</span> <span class='k'>null</span>
+    <span class='n'>parseInfo</span><span class='p'>(</span><span class='n'>information</span><span class='p'>)?.</span><span class='n'>forEach</span> <span class='p'>{</span> <span class='n'>println</span><span class='p'>(</span><span class='n'>it</span><span class='p'>)</span> <span class='p'>}</span>
+<span class='p'>}</span>
+</code></pre></div><p class='code-header'>Haskell:</p><div class='highlight'><pre><code class='haskell'><span class='nf'>retrieveInfo</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+<span class='nf'>retrieveInfo</span> <span class='ow'>=</span> <span class='kr'>do</span>
+    <span class='n'>num</span> <span class='ow'>&lt;-</span> <span class='n'>randomRIO</span> <span class='p'>(</span><span class='mi'>0</span><span class='p'>,</span> <span class='mi'>1</span><span class='p'>)</span>
+    <span class='kr'>let</span> <span class='n'>information</span> <span class='ow'>=</span> <span class='kr'>if</span> <span class='p'>(</span><span class='n'>num</span> <span class='ow'>::</span> <span class='kt'>Int</span><span class='p'>)</span> <span class='o'>==</span> <span class='mi'>0</span> <span class='kr'>then</span> <span class='p'>(</span><span class='kt'>Just</span> <span class='s'>&quot;a,b,c&quot;</span><span class='p'>)</span> <span class='kr'>else</span> <span class='kt'>Nothing</span>
+    <span class='n'>putStrLn</span> <span class='o'>$</span> <span class='n'>show</span> <span class='o'>$</span> <span class='n'>parseInfo</span> <span class='n'>information</span>
+</code></pre></div>
+<p><strong>Returning null as well (e.g. guard statements)</strong></p>
+<p class='code-header'>Java:</p><div class='highlight'><pre><code class='java'><span class='kd'>public</span> <span class='n'>String</span><span class='o'>[]</span> <span class='nf'>parseInfo</span><span class='o'>(</span><span class='n'>String</span> <span class='n'>information</span><span class='o'>)</span> <span class='o'>{</span>
+    <span class='k'>if</span> <span class='o'>(</span><span class='n'>information</span> <span class='o'>==</span> <span class='kc'>null</span><span class='o'>)</span> <span class='o'>{</span>
+        <span class='k'>return</span> <span class='kc'>null</span><span class='o'>;</span>
+    <span class='o'>}</span>
+
+    <span class='k'>return</span> <span class='n'>information</span><span class='o'>.</span><span class='na'>split</span><span class='o'>(</span><span class='s'>&quot;,&quot;</span><span class='o'>);</span>
+<span class='o'>}</span>
+</code></pre></div><p class='code-header'>Kotlin:</p><div class='highlight'><pre><code class='kotlin'><span class='c1'>// Can choose to imitate java...</span>
+<span class='k'>fun</span> <span class='nf'>parseInfo</span><span class='p'>(</span><span class='n'>information</span> <span class='p'>:</span> <span class='n'>String</span><span class='p'>?)</span> <span class='p'>:</span> <span class='n'>Array</span><span class='p'>&lt;</span><span class='n'>String</span><span class='p'>&gt;?</span> <span class='p'>{</span>
+    <span class='k'>if</span> <span class='p'>(</span><span class='n'>information</span> <span class='p'>==</span> <span class='k'>null</span><span class='p'>)</span> <span class='p'>{</span>
+        <span class='k'>return</span> <span class='k'>null</span>
+    <span class='p'>}</span>
+
+    <span class='k'>return</span> <span class='n'>information</span><span class='p'>.</span><span class='n'>split</span><span class='p'>(</span><span class='s'>&quot;,&quot;</span><span class='p'>)</span>
+<span class='p'>}</span>
+
+<span class='c1'>// ...Or take advantage of the safe navigation operator</span>
+<span class='k'>fun</span> <span class='nf'>parseInfo</span><span class='p'>(</span><span class='n'>information</span> <span class='p'>:</span> <span class='n'>String</span><span class='p'>?)</span> <span class='p'>:</span> <span class='n'>Array</span><span class='p'>&lt;</span><span class='n'>String</span><span class='p'>&gt;?</span> <span class='p'>{</span>
+    <span class='k'>return</span> <span class='n'>information</span><span class='p'>?.</span><span class='n'>split</span><span class='p'>(</span><span class='s'>&quot;,&quot;</span><span class='p'>)</span>
+<span class='p'>}</span>
+</code></pre></div><p class='code-header'>Haskell:</p><div class='highlight'><pre><code class='haskell'><span class='c1'>-- Can do it with pattern matching...</span>
+<span class='nf'>parseInfo</span> <span class='ow'>::</span> <span class='kt'>Maybe</span> <span class='kt'>String</span> <span class='ow'>-&gt;</span> <span class='kt'>Maybe</span> <span class='p'>[</span><span class='kt'>String</span><span class='p'>]</span>
+<span class='nf'>parseInfo</span> <span class='kt'>Nothing</span> <span class='ow'>=</span> <span class='kt'>Nothing</span>
+<span class='nf'>parseInfo</span> <span class='p'>(</span><span class='kt'>Just</span> <span class='n'>information</span><span class='p'>)</span> <span class='ow'>=</span> <span class='kt'>Just</span> <span class='p'>(</span><span class='n'>splitOn</span> <span class='s'>&quot;,&quot;</span> <span class='n'>information</span><span class='p'>)</span>
+
+<span class='c1'>-- ...Or with do notation...</span>
+<span class='nf'>parseInfo</span> <span class='ow'>::</span> <span class='kt'>Maybe</span> <span class='kt'>String</span> <span class='ow'>-&gt;</span> <span class='kt'>Maybe</span> <span class='p'>[</span><span class='kt'>String</span><span class='p'>]</span>
+<span class='nf'>parseInfo</span> <span class='n'>information</span> <span class='ow'>=</span> <span class='kr'>do</span> <span class='n'>i</span> <span class='ow'>&lt;-</span> <span class='n'>information</span>
+                            <span class='kt'>Just</span> <span class='p'>(</span><span class='n'>splitOn</span> <span class='s'>&quot;,&quot;</span> <span class='n'>i</span><span class='p'>)</span>
+
+<span class='c1'>-- ...Or with fmap</span>
+<span class='nf'>parseInfo</span> <span class='ow'>::</span> <span class='kt'>Maybe</span> <span class='kt'>String</span> <span class='ow'>-&gt;</span> <span class='kt'>Maybe</span> <span class='p'>[</span><span class='kt'>String</span><span class='p'>]</span>
+<span class='nf'>parseInfo</span> <span class='n'>information</span> <span class='ow'>=</span> <span class='n'>fmap</span> <span class='p'>(</span><span class='n'>splitOn</span> <span class='s'>&quot;,&quot;</span><span class='p'>)</span> <span class='n'>information</span>
+</code></pre></div><!-- **Executing several operations that could fail in a row** -->
+<p><strong>Giving something a default value</strong></p>
+<p class='code-header'>Java:</p><div class='highlight'><pre><code class='java'><span class='n'>String</span> <span class='n'>name</span> <span class='o'>=</span> <span class='o'>(</span><span class='n'>author</span> <span class='o'>==</span> <span class='kc'>null</span><span class='o'>)</span> <span class='o'>?</span> <span class='s'>&quot;Anonymous&quot;</span> <span class='o'>:</span> <span class='n'>author</span><span class='o'>;</span>
+</code></pre></div><p class='code-header'>Kotlin:</p><div class='highlight'><pre><code class='kotlin'><span class='k'>val</span> <span class='n'>name</span> <span class='p'>=</span> <span class='n'>author</span> <span class='p'>?:</span> <span class='s'>&quot;Anonymous&quot;</span>
+</code></pre></div><p class='code-header'>Haskell:</p><div class='highlight'><pre><code class='haskell'><span class='kr'>let</span> <span class='n'>name</span> <span class='ow'>=</span> <span class='n'>fromMaybe</span> <span class='s'>&quot;Anonymous&quot;</span> <span class='n'>author</span>
+</code></pre></div>
+<p><strong>Throwing an exception</strong></p>
+<p class='code-header'>Java:</p><div class='highlight'><pre><code class='java'><span class='kd'>public</span> <span class='n'>String</span><span class='o'>[]</span> <span class='nf'>parseInfo</span><span class='o'>(</span><span class='n'>String</span> <span class='n'>information</span><span class='o'>)</span> <span class='o'>{</span>
+    <span class='k'>return</span> <span class='n'>information</span><span class='o'>.</span><span class='na'>split</span><span class='o'>(</span><span class='s'>&quot;,&quot;</span><span class='o'>);</span>
+<span class='o'>}</span>
+</code></pre></div><p class='code-header'>Kotlin:</p><div class='highlight'><pre><code class='kotlin'><span class='k'>fun</span> <span class='nf'>parseInfo</span><span class='p'>(</span><span class='n'>information</span> <span class='p'>:</span> <span class='n'>String</span><span class='p'>?)</span> <span class='p'>:</span> <span class='n'>Array</span><span class='p'>&lt;</span><span class='n'>String</span><span class='p'>&gt;</span> <span class='p'>{</span>
+    <span class='k'>return</span> <span class='n'>information</span><span class='p'>!!.</span><span class='n'>split</span><span class='p'>(</span><span class='s'>&quot;,&quot;</span><span class='p'>)</span>
+<span class='p'>}</span>
+</code></pre></div><p class='code-header'>Haskell:</p><div class='highlight'><pre><code class='haskell'><span class='nf'>parseInfo</span> <span class='ow'>::</span> <span class='kt'>Maybe</span> <span class='kt'>String</span> <span class='ow'>-&gt;</span> <span class='kt'>Maybe</span> <span class='p'>[</span><span class='kt'>String</span><span class='p'>]</span>
+<span class='nf'>parseInfo</span> <span class='n'>information</span> <span class='ow'>=</span> <span class='kt'>Just</span> <span class='p'>(</span><span class='n'>splitOn</span> <span class='s'>&quot;,&quot;</span> <span class='p'>(</span><span class='n'>fromJust</span> <span class='n'>information</span><span class='p'>))</span>
+</code></pre></div>
+<p><strong>Not having to check for null</strong></p>
+
+<p>Java: Does not have this option, you always have to deal with null.</p>
+<p class='code-header'>Kotlin:</p><div class='highlight'><pre><code class='kotlin'><span class='c1'>// note: no ? appended to types</span>
+<span class='k'>fun</span> <span class='nf'>safeParseInfo</span><span class='p'>(</span><span class='n'>information</span> <span class='p'>:</span> <span class='n'>String</span><span class='p'>)</span> <span class='p'>:</span> <span class='n'>Array</span><span class='p'>&lt;</span><span class='n'>String</span><span class='p'>&gt;</span> <span class='p'>{</span>
+    <span class='k'>return</span> <span class='n'>information</span><span class='p'>.</span><span class='n'>split</span><span class='p'>(</span><span class='s'>&quot;,&quot;</span><span class='p'>)</span>
+<span class='p'>}</span>
+</code></pre></div><p class='code-header'>Haskell:</p><div class='highlight'><pre><code class='haskell'><span class='c1'>-- and these types are not wrapped in Maybe</span>
+<span class='nf'>safeParseInfo</span> <span class='ow'>::</span> <span class='kt'>String</span> <span class='ow'>-&gt;</span> <span class='p'>[</span><span class='kt'>String</span><span class='p'>]</span>
+<span class='nf'>safeParseInfo</span> <span class='n'>information</span> <span class='ow'>=</span> <span class='n'>splitOn</span> <span class='s'>&quot;,&quot;</span> <span class='n'>information</span>
+</code></pre></div>
+<p>The nice thing about this last example is that if the code changes and this function now needs to be called with a value that might be <code>null</code>, the code won&#8217;t compile until the developer has revisited <code>safeParseInfo</code> and explicitly chosen to deal with <code>null</code> in one of the ways shown above.</p>
+
+<p>In case you want to run the examples yourself:</p>
+
+<ul>
+<li>The Java examples import <code>java.util.Arrays</code> and <code>java.util.Random</code></li>
+
+<li>The Kotlin examples import <code>java.util.Random</code></li>
+
+<li>The Haskell examples import <code>System.Random</code>, <code>Data.List.Split</code>, and <code>Data.Maybe</code></li>
+</ul>
+
+<p>That&#8217;s it, that&#8217;s the end of both the <a href='#faq'>FAQ</a> and this article. Hope you enjoyed it!</p>
 </div>
 
 
