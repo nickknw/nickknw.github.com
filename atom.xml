@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-05-20T10:02:40-07:00</updated>
+ <updated>2013-04-24T22:24:39-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -16,13 +16,15 @@
    <link href="http://nickknowlson.com/blog/2013/04/16/why-maybe-is-better-than-null/"/>
    <updated>2013-04-16T00:00:00-07:00</updated>
    <id>http://nickknowlson.com/blog/2013/04/16/why-maybe-is-better-than-null</id>
-   <content type="html">&lt;p&gt;This article is divided into two parts: &lt;a href='#explanation'&gt;Explanation&lt;/a&gt; and &lt;a href='#faq'&gt;FAQ&lt;/a&gt;. The explanation shows the reasons why a bunch of people think Maybe is way more useful than &lt;code&gt;null&lt;/code&gt;. The FAQ is a list of my responses to common arguments I&amp;#8217;ve seen about the shortcomings of Maybe.&lt;/p&gt;
+   <content type="html">&lt;p&gt;This article is divided into two parts: explanation and FAQ. The explanation explains why there are a lot of people who think the idea behind Maybe is way more useful than &lt;code&gt;null&lt;/code&gt;. The FAQ is mostly a list of my responses to common arguments I&amp;#8217;ve seen about the shortcomings of Maybe.&lt;/p&gt;
 
-&lt;p&gt;I&amp;#8217;m going to try to not go overboard with details here - my aim is to make it accessible to as many programmers as possible, not to be as thorough as possible.&lt;/p&gt;
-&lt;h2 id='explanation'&gt;Explanation&lt;/h2&gt;&lt;h3&gt;Motivation&lt;/h3&gt;
+&lt;p&gt;I&amp;#8217;m going to try to not go overboard with details here - my aim with this explanation is to make it accessible to as many programmers as possible, not to be as thorough as possible.&lt;/p&gt;
+
+&lt;h2 id='explanation'&gt;Explanation&lt;/h2&gt;
+&lt;h3&gt;Motivation&lt;/h3&gt;
 &lt;p&gt;Tony Hoare, the inventor of &lt;code&gt;null&lt;/code&gt;, &lt;a href='http://qconlondon.com/london-2009/presentation/Null+References:+The+Billion+Dollar+Mistake'&gt;has gone on record calling it his &amp;#8216;billion-dollar mistake&amp;#8217;&lt;/a&gt;. So what should replace it?&lt;/p&gt;
 
-&lt;p&gt;Maybe, at its core, is a construct that allows programmers to &lt;strong&gt;move null checks into the type system&lt;/strong&gt;, so they can be enforced at &lt;em&gt;compile-time&lt;/em&gt;. Instead of forgetting to deal with a null check and finding out with an exception at run-time, you forget to deal with a null check and &lt;em&gt;find out with an error at compile-time,&lt;/em&gt; before anyone else even sees it! And that&amp;#8217;s &lt;strong&gt;not just some null checks&lt;/strong&gt;, that&amp;#8217;s &lt;strong&gt;all of them, guaranteed!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Maybe, at its core, is a construct that allows programmers to &lt;strong&gt;move null checks into the type system&lt;/strong&gt;, so they can be enforced at &lt;em&gt;compile-time&lt;/em&gt;. Instead of forgetting to deal with a null check and finding out with an exception at run-time, you forget to deal with a null check and &lt;em&gt;find out at compile-time,&lt;/em&gt; before anyone else even sees it! And that&amp;#8217;s &lt;strong&gt;not just some null checks&lt;/strong&gt;, that&amp;#8217;s &lt;strong&gt;all of them, guaranteed!&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;Details&lt;/h3&gt;
 &lt;p&gt;There are two components to an environment free of null pointer exceptions:&lt;/p&gt;
 
@@ -36,11 +38,11 @@
 
 &lt;p&gt;In object-oriented terms, think of &lt;code&gt;Maybe&lt;/code&gt; as a generic interface that has exactly two implementing classes: &lt;code&gt;Just&lt;/code&gt; and &lt;code&gt;Nothing&lt;/code&gt;. The &lt;code&gt;Just&lt;/code&gt; class wraps a value of some other type and the &lt;code&gt;Nothing&lt;/code&gt; class doesn&amp;#8217;t. There are a variety of ways to extract the value safely, but I&amp;#8217;m going to omit these for now, as they&amp;#8217;re not the point. When you receive an object of type &lt;code&gt;Maybe&amp;lt;String&amp;gt;&lt;/code&gt; (for example) you now have the type system helping you out, telling you &amp;#8220;there &lt;em&gt;might&lt;/em&gt; be a String here but it &lt;em&gt;might&lt;/em&gt; be empty&amp;#8221;. You &lt;strong&gt;can&amp;#8217;t&lt;/strong&gt; perform operations on the String until you&amp;#8217;ve safely extracted it and &lt;em&gt;made a choice&lt;/em&gt; about what to do in the case that its empty.&lt;/p&gt;
 
-&lt;p&gt;By itself (without point &lt;strong&gt;#1&lt;/strong&gt;) this is nice but not fantastic. The benefit really kicks in when you also have non-nullable types. It simplifies the 80% of the cases that don&amp;#8217;t involve &lt;code&gt;null&lt;/code&gt; and gives significance and meaning to the times when you do deal with objects wrapped in &lt;code&gt;Maybe&amp;lt;T&amp;gt;&lt;/code&gt;. It lets you say both &lt;strong&gt;&amp;#8220;I know that this value will &lt;em&gt;literally never&lt;/em&gt; be null&amp;#8221;&lt;/strong&gt; and &lt;strong&gt;&amp;#8220;It is immediately obvious to me that I need to handle the case of an empty value here&amp;#8221;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;By itself (without point &lt;strong&gt;#1&lt;/strong&gt;) this is nice but not fantastic. The benefit really kicks in when you also have non-nullable types. It simplifies the 80% of the cases that don&amp;#8217;t involve &lt;code&gt;null&lt;/code&gt; and gives significance and meaning to the times when you do deal with objects wrapped in &lt;code&gt;Maybe&amp;lt;T&amp;gt;&lt;/code&gt;. It lets you say both &amp;#8220;I know that this value will &lt;em&gt;literally never&lt;/em&gt; be null&amp;#8221; and &amp;#8220;It is immediately obvious to me that I need to handle the case of an empty value here&amp;#8221;.&lt;/p&gt;
 &lt;h3&gt;Conclusion&lt;/h3&gt;
 &lt;p&gt;It&amp;#8217;s not that dealing with any given instance of null is particularly hard, it&amp;#8217;s that it is &lt;a href='http://james-iry.blogspot.ca/2013/03/king-null-stubborn.html'&gt;so easy to miss one&lt;/a&gt;. Removing this concern and encoding the information in the type system means programmers have less things to keep track of and simplifies control flow across the entire program. Like with memory management: when you don&amp;#8217;t have to keep track of it manually it is just plain easier to write code. More importantly, it is easier to write &lt;strong&gt;more robust&lt;/strong&gt; code. For all programmers, not just the experienced or talented.&lt;/p&gt;
 
-&lt;p&gt;And that is something I am firmly in favour of. A product is never the result of a single person&amp;#8217;s code - everything has dependencies. Improvements to the code of others benefits all of us.&lt;/p&gt;
+&lt;p&gt;And that is something I am firmly in favour of. A product is rarely built by a single person. Improvements to other people&amp;#8217;s code benefit all of us.&lt;/p&gt;
 &lt;h3&gt;Addendum&lt;/h3&gt;
 &lt;p&gt;There are two more points I&amp;#8217;d like to address about Maybe that are separate from actually explaining why it is useful.&lt;/p&gt;
 
@@ -49,15 +51,17 @@
 &lt;ul&gt;
 &lt;li&gt;ML, Scala, F#, Rust: Option&lt;/li&gt;
 
-&lt;li&gt;Fantom, Kotlin: ? appended to type&lt;/li&gt;
+&lt;li&gt;C#: Nullable&lt;/li&gt;
 
-&lt;li&gt;C#: Nullable or ? appended to type&lt;/li&gt;
+&lt;li&gt;Fantom, Kotlin: ? appended to type&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;Second&lt;/strong&gt;, not all languages with Maybe have non-nullable types. This makes Maybe less valuable in those environments (since you lose the &lt;strong&gt;very&lt;/strong&gt; useful &amp;#8220;I know this value will never contain &lt;code&gt;null&lt;/code&gt;&amp;#8221; guarantee&amp;#8221;) and ends up confusing people who are skeptical of Maybe&amp;#8217;s benefits.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Second&lt;/strong&gt;, not all environments with Maybe have non-nullable types. This makes Maybe less valuable in those environments (since you lose the &lt;strong&gt;very&lt;/strong&gt; useful &amp;#8220;I know this value will never contain &lt;code&gt;null&lt;/code&gt;&amp;#8221; guarantee&amp;#8221;) and ends up confusing people who are skeptical of Maybe&amp;#8217;s benefits.&lt;/p&gt;
 
-&lt;p&gt;To help clarify this: I agree that in a language where you don&amp;#8217;t have the guarantee provided by non-nullable types, Maybe &lt;em&gt;just isn&amp;#8217;t as useful&lt;/em&gt;. But it is not use&lt;i&gt;less&lt;/i&gt; either and depending on the environment may still provide some benefit.&lt;/p&gt;
+&lt;p&gt;To help clarify this: I agree that in a language where you don&amp;#8217;t have the guarantee provided by non-nullable types, Maybe &lt;em&gt;just isn&amp;#8217;t as useful&lt;/em&gt;. But it is not use_less_ either and depending on the environment may still provide some benefit.&lt;/p&gt;
+
 &lt;h2 id='faq'&gt;FAQ&lt;/h2&gt;
+
 &lt;p&gt;Posts like these are tricky. To explain something understandably and (relatively) concisely I can&amp;#8217;t qualify every statement and address all the holes inline. Here is where I&amp;#8217;ll address the bits I skipped as well as some common sentiments I&amp;#8217;ve previously seen on this topic.&lt;/p&gt;
 
 &lt;p&gt;I have made each headline a link as well so each question/answer combo can be linked to individually.&lt;/p&gt;
@@ -75,21 +79,17 @@
 
 &lt;li&gt;&lt;a href='#same-thing'&gt;So you&amp;#8217;re still testing against null, except that it&amp;#8217;s called Nothing.&lt;/a&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;a href='#safe-navigation'&gt;I think the safe navigation operator in Groovy etc. is better than Maybe.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#safe-invoke'&gt;I think the safe-invoke operator in Groovy etc. is better than Maybe.&lt;/a&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;a href='#fantom-kotlin'&gt;What about Fantom &amp;#38; Kotlin?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#fantom-kotlin'&gt;What About Fantom &amp;#38; Kotlin?&lt;/a&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;a href='#option-scala'&gt;But Option in Scala DOESN&amp;#8217;T save you from null!&lt;/a&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;a href='#unsafe-methods'&gt;Safety ISN&amp;#8217;T guaranteed because of the existence of unsafe extraction methods.&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;a href='#overhead'&gt;Using Maybe is not worth the overhead.&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;a href='#examples'&gt;Enough vague, high-level information. Show me some examples!&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4&gt;&lt;a class='header_link' href='#maybe-shortcomings' id='maybe-shortcomings'&gt;Maybe isn't the be-all
 end-all.&lt;/a&gt; &lt;/h4&gt;
-&lt;p&gt;I definitely agree. For one thing, I haven&amp;#8217;t even mentioned &lt;a href='http://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Data-Either.html'&gt;Either&lt;/a&gt;! This article is for people who aren&amp;#8217;t even convinced of the benefits of Maybe yet. In order to get my point across effectively I want to avoid overwhelming the reader with information, so I restricted the topics brought up here.&lt;/p&gt;
+&lt;p&gt;I definitely agree. For one thing, I haven&amp;#8217;t even mentioned &lt;a href='http://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Data-Either.html'&gt;Either&lt;/a&gt;! This article is for people who aren&amp;#8217;t convinced of the benefits of Maybe yet. In order to get my point across effectively I want to avoid overwhelming the reader with information, so I restricted the topics brought up here.&lt;/p&gt;
 
 &lt;p&gt;If you want a higher level perspective on this issue, take a look at &lt;a href='http://lambda-the-ultimate.org/node/3186#comment-46637'&gt;dmbarbour&amp;#8217;s view:&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -104,13 +104,13 @@ solve it, might very well be a third mistake.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Beautifully stated! This is a much more general (and elegant) way to look at it. It&amp;#8217;s a somewhat harder sentiment to communicate effectively to a lot of people though.&lt;/p&gt;
 &lt;h4&gt;&lt;a class='header_link' href='#ide-plugin' id='ide-plugin'&gt;My IDE plugin already does this.&lt;/a&gt; &lt;/h4&gt;
-&lt;p&gt;Yes, there are some IDEs and plugins that provide limited null reference analysis. The key though, is that it &lt;strong&gt;is&lt;/strong&gt; limited. As far as I know (and I&amp;#8217;ve looked) none of them provide the same system-wide elimination of &lt;code&gt;null&lt;/code&gt; that encoding it in the type-system can guarantee.&lt;/p&gt;
+&lt;p&gt;Yes, there are some IDEs and plugins that provide limited null reference analysis. The key though, is that it &lt;strong&gt;is&lt;/strong&gt; limited. As far as I know none of them provide the same system-wide elimination of &lt;code&gt;null&lt;/code&gt; that encoding it in the type-system can guarantee.&lt;/p&gt;
 
 &lt;p&gt;And so, you still don&amp;#8217;t get the same reassurances of &amp;#8220;I know this value will &lt;em&gt;literally never&lt;/em&gt; be null&amp;#8221; and &amp;#8220;It is immediately obvious that I have to handle the case of an empty value here&amp;#8221;.&lt;/p&gt;
 &lt;h4&gt;&lt;a class='header_link' href='#hiding' id='hiding'&gt;NPEs are the proper
 response to a missing value you forgot to consider. You should be notified when
 something goes wrong, not hide it with Maybe.&lt;/a&gt; &lt;/h4&gt;
-&lt;p&gt;I&amp;#8217;ve got good news for you - we fundamentally agree in our approach to how errors should be handled! You might have seen some bad examples of Maybe usage, since proper usage would lead to these errors being caught &lt;em&gt;even earlier&lt;/em&gt; than a NullPointerException would have.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;ve got good news for you - we fundamentally agree in our approach to how errors should be handled! You might have seen some bad examples of Maybe usage, since properl usage would lead to these errors being caught &lt;em&gt;even earlier&lt;/em&gt; than a NullPointerException would have.&lt;/p&gt;
 
 &lt;p&gt;You can still choose to do the equivalent of &lt;code&gt;if (null) return;&lt;/code&gt; and some examples &lt;em&gt;will do that&lt;/em&gt;, because it makes sense to do in some contexts. What matters is that Maybe forces you to think about it at the time of &lt;em&gt;writing&lt;/em&gt; the code, and to be &lt;em&gt;explicit&lt;/em&gt; about it.&lt;/p&gt;
 
@@ -128,19 +128,17 @@ fault of null.&lt;/a&gt; &lt;/h4&gt;
 &lt;h4&gt;&lt;a class='header_link' href='#default-value' id='default-value'&gt;Null is meaningful! What if a value cannot have any meaningful default value?&lt;/a&gt; &lt;/h4&gt;
 &lt;p&gt;Then either wait until it has a meaningful value to put in it or wrap it in Maybe and give it a value of Nothing. That&amp;#8217;s what Maybe is for - To provide a type-checkable alternative to &lt;code&gt;null&lt;/code&gt;!&lt;/p&gt;
 &lt;h4&gt;&lt;a class='header_link' href='#same-thing' id='same-thing'&gt;So you're still testing against null, except that it's called Nothing. What have we gained?&lt;/a&gt; &lt;/h4&gt;
-&lt;p&gt;We have gained earlier detection of an entire class of errors! Now if there is a missed check for an empty value you will find out at compile-time rather than run-time. Using Maybe forces you to be &lt;em&gt;explicit&lt;/em&gt; about possibly-empty values and &lt;em&gt;deal with&lt;/em&gt; the case where they are empty.&lt;/p&gt;
-
-&lt;p&gt;The user doesn&amp;#8217;t see &lt;strong&gt;any&lt;/strong&gt; null reference exceptions, they are all fixed before they even get outside the developer&amp;#8217;s computer.&lt;/p&gt;
-&lt;h4&gt;&lt;a class='header_link' href='#safe navigation' id='safe navigation'&gt;I think the safe navigation operator in Groovy/Kotlin/Fantom/CoffeeScript is better than Maybe.&lt;/a&gt; &lt;/h4&gt;
+&lt;p&gt;We have gained earlier detection of an entire class of errors! Now if there is a missed check for an empty value you will find out at compile-time rather than run-time. The user doesn&amp;#8217;t see the error, it is fixed before it gets outside the developer&amp;#8217;s computer.&lt;/p&gt;
+&lt;h4&gt;&lt;a class='header_link' href='#safe-invoke' id='safe-invoke'&gt;I think the safe-invoke operator in Groovy/Kotlin/Fantom/CoffeeScript is better than Maybe.&lt;/a&gt; &lt;/h4&gt;
 &lt;p&gt;I&amp;#8217;m going to talk about Kotlin and Fantom separately in the next section because they&amp;#8217;re special.&lt;/p&gt;
 
-&lt;p&gt;In Groovy/CoffeeScript, the safe navigation operator (&lt;code&gt;?.&lt;/code&gt;) lets you safely call a method or access a field on an object that may be &lt;code&gt;null&lt;/code&gt;. If the object IS &lt;code&gt;null&lt;/code&gt; then the method/field just returns &lt;code&gt;null&lt;/code&gt; as well, instead of an exception being thrown.&lt;/p&gt;
+&lt;p&gt;In Groovy/CoffeeScript, the safe invoke operator (&lt;code&gt;?.&lt;/code&gt;) lets you safely call a method or access a field on an object that may be &lt;code&gt;null&lt;/code&gt;. If the object IS &lt;code&gt;null&lt;/code&gt; then the method/field just returns &lt;code&gt;null&lt;/code&gt; as well, instead of an exception being thrown.&lt;/p&gt;
 
-&lt;p&gt;I agree that the safe navigation operator is certainly convenient but it is solving a different problem. If you compare it directly to Maybe, it&amp;#8217;s only solving the &amp;#8216;retrieve value from possibly empty object&amp;#8217; part of Maybe. This is a nice thing to have, but isn&amp;#8217;t nearly as interesting as moving a whole class of run-time exceptions to compile-time.&lt;/p&gt;
+&lt;p&gt;I agree that the safe-invoke operator is certainly convenient but it is solving a different problem. If you compare it directly to Maybe, it&amp;#8217;s only solving the &amp;#8216;retrieve value from possibly empty object&amp;#8217; part of Maybe. This is a nice thing to have, but isn&amp;#8217;t nearly as interesting as moving a whole class of run-time exceptions to compile-time.&lt;/p&gt;
 
-&lt;p&gt;Which is fine, it doesn&amp;#8217;t have to be as good as Maybe to still be useful. Just don&amp;#8217;t misrepresent it as being anything more than &lt;strong&gt;a convenient syntax for null checks&lt;/strong&gt;.&lt;/p&gt;
-&lt;h4&gt;&lt;a class='header_link' href='#fantom-kotlin' id='fantom-kotlin'&gt;What about Fantom &amp;amp; Kotlin?&lt;/a&gt; &lt;/h4&gt;
-&lt;p&gt;Fantom and Kotlin are different because they are both languages that have non-nullable reference types and have built Maybe in as a language feature. In both languages (&lt;a href='http://fantom.org/doc/docLang/TypeSystem.html#nullableTypes'&gt;Fantom&lt;/a&gt;, &lt;a href='http://confluence.jetbrains.com/display/Kotlin/Null-safety'&gt;Kotlin&lt;/a&gt;), you can distinguish a reference that may hold &lt;code&gt;null&lt;/code&gt; by appending a ? to its type (i.e. &lt;code&gt;String?&lt;/code&gt;). The compiler can then keep track of it as if it were a &lt;code&gt;Maybe&amp;lt;String&amp;gt;&lt;/code&gt; and is able to prevent you from unsafely accessing its contents. They provide safe navigation and elvis operators to extract the value like Groovy does.&lt;/p&gt;
+&lt;p&gt;Which is fine, &lt;a href='http://james-iry.blogspot.ca/2009/07/groovy-does-not-have-optional-static.html'&gt;Groovy isn&amp;#8217;t really about statically enforcing things&lt;/a&gt; and neither is CoffeeScript. Just don&amp;#8217;t misrepresent this feature as being anything more than &lt;strong&gt;a convenient syntax for null checks&lt;/strong&gt;.&lt;/p&gt;
+&lt;h4&gt;&lt;a class='header_link' href='#fantom-kotlin' id='fantom-kotlin'&gt;What About Fantom &amp;amp; Kotlin?&lt;/a&gt; &lt;/h4&gt;
+&lt;p&gt;Fantom and Kotlin are different because they are both languages that have non-nullable reference types and have built Maybe in as a language feature. In both languages (&lt;a href='http://fantom.org/doc/docLang/TypeSystem.html#nullableTypes'&gt;Fantom&lt;/a&gt;, &lt;a href='http://confluence.jetbrains.com/display/Kotlin/Null-safety'&gt;Kotlin&lt;/a&gt;), you can distinguish a reference that may hold &lt;code&gt;null&lt;/code&gt; by appending a ? to its type (i.e. &lt;code&gt;String?&lt;/code&gt;). The compiler can then keep track of it as if it were a &lt;code&gt;Maybe&amp;lt;String&amp;gt;&lt;/code&gt; and is able to prevent you from unsafely accessing its contents. They provide safe-invoke and elvis operators to extract the value like Groovy does.&lt;/p&gt;
 
 &lt;p&gt;This is probably where opinions will start to differ among people who think Maybe is a good idea.&lt;/p&gt;
 
@@ -158,164 +156,7 @@ fault of null.&lt;/a&gt; &lt;/h4&gt;
 
 &lt;p&gt;So it &lt;strong&gt;is&lt;/strong&gt; possible to shoot yourself in the foot if you want to. The difference is you have to &lt;strong&gt;explicitly ask&lt;/strong&gt; for this behaviour, it cannot sneak in by accident.&lt;/p&gt;
 
-&lt;p&gt;Whenever I claim Maybe can move null reference exceptions to compile-time, it comes with the assumption that you&amp;#8217;re using the built-in safe extraction methods and that you&amp;#8217;re not &lt;em&gt;requesting&lt;/em&gt; run-time exceptions.&lt;/p&gt;
-&lt;h4&gt;&lt;a class='header_link' href='#overhead' id='overhead'&gt;Using Maybe is not worth the overhead.&lt;/a&gt; &lt;/h4&gt;
-&lt;p&gt;This is a hard question to answer without getting specific. If this was said about a specific language or kind of application and the person saying it has done their due diligence or has some working code to back it up, then I can&amp;#8217;t address that here.&lt;/p&gt;
-
-&lt;p&gt;If it is a less qualified statement however, I have some counterpoints that I can share.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1. Bugs are expensive, even more so the later on they are caught.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;It takes developer time to find and fix bugs - the more bugs the more time it takes. For each bug, overhead is introduced in the form of finding, tracking, fixing, and testing it. Worse, bugs that make it all the way to production impact your users and can have even more expensive consequences like data corruption. For some applications small amounts of bug-related downtime could cost thousands (or millions!) of dollars.&lt;/p&gt;
-
-&lt;p&gt;This is the whole reason why we have test suites, type systems, static analysis tools, code reviews, even exceptions! We want to catch bugs earlier.&lt;/p&gt;
-
-&lt;p&gt;Maybe lets you catch one of the most common bugs, null reference exceptions, at compile-time instead of run-time. So if you say &amp;#8216;it is not worth the overhead&amp;#8217;, think about what null reference exceptions are costing you first, and make sure you really &lt;strong&gt;do&lt;/strong&gt; know how much it is worth.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Unless&amp;#8230;&lt;/strong&gt; you are one of those lucky few who says that null reference exceptions really are just not an issue for you. Maybe your other bug prevention measures combined are good enough and when you tracked your faults you found you don&amp;#8217;t end up dealing with null reference exceptions very much. For you guys, keep in mind that &lt;a href='https://twitter.com/ID_AA_Carmack/status/324998304045879296'&gt;you are probably not in the majority&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2. There might not be as much syntactic overhead as you think. In many cases it actually reduces overhead.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Languages that provide Maybe usually provide many convenient ways to extract values which are actually often shorter than the null checks you would otherwise be writing. On top of that, code that &lt;em&gt;doesn&amp;#8217;t deal&lt;/em&gt; with possibly-empty values &lt;em&gt;doesn&amp;#8217;t need&lt;/em&gt; to use Maybe (or check for null!) at all.&lt;/p&gt;
-
-&lt;p&gt;Check out the &lt;a href='#examples'&gt;examples section&lt;/a&gt; below and see for yourself what code that uses Maybe looks like.&lt;/p&gt;
-
-&lt;p&gt;For those of you that are talking about having to mark too many properties as optional and having to deal with Maybe everywhere, think about it like this: You would have had to deal with the same amount of possibly-empty values either way, the only difference is that now you have the compiler helping you out. If your code is meant to be robust it will need null checks anyway. For the cost of adding a little wrapper around your types you can replace those easy-to-forget null checks with their equivalent compiler-checked Maybe extraction methods.&lt;/p&gt;
-
-&lt;p&gt;You also get perfect safety and ease of mind when dealing with values that cannot logically be empty.&lt;/p&gt;
-&lt;h4&gt;&lt;a class='header_link' href='#examples' id='examples'&gt;Enough vague,
-high-level information. Show me some examples!&lt;/a&gt; &lt;/h4&gt;
-&lt;p&gt;I intentionally avoided showing examples in the explanation section to avoid taking attention away from the main points. For a topic like this one, as soon as you show some code it is like sticking a bikeshedding magnet right in the middle of your article. But since this post is aiming to be a definitive reference, it could use at least a few examples.&lt;/p&gt;
-
-&lt;p&gt;Another measure I am going to be taking to avoid stirring up unnecessary arguments is &lt;em&gt;comparing like with like&lt;/em&gt;. I will show a scenario where null checks are used to deal with an empty value in a certain way, then I will show what that example would look like in a language with good support for Maybe.&lt;/p&gt;
-
-&lt;p&gt;The languages I picked are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Java:&lt;/strong&gt; to represent the traditional ways of handling nulls that most people are hopefully familiar with.&lt;/li&gt;
-
-&lt;li&gt;&lt;strong&gt;Kotlin:&lt;/strong&gt; to represent languages with non-nullable references and support for Maybe baked into the language.&lt;/li&gt;
-
-&lt;li&gt;&lt;strong&gt;Haskell:&lt;/strong&gt; to represent languages with non-nullable references and support for Maybe as a library.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The scenarios follow:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Dealing with it explicitly&lt;/strong&gt;&lt;/p&gt;
-&lt;p class='code-header'&gt;Java:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='java'&gt;&lt;span class='kd'&gt;public&lt;/span&gt; &lt;span class='kd'&gt;static&lt;/span&gt; &lt;span class='kt'&gt;void&lt;/span&gt; &lt;span class='nf'&gt;retrieveInfoExplicit&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
-    &lt;span class='n'&gt;String&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='k'&gt;new&lt;/span&gt; &lt;span class='n'&gt;Random&lt;/span&gt;&lt;span class='o'&gt;().&lt;/span&gt;&lt;span class='na'&gt;nextInt&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='o'&gt;?&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;a,b,c&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;:&lt;/span&gt; &lt;span class='kc'&gt;null&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt;
-
-    &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='kc'&gt;null&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
-        &lt;span class='n'&gt;System&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='na'&gt;out&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='na'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;No information received.&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;);&lt;/span&gt;
-    &lt;span class='o'&gt;}&lt;/span&gt; &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
-        &lt;span class='n'&gt;System&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='na'&gt;out&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='na'&gt;println&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;Arrays&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='na'&gt;toString&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;parseInfo&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='o'&gt;)));&lt;/span&gt;
-    &lt;span class='o'&gt;}&lt;/span&gt;
-&lt;span class='o'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Kotlin:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='kotlin'&gt;&lt;span class='k'&gt;fun&lt;/span&gt; &lt;span class='nf'&gt;retrieveInfoExplicit&lt;/span&gt;&lt;span class='p'&gt;()&lt;/span&gt; &lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='n'&gt;Unit&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='p'&gt;=&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;Random&lt;/span&gt;&lt;span class='p'&gt;().&lt;/span&gt;&lt;span class='n'&gt;nextInt&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;==&lt;/span&gt; &lt;span class='m'&gt;0&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;a,b,c&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='k'&gt;null&lt;/span&gt;
-
-    &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='p'&gt;==&lt;/span&gt; &lt;span class='k'&gt;null&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-        &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;No information received.&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    &lt;span class='k'&gt;else&lt;/span&gt;
-        &lt;span class='nf'&gt;safeParseInfo&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='n'&gt;forEach&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;it&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Haskell:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='haskell'&gt;&lt;span class='nf'&gt;retrieveInfoExplicit&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='kt'&gt;IO&lt;/span&gt; &lt;span class='nb'&gt;()&lt;/span&gt;
-&lt;span class='nf'&gt;retrieveInfoExplicit&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='kr'&gt;do&lt;/span&gt;
-    &lt;span class='n'&gt;num&lt;/span&gt; &lt;span class='ow'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='n'&gt;randomRIO&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    &lt;span class='kr'&gt;let&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='kr'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='kr'&gt;then&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kt'&gt;Just&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;a,b,c&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='kr'&gt;else&lt;/span&gt; &lt;span class='kt'&gt;Nothing&lt;/span&gt;
-    &lt;span class='kr'&gt;case&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='kr'&gt;of&lt;/span&gt;
-        &lt;span class='kt'&gt;Nothing&lt;/span&gt; &lt;span class='ow'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;putStrLn&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;No information retrieved.&amp;quot;&lt;/span&gt;
-        &lt;span class='kt'&gt;Just&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='ow'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;putStrLn&lt;/span&gt; &lt;span class='o'&gt;$&lt;/span&gt; &lt;span class='n'&gt;show&lt;/span&gt; &lt;span class='o'&gt;$&lt;/span&gt; &lt;span class='n'&gt;safeParseInfo&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Dealing with it implicitly&lt;/strong&gt;&lt;/p&gt;
-&lt;p class='code-header'&gt;Java:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='java'&gt;&lt;span class='kd'&gt;public&lt;/span&gt; &lt;span class='kt'&gt;void&lt;/span&gt; &lt;span class='nf'&gt;retrieveInfo&lt;/span&gt;&lt;span class='o'&gt;()&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
-    &lt;span class='n'&gt;String&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;Random&lt;/span&gt;&lt;span class='o'&gt;().&lt;/span&gt;&lt;span class='na'&gt;nextInt&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;2&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='o'&gt;?&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;a,b,c&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;:&lt;/span&gt; &lt;span class='kc'&gt;null&lt;/span&gt;
-    &lt;span class='n'&gt;parseInfo&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='o'&gt;);&lt;/span&gt;
-&lt;span class='o'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Kotlin:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='kotlin'&gt;&lt;span class='k'&gt;fun&lt;/span&gt; &lt;span class='nf'&gt;retrieveInfo&lt;/span&gt;&lt;span class='p'&gt;()&lt;/span&gt; &lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='n'&gt;Unit&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    &lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='p'&gt;=&lt;/span&gt; &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;Random&lt;/span&gt;&lt;span class='p'&gt;().&lt;/span&gt;&lt;span class='n'&gt;nextInt&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='m'&gt;2&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;==&lt;/span&gt; &lt;span class='m'&gt;0&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;a,b,c&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='k'&gt;null&lt;/span&gt;
-    &lt;span class='n'&gt;parseInfo&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='p'&gt;)?.&lt;/span&gt;&lt;span class='n'&gt;forEach&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='n'&gt;println&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;it&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Haskell:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='haskell'&gt;&lt;span class='nf'&gt;retrieveInfo&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='kt'&gt;IO&lt;/span&gt; &lt;span class='nb'&gt;()&lt;/span&gt;
-&lt;span class='nf'&gt;retrieveInfo&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='kr'&gt;do&lt;/span&gt;
-    &lt;span class='n'&gt;num&lt;/span&gt; &lt;span class='ow'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='n'&gt;randomRIO&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    &lt;span class='kr'&gt;let&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='kr'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;num&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='kt'&gt;Int&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt; &lt;span class='kr'&gt;then&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kt'&gt;Just&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;a,b,c&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='kr'&gt;else&lt;/span&gt; &lt;span class='kt'&gt;Nothing&lt;/span&gt;
-    &lt;span class='n'&gt;putStrLn&lt;/span&gt; &lt;span class='o'&gt;$&lt;/span&gt; &lt;span class='n'&gt;show&lt;/span&gt; &lt;span class='o'&gt;$&lt;/span&gt; &lt;span class='n'&gt;parseInfo&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Returning null as well (e.g. guard statements)&lt;/strong&gt;&lt;/p&gt;
-&lt;p class='code-header'&gt;Java:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='java'&gt;&lt;span class='kd'&gt;public&lt;/span&gt; &lt;span class='n'&gt;String&lt;/span&gt;&lt;span class='o'&gt;[]&lt;/span&gt; &lt;span class='nf'&gt;parseInfo&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;String&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
-    &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='kc'&gt;null&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
-        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='kc'&gt;null&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt;
-    &lt;span class='o'&gt;}&lt;/span&gt;
-
-    &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='na'&gt;split&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;);&lt;/span&gt;
-&lt;span class='o'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Kotlin:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='kotlin'&gt;&lt;span class='c1'&gt;// Can choose to imitate java...&lt;/span&gt;
-&lt;span class='k'&gt;fun&lt;/span&gt; &lt;span class='nf'&gt;parseInfo&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='n'&gt;String&lt;/span&gt;&lt;span class='p'&gt;?)&lt;/span&gt; &lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='n'&gt;Array&lt;/span&gt;&lt;span class='p'&gt;&amp;lt;&lt;/span&gt;&lt;span class='n'&gt;String&lt;/span&gt;&lt;span class='p'&gt;&amp;gt;?&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='p'&gt;==&lt;/span&gt; &lt;span class='k'&gt;null&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-        &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='k'&gt;null&lt;/span&gt;
-    &lt;span class='p'&gt;}&lt;/span&gt;
-
-    &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;split&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
-
-&lt;span class='c1'&gt;// ...Or take advantage of the safe navigation operator&lt;/span&gt;
-&lt;span class='k'&gt;fun&lt;/span&gt; &lt;span class='nf'&gt;parseInfo&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='n'&gt;String&lt;/span&gt;&lt;span class='p'&gt;?)&lt;/span&gt; &lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='n'&gt;Array&lt;/span&gt;&lt;span class='p'&gt;&amp;lt;&lt;/span&gt;&lt;span class='n'&gt;String&lt;/span&gt;&lt;span class='p'&gt;&amp;gt;?&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='p'&gt;?.&lt;/span&gt;&lt;span class='n'&gt;split&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Haskell:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='haskell'&gt;&lt;span class='c1'&gt;-- Can do it with pattern matching...&lt;/span&gt;
-&lt;span class='nf'&gt;parseInfo&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='kt'&gt;Maybe&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='ow'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='kt'&gt;Maybe&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
-&lt;span class='nf'&gt;parseInfo&lt;/span&gt; &lt;span class='kt'&gt;Nothing&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='kt'&gt;Nothing&lt;/span&gt;
-&lt;span class='nf'&gt;parseInfo&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kt'&gt;Just&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='kt'&gt;Just&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;splitOn&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-
-&lt;span class='c1'&gt;-- ...Or with do notation...&lt;/span&gt;
-&lt;span class='nf'&gt;parseInfo&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='kt'&gt;Maybe&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='ow'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='kt'&gt;Maybe&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
-&lt;span class='nf'&gt;parseInfo&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='kr'&gt;do&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt; &lt;span class='ow'&gt;&amp;lt;-&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;
-                            &lt;span class='kt'&gt;Just&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;splitOn&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;i&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-
-&lt;span class='c1'&gt;-- ...Or with fmap&lt;/span&gt;
-&lt;span class='nf'&gt;parseInfo&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='kt'&gt;Maybe&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='ow'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='kt'&gt;Maybe&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
-&lt;span class='nf'&gt;parseInfo&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='n'&gt;fmap&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;splitOn&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- **Executing several operations that could fail in a row** --&gt;
-&lt;p&gt;&lt;strong&gt;Giving something a default value&lt;/strong&gt;&lt;/p&gt;
-&lt;p class='code-header'&gt;Java:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='java'&gt;&lt;span class='n'&gt;String&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;author&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='kc'&gt;null&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;?&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Anonymous&amp;quot;&lt;/span&gt; &lt;span class='o'&gt;:&lt;/span&gt; &lt;span class='n'&gt;author&lt;/span&gt;&lt;span class='o'&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Kotlin:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='kotlin'&gt;&lt;span class='k'&gt;val&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt; &lt;span class='p'&gt;=&lt;/span&gt; &lt;span class='n'&gt;author&lt;/span&gt; &lt;span class='p'&gt;?:&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Anonymous&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Haskell:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='haskell'&gt;&lt;span class='kr'&gt;let&lt;/span&gt; &lt;span class='n'&gt;name&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='n'&gt;fromMaybe&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;Anonymous&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;author&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Throwing an exception&lt;/strong&gt;&lt;/p&gt;
-&lt;p class='code-header'&gt;Java:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='java'&gt;&lt;span class='kd'&gt;public&lt;/span&gt; &lt;span class='n'&gt;String&lt;/span&gt;&lt;span class='o'&gt;[]&lt;/span&gt; &lt;span class='nf'&gt;parseInfo&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;String&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='o'&gt;{&lt;/span&gt;
-    &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='na'&gt;split&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;);&lt;/span&gt;
-&lt;span class='o'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Kotlin:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='kotlin'&gt;&lt;span class='k'&gt;fun&lt;/span&gt; &lt;span class='nf'&gt;parseInfo&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='n'&gt;String&lt;/span&gt;&lt;span class='p'&gt;?)&lt;/span&gt; &lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='n'&gt;Array&lt;/span&gt;&lt;span class='p'&gt;&amp;lt;&lt;/span&gt;&lt;span class='n'&gt;String&lt;/span&gt;&lt;span class='p'&gt;&amp;gt;&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='p'&gt;!!.&lt;/span&gt;&lt;span class='n'&gt;split&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Haskell:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='haskell'&gt;&lt;span class='nf'&gt;parseInfo&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='kt'&gt;Maybe&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='ow'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='kt'&gt;Maybe&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
-&lt;span class='nf'&gt;parseInfo&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='kt'&gt;Just&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;splitOn&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;fromJust&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='p'&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Not having to check for null&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Java: Does not have this option, you always have to deal with null.&lt;/p&gt;
-&lt;p class='code-header'&gt;Kotlin:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='kotlin'&gt;&lt;span class='c1'&gt;// note: no ? appended to types&lt;/span&gt;
-&lt;span class='k'&gt;fun&lt;/span&gt; &lt;span class='nf'&gt;safeParseInfo&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='n'&gt;String&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;:&lt;/span&gt; &lt;span class='n'&gt;Array&lt;/span&gt;&lt;span class='p'&gt;&amp;lt;&lt;/span&gt;&lt;span class='n'&gt;String&lt;/span&gt;&lt;span class='p'&gt;&amp;gt;&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;split&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p class='code-header'&gt;Haskell:&lt;/p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='haskell'&gt;&lt;span class='c1'&gt;-- and these types are not wrapped in Maybe&lt;/span&gt;
-&lt;span class='nf'&gt;safeParseInfo&lt;/span&gt; &lt;span class='ow'&gt;::&lt;/span&gt; &lt;span class='kt'&gt;String&lt;/span&gt; &lt;span class='ow'&gt;-&amp;gt;&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='kt'&gt;String&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
-&lt;span class='nf'&gt;safeParseInfo&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt; &lt;span class='ow'&gt;=&lt;/span&gt; &lt;span class='n'&gt;splitOn&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;,&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;information&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The nice thing about this last example is that if the code changes and this function now needs to be called with a value that might be &lt;code&gt;null&lt;/code&gt;, the code won&amp;#8217;t compile until the developer has revisited &lt;code&gt;safeParseInfo&lt;/code&gt; and explicitly chosen to deal with &lt;code&gt;null&lt;/code&gt; in one of the ways shown above.&lt;/p&gt;
-
-&lt;p&gt;In case you want to run the examples yourself:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The Java examples import &lt;code&gt;java.util.Arrays&lt;/code&gt; and &lt;code&gt;java.util.Random&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;The Kotlin examples import &lt;code&gt;java.util.Random&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;The Haskell examples import &lt;code&gt;System.Random&lt;/code&gt;, &lt;code&gt;Data.List.Split&lt;/code&gt;, and &lt;code&gt;Data.Maybe&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;That&amp;#8217;s it, that&amp;#8217;s the end of both the &lt;a href='#faq'&gt;FAQ&lt;/a&gt; and this article. Hope you enjoyed it!&lt;/p&gt;</content>
+&lt;p&gt;Whenever I claim Maybe can move null reference exceptions to compile-time, it comes with the assumption that you&amp;#8217;re using the built-in safe extraction methods and that you&amp;#8217;re not &lt;em&gt;requesting&lt;/em&gt; run-time exceptions.&lt;/p&gt;</content>
  </entry>
  
  <entry>
@@ -2776,18 +2617,18 @@ Congrats, you did it!
 &lt;/blockquote&gt;
 
 &lt;p&gt;Before we get started, this is what the final solution looks like. Try and become a little familiar with this before we move on (it will all be explained in detail below, don&amp;#8217;t worry).&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='lineno'&gt; 1&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
-&lt;span class='lineno'&gt; 2&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-&lt;span class='lineno'&gt; 3&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
-&lt;span class='lineno'&gt; 4&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
-&lt;span class='lineno'&gt; 5&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
-&lt;span class='lineno'&gt; 6&lt;/span&gt;     &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt; 7&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt; 8&lt;/span&gt; 
-&lt;span class='lineno'&gt; 9&lt;/span&gt; &lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-&lt;span class='lineno'&gt;10&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt;11&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;set&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt;12&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;set&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;List2D is a simple matrix prototype from the previous exercise. It is the thing that is being transposed.&lt;/p&gt;
 
@@ -2853,18 +2694,18 @@ Congrats, you did it!
 &lt;h2 id='wrapup'&gt;Wrap-up&lt;/h2&gt;
 
 &lt;p&gt;Now, putting back together all the lines I&amp;#8217;ve explained, here is the full solution again:&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='lineno'&gt; 1&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
-&lt;span class='lineno'&gt; 2&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-&lt;span class='lineno'&gt; 3&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
-&lt;span class='lineno'&gt; 4&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
-&lt;span class='lineno'&gt; 5&lt;/span&gt;         &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
-&lt;span class='lineno'&gt; 6&lt;/span&gt;     &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt; 7&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt; 8&lt;/span&gt; 
-&lt;span class='lineno'&gt; 9&lt;/span&gt; &lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
-&lt;span class='lineno'&gt;10&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt;11&lt;/span&gt;     &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;set&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
-&lt;span class='lineno'&gt;12&lt;/span&gt; &lt;span class='o'&gt;)&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='io'&gt;&lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;,&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;setArgumentNames&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt; &lt;span class='nb'&gt;list&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;1&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;at&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='mf'&gt;0&lt;/span&gt;&lt;span class='o'&gt;),&lt;/span&gt;
+        &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;getSlot&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='n'&gt;slotName&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;argumentNames&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt; &lt;span class='n'&gt;rest&lt;/span&gt;
+    &lt;span class='o'&gt;)&lt;/span&gt; &lt;span class='n'&gt;flatten&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
+
+&lt;span class='n'&gt;List2D&lt;/span&gt; &lt;span class='n'&gt;transpose&lt;/span&gt; &lt;span class='o'&gt;:=&lt;/span&gt; &lt;span class='k'&gt;method&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;get&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;get&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;set&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;flipFirstTwoArgs&lt;/span&gt;&lt;span class='o'&gt;(&lt;/span&gt;&lt;span class='s'&gt;&amp;quot;set&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;)&lt;/span&gt;
+&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If I&amp;#8217;ve done my job right, it should make a lot more sense this time.&lt;/p&gt;
 
