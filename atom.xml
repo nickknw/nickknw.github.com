@@ -4,7 +4,7 @@
  <title>Nick Knowlson</title>
  <link href="http://nickknowlson.com/atom.xml" rel="self"/>
  <link href="http://nickknowlson.com/"/>
- <updated>2013-05-28T19:38:57-07:00</updated>
+ <updated>2013-06-01T20:58:03-07:00</updated>
  <id>http://nickknowlson.com/</id>
  <author>
    <name>Nick Knowlson</name>
@@ -22,7 +22,7 @@
 &lt;h2 id='explanation'&gt;Explanation&lt;/h2&gt;&lt;h3&gt;Motivation&lt;/h3&gt;
 &lt;p&gt;Tony Hoare, the inventor of &lt;code&gt;null&lt;/code&gt;, &lt;a href='http://qconlondon.com/london-2009/presentation/Null+References:+The+Billion+Dollar+Mistake'&gt;has gone on record calling it his &amp;#8216;billion-dollar mistake&amp;#8217;&lt;/a&gt;. So what should replace it?&lt;/p&gt;
 
-&lt;p&gt;Maybe, at its core, is a construct that allows programmers to &lt;strong&gt;move null checks into the type system&lt;/strong&gt;, so they can be enforced at &lt;em&gt;compile-time&lt;/em&gt;. Instead of forgetting to deal with a null check and finding out with an exception at run-time, you forget to deal with a null check and &lt;em&gt;find out with an error at compile-time,&lt;/em&gt; before anyone else even sees it! And that&amp;#8217;s &lt;strong&gt;not just some null checks&lt;/strong&gt;, that&amp;#8217;s &lt;strong&gt;all of them, guaranteed!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Maybe, at its core, is a construct that allows programmers to &lt;strong&gt;move null checks into the type system&lt;/strong&gt;, so they can be enforced at &lt;em&gt;compile-time&lt;/em&gt;. Instead of forgetting to deal with a null check and finding out with an exception at run-time, you forget to deal with a null check and &lt;em&gt;find out with an error at compile-time,&lt;/em&gt; before anyone else even sees it! And that&amp;#8217;s &lt;strong&gt;not just some&lt;/strong&gt; null checks, that&amp;#8217;s &lt;strong&gt;all of them!&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;Details&lt;/h3&gt;
 &lt;p&gt;There are two components to an environment free of null pointer exceptions:&lt;/p&gt;
 
@@ -34,13 +34,13 @@
 
 &lt;p&gt;So how does Maybe accomplish this, and how does it achieve all those benefits listed above? It&amp;#8217;s actually very straightforward.&lt;/p&gt;
 
-&lt;p&gt;In object-oriented terms, think of &lt;code&gt;Maybe&lt;/code&gt; as a generic interface that has exactly two implementing classes: &lt;code&gt;Just&lt;/code&gt; and &lt;code&gt;Nothing&lt;/code&gt;. The &lt;code&gt;Just&lt;/code&gt; class wraps a value of some other type and the &lt;code&gt;Nothing&lt;/code&gt; class doesn&amp;#8217;t. There are a variety of ways to extract the value safely, but I&amp;#8217;m going to omit these for now, as they&amp;#8217;re not the point. When you receive an object of type &lt;code&gt;Maybe&amp;lt;String&amp;gt;&lt;/code&gt; (for example) you now have the type system helping you out, telling you &amp;#8220;there &lt;em&gt;might&lt;/em&gt; be a String here but it &lt;em&gt;might&lt;/em&gt; be empty&amp;#8221;. You &lt;strong&gt;can&amp;#8217;t&lt;/strong&gt; perform operations on the String until you&amp;#8217;ve safely extracted it and &lt;em&gt;made a choice&lt;/em&gt; about what to do in the case that its empty.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;m going to explain this in object-oriented terms, because if you&amp;#8217;re already familiar with algebraic data types odds are you already know about Maybe too. Anyway, think of &lt;code&gt;Maybe&amp;lt;T&amp;gt;&lt;/code&gt; as an interface with a single type parameter that has exactly two implementing classes: &lt;code&gt;Just&amp;lt;T&amp;gt;&lt;/code&gt; and &lt;code&gt;Nothing&lt;/code&gt;. The &lt;code&gt;Just&amp;lt;T&amp;gt;&lt;/code&gt; class wraps a value of some other type and the &lt;code&gt;Nothing&lt;/code&gt; class doesn&amp;#8217;t. There are a variety of methods provided by Maybe to extract the value safely, but I&amp;#8217;m going to omit these for now, as they&amp;#8217;re not the point. When you receive an object of type &lt;code&gt;Maybe&amp;lt;String&amp;gt;&lt;/code&gt; (for example) you now have the type system helping you out, telling you &amp;#8220;there &lt;em&gt;might&lt;/em&gt; be a String here but it &lt;em&gt;might&lt;/em&gt; be empty&amp;#8221;. You &lt;strong&gt;can&amp;#8217;t&lt;/strong&gt; perform operations on the String until you&amp;#8217;ve safely extracted it and &lt;em&gt;made a choice&lt;/em&gt; about what to do in the case that its empty.&lt;/p&gt;
 
 &lt;p&gt;By itself (without point &lt;strong&gt;#1&lt;/strong&gt;) this is nice but not fantastic. The benefit really kicks in when you also have non-nullable types. It simplifies the 80% of the cases that don&amp;#8217;t involve &lt;code&gt;null&lt;/code&gt; and gives significance and meaning to the times when you do deal with objects wrapped in &lt;code&gt;Maybe&amp;lt;T&amp;gt;&lt;/code&gt;. It lets you say both &lt;strong&gt;&amp;#8220;I know that this value will &lt;em&gt;literally never&lt;/em&gt; be null&amp;#8221;&lt;/strong&gt; and &lt;strong&gt;&amp;#8220;It is immediately obvious to me that I need to handle the case of an empty value here&amp;#8221;&lt;/strong&gt;.&lt;/p&gt;
 &lt;h3&gt;Conclusion&lt;/h3&gt;
 &lt;p&gt;It&amp;#8217;s not that dealing with any given instance of null is particularly hard, it&amp;#8217;s that it is &lt;a href='http://james-iry.blogspot.ca/2013/03/king-null-stubborn.html'&gt;so easy to miss one&lt;/a&gt;. Removing this concern and encoding the information in the type system means programmers have less things to keep track of and simplifies control flow across the entire program. Like with memory management: when you don&amp;#8217;t have to keep track of it manually it is just plain easier to write code. More importantly, it is easier to write &lt;strong&gt;more robust&lt;/strong&gt; code. For all programmers, not just the experienced or talented.&lt;/p&gt;
 
-&lt;p&gt;And that is something I am firmly in favour of. A product is never the result of a single person&amp;#8217;s code - everything has dependencies. Improvements to the code of others benefits all of us.&lt;/p&gt;
+&lt;p&gt;And that is something I am firmly in favour of. A product is never the result of a single person&amp;#8217;s code - everything has dependencies. Improvements to other people&amp;#8217;s code benefit all of us.&lt;/p&gt;
 &lt;h3&gt;Addendum&lt;/h3&gt;
 &lt;p&gt;There are two more points I&amp;#8217;d like to address about Maybe that are separate from actually explaining why it is useful.&lt;/p&gt;
 
@@ -148,7 +148,7 @@ fault of null.&lt;/a&gt; &lt;/h4&gt;
 
 &lt;p&gt;The only downsides to this approach are related to the fact that it is specialized. When you stretch against the limits of Maybe you can&amp;#8217;t drop in &lt;a href='http://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Data-Either.html'&gt;Either&lt;/a&gt; instead. You also can&amp;#8217;t wrap Maybes in another Maybe (&lt;code&gt;Maybe&amp;lt;Maybe&amp;lt;String&amp;gt;&amp;gt;&lt;/code&gt;), which you might do when you have nested calls that could fail.&lt;/p&gt;
 
-&lt;p&gt;I can&amp;#8217;t speak to how often this ends up being an issue for people working in Fantom/Kotlin and what alternatives the language provides because, frankly, I am pretty unfamiliar with them. If anyone with experience would like to speak up I&amp;#8217;d be happy to annotate this section with their information.&lt;/p&gt;
+&lt;p&gt;I can&amp;#8217;t speak to how often this ends up being an issue for people working in Fantom/Kotlin and what alternatives the language provides because, frankly, I am pretty unfamiliar with them. If anyone with experience would like to speak up I&amp;#8217;d be happy to add their information to this section.&lt;/p&gt;
 &lt;h4&gt;&lt;a class='header_link' href='#option-scala' id='option-scala'&gt;But Option in Scala DOESN'T save you from null!&lt;/a&gt; &lt;/h4&gt;
 &lt;p&gt;Yes, in Scala you can still get NullPointerExceptions. Scala doesn&amp;#8217;t have non-nullable reference types because Martin Odersky (for what were probably good reasons - I&amp;#8217;m guessing related to java interop) decided to include &lt;code&gt;null&lt;/code&gt; in his language. That doesn&amp;#8217;t invalidate all the other implementations of Maybe and it doesn&amp;#8217;t mean it can&amp;#8217;t still be somewhat useful in Scala.&lt;/p&gt;
 
