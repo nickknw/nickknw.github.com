@@ -124,10 +124,13 @@
 <span class='n'>file</span><span class='o'>.</span><span class='n'>puts</span> <span class='s2'>&quot;a spoonful is great but I&#39;d rather have a bowl&quot;</span>
 <span class='n'>file</span><span class='o'>.</span><span class='n'>close</span>
 
-<span class='c1'># safer, less erroro-prone, shorter, more readable</span>
-<span class='no'>File</span><span class='o'>.</span><span class='n'>open</span><span class='p'>(</span><span class='s2'>&quot;tmp.txt&quot;</span><span class='p'>,</span> <span class='s2'>&quot;r&quot;</span><span class='p'>)</span><span class='o'>.</span><span class='n'>each</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>line</span><span class='o'>|</span>
-    <span class='nb'>puts</span> <span class='n'>line</span>
+<span class='c1'># safer, less error-prone, more readable</span>
+<span class='no'>File</span><span class='o'>.</span><span class='n'>open</span><span class='p'>(</span><span class='s2'>&quot;tmp2.txt&quot;</span><span class='p'>,</span> <span class='s2'>&quot;w+&quot;</span><span class='p'>)</span> <span class='p'>{</span> <span class='o'>|</span><span class='n'>file</span><span class='o'>|</span>
+    <span class='n'>file</span><span class='o'>.</span><span class='n'>puts</span> <span class='s2'>&quot;a spoonful is great but I&#39;d rather have a bowl&quot;</span>
 <span class='p'>}</span>
+
+<span class='nb'>puts</span> <span class='no'>IO</span><span class='o'>.</span><span class='n'>read</span><span class='p'>(</span><span class='s2'>&quot;tmp.txt&quot;</span><span class='p'>)</span>
+<span class='nb'>puts</span> <span class='no'>IO</span><span class='o'>.</span><span class='n'>read</span><span class='p'>(</span><span class='s2'>&quot;tmp2.txt&quot;</span><span class='p'>)</span>
 </code></pre></div>
 
 
